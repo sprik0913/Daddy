@@ -863,7 +863,12 @@ public class MainActivity extends Activity {
     }
 
     private void openFireSettings() {
-        safeStart(new Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+        Intent s = new Intent(Settings.ACTION_SETTINGS).addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        if (s.resolveActivity(getPackageManager()) == null) {
+            s = new Intent().setClassName("com.amazon.tv.launcher",
+                    "com.amazon.tv.launcher.ui.MainSettingsActivity").addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        }
+        safeStart(s);
     }
 
     private void showAppMenu(App a) {

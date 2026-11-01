@@ -48,7 +48,7 @@ Add words after the command (`setup.bat extra` or `./setup.sh extra noupdates`):
 
 | Word | What it does |
 |---|---|
-| `extra` | Also turns off Live TV tab, Silk browser, Kids profiles, Amazon push service, Alexa notifications, parental controls |
+| `extra` | Also turns off Alexa extras (alarms, timers, Alexa music), Amazon casting, smart-home views, profile sync and Amazon sign-in for apps. Alexa voice still works |
 | `noupdates` | Blocks automatic Fire OS updates (updates can undo this setup) |
 | `optimize` | Pre-compiles all apps so they open faster (5–15 min) |
 | `scan` | Lists every Amazon package and which are off |
@@ -76,9 +76,13 @@ Already set up? Run `setup.bat` / `./setup.sh` again — it installs the new ver
 - Fire OS doesn't let you change the home app, so Sprik Home uses an accessibility helper:
   when Amazon's home screen appears, it opens Sprik Home on top. Voice search results,
   profiles and settings screens are left alone.
-- Debloat uses `pm disable-user` (or `pm uninstall --user 0` when Amazon blocks disabling).
-  Nothing is deleted from the system, and `restore` brings it all back. A factory reset also does.
-- Packages that don't exist on this TV are skipped.
+- The debloat list is [CleanYourTV](https://github.com/Gathin23/cleanyourtv)'s tested list for this
+  exact Stick (4K Max 2nd gen, Fire OS 8.1.8.5), MIT licensed; the full annotated list is in
+  `firetv/debloat-aftkrt.txt`. Prime Video, the Appstore, Alexa voice, the screensaver, Music, Silk,
+  Kids and Fire OS updates are kept.
+- Debloat only uses `pm disable-user`: nothing is uninstalled, and `restore` brings it all back.
+  Packages Fire OS protects, or that aren't on this TV, are skipped.
+- Animation speed is left at normal: on this Fire OS build, faster animations break the side menu.
 
 ## Rebuilding the app
 ```

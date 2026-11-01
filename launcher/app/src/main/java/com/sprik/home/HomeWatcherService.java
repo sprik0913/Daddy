@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Handler;
 import android.os.Looper;
 import android.os.SystemClock;
+import android.view.KeyEvent;
+import android.view.ViewConfiguration;
 import android.view.accessibility.AccessibilityEvent;
 
 /**
@@ -38,6 +40,35 @@ public class HomeWatcherService extends AccessibilityService {
         }
     }
 
+    /**
+     * The Home key itself. Watching for Amazon's screen alone misses one case: when
+     * Amazon's home is already showing (e.g. right after boot), pressing Home again
+     * changes no window, so nothing would fire. A short press opens Sprik Home a
+     * moment after the system handles the key; a long press (Amazon's quick menu)
+     * is left alone. The key is never swallowed.
+     */
+    @Override
+    protected boolean onKeyEvent(KeyEvent e) {
+        if (e.getKeyCode() == KeyEvent.KEYCODE_HOME && e.getAction() == KeyEvent.ACTION_UP
+                && !e.isCanceled()
+                && e.getEventTime() - e.getDownTime() < ViewConfiguration.getLongPressTimeout()
+                && new Prefs(this).homeRedirect()) {
+            handler.postDelayed(this::openHome, 250);
+        }
+        return false;
+    }
+
+    private void openHome() {
+        long now = SystemClock.uptimeMillis();
+        if (now - lastJump < 400) return;
+        lastJump = now;
+        startActivity(new Intent(this, MainActivity.class)
+                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
+                        | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
+                        | Intent.FLAG_ACTIVITY_NO_ANIMATION));
+        if (startupPending) handler.postDelayed(this::runStartupApp, 1200);
+    }
+
     @Override
     public void onAccessibilityEvent(AccessibilityEvent e) {
         if (e == null || e.getEventType() != AccessibilityEvent.TYPE_WINDOW_STATE_CHANGED) return;
@@ -52,16 +83,7 @@ public class HomeWatcherService extends AccessibilityService {
         String lower = cls.toLowerCase();
         for (String word : LEAVE_ALONE) if (lower.contains(word)) return;
 
-        long now = SystemClock.uptimeMillis();
-        if (now - lastJump < 600) return;
-        lastJump = now;
-
-        startActivity(new Intent(this, MainActivity.class)
-                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK
-                        | Intent.FLAG_ACTIVITY_REORDER_TO_FRONT
-                        | Intent.FLAG_ACTIVITY_NO_ANIMATION));
-
-        if (startupPending) handler.postDelayed(this::runStartupApp, 1200);
+        openHome();
     }
 
     private void runStartupApp() {
