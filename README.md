@@ -4,8 +4,26 @@ For **Jessica's Fire TV** (Fire TV Stick 4K Max 2nd gen, Fire OS 8.1.8.5, IP `19
 
 ![Sprik Home preview](docs/preview.png)
 
-**Sprik Home** is a tiny (~25 KB) home screen with no ads, no tracking and no internet access:
-clock and greeting, a Favorites row, every app in a grid, and 5 color themes.
+**Sprik Home** is a tiny (~30 KB) Apple TV–style home screen with no ads, no tracking and no internet access.
+
+- **Top shelf:** a big preview of whatever app you're on, with its name and how often you use it.
+- **Glass dock** of your favorite apps, and every app in a grid below.
+- **Tiles lift, tilt and shine** when you move onto them; the name appears underneath.
+- **Living colors:** a slow aurora glow behind everything that takes on the colors of the app
+  you're on. Or pick Time of day, Aurora, Sunset, Ocean, Neon or Mono (••• → Colors).
+
+| Neon colors | Scrolled into All Apps |
+|---|---|
+| ![](docs/preview-neon.png) | ![](docs/preview-grid.png) |
+
+## Automation (••• → Automation)
+| Feature | What it does | Default |
+|---|---|---|
+| Smart dock | Puts your most-used apps first, automatically | On |
+| Free up memory | Closes leftover background apps when you come back home, so the next app opens faster | On |
+| Night mode | 10 PM–6 AM: warmer, dimmer colors | On |
+| Ambient clock | After a few idle minutes on the home screen, shows a big drifting clock over the aurora (any button wakes it) | 5 min |
+| Open at start-up | Opens an app of your choice right after the TV turns on (also: ☰ on an app → *Open when TV turns on*) | Off |
 
 ## What you need
 - A computer (Windows, Mac or Linux) on the same Wi-Fi as the TV.
@@ -38,10 +56,14 @@ Add words after the command (`setup.bat extra` or `./setup.sh extra noupdates`):
 | `restore` | **Undoes everything** |
 
 ## Using Sprik Home
-- **☰ (menu button)** on any app: add/remove favorite, move left/right, hide, app info, uninstall.
-- **Menu** (top right): Fire TV settings, change theme, show hidden apps, Home button on/off,
-  open the Amazon home screen if you ever need it.
+- **☰ (menu button)** on any app: add to / remove from the dock, open at start-up, hide, app info, uninstall.
+  (Turn off *Smart dock* if you want to arrange the dock yourself.)
+- **•••** (top right): colors, motion effects on/off, automation, show hidden apps, Home button on/off,
+  Fire TV settings, and the Amazon home screen if you ever need it.
 - **Back** on the home screen just jumps to the top.
+
+## Updating
+Already set up? Run `setup.bat` / `./setup.sh` again — it installs the new version over the old one and keeps your settings.
 
 ## Do these on the TV too (big speed wins)
 - Settings → Preferences → **Featured Content** → turn off *Video autoplay* and *Audio autoplay*.
