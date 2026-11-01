@@ -1,29 +1,15 @@
-# Sprik Home — ad-free Fire TV launcher + debloat
+# Fire TV cleanup: CleanYourTV launcher + debloat
 
 For **Jessica's Fire TV** (Fire TV Stick 4K Max 2nd gen, Fire OS 8.1.8.5, IP `192.168.1.175`).
 
-![Sprik Home preview](docs/preview.png)
+![CleanYourTV with the Scenes theme](cleanyourtv/themes/scenes/screenshot.jpg)
 
-**Sprik Home** is a tiny (~30 KB) Apple TV–style home screen with no ads, no tracking and no internet access.
-
-- **Top shelf:** a big preview of whatever app you're on, with its name and how often you use it.
-- **Glass dock** of your favorite apps, and every app in a grid below.
-- **Tiles lift, tilt and shine** when you move onto them; the name appears underneath.
-- **Living colors:** a slow aurora glow behind everything that takes on the colors of the app
-  you're on. Or pick Time of day, Aurora, Sunset, Ocean, Neon or Mono (••• → Colors).
-
-| Neon colors | Scrolled into All Apps |
-|---|---|
-| ![](docs/preview-neon.png) | ![](docs/preview-grid.png) |
-
-## Automation (••• → Automation)
-| Feature | What it does | Default |
-|---|---|---|
-| Smart dock | Puts your most-used apps first, automatically | On |
-| Free up memory | Closes leftover background apps when you come back home, so the next app opens faster | On |
-| Night mode | 10 PM–6 AM: warmer, dimmer colors | On |
-| Ambient clock | After a few idle minutes on the home screen, shows a big drifting clock over the aurora (any button wakes it) | 5 min |
-| Open at start-up | Opens an app of your choice right after the TV turns on (also: ☰ on an app → *Open when TV turns on*) | Off |
+This repo sets up:
+- **[CleanYourTV](https://github.com/Gathin23/cleanyourtv)'s Apple TV–style launcher** (MIT), built for
+  this Fire TV so the **Home button opens it** instead of Amazon's ad-filled home. No ads, no internet access.
+- **Debloat**: CleanYourTV's list tested on this exact Stick, turning off Amazon tracking, ads and junk.
+- **Themes** you can switch with one command, with photo wallpapers.
+- **Sprik Home**, our own smaller launcher, as an alternative (`sprik`).
 
 ## What you need
 - A computer (Windows, Mac or Linux) on the same Wi-Fi as the TV.
@@ -40,8 +26,25 @@ For **Jessica's Fire TV** (Fire TV Stick 4K Max 2nd gen, Fire OS 8.1.8.5, IP `19
    - **Mac/Linux:** `cd firetv && ./setup.sh`
 3. The TV asks **"Allow USB debugging?"** → tick *Always allow* → **OK**.
 
-That installs Sprik Home, turns off Amazon ads/tracking/junk, speeds up animations,
-and makes the **Home button open Sprik Home**.
+That installs CleanYourTV, turns off Amazon ads/tracking/junk and makes the **Home button open it**.
+
+## Themes
+`setup.bat theme scenes` (Windows) or `./setup.sh theme scenes` (Mac). `theme-reset` goes back to the default.
+
+| Theme | Look |
+|---|---|
+| `scenes` | Rotating landscape photos (dusk peaks, aurora, city lights…) |
+| `nature-calm` | Calm nature photos |
+| `aurora` | Northern-lights wallpaper |
+| `cinematic` | Dark movie-theater look |
+| `glass` | Frosted glass |
+| `storm` | Stormy sky |
+| `retro` | Wallpaper that changes with the time of day |
+| `red-rain` | Dark red |
+| `minimal` | Plain and simple |
+| `default` | The built-in look |
+
+More themes: [CleanYourTV themes](https://github.com/Gathin23/cleanyourtv/tree/main/themes).
 
 ## Optional extras
 Add words after the command (`setup.bat extra` or `./setup.sh extra noupdates`):
@@ -52,10 +55,19 @@ Add words after the command (`setup.bat extra` or `./setup.sh extra noupdates`):
 | `noupdates` | Blocks automatic Fire OS updates (updates can undo this setup) |
 | `optimize` | Pre-compiles all apps so they open faster (5–15 min) |
 | `scan` | Lists every Amazon package and which are off |
-| `home` | Re-enables the Home button redirect (use if it stops after a reboot) |
+| `home` | Re-installs CleanYourTV and turns its Home helper back on (use if Home goes to Amazon) |
+| `sprik` | Switch to Sprik Home (Apple TV–style with automation, see below) |
 | `restore` | **Undoes everything** |
 
-## Using Sprik Home
+## Sprik Home (alternative)
+Our own ~30 KB launcher: a big preview of the selected app, a glass dock, and colors that follow
+the app you're on, plus automation (most-used apps first, memory cleanup, night mode, ambient clock,
+an app that opens at start-up). Switch with `sprik`, back with `home`. Only one of the two owns the
+Home button at a time.
+
+![Sprik Home](docs/preview.png)
+
+### Using Sprik Home
 - **☰ (menu button)** on any app: add to / remove from the dock, open at start-up, hide, app info, uninstall.
   (Turn off *Smart dock* if you want to arrange the dock yourself.)
 - **•••** (top right): colors, motion effects on/off, automation, show hidden apps, Home button on/off,
@@ -73,9 +85,10 @@ Already set up? Run `setup.bat` / `./setup.sh` again — it installs the new ver
 - Settings → Applications → **Appstore** → *Automatic updates* off (optional).
 
 ## How it works / safety
-- Fire OS doesn't let you change the home app, so Sprik Home uses an accessibility helper:
-  when Amazon's home screen appears, it opens Sprik Home on top. Voice search results,
-  profiles and settings screens are left alone.
+- Fire OS doesn't let you change the home app, and Amazon's launcher can't be disabled. So the
+  launcher's accessibility helper watches for the Home button and for Amazon's home screen, and
+  opens the new launcher on top. Amazon's launcher stays installed and stays Android's Home, so
+  the remote's Netflix/YouTube/Prime buttons and Alexa keep working.
 - The debloat list is [CleanYourTV](https://github.com/Gathin23/cleanyourtv)'s tested list for this
   exact Stick (4K Max 2nd gen, Fire OS 8.1.8.5), MIT licensed; the full annotated list is in
   `firetv/debloat-aftkrt.txt`. Prime Video, the Appstore, Alexa voice, the screensaver, Music, Silk,
@@ -84,7 +97,8 @@ Already set up? Run `setup.bat` / `./setup.sh` again — it installs the new ver
   Packages Fire OS protects, or that aren't on this TV, are skipped.
 - Animation speed is left at normal: on this Fire OS build, faster animations break the side menu.
 
-## Rebuilding the app
+## Rebuilding the apps
+CleanYourTV: see `cleanyourtv/README.md`. Sprik Home:
 ```
 cd launcher && ./gradlew assembleRelease
 cp app/build/outputs/apk/release/app-release.apk ../dist/SprikHome.apk

@@ -4,11 +4,14 @@
 #
 # Usage: sh firetv.sh <command> [command...]
 #   all        debloat + tweaks + home      (what setup runs by default)
+#   home       make the Home button open the CleanYourTV launcher
+#   sprik      make the Home button open Sprik Home instead
+#   theme      apply the CleanYourTV theme staged in /data/local/tmp/cyt-theme (setup.sh pushes it)
+#   theme-reset  back to the launcher's built-in look
 #   debloat    turn off Amazon ads, tracking, telemetry and junk
 #   extra      also turn off Alexa extras, Amazon casting, smart home, profiles sync, Amazon sign-in
 #   noupdates  also block automatic Fire OS updates (they can undo all this)
 #   tweaks     clear caches, close background apps
-#   home       make the Home button open Sprik Home
 #   optimize   pre-compile every app so it opens faster (takes 5-15 min)
 #   scan       list every Amazon package on this TV
 #   restore    undo everything
@@ -21,6 +24,10 @@
 
 LAUNCHER=com.sprik.home
 SERVICE=$LAUNCHER/com.sprik.home.HomeWatcherService
+CYT=com.gathin.tvhome
+CYT_SERVICE=$CYT/.HomeKeyService
+THEME_DIR=/data/local/tmp/cyt-theme
+THEME_URI=content://$CYT.theme
 
 # Telemetry, metrics, logs, usage and location reporting
 TELEMETRY="
@@ -198,23 +205,109 @@ do_tweaks() {
   am kill-all >/dev/null 2>&1 && echo "  [ OK ] background apps closed"
 }
 
-do_home() {
-  echo "== Home button -> Sprik Home =="
-  if ! pm list packages | grep -qx "package:$LAUNCHER"; then
-    echo "  [ NO ] Sprik Home isn't installed yet"
-    return
-  fi
+installed() { pm list packages | grep -qx "package:$1"; }
+
+# The list of accessibility helpers, with every entry for package $1 taken out.
+services_without() {
   cur=$(settings get secure enabled_accessibility_services)
-  case "$cur" in
-    *"$SERVICE"*) new="$cur" ;;
-    ""|null)      new="$SERVICE" ;;
-    *)            new="$cur:$SERVICE" ;;
-  esac
+  [ "$cur" = null ] && cur=""
+  echo "$cur" | tr ':' '\n' | grep -v "^$1/" | grep -v '^$' | tr '\n' ':' | sed 's/:$//'
+}
+
+# Puts helper $2 (of package $1) on the list. Clearing the list first makes Android bind it again.
+use_helper() {
+  rest=$(services_without "$1")
+  settings put secure enabled_accessibility_services ""
+  settings put secure accessibility_enabled 0
+  sleep 1
+  if [ -n "$rest" ]; then new="$rest:$2"; else new="$2"; fi
   settings put secure enabled_accessibility_services "$new"
   settings put secure accessibility_enabled 1
-  echo "  [ OK ] home-button helper enabled"
+}
+
+drop_helper() {
+  rest=$(services_without "$1")
+  if [ -n "$rest" ]; then
+    settings put secure enabled_accessibility_services "$rest"
+  else
+    settings delete secure enabled_accessibility_services >/dev/null 2>&1
+  fi
+}
+
+# Restart CleanYourTV and bind its Home helper.
+start_cyt() {
+  am force-stop $CYT
+  use_helper $CYT $CYT_SERVICE
+  # Started like an app, not as Home: Amazon's launcher stays Android's Home, and starting
+  # this one as Home would stop the remote's Netflix/YouTube buttons from working.
+  am start -W -n $CYT/.MainActivity >/dev/null 2>&1
+}
+
+do_home() {
+  echo "== Home button -> CleanYourTV =="
+  if ! installed $CYT; then echo "  [ NO ] CleanYourTV isn't installed yet"; return; fi
+  installed $LAUNCHER && drop_helper $LAUNCHER
+  cmd appops set $CYT AUTO_START allow >/dev/null 2>&1
+  pm grant $CYT android.permission.ACCESS_FINE_LOCATION >/dev/null 2>&1   # Wi-Fi name in the top bar
+  pm grant $CYT android.permission.WRITE_SECURE_SETTINGS >/dev/null 2>&1  # lets it put its Home helper back
+  start_cyt
+  echo "  [ OK ] Home helper on, CleanYourTV opened"
+  cmd package compile -m speed -f $CYT >/dev/null 2>&1 && echo "  [ OK ] launcher pre-compiled for speed"
+}
+
+do_sprik() {
+  echo "== Home button -> Sprik Home =="
+  if ! installed $LAUNCHER; then echo "  [ NO ] Sprik Home isn't installed yet"; return; fi
+  installed $CYT && drop_helper $CYT
+  use_helper $LAUNCHER $SERVICE
   am start -n "$LAUNCHER/.MainActivity" >/dev/null 2>&1
-  echo "  [ OK ] Sprik Home opened"
+  echo "  [ OK ] Home helper on, Sprik Home opened"
+}
+
+theme_put() {   # $1 = file path inside the theme
+  content delete --uri "$THEME_URI/$1" >/dev/null 2>&1
+  out=$(content write --uri "$THEME_URI/$1" < "$THEME_DIR/$1" 2>&1)
+  case "$out" in *rror*|*xception*) echo "  [ NO ] $1: $out"; return 1 ;; esac
+  return 0
+}
+
+theme_finish() {
+  cat /proc/sys/kernel/random/uuid > "$THEME_DIR.rev" 2>/dev/null || date +%s > "$THEME_DIR.rev"
+  content write --uri "$THEME_URI/theme_revision" < "$THEME_DIR.rev" >/dev/null 2>&1
+  rm -f "$THEME_DIR.rev"
+  start_cyt
+}
+
+theme_clear() {
+  content delete --uri "$THEME_URI/config.json" >/dev/null 2>&1
+  content delete --uri "$THEME_URI/wallpaper.jpg" >/dev/null 2>&1
+  content delete --uri "$THEME_URI/wallpapers" >/dev/null 2>&1
+}
+
+do_theme() {
+  echo "== Applying theme =="
+  if ! installed $CYT; then echo "  [ NO ] CleanYourTV isn't installed yet"; return; fi
+  if [ ! -f "$THEME_DIR/config.json" ]; then echo "  [ NO ] no theme was sent to the TV"; return; fi
+  theme_clear
+  n=0
+  theme_put config.json || return
+  [ -f "$THEME_DIR/wallpaper.jpg" ] && theme_put wallpaper.jpg && n=$((n + 1))
+  if [ -d "$THEME_DIR/wallpapers" ]; then
+    for f in "$THEME_DIR"/wallpapers/*; do
+      [ -f "$f" ] || continue
+      theme_put "wallpapers/${f##*/}" && n=$((n + 1))
+    done
+  fi
+  theme_finish
+  rm -rf "$THEME_DIR"
+  echo "  [ OK ] theme applied ($n pictures)"
+}
+
+do_theme_reset() {
+  echo "== Back to the built-in look =="
+  theme_clear
+  theme_finish
+  echo "  [ OK ] done"
 }
 
 do_optimize() {
@@ -241,15 +334,10 @@ do_restore() {
   settings put global window_animation_scale 1
   settings put global transition_animation_scale 1
   settings put global animator_duration_scale 1
-  cur=$(settings get secure enabled_accessibility_services)
-  new=$(echo "$cur" | sed "s#:*$SERVICE##g; s#^:##")
-  if [ -z "$new" ] || [ "$new" = "null" ]; then
-    settings delete secure enabled_accessibility_services >/dev/null 2>&1
-  else
-    settings put secure enabled_accessibility_services "$new"
-  fi
+  drop_helper $LAUNCHER
+  drop_helper $CYT
   echo "  [ OK ] Amazon apps back on, Home button back to Amazon"
-  echo "  (Sprik Home is still installed. Remove it from Settings > Applications if you want.)"
+  echo "  (The launchers are still installed. Remove them from Settings > Applications if you want.)"
 }
 
 [ $# -eq 0 ] && set -- all
@@ -261,6 +349,9 @@ for cmd in "$@"; do
     noupdates) do_noupdates ;;
     tweaks)    do_tweaks ;;
     home)      do_home ;;
+    sprik)     do_sprik ;;
+    theme)     do_theme ;;
+    theme-reset) do_theme_reset ;;
     optimize)  do_optimize ;;
     scan)      do_scan ;;
     restore)   do_restore ;;
