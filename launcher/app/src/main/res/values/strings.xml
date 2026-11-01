@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Sprik Home</string>
+    <string name="service_name">Sprik Home button</string>
+    <string name="service_desc">Opens Sprik Home when you press the Home button instead of the Amazon home screen.</string>
+</resources>

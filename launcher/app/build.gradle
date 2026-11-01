@@ -1,0 +1,44 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'com.sprik.home'
+    compileSdk 34
+
+    defaultConfig {
+        applicationId 'com.sprik.home'
+        minSdk 25          // Fire OS 7+
+        targetSdk 34
+        versionCode 1
+        versionName '1.0'
+    }
+
+    // Optional: put your own key in launcher/keystore/ (kept out of git) and set
+    // SPRIK_STORE_PASSWORD. Without it, builds use the standard debug key.
+    def ks = file('../keystore/sprik-home.jks')
+    def ksPass = System.getenv('SPRIK_STORE_PASSWORD')
+    signingConfigs {
+        if (ks.exists() && ksPass) {
+            own {
+                storeFile ks
+                storePassword ksPass
+                keyAlias 'sprik'
+                keyPassword ksPass
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt')
+            signingConfig signingConfigs.findByName('own') ?: signingConfigs.debug
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    lint { abortOnError false; checkReleaseBuilds false }
+}
