@@ -1,3 +1,5 @@
+> **Also in this repo:** [Sprik Books](books/README.md), our own bookkeeping app to replace QuickBooks. Free, unlimited businesses, data stays on your computer.
+
 # Fire TV cleanup: CleanYourTV launcher + debloat
 
 For **Jessica's Fire TV** (Fire TV Stick 4K Max 2nd gen, Fire OS 8.1.8.5, IP `192.168.1.175`).
