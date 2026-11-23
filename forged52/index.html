@@ -79,8 +79,16 @@ section{position:relative}
 
 /* HERO */
 .hero{min-height:100svh;display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:90px 16px 110px}
-.hero-bg{position:absolute;inset:-4%;z-index:-3;background:url(assets/bg.webp) center/cover no-repeat;animation:kb 28s ease-in-out infinite alternate;filter:saturate(1.1)}
-@keyframes kb{to{transform:scale(1.12) translate(-1.5%,1%)}}
+.hero-bg{position:absolute;inset:0;z-index:-3;overflow:hidden;background:
+  radial-gradient(ellipse 34% 30% at 50% 34%,rgba(170,255,40,.20),rgba(145,230,0,.06) 55%,transparent 75%),
+  radial-gradient(ellipse 80% 38% at 50% 108%,rgba(145,230,0,.30),rgba(90,150,0,.10) 45%,transparent 75%),
+  linear-gradient(180deg,#0c0f0b 0%,#080907 55%,#0a0c08 100%)}
+.hero-bg .tex{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27420%27%20height%3D%27420%27%3E%3Cfilter%20id%3D%27h%27%20x%3D%270%27%20y%3D%270%27%3E%3CfeTurbulence%20type%3D%27turbulence%27%20baseFrequency%3D%27.028%27%20numOctaves%3D%273%27%20seed%3D%277%27%20stitchTiles%3D%27stitch%27/%3E%3CfeDiffuseLighting%20surfaceScale%3D%274%27%20lighting-color%3D%27%239aa596%27%3E%3CfeDistantLight%20azimuth%3D%27235%27%20elevation%3D%2748%27/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23h%29%27/%3E%3C/svg%3E") center/420px;opacity:.13;mix-blend-mode:screen;-webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 45%,#000 30%,transparent 85%);mask-image:radial-gradient(ellipse 80% 75% at 50% 45%,#000 30%,transparent 85%)}
+.hero-bg .rays{position:absolute;left:50%;top:34%;width:240vmax;height:240vmax;margin:-120vmax 0 0 -120vmax;background:repeating-conic-gradient(from 0deg,rgba(200,255,120,.075) 0deg 2.2deg,transparent 2.2deg 11deg);-webkit-mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.5) 12%,transparent 30%);mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.5) 12%,transparent 30%);animation:rays 180s linear infinite}
+@keyframes rays{to{transform:rotate(360deg)}}
+.hero-bg .heat{position:absolute;left:-10%;right:-10%;bottom:-2px;height:42%;background:radial-gradient(ellipse 50% 100% at 50% 100%,rgba(184,255,61,.22),transparent 70%);filter:blur(8px);animation:heat 6s ease-in-out infinite alternate;transform-origin:bottom}
+@keyframes heat{0%{opacity:.7;transform:scaleY(.92)}100%{opacity:1;transform:scaleY(1.06)}}
+.hero-bg .edge{position:absolute;left:8%;right:8%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,255,61,.7),transparent);box-shadow:0 0 18px 2px rgba(145,230,0,.45)}
 .hero::after{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse 70% 55% at 50% 42%,transparent 0,rgba(10,10,10,.55) 60%,var(--bg) 100%),linear-gradient(to bottom,rgba(10,10,10,.2),transparent 30%,transparent 70%,var(--bg))}
 #embers{position:absolute;inset:0;z-index:-1;width:100%;height:100%}
 .hero-inner{text-align:center;display:flex;flex-direction:column;align-items:center}
@@ -406,7 +414,7 @@ html.big .hero .sub{font-size:22px;color:#e0e0e0}
 
 <!-- HERO -->
 <section class="hero" id="top">
-  <div class="hero-bg"></div>
+  <div class="hero-bg" aria-hidden="true"><div class="rays"></div><div class="tex"></div><div class="heat"></div><div class="edge"></div></div>
   <canvas id="embers" aria-hidden="true"></canvas>
   <div class="hero-inner">
     <div class="logo-wrap">
@@ -726,9 +734,9 @@ $$('[data-words]').forEach(el=>{
 (()=>{
   const c = $('#embers'), x = c.getContext('2d');
   let W,H,dpr,parts=[],mouse={x:-999,y:-999,vx:0,vy:0};
-  const N = reduce ? 0 : (innerWidth<700?70:150);
+  const N = reduce ? 0 : (innerWidth<700?60:120);
   function size(){dpr=Math.min(devicePixelRatio||1,2);W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
-  function spawn(p,init){p.x=Math.random()*W;p.y=init?Math.random()*H:H+10;p.r=Math.random()*1.8+.4;p.vy=-(Math.random()*1.1+.35);p.vx=(Math.random()-.5)*.4;p.life=0;p.max=Math.random()*400+200;p.lime=Math.random()<.22;p.ph=Math.random()*6.28;return p}
+  function spawn(p,init){p.x=Math.random()*W;p.y=init?Math.random()*H:H+10;p.r=Math.random()*1.1+.3;p.vy=-(Math.random()*.9+.3);p.vx=(Math.random()-.5)*.4;p.life=0;p.max=Math.random()*400+200;p.lime=Math.random()<.6;p.ph=Math.random()*6.28;return p}
   size(); addEventListener('resize',size);
   for(let i=0;i<N;i++) parts.push(spawn({},true));
   const hero = $('.hero');
@@ -757,8 +765,9 @@ $$('[data-words]').forEach(el=>{
       const t=p.life/p.max,a=t<.1?t*10:1-(t-.1)/.9;
       if(p.life>p.max||p.y<-20){ if(p.burst){parts.splice(i,1);continue} spawn(p,false); continue }
       const col=p.lime?`184,255,61`:`255,${130+((1-t)*90|0)},${30+((1-t)*40|0)}`;
-      const gr=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*5);gr.addColorStop(0,`rgba(${col},${a})`);gr.addColorStop(1,`rgba(${col},0)`);
-      x.fillStyle=gr;x.beginPath();x.arc(p.x,p.y,p.r*5,0,6.283);x.fill();
+      const gr=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.2);gr.addColorStop(0,`rgba(${col},${a*.55})`);gr.addColorStop(1,`rgba(${col},0)`);
+      x.fillStyle=gr;x.beginPath();x.arc(p.x,p.y,p.r*3.2,0,6.283);x.fill();
+      x.fillStyle=`rgba(255,255,240,${a*.9})`;x.beginPath();x.arc(p.x,p.y,p.r*.55,0,6.283);x.fill();
     }
   })();
 })();
