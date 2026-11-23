@@ -4,1288 +4,552 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Forged52</title>
-<meta name="description" content="Read the entire Bible in 52 weeks. Build the Man. Lead the Family.">
-<meta name="theme-color" content="#0a0a0a">
+<meta name="description" content="Read the whole Bible in 52 weeks. One reading a day.">
+<meta name="theme-color" content="#0f1110">
 <link rel="icon" href="assets/icon.png">
+<link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&display=swap" rel="stylesheet">
 <style>
+/* Layout: one calm reading column (max 680px) like a good reading app; header tabs on desktop, tab bar on phones. */
 :root{
-  --bg:#0a0a0a; --bg-2:#111; --card:#131313; --line:#1f1f1f; --line-2:#2a2a2a;
-  --fg:#ececec; --fg-2:#a6a6a6; --fg-3:#6b6b6b;
-  --lime:#91e600; --lime-2:#b8ff3d; --lime-dim:#4f7d00;
-  --ember:#ff7a1a; --ember-2:#ffb347; --steel:#6c7278;
-  --display:"Bebas Neue",Impact,sans-serif;
-  --body:"Barlow",system-ui,sans-serif;
-  --head:"Barlow",system-ui,sans-serif;
-  --serif:"Cinzel",Georgia,serif;
+  --bg:#0f1110; --surface:#161917; --surface-2:#1c201d; --line:#272b28; --line-2:#343a35;
+  --text:#eceee8; --muted:#a4aba2; --faint:#767d74;
+  --accent:#a6d65a; --accent-ink:#121a06; --accent-soft:rgba(166,214,90,.12);
+  --warm:#e6b566;
+  --serif:"Newsreader",Georgia,"Times New Roman",serif;
+  --sans:"Manrope",system-ui,-apple-system,"Segoe UI",sans-serif;
   color-scheme:dark;
 }
-@media (prefers-color-scheme: light){ :root:not([data-theme="light"]){ color-scheme:dark; } }
-:root[data-theme="dark"]{ color-scheme:dark; }
 *{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;overflow-x:clip}
-body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:20px;line-height:1.45;overflow-x:clip;-webkit-font-smoothing:antialiased}
-img{max-width:100%;display:block}
+html{-webkit-text-size-adjust:100%;font-size:100%}
+html.big{font-size:122%}
+html.big{--muted:#c9cec6;--faint:#a8aea6}
+body{background:var(--bg);color:var(--text);font-family:var(--sans);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;min-height:100vh}
 a{color:inherit}
-button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
-::selection{background:var(--lime);color:#000}
-:focus-visible{outline:2px solid var(--lime);outline-offset:3px}
+button,input,select{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+[hidden]{display:none!important}
 
-/* grain + grid */
-body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.07;mix-blend-mode:overlay;
-  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.grid-bg{background-image:linear-gradient(rgba(145,230,0,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(145,230,0,.035) 1px,transparent 1px);background-size:48px 48px}
+/* header */
+.top{position:sticky;top:0;z-index:30;background:rgba(15,17,16,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.top-in{max-width:1080px;margin:0 auto;display:flex;align-items:center;gap:16px;padding:12px max(18px,env(safe-area-inset-right)) 12px max(18px,env(safe-area-inset-left))}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;font-weight:800;font-size:1.05rem;letter-spacing:-.01em}
+.brand img{height:34px;width:auto}
+.brand b{color:var(--accent);font-weight:800}
+.tabs{display:flex;gap:4px;margin-left:auto}
+.tabs a{text-decoration:none;font-weight:600;font-size:.95rem;color:var(--muted);padding:8px 14px;border-radius:999px}
+.tabs a:hover{color:var(--text)}
+.tabs a[aria-current="page"]{color:var(--text);background:var(--surface-2)}
+.tool{height:40px;min-width:40px;padding:0 12px;border-radius:999px;border:1px solid var(--line-2);font-weight:700;font-size:.95rem;display:inline-flex;align-items:center;gap:6px}
+.tool[aria-pressed="true"]{background:var(--text);color:var(--bg);border-color:var(--text)}
+.tabbar{display:none}
+@media (max-width:760px){
+  .tabs{display:none}
+  .tool{margin-left:auto}
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:30;background:rgba(15,17,16,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line);padding:6px max(8px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(8px,env(safe-area-inset-left))}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:2px;padding:6px 0;text-decoration:none;color:var(--faint);font-size:.78rem;font-weight:700}
+  .tabbar svg{width:24px;height:24px}
+  .tabbar a[aria-current="page"]{color:var(--accent)}
+  body{padding-bottom:calc(74px + env(safe-area-inset-bottom))}
+}
 
-/* heat bar */
-#heat{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,#3a3f44,#8b1a00,#ff4d00,#ffb347,#fff3c4,var(--lime));box-shadow:0 0 12px rgba(255,122,26,.7)}
-
-/* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,40px);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
-.nav .brand,.nav .btn.primary{transition:opacity .3s}
-.nav:not(.show) .brand{opacity:0;pointer-events:none}
-.nav:not(.show) .btn.primary{display:none}
-.nav .links{margin-left:auto}
-.nav.show{background:rgba(10,10,10,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
-.nav .brand{font-family:var(--display);font-size:28px;letter-spacing:.06em;text-decoration:none}
-.nav .brand b{color:var(--lime);font-weight:400}
-.nav .links{display:flex;gap:28px;align-items:center}
-.nav .links a:not(.btn){font-family:var(--body);font-weight:600;font-size:15px;letter-spacing:.2em;text-transform:uppercase;text-decoration:none;color:var(--fg-2)}
-.nav .links a:not(.btn):hover{color:var(--fg)}
-@media (max-width:720px){.nav .links a:not(.btn){display:none}}
+/* page */
+main{max-width:680px;margin:0 auto;padding:36px max(18px,env(safe-area-inset-right)) 80px max(18px,env(safe-area-inset-left))}
+.page{animation:in .35s ease both}
+@keyframes in{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.kicker{font-size:.82rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+h1,h2,h3{font-family:var(--serif);font-weight:500;letter-spacing:-.01em;line-height:1.15;text-wrap:balance}
+h1{font-size:clamp(2rem,6vw,2.75rem)}
+h2{font-size:1.6rem}
+.lead{font-size:1.15rem;color:var(--muted);margin-top:10px;max-width:56ch}
+.section{margin-top:44px}
+.section-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;margin-bottom:14px}
+.section-head h2{font-size:1.35rem}
+.section-head span{color:var(--faint);font-size:.95rem}
 
 /* buttons */
-.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;font-family:var(--display);font-size:22px;letter-spacing:.12em;text-decoration:none;padding:14px 30px 12px;border:1px solid var(--line-2);color:var(--fg);transition:transform .2s,border-color .2s,background .2s,box-shadow .2s}
-.btn:hover{border-color:var(--lime);transform:translateY(-2px)}
-.btn.primary{clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px);background:var(--lime);color:#050505;border-color:var(--lime);box-shadow:0 0 0 0 rgba(145,230,0,.5)}
-.btn.primary:hover{background:var(--lime-2);box-shadow:0 10px 40px -8px rgba(145,230,0,.65)}
-.btn.sm{font-size:17px;padding:9px 18px 7px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:0 22px;border-radius:14px;font-weight:700;font-size:1.02rem;text-decoration:none;border:1px solid var(--line-2);background:var(--surface-2);transition:background .2s,border-color .2s,transform .1s}
+.btn:hover{border-color:var(--faint)}
+.btn:active{transform:scale(.98)}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn.primary:hover{background:#b6e270}
+.btn svg{width:20px;height:20px;flex:none}
+.btn.done{background:var(--accent-soft);border-color:rgba(166,214,90,.45);color:var(--accent)}
 
-/* layout */
-section{position:relative}
-.wrap{width:min(1180px,100% - 32px);margin-inline:auto}
-.narrow{width:min(820px,100% - 32px);margin-inline:auto}
-.eyebrow{font-family:var(--body);font-weight:600;font-size:15px;letter-spacing:.42em;text-transform:uppercase;color:var(--lime)}
-.eyebrow::before{content:"";display:inline-block;width:28px;height:1px;background:currentColor;vertical-align:middle;margin-right:14px}
-.h2{font-family:var(--display);font-weight:400;font-size:clamp(46px,8vw,104px);line-height:.92;letter-spacing:.01em}
-.h2 em{font-style:normal;color:var(--lime)}
-.lede{font-size:clamp(20px,2.2vw,25px);color:var(--fg-2);max-width:60ch}
-.pad{padding:clamp(90px,14vw,170px) 0}
+/* TODAY */
+.greet{display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex-wrap:wrap}
+.greet h1{font-size:clamp(1.9rem,5.5vw,2.5rem)}
+.streak{font-size:.95rem;color:var(--warm);font-weight:700}
+.prog{margin-top:18px}
+.prog-bar{height:6px;border-radius:99px;background:var(--surface-2);overflow:hidden}
+.prog-bar i{display:block;height:100%;background:var(--accent);border-radius:99px;transition:width .6s}
+.prog-meta{display:flex;justify-content:space-between;font-size:.9rem;color:var(--faint);margin-top:8px}
+.reading{margin-top:26px;background:var(--surface);border:1px solid var(--line);border-radius:22px;padding:clamp(22px,5vw,32px)}
+.reading .kicker{color:var(--accent)}
+.reading .ref{font-family:var(--serif);font-weight:500;font-size:clamp(2.4rem,9vw,3.4rem);line-height:1.05;margin-top:10px;letter-spacing:-.02em}
+.reading .cat{color:var(--muted);margin-top:6px}
+.reading .acts{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
+@media (max-width:420px){.reading .acts{grid-template-columns:1fr}}
+.note{margin-top:16px;font-size:.95rem;color:var(--muted);display:flex;flex-wrap:wrap;gap:8px 14px;align-items:center}
+.link-btn{color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.verse{margin-top:22px;padding:22px 24px;border-left:3px solid var(--accent);background:linear-gradient(90deg,var(--accent-soft),transparent 80%);border-radius:0 16px 16px 0}
+.verse p{font-family:var(--serif);font-size:1.3rem;line-height:1.45;font-style:italic}
+.verse cite{display:block;margin-top:8px;font-style:normal;font-size:.9rem;color:var(--faint);font-weight:600}
 
-/* reveal */
-.rv{opacity:0;transform:translateY(34px);transition:opacity .9s cubic-bezier(.2,.8,.2,1),transform .9s cubic-bezier(.2,.8,.2,1)}
-.rv.in{opacity:1;transform:none}
-.rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
-
-/* HERO */
-.hero{display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:84px 16px 26px}
-.hero-bg{position:absolute;inset:0;z-index:-3;overflow:hidden;background:
-  radial-gradient(ellipse 34% 30% at 50% 34%,rgba(170,255,40,.20),rgba(145,230,0,.06) 55%,transparent 75%),
-  radial-gradient(ellipse 80% 38% at 50% 108%,rgba(145,230,0,.30),rgba(90,150,0,.10) 45%,transparent 75%),
-  linear-gradient(180deg,#0c0f0b 0%,#080907 55%,#0a0c08 100%)}
-.hero-bg .tex{position:absolute;inset:0;background:url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27420%27%20height%3D%27420%27%3E%3Cfilter%20id%3D%27h%27%20x%3D%270%27%20y%3D%270%27%3E%3CfeTurbulence%20type%3D%27turbulence%27%20baseFrequency%3D%27.028%27%20numOctaves%3D%273%27%20seed%3D%277%27%20stitchTiles%3D%27stitch%27/%3E%3CfeDiffuseLighting%20surfaceScale%3D%274%27%20lighting-color%3D%27%239aa596%27%3E%3CfeDistantLight%20azimuth%3D%27235%27%20elevation%3D%2748%27/%3E%3C/feDiffuseLighting%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23h%29%27/%3E%3C/svg%3E") center/420px;opacity:.13;mix-blend-mode:screen;-webkit-mask-image:radial-gradient(ellipse 80% 75% at 50% 45%,#000 30%,transparent 85%);mask-image:radial-gradient(ellipse 80% 75% at 50% 45%,#000 30%,transparent 85%)}
-.hero-bg .rays{position:absolute;left:50%;top:34%;width:240vmax;height:240vmax;margin:-120vmax 0 0 -120vmax;background:repeating-conic-gradient(from 0deg,rgba(200,255,120,.075) 0deg 2.2deg,transparent 2.2deg 11deg);-webkit-mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.5) 12%,transparent 30%);mask-image:radial-gradient(circle,#000 0,rgba(0,0,0,.5) 12%,transparent 30%);animation:rays 180s linear infinite}
-@keyframes rays{to{transform:rotate(360deg)}}
-.hero-bg .heat{position:absolute;left:-10%;right:-10%;bottom:-2px;height:42%;background:radial-gradient(ellipse 50% 100% at 50% 100%,rgba(184,255,61,.22),transparent 70%);filter:blur(8px);animation:heat 6s ease-in-out infinite alternate;transform-origin:bottom}
-@keyframes heat{0%{opacity:.7;transform:scaleY(.92)}100%{opacity:1;transform:scaleY(1.06)}}
-.hero-bg .edge{position:absolute;left:8%;right:8%;bottom:0;height:1px;background:linear-gradient(90deg,transparent,rgba(184,255,61,.7),transparent);box-shadow:0 0 18px 2px rgba(145,230,0,.45)}
-.hero::after{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse 70% 55% at 50% 42%,transparent 0,rgba(10,10,10,.55) 60%,var(--bg) 100%),linear-gradient(to bottom,rgba(10,10,10,.2),transparent 30%,transparent 70%,var(--bg))}
-#embers{position:absolute;inset:0;z-index:-1;width:100%;height:100%}
-.hero-inner{text-align:center;display:flex;flex-direction:column;align-items:center}
-.logo-wrap{position:relative;width:min(320px,52vw,26vh);aspect-ratio:1492/1023;margin-bottom:6px}
-.logo-wrap img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 40px rgba(145,230,0,.25));animation:strike 1.1s cubic-bezier(.2,1.4,.3,1) .2s both, breathe 5s ease-in-out 1.5s infinite}
-@keyframes strike{0%{opacity:0;transform:scale(1.5) rotate(-3deg);filter:brightness(4) blur(6px)}55%{opacity:1;filter:brightness(2.4) drop-shadow(0 0 80px var(--lime))}100%{transform:none;filter:drop-shadow(0 0 40px rgba(145,230,0,.25))}}
-@keyframes breathe{50%{filter:drop-shadow(0 0 70px rgba(145,230,0,.45)) brightness(1.08)}}
-.shock{position:absolute;left:50%;top:44%;width:30px;height:30px;margin:-15px;border-radius:50%;border:2px solid var(--lime-2);opacity:0;animation:shock 1.1s ease-out .55s both;pointer-events:none}
-@keyframes shock{0%{opacity:.9;transform:scale(.2)}100%{opacity:0;transform:scale(28)}}
-.flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:90;animation:flash .5s ease-out .5s both}
-@keyframes flash{0%{opacity:.0}10%{opacity:.35}100%{opacity:0}}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,6.4vw,88px);line-height:.88;letter-spacing:.01em;margin-top:8px}
-.hero h1 .l1{display:block}
-.hero h1 .l1 .w{background:linear-gradient(180deg,#fff 0%,#c9cdd1 45%,#6d7378 52%,#d9dcdf 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
-.hero h1 .l2{display:block;color:var(--lime);text-shadow:0 0 40px rgba(145,230,0,.45)}
-.hero h1 .w{display:inline-block;opacity:0;transform:translateY(40px) skewY(6deg);animation:wup .8s cubic-bezier(.2,.8,.2,1) both}
-@keyframes wup{to{opacity:1;transform:none}}
-.hero .sub{margin-top:22px;font-size:clamp(18px,2vw,22px);letter-spacing:.32em;text-transform:uppercase;color:var(--fg-2);font-weight:500;opacity:0;animation:fade 1s 1.7s both}
-.hero .ctas{display:flex;gap:14px;flex-wrap:wrap;justify-content:center;margin-top:34px;opacity:0;animation:fade 1s 1.9s both}
-@keyframes fade{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:none}}
-@media (max-height:920px){.scroll-cue{display:none!important}}
-.scroll-cue{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;font-size:12px;letter-spacing:.5em;text-transform:uppercase;color:var(--fg-3);text-decoration:none;opacity:0;animation:fade 1s 2.3s both}
-.scroll-cue i{width:1px;height:46px;background:linear-gradient(var(--lime),transparent);animation:drip 2s ease-in-out infinite}
-@keyframes drip{0%{transform:scaleY(0);transform-origin:top}50%{transform:scaleY(1);transform-origin:top}51%{transform-origin:bottom}100%{transform:scaleY(0);transform-origin:bottom}}
-
-/* STATS */
-.stats{border-block:1px solid var(--line);background:linear-gradient(180deg,#0d0d0d,#0a0a0a)}
-.stats .wrap{display:grid;grid-template-columns:repeat(4,1fr)}
-.stat{padding:38px 12px 32px;text-align:center;border-right:1px solid var(--line)}
-.stat:last-child{border-right:0}
-.stat .n{font-family:var(--display);font-size:clamp(54px,8vw,96px);line-height:1;color:var(--fg);font-variant-numeric:tabular-nums}
-.stat:nth-child(4) .n{color:var(--lime);text-shadow:0 0 30px rgba(145,230,0,.4)}
-.stat .l{font-size:14px;letter-spacing:.4em;text-transform:uppercase;color:var(--fg-3);margin-top:6px}
-@media (max-width:640px){.stats .wrap{grid-template-columns:repeat(2,1fr)}.stat:nth-child(2){border-right:0}.stat:nth-child(-n+2){border-bottom:1px solid var(--line)}}
-
-/* SCRIPTURE */
-.verse{text-align:center}
-.verse blockquote{font-family:var(--serif);font-weight:400;font-size:clamp(26px,3.6vw,46px);line-height:1.3;color:#e8e8e8}
-.verse blockquote .ch{opacity:.12;transition:opacity .5s, color .5s, text-shadow .5s}
-.verse blockquote .ch.lit{opacity:1}
-.verse blockquote .ch.hot{color:var(--lime-2);text-shadow:0 0 18px rgba(145,230,0,.6)}
-.verse cite{display:block;margin-top:26px;font-style:normal;font-size:15px;letter-spacing:.45em;color:var(--lime);text-transform:uppercase}
-.verse .mark{font-family:var(--serif);font-size:120px;line-height:.5;color:var(--lime);opacity:.35;display:block;height:50px}
-
-/* CONVOY */
-.convoy{overflow:hidden}
-.convoy-grid{display:grid;grid-template-columns:1.05fr 1fr;gap:clamp(30px,6vw,90px);align-items:center}
-@media (max-width:900px){.convoy-grid{grid-template-columns:1fr}}
-.convoy .copy p{font-size:clamp(20px,2vw,24px);color:var(--fg-2);margin-top:22px}
-.convoy .copy p strong{color:var(--fg);font-weight:600}
-.convoy .copy .punch{font-family:var(--display);font-size:clamp(30px,3.6vw,46px);color:var(--fg);line-height:1;margin-top:30px;letter-spacing:.02em}
-.convoy .copy .punch span{color:var(--lime)}
-.radar{position:relative;aspect-ratio:1;width:100%;max-width:520px;margin-inline:auto;border-radius:50%;border:1px solid rgba(145,230,0,.25);background:radial-gradient(circle,rgba(145,230,0,.07),transparent 70%);overflow:hidden}
-.radar::before,.radar::after{content:"";position:absolute;inset:16%;border-radius:50%;border:1px dashed rgba(145,230,0,.16)}
-.radar::after{inset:33%}
-.radar .sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,rgba(145,230,0,.32),rgba(145,230,0,0) 22%,transparent);animation:spin 5s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-.radar .cross{position:absolute;inset:0}
-.radar .cross::before,.radar .cross::after{content:"";position:absolute;background:rgba(145,230,0,.14)}
-.radar .cross::before{left:50%;top:0;bottom:0;width:1px}
-.radar .cross::after{top:50%;left:0;right:0;height:1px}
-.unit{position:absolute;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:6px;transition:left 1.2s cubic-bezier(.2,.8,.2,1),top 1.2s cubic-bezier(.2,.8,.2,1)}
-.unit i{width:14px;height:14px;border-radius:50%;background:#7c8186;box-shadow:0 0 0 4px rgba(124,129,134,.15)}
-.unit span{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--fg-3);white-space:nowrap}
-.unit.point i{width:20px;height:20px;background:var(--lime);box-shadow:0 0 0 6px rgba(145,230,0,.18),0 0 30px var(--lime);animation:ping 1.8s ease-out infinite}
-.unit.point span{color:var(--lime);font-weight:700}
-@keyframes ping{0%{box-shadow:0 0 0 0 rgba(145,230,0,.6),0 0 30px var(--lime)}100%{box-shadow:0 0 0 22px rgba(145,230,0,0),0 0 30px var(--lime)}}
-.threat{position:absolute;width:8px;height:8px;background:var(--ember);border-radius:50%;opacity:0;box-shadow:0 0 12px var(--ember);animation:blip 5s linear infinite}
-@keyframes blip{0%,8%{opacity:0}10%{opacity:1}40%{opacity:0}100%{opacity:0}}
-.radar-label{position:absolute;left:50%;bottom:7%;transform:translateX(-50%);font-size:11px;letter-spacing:.4em;color:rgba(145,230,0,.6);text-transform:uppercase;white-space:nowrap}
-
-/* IMPACT */
-.impact .tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);margin-top:56px}
-@media (max-width:820px){.impact .tiles{grid-template-columns:repeat(2,1fr)}}
-@media (max-width:520px){.impact .tiles{grid-template-columns:1fr}.tile{padding:26px 20px}}
-.tile{background:var(--bg);padding:34px 24px 30px;position:relative;overflow:hidden;transition:background .3s}
-.tile::after{content:"";position:absolute;left:0;bottom:0;height:2px;width:0;background:var(--lime);transition:width .6s cubic-bezier(.2,.8,.2,1)}
-.tile:hover{background:#0f0f0f}.tile:hover::after{width:100%}
-.tile .k{font-family:var(--display);font-size:15px;letter-spacing:.3em;color:var(--fg-3)}
-.tile h3{font-family:var(--display);font-weight:400;font-size:42px;letter-spacing:.03em;margin:6px 0 8px}
-.tile p{color:var(--fg-2);font-size:18px}
-.gens{margin-top:90px;display:grid;grid-template-columns:1fr auto 1fr;gap:24px;align-items:center}
-.gens .side{font-family:var(--display);font-size:clamp(28px,4vw,52px);line-height:1}
-.gens .side small{display:block;font-family:var(--body);font-size:14px;letter-spacing:.35em;color:var(--fg-3);margin-bottom:8px}
-.gens .curse{text-align:right;color:#5a5a5a;text-decoration:line-through;text-decoration-color:var(--ember);text-decoration-thickness:3px}
-.gens .bless{color:var(--lime)}
-.chain{display:flex;gap:10px;align-items:center}
-.chain b{width:18px;height:18px;border-radius:50%;background:#2c2c2c;transition:background .5s,box-shadow .5s}
-.chain b.on{background:var(--lime);box-shadow:0 0 16px var(--lime)}
-.chain b.me{width:28px;height:28px;border:2px solid var(--lime);background:transparent}
-.chain b.me.on{background:var(--lime)}
-@media (max-width:720px){.gens{grid-template-columns:1fr;text-align:center}.gens .curse{text-align:center}.chain{justify-content:center}}
-
-/* RULES */
-.rules{background:#0c0c0c;border-block:1px solid var(--line)}
-.rules-head{text-align:center}
-.rule-list{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;margin-top:60px}
-@media (max-width:900px){.rule-list{grid-template-columns:repeat(2,1fr)}}
-.rule{border:1px solid var(--line-2);padding:28px 22px;text-align:center;position:relative;background:linear-gradient(160deg,#151515,#0d0d0d)}
-.rule .big{font-family:var(--display);font-size:clamp(60px,7vw,92px);line-height:.9;color:var(--fg)}
-.rule .big.lime{color:var(--lime)}
-.rule .cap{font-size:15px;letter-spacing:.32em;text-transform:uppercase;color:var(--fg-2);margin-top:8px}
-.stamp{position:absolute;top:12px;right:12px;font-family:var(--display);font-size:13px;letter-spacing:.2em;color:var(--ember);border:2px solid var(--ember);padding:3px 8px 1px;transform:rotate(8deg) scale(2.4);opacity:0;transition:transform .35s cubic-bezier(.3,1.6,.5,1),opacity .2s}
-.rule.in .stamp{transform:rotate(8deg) scale(1);opacity:.85}
-
-/* FIELD MANUAL */
-.manual-grid{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(30px,6vw,90px);align-items:start}
-@media (max-width:900px){.manual-grid{grid-template-columns:1fr}}
-.steps{counter-reset:s;display:grid;gap:14px}
-.step{display:grid;grid-template-columns:70px 1fr;gap:18px;padding:22px 22px 22px 0;border-top:1px solid var(--line);align-items:start}
-.step::before{counter-increment:s;content:"0" counter(s);font-family:var(--display);font-size:48px;line-height:.9;color:var(--lime);opacity:.9}
-.step h4{font-family:var(--display);font-weight:400;font-size:30px;letter-spacing:.04em}
-.step p{color:var(--fg-2);font-size:19px}
-.sticky-card{position:sticky;top:100px}
-@media (max-width:900px){.sticky-card{position:static;order:2}.bible{max-width:260px}}
-.bible{aspect-ratio:4/5;max-width:420px;border-radius:6px 14px 14px 6px;background:linear-gradient(105deg,#1b120c 0%,#2a1b11 6%,#3b2617 7.5%,#2b1c12 9%,#24170f 60%,#1a110b 100%);box-shadow:inset -8px 0 18px rgba(0,0,0,.6),inset 3px 0 0 rgba(255,255,255,.04),0 40px 80px -30px rgba(0,0,0,.9),0 0 0 1px #000;position:relative;display:grid;place-items:center;transform:perspective(1000px) rotateY(-12deg) rotateX(4deg);transition:transform .8s cubic-bezier(.2,.8,.2,1);margin-inline:auto}
-.bible:hover{transform:perspective(1000px) rotateY(-4deg) rotateX(1deg)}
-.bible::before{content:"";position:absolute;inset:0;border-radius:inherit;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='l'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='1.4' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 .5 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23l)'/%3E%3C/svg%3E");opacity:.6;mix-blend-mode:multiply}
-.bible .emb{position:relative;text-align:center;color:#b8935a;text-shadow:0 1px 0 rgba(0,0,0,.6),0 -1px 0 rgba(255,220,160,.15)}
-.bible .emb svg{width:70px;height:100px;margin:0 auto 22px;display:block}
-.bible .emb div{font-family:var(--serif);font-weight:700;letter-spacing:.4em;font-size:22px}
-.bible .emb small{display:block;font-family:var(--serif);letter-spacing:.3em;font-size:12px;margin-top:10px;opacity:.7}
-.bible .ribbon{position:absolute;bottom:-34px;left:62%;width:16px;height:60px;background:linear-gradient(90deg,#4e7a00,var(--lime) 50%,#4e7a00);clip-path:polygon(0 0,100% 0,100% 100%,50% 82%,0 100%)}
-.phone-off{display:flex;align-items:center;gap:12px;justify-content:center;margin-top:56px;font-size:14px;letter-spacing:.3em;text-transform:uppercase;color:var(--fg-3)}
-.phone-off svg{width:20px;height:20px;color:var(--ember)}
-
-/* MARQUEE */
-.marquee{overflow:hidden;border-block:1px solid var(--line);background:var(--lime);color:#050505;padding:16px 0 10px;transform:rotate(-1.6deg) scale(1.04);margin:40px 0}
-.marquee.alt{background:#0d0d0d;color:var(--fg);transform:rotate(1.2deg) scale(1.04);margin-top:-30px}
-.marquee .track{display:flex;width:max-content;animation:mq 30s linear infinite;font-family:var(--display);font-size:clamp(40px,6vw,74px);line-height:1;letter-spacing:.03em;white-space:nowrap}
-.marquee.alt .track{animation-direction:reverse;animation-duration:38s}
-.marquee .track span{padding-right:.6em}
-.marquee .track span::after{content:"✦";padding-left:.6em;font-size:.5em;vertical-align:middle}
-@keyframes mq{to{transform:translateX(-50%)}}
-
-/* FIRE TEXT */
-.burn{text-align:center}
-.burn h2{font-family:var(--display);font-weight:400;font-size:clamp(52px,10vw,150px);line-height:.88;letter-spacing:.01em}
-.burn h2 .fire{background:linear-gradient(0deg,#ff3d00 0%,#ff7a1a 25%,#ffd36b 50%,#fff6d8 62%,#3a3a3a 63%,#2a2a2a 100%);background-size:100% 260%;background-position:0 100%;-webkit-background-clip:text;background-clip:text;color:transparent;transition:background-position 0s}
-.burn p{margin-top:28px;color:var(--fg-2);font-size:clamp(19px,2vw,23px)}
+/* reading list rows (today + plan) */
+.list{border:1px solid var(--line);border-radius:18px;overflow:hidden;background:var(--surface)}
+.row{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row.now{background:var(--accent-soft)}
+.check{width:30px;height:30px;border-radius:50%;border:2px solid var(--line-2);display:grid;place-items:center;color:var(--accent-ink);transition:background .2s,border-color .2s}
+.check svg{width:16px;height:16px;opacity:0}
+.check[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+.check[aria-pressed="true"] svg{opacity:1}
+.row .d{font-size:.85rem;color:var(--faint);font-weight:600}
+.row.now .d{color:var(--accent)}
+.row .r{font-family:var(--serif);font-size:1.25rem;line-height:1.25}
+.row .c{font-size:.85rem;color:var(--faint)}
+.play{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center;color:var(--text)}
+.play:hover{border-color:var(--accent);color:var(--accent)}
+.play svg{width:16px;height:16px;margin-left:2px}
 
 /* PLAN */
-.plan{background:radial-gradient(ellipse 80% 60% at 50% 0%,rgba(145,230,0,.07),transparent 70%)}
-.plan-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
-.panel{margin-top:44px;border:1px solid var(--line-2);background:rgba(17,17,17,.85);backdrop-filter:blur(6px)}
-.panel-top{display:flex;flex-wrap:wrap;gap:18px 30px;align-items:center;justify-content:space-between;padding:20px 24px;border-bottom:1px solid var(--line-2)}
-.seg{display:inline-flex;border:1px solid var(--line-2);padding:3px}
-.seg button{font-family:var(--body);font-weight:600;font-size:15px;letter-spacing:.22em;text-transform:uppercase;padding:9px 16px;color:var(--fg-2);transition:background .2s,color .2s}
-.seg button[aria-pressed="true"]{background:var(--lime);color:#050505}
-.field{display:flex;align-items:center;gap:12px;font-size:14px;letter-spacing:.25em;text-transform:uppercase;color:var(--fg-3)}
-.field input{font:inherit;font-size:17px;letter-spacing:.05em;color:var(--fg);background:#0b0b0b;border:1px solid var(--line-2);padding:8px 10px;color-scheme:dark;text-transform:none}
-.week-ctl{padding:26px 24px 8px}
-.week-row{display:flex;align-items:baseline;justify-content:space-between;gap:14px;flex-wrap:wrap}
-.week-num{font-family:var(--display);font-size:clamp(64px,9vw,110px);line-height:.85}
-.week-num small{font-size:.32em;letter-spacing:.2em;color:var(--fg-3);margin-right:10px;vertical-align:.9em}
-.week-num .of{font-size:.36em;color:var(--fg-3)}
-.stage-msg{font-family:var(--serif);font-size:clamp(16px,1.7vw,20px);color:var(--fg-2);max-width:36ch;text-align:right}
-.stage-msg b{display:block;font-family:var(--display);font-weight:400;font-size:13px;letter-spacing:.4em;color:var(--ember-2);margin-bottom:4px}
-.weeks{display:grid;grid-template-columns:repeat(52,1fr);gap:3px;margin-top:22px;height:44px;cursor:pointer;touch-action:none}
-.weeks i{border-radius:1px;background:#262626;transition:background .25s,transform .2s;transform-origin:bottom}
-.weeks i.sel{transform:scaleY(1.35);box-shadow:0 0 0 1px #fff}
-.weeks i.today{outline:1px dashed var(--lime);outline-offset:2px}
-.weeks-legend{display:flex;justify-content:space-between;font-size:12px;letter-spacing:.3em;color:var(--fg-3);margin-top:10px;text-transform:uppercase}
-.days{display:grid;grid-template-columns:repeat(7,1fr);gap:1px;background:var(--line-2);border-top:1px solid var(--line-2);margin-top:22px}
-@media (max-width:900px){.days{grid-template-columns:1fr}}
-.day{background:#0e0e0e;padding:20px 16px 18px;min-height:150px;position:relative;transition:background .25s}
-@media (max-width:900px){.day{min-height:0;display:grid;grid-template-columns:132px 1fr;gap:4px 14px;align-items:center;padding:14px 16px}.day .cat{grid-column:2}.day .ref{grid-row:1/3;grid-column:2;}}
-.day .dn{font-size:13px;letter-spacing:.32em;text-transform:uppercase;color:var(--fg-3)}
-.day .cat{font-size:13px;letter-spacing:.12em;color:var(--lime);font-weight:600;margin-top:4px;min-height:1.2em}
-.day .ref{font-family:var(--display);font-size:clamp(24px,2.1vw,30px);line-height:1.02;margin-top:14px;letter-spacing:.02em}
-@media (max-width:900px){.day .ref{margin-top:0;font-size:24px}.day .cat{grid-row:2;grid-column:1;margin:0}.day .dn{grid-row:1;grid-column:1}}
-.day.today{background:linear-gradient(180deg,rgba(145,230,0,.16),rgba(145,230,0,.03))}
-.day.today::before{content:"TODAY";position:absolute;top:10px;right:10px;font-family:var(--display);font-size:13px;letter-spacing:.2em;color:#050505;background:var(--lime);padding:2px 7px 0}
-.panel-foot{padding:16px 24px;font-size:15px;color:var(--fg-3);letter-spacing:.06em;display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;border-top:1px solid var(--line-2)}
-.panel-foot a{color:var(--lime);text-decoration:none;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+.seg{display:inline-grid;grid-template-columns:1fr 1fr;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:4px;margin-top:22px;width:100%;max-width:420px}
+.seg button{padding:10px 12px;border-radius:10px;font-weight:700;color:var(--muted)}
+.seg button[aria-pressed="true"]{background:var(--surface-2);color:var(--text);box-shadow:0 0 0 1px var(--line-2)}
+.route-note{color:var(--faint);font-size:.95rem;margin-top:10px}
+.startline{margin-top:18px;display:flex;flex-wrap:wrap;gap:10px 14px;align-items:center;color:var(--muted)}
+.startline input,.field input,.field select{background:var(--surface);border:1px solid var(--line-2);border-radius:12px;padding:10px 12px;min-height:46px;color-scheme:dark}
+.weeks{margin-top:26px;display:grid;gap:10px}
+.wk{scroll-margin-top:84px;border:1px solid var(--line);border-radius:16px;background:var(--surface);overflow:hidden}
+.wk.cur{border-color:rgba(166,214,90,.45)}
+.wk summary{list-style:none;display:grid;grid-template-columns:1fr auto;gap:12px;align-items:center;padding:16px 18px;cursor:pointer}
+.wk summary::-webkit-details-marker{display:none}
+.wk summary b{font-weight:700}
+.wk summary .dt{color:var(--faint);font-size:.9rem;margin-left:8px;font-weight:500}
+.wk summary .tag{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-left:8px}
+.wk summary .cnt{font-size:.9rem;color:var(--faint);display:flex;align-items:center;gap:10px}
+.wk summary .cnt i{width:44px;height:4px;border-radius:9px;background:var(--surface-2);overflow:hidden;display:block}
+.wk summary .cnt i b{display:block;height:100%;background:var(--accent)}
+.wk summary::after{content:"";width:8px;height:8px;border-right:2px solid var(--faint);border-bottom:2px solid var(--faint);transform:rotate(45deg);position:absolute;opacity:0}
+.wk .list{border:0;border-top:1px solid var(--line);border-radius:0}
 
-/* FORGE STAGES */
-.stages{margin-top:70px;position:relative}
-.bar{position:relative;height:16px;border-radius:2px;background:linear-gradient(90deg,#3a3f44 0%,#55301f 14%,#8b1a00 28%,#d43a00 42%,#ff6a00 56%,#ffa230 70%,#ffd98a 84%,#fffbe8 100%);box-shadow:0 0 50px -10px rgba(255,106,0,.6)}
-.bar::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);background-size:30% 100%;background-repeat:no-repeat;animation:sheen 3.5s ease-in-out infinite}
-@keyframes sheen{from{background-position:-30% 0}to{background-position:130% 0}}
-.stage-pts{display:grid;grid-template-columns:repeat(8,1fr);margin-top:22px;gap:10px}
-@media (max-width:820px){.stage-pts{grid-template-columns:repeat(2,1fr);gap:22px 16px}}
-.sp .pct{font-family:var(--display);font-size:30px;line-height:1}
-.sp .wk{font-size:12px;letter-spacing:.3em;color:var(--fg-3);text-transform:uppercase}
-.sp p{font-size:16px;color:var(--fg-2);margin-top:6px;line-height:1.3}
+/* WHY */
+.why h1{font-size:clamp(2.1rem,6.5vw,3rem)}
+.essay{margin-top:30px;display:grid;gap:30px}
+.essay h2{font-size:1.4rem}
+.essay p{color:var(--muted);margin-top:8px;font-size:1.08rem;max-width:60ch}
+.big-verse{margin:44px 0 10px;text-align:center}
+.big-verse p{font-family:var(--serif);font-size:clamp(1.6rem,5vw,2.2rem);line-height:1.3}
+.big-verse cite{display:block;margin-top:10px;font-style:normal;color:var(--faint);font-weight:600}
 
-/* FAMILY */
-.fam-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:56px}
-@media (max-width:900px){.fam-grid{grid-template-columns:1fr}}
-.fam{position:relative;border:1px solid var(--line-2);padding:34px 28px 30px;background:#0e0e0e;overflow:hidden;transition:border-color .3s,transform .3s}
-.fam:hover{border-color:var(--lime-dim);transform:translateY(-4px)}
-.fam::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:radial-gradient(circle,rgba(145,230,0,.13),transparent 70%)}
-.fam .who{font-family:var(--display);font-size:16px;letter-spacing:.4em;color:var(--lime)}
-.fam h3{font-family:var(--display);font-weight:400;font-size:clamp(34px,3.2vw,44px);line-height:.95;margin:14px 0 14px;letter-spacing:.02em}
-.fam p{color:var(--fg-2);font-size:19px}
-.fam svg{width:44px;height:44px;color:var(--fg-3);margin-bottom:18px}
-.excuse{text-align:center;margin-top:90px}
-.excuse h3{font-family:var(--display);font-weight:400;font-size:clamp(40px,7vw,96px);line-height:.92}
-.excuse h3 span{color:var(--lime)}
+/* JOIN */
+.steps{margin-top:28px;display:grid;gap:14px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:18px;padding:20px 22px}
+.step h3{font-family:var(--sans);font-weight:700;font-size:1.05rem;display:flex;gap:12px;align-items:center}
+.step h3 span{width:28px;height:28px;border-radius:50%;background:var(--surface-2);border:1px solid var(--line-2);display:grid;place-items:center;font-size:.85rem;flex:none}
+.step p{color:var(--muted);margin:8px 0 14px;font-size:1rem}
+.field{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.toast{position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom));transform:translate(-50%,20px);background:var(--text);color:var(--bg);font-weight:700;padding:12px 18px;border-radius:12px;opacity:0;transition:opacity .25s,transform .25s;z-index:60;pointer-events:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
 
-/* VERSE 2 */
-.v2{text-align:center;position:relative;overflow:hidden}
-.v2 .ref{font-family:var(--display);font-size:clamp(120px,24vw,340px);line-height:.8;color:transparent;-webkit-text-stroke:1px rgba(145,230,0,.18);position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);white-space:nowrap;pointer-events:none;user-select:none}
-.v2 .lines{position:relative;display:grid;gap:4px}
-.v2 .lines div{font-family:var(--display);font-size:clamp(46px,8vw,110px);line-height:.95}
-.v2 .lines div:nth-child(even){color:var(--lime)}
-.v2 cite{display:block;position:relative;margin-top:30px;font-style:normal;font-size:15px;letter-spacing:.45em;color:var(--fg-3)}
+footer{max-width:680px;margin:0 auto;padding:10px 18px 60px;color:var(--faint);font-size:.85rem;display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
 
-/* OATH */
-.oath{text-align:center;overflow:hidden;isolation:isolate}
-.oath::before{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(ellipse 60% 50% at 50% 60%,rgba(145,230,0,.12),transparent 70%)}
-.oath-card{margin:48px auto 0;max-width:620px;border:1px solid var(--line-2);background:rgba(14,14,14,.9);padding:clamp(24px,4vw,44px);text-align:left;position:relative}
-.oath-card::before,.oath-card::after{content:"";position:absolute;width:22px;height:22px;border:2px solid var(--lime)}
-.oath-card::before{top:-1px;left:-1px;border-right:0;border-bottom:0}
-.oath-card::after{bottom:-1px;right:-1px;border-left:0;border-top:0}
-.oath-text{font-family:var(--serif);font-size:clamp(17px,1.8vw,20px);line-height:1.6;color:var(--fg-2)}
-.oath-text p+p{margin-top:10px}
-.oath-text b{color:var(--fg);font-weight:700}
-.oath-fields{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:26px}
-@media (max-width:560px){.oath-fields{grid-template-columns:1fr}}
-.oath-fields label{display:grid;gap:6px;font-size:13px;letter-spacing:.3em;text-transform:uppercase;color:var(--fg-3)}
-.oath-fields input{font:inherit;font-size:20px;letter-spacing:.03em;text-transform:none;color:var(--fg);background:#090909;border:1px solid var(--line-2);padding:11px 13px;color-scheme:dark;width:100%}
-.oath-fields input:focus{border-color:var(--lime);outline:none}
-.hold{position:relative;width:100%;margin-top:26px;height:76px;border:1px solid var(--lime);overflow:hidden;font-family:var(--display);font-size:clamp(22px,3vw,30px);letter-spacing:.14em;color:var(--lime);user-select:none;-webkit-user-select:none;touch-action:none}
-.hold .fill{position:absolute;inset:0;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,#3c5f00,var(--lime) 70%,#f4ffd6)}
-.hold .lbl{position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:12px;height:100%;mix-blend-mode:difference;color:var(--lime)}
-.hold .lbl svg{width:26px;height:26px}
-.hold.done{background:var(--lime)}
-.hold.done .lbl{mix-blend-mode:normal;color:#050505}
-.hint{font-size:14px;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-3);margin-top:12px;text-align:center}
-.shake{animation:shk .45s cubic-bezier(.36,.07,.19,.97)}
-@keyframes shk{10%,90%{transform:translate(-2px,1px)}20%,80%{transform:translate(4px,-2px)}30%,50%,70%{transform:translate(-7px,3px)}40%,60%{transform:translate(7px,-3px)}}
-.forged{display:none;margin:48px auto 0;max-width:760px}
-.forged.show{display:block;animation:fade .8s both}
-#cert{width:100%;height:auto;border:1px solid var(--line-2);box-shadow:0 30px 90px -30px rgba(145,230,0,.35)}
-.forged .actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;margin-top:22px}
-.forged .next{margin-top:26px;color:var(--fg-2);font-size:19px}
+/* PLAYER */
+.player{position:fixed;inset:0;z-index:80;background:#0b0c0b;display:flex;flex-direction:column}
+.pl-head{display:flex;align-items:center;gap:12px;padding:calc(12px + env(safe-area-inset-top)) max(18px,env(safe-area-inset-right)) 12px max(18px,env(safe-area-inset-left));border-bottom:1px solid var(--line)}
+.pl-head .t{flex:1;min-width:0}
+.pl-head .kicker{color:var(--accent)}
+.pl-head h2{font-size:1.5rem}
+.pl-x{width:48px;height:48px;border-radius:50%;border:1px solid var(--line-2);font-size:1.6rem;line-height:1}
+.pl-chaps{display:flex;gap:8px;overflow-x:auto;padding:12px max(18px,env(safe-area-inset-left));scrollbar-width:none}
+.pl-chaps button{flex:none;padding:8px 14px;border-radius:999px;border:1px solid var(--line-2);font-weight:700;font-size:.92rem;color:var(--muted)}
+.pl-chaps button.cur{background:var(--text);color:var(--bg);border-color:var(--text)}
+.pl-text{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+.pl-text .in{max-width:680px;margin:0 auto;padding:10px max(20px,env(safe-area-inset-left)) 30px}
+.pl-text h3{font-size:1.1rem;font-family:var(--sans);font-weight:700;color:var(--faint);margin:10px 0 14px}
+.pl-text p{font-family:var(--serif);font-size:var(--pl-size,1.45rem);line-height:1.6;color:#8d938b;margin-bottom:.55em;transition:color .3s;cursor:pointer}
+.pl-text p sup{font-family:var(--sans);font-size:.55em;font-weight:700;color:var(--faint);margin-right:.3em}
+.pl-text p.now{color:var(--text)}
+.pl-text p.now sup{color:var(--accent)}
+.pl-msg{font-family:var(--sans)!important;font-size:1.05rem!important;color:var(--muted)!important;cursor:default!important}
+.pl-msg a{color:var(--accent)}
+.pl-foot{border-top:1px solid var(--line);padding:14px max(18px,env(safe-area-inset-right)) calc(14px + env(safe-area-inset-bottom)) max(18px,env(safe-area-inset-left))}
+.pl-ctl{display:flex;align-items:center;justify-content:center;gap:22px}
+.pl-ctl button{width:54px;height:54px;border-radius:50%;border:1px solid var(--line-2);display:grid;place-items:center}
+.pl-ctl button svg{width:22px;height:22px}
+.pl-ctl #plPlay{width:76px;height:76px;background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pl-ctl #plPlay svg{width:30px;height:30px}
+.pl-opts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 14px;margin-top:14px}
+.pl-opts .g{display:flex;gap:4px;background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:3px}
+.pl-opts .g button{min-width:46px;height:38px;padding:0 10px;border-radius:9px;font-weight:700;font-size:.9rem;color:var(--muted)}
+.pl-opts .g button[aria-pressed="true"]{background:var(--surface-2);color:var(--text);box-shadow:0 0 0 1px var(--line-2)}
+.pl-opts select{height:44px;border-radius:12px;background:var(--surface);border:1px solid var(--line);padding:0 10px;max-width:220px;font-weight:600;font-size:.9rem;color-scheme:dark}
+.pl-small{text-align:center;font-size:.85rem;color:var(--faint);margin-top:12px}
+.pl-small a{color:var(--accent);font-weight:700}
+.pl-copy{font-size:.72rem;color:#5f665e;text-align:center;margin-top:8px;line-height:1.4}
 
-footer{border-top:1px solid var(--line);padding:46px 16px 60px;text-align:center}
-footer .f1{font-family:var(--display);font-size:30px;letter-spacing:.08em}
-footer .f1 b{color:var(--lime);font-weight:400}
-footer .f2{font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:var(--fg-3);margin-top:8px}
-
-/* ---------- LISTEN ---------- */
-.btn.listen{border-color:var(--lime);color:var(--lime)}
-.btn.listen:hover{background:rgba(145,230,0,.1)}
-.nav .tools{display:flex;gap:10px;align-items:center}
-.icon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;min-width:44px;padding:0 12px;border:1px solid var(--line-2);font-family:var(--body);font-weight:700;font-size:17px;letter-spacing:.06em;color:var(--fg)}
-.icon-btn:hover{border-color:var(--lime)}
-.icon-btn[aria-pressed="true"]{background:var(--fg);color:#000;border-color:var(--fg)}
-@media (max-width:720px){.icon-btn .t{display:none}}
-.day-play{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(145,230,0,.45);padding:7px 12px}
-.day-play:hover{background:rgba(145,230,0,.12)}
-@media (max-width:900px){.day-play{grid-column:2;margin-top:6px;justify-self:start}}
-.panel-foot .lt{background:none;border:0;color:var(--lime);font:inherit;font-weight:600;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;padding:0}
-
-.player{position:fixed;inset:0;z-index:120;background:#050505;display:flex;flex-direction:column;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
-.player[hidden]{display:none}
-.pl-top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:900px;width:100%;margin:0 auto}
-.pl-day{font-family:var(--body);font-weight:700;font-size:18px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime)}
-.pl-ref{font-family:var(--display);font-size:clamp(40px,7vw,64px);line-height:1;color:#fff}
-.pl-close{width:60px;height:60px;border:2px solid #555;font-size:34px;line-height:1;color:#fff;flex:none}
-.pl-close:hover{border-color:#fff}
-.pl-chaps{display:flex;gap:8px;flex-wrap:wrap;max-width:900px;width:100%;margin:16px auto 0}
-.pl-chaps button{font-family:var(--body);font-weight:700;font-size:17px;padding:8px 14px;border:1px solid #444;color:#ddd}
-.pl-chaps button.cur{background:var(--lime);color:#000;border-color:var(--lime)}
-.pl-chaps button.done{border-color:var(--lime-dim);color:var(--lime)}
-.pl-text{flex:1;overflow-y:auto;max-width:900px;width:100%;margin:18px auto;padding:6px 4px;-webkit-overflow-scrolling:touch}
-.pl-text p{font-family:Georgia,"Times New Roman",serif;font-size:var(--pl-size,30px);line-height:1.55;color:#8a8a8a;margin:0 0 .6em;transition:color .3s}
-.pl-text p sup{font-family:var(--body);font-weight:700;font-size:.55em;color:var(--lime);margin-right:.35em;vertical-align:.5em}
-.pl-text p.now{color:#fff}
-.pl-text h3{font-family:var(--display);font-weight:400;font-size:calc(var(--pl-size,30px) * 1.2);color:var(--lime);margin:.4em 0 .5em;letter-spacing:.04em}
-.pl-msg{font-size:24px;color:#ddd;line-height:1.5}
-.pl-msg a{color:var(--lime)}
-.pl-ctl{max-width:900px;width:100%;margin:0 auto;display:grid;gap:14px}
-.pl-main{display:flex;align-items:center;justify-content:center;gap:clamp(16px,5vw,40px)}
-.pl-main button{width:64px;height:64px;border:2px solid #555;display:grid;place-items:center;color:#fff}
-.pl-main button svg{width:30px;height:30px}
-.pl-main #plPlay{width:96px;height:96px;border-radius:50%;background:var(--lime);border-color:var(--lime);color:#000;box-shadow:0 0 40px rgba(145,230,0,.35)}
-.pl-main #plPlay svg{width:44px;height:44px}
-.pl-opts{display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:center;align-items:center}
-.pl-opts .grp{display:flex;align-items:center;gap:6px}
-.pl-opts .lbl{font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#aaa;margin-right:4px}
-.pl-opts button{min-width:52px;height:48px;padding:0 10px;border:1px solid #555;font-family:var(--body);font-weight:700;font-size:18px;color:#fff}
-.pl-opts button[aria-pressed="true"]{background:#fff;color:#000;border-color:#fff}
-.pl-opts select{height:48px;max-width:240px;background:#111;color:#fff;border:1px solid #555;font:600 17px var(--body);padding:0 8px;color-scheme:dark}
-.pl-narr{text-align:center;font-family:var(--body);font-size:18px;color:#bbb}
-.pl-narr a{color:var(--lime);font-weight:700}
-
-/* large text mode for low vision */
-html.big body{font-size:25px}
-html.big{--fg-2:#dcdcdc;--fg-3:#b4b4b4}
-html.big .lede,html.big .convoy .copy p,html.big .tile p,html.big .step p,html.big .fam p,html.big .burn p,html.big .panel-foot,html.big .stage-msg,html.big .sp p,html.big .oath-text{font-size:24px!important;line-height:1.5}
-html.big .eyebrow,html.big .stat .l,html.big .day .dn,html.big .day .cat,html.big .weeks-legend,html.big .hint,html.big .field,html.big footer .f2,html.big .rule .cap,html.big .oath-fields label,html.big .nav .links a:not(.btn),html.big .verse cite,html.big .v2 cite,html.big .sp .wk,html.big .unit span{font-size:17px!important;letter-spacing:.12em!important}
-html.big .day .ref{font-size:34px}
-html.big .verse blockquote .ch{opacity:1!important}
-html.big .hero .sub{font-size:22px;color:#e0e0e0}
-
-/* ---------- lighter type ---------- */
-body{font-size:19px;line-height:1.55}
-.h2{font-family:var(--head);font-weight:700;font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
-.tile h3,.step h4,.fam h3,.go b,.tw-title{font-family:var(--head);font-weight:700;letter-spacing:-.01em;line-height:1.18}
-.tile h3{font-size:26px}.step h4{font-size:22px}.fam h3{font-size:clamp(22px,2vw,27px)}.go b{font-size:21px}.tw-title{font-size:28px}
-.convoy .copy .punch{font-family:var(--head);font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.22;letter-spacing:-.01em}
-.gens .side{font-family:var(--head);font-weight:700;font-size:clamp(22px,2.6vw,34px);line-height:1.15}
-.burn h2{font-family:var(--head);font-weight:800;font-size:clamp(38px,6vw,84px);line-height:1.04;letter-spacing:-.025em}
-.excuse h3{font-family:var(--head);font-weight:700;font-size:clamp(30px,4.4vw,56px);line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
-.v2 .lines div{font-family:var(--head);font-weight:700;font-size:clamp(32px,5vw,64px);line-height:1.12;letter-spacing:-.02em}
-.tc-ref{font-family:var(--head);font-weight:700;font-size:clamp(40px,7vw,62px);line-height:1.05;letter-spacing:-.02em}
-.tw-row .rf{font-family:var(--head);font-weight:600;font-size:22px;line-height:1.2;letter-spacing:-.005em}
-.day .ref{font-family:var(--head);font-weight:700;font-size:clamp(19px,1.6vw,22px);line-height:1.2;letter-spacing:-.005em}
-@media (max-width:900px){.day .ref{font-size:20px}}
-.pl-ref{font-family:var(--head);font-weight:700;font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-.015em}
-.eyebrow{letter-spacing:.16em;font-size:14px}
-.stat .l,.rule .cap,.tw-row .meta,.day .dn,.weeks-legend,.field,.hint,footer .f2,.oath-fields label,.sp .wk,.unit span,.verse cite,.v2 cite,.radar-label,.fam .who,.tile .k,.tc-day,.pl-day,.pl-opts .lbl{letter-spacing:.1em!important}
-.tabs-top a,.tabbar a,.day-play,.tw-row .pl,.tc-note button,.panel-foot .lt,.panel-foot a{letter-spacing:.06em!important}
-.tc-day,.pl-day{font-size:16px}
-html.big .day .ref{font-size:26px}
-html.big .tw-row .rf{font-size:27px}
-.pl-copy{font-size:13px;color:#777;text-align:center;line-height:1.4;max-width:760px;margin:0 auto}
-.pl-note{font-size:18px;color:#ffb347;margin:0 0 14px}
-/* ---------- PAGES ---------- */
-.page[hidden]{display:none}
-.nav{background:rgba(10,10,10,.82)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)!important}
-.nav .brand{opacity:1!important;pointer-events:auto!important}
-.tabs-top{display:flex;gap:4px}
-.tabs-top a{font-family:var(--body);font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--fg-2);padding:10px 14px;border-bottom:2px solid transparent}
-.tabs-top a:hover{color:var(--fg)}
-.tabs-top a[aria-current="page"]{color:var(--lime);border-bottom-color:var(--lime)}
-.tabbar{display:none}
-@media (max-width:720px){
-  .tabs-top{display:none}
-  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(10,10,10,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line-2);padding:6px max(6px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left))}
-  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;text-decoration:none;color:var(--fg-2);font-family:var(--body);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
-  .tabbar svg{width:26px;height:26px}
-  .tabbar a[aria-current="page"]{color:var(--lime)}
-  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
-}
-.page-head{padding:130px 0 50px;border-bottom:1px solid var(--line)}
-.plan.pad,.oath.pad{padding-top:120px}
-.today-wrap{padding:10px 0 90px}
-.today-card{position:relative;max-width:760px;margin:0 auto;border:1px solid var(--lime-dim);background:linear-gradient(180deg,rgba(145,230,0,.09),rgba(20,20,20,.9) 55%);padding:clamp(22px,4vw,38px);box-shadow:0 30px 80px -40px rgba(145,230,0,.45)}
-.tc-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
-.tc-day{font-family:var(--body);font-weight:700;font-size:18px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime)}
-.tc-streak{font-family:var(--body);font-weight:700;font-size:18px;letter-spacing:.06em;color:#ffb347}
-.tc-cat{font-size:18px;color:var(--fg-2);margin-top:14px;min-height:1.2em}
-.tc-ref{font-family:var(--display);font-size:clamp(56px,11vw,104px);line-height:.92;margin-top:4px;color:#fff}
-.tc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
-.tc-listen{font-size:24px;padding:16px 28px 14px}
-.tc-done .ck{width:22px;height:22px;border:2px solid currentColor;display:inline-block;position:relative}
-.tc-done[aria-pressed="true"]{border-color:var(--lime);color:var(--lime)}
-.tc-done[aria-pressed="true"] .ck{background:var(--lime);border-color:var(--lime)}
-.tc-done[aria-pressed="true"] .ck::after{content:"";position:absolute;left:6px;top:1px;width:6px;height:12px;border:solid #000;border-width:0 3px 3px 0;transform:rotate(45deg)}
-@media (max-width:520px){.tc-actions .btn{flex:1 1 100%}}
-.tc-note{margin-top:18px;font-size:18px;color:var(--fg-2);display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
-.tc-note label{display:flex;gap:10px;align-items:center}
-.tc-note input{font:inherit;font-size:17px;color:var(--fg);background:#0b0b0b;border:1px solid var(--line-2);padding:8px 10px;color-scheme:dark}
-.tc-note button{font-family:var(--body);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid var(--lime-dim);padding:8px 12px}
-.tw-head{max-width:760px;margin:44px auto 10px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
-.tw-title{font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:.02em}
-.tw-prog{font-size:17px;color:var(--fg-2)}
-.tw-bar{max-width:760px;margin:0 auto 14px;height:6px;background:#222}
-.tw-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4f7d00,var(--lime));box-shadow:0 0 12px rgba(145,230,0,.5);transition:width .6s}
-.tw-list{max-width:760px;margin:0 auto;border:1px solid var(--line-2)}
-.tw-row{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--line)}
-.tw-row:first-child{border-top:0}
-.tw-row.is-today{background:rgba(145,230,0,.08)}
-.tw-row .ckb{width:38px;height:38px;border:2px solid #555;display:grid;place-items:center;color:#000}
-.tw-row .ckb[aria-pressed="true"]{background:var(--lime);border-color:var(--lime)}
-.tw-row .ckb svg{width:22px;height:22px;opacity:0}
-.tw-row .ckb[aria-pressed="true"] svg{opacity:1}
-.tw-row .meta{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
-.tw-row.is-today .meta{color:var(--lime)}
-.tw-row .rf{font-family:var(--display);font-size:28px;line-height:1.05;letter-spacing:.02em}
-.tw-row .pl{margin:0;font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(145,230,0,.45);padding:9px 12px;white-space:nowrap}
-@media (max-width:900px){.tw-row .pl{grid-column:auto;justify-self:end}}
-.go-cards{max-width:760px;margin:40px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
-@media (max-width:720px){.go-cards{grid-template-columns:1fr}}
-.go{display:block;text-decoration:none;border:1px solid var(--line-2);padding:18px;background:#0e0e0e;transition:border-color .2s,transform .2s}
-.go:hover{border-color:var(--lime);transform:translateY(-2px)}
-.go b{display:block;font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:.03em}
-.go b::after{content:" →";color:var(--lime)}
-.go span{color:var(--fg-2);font-size:17px}
-html.big .tw-row .meta,html.big .tw-row .pl,html.big .tc-note,html.big .go span{font-size:19px!important}
-html.big .tw-row .rf{font-size:34px}
-
-/* lighter type for Today (after page styles) */
-.tc-ref{font-family:var(--head);font-weight:700;font-size:clamp(40px,7vw,62px);line-height:1.05;letter-spacing:-.02em}
-.tw-row .rf{font-family:var(--head);font-weight:600;font-size:22px;line-height:1.2;letter-spacing:-.005em}
-.go b{font-family:var(--head);font-weight:700;font-size:21px;letter-spacing:-.01em}
-.tw-title{font-family:var(--head);font-weight:700;font-size:28px;letter-spacing:-.01em}
-html.big .tw-row .rf{font-size:27px}
-html.big .tc-ref{font-size:clamp(46px,8vw,70px)}
-@media (prefers-reduced-motion:reduce){
-  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
-  .rv{opacity:1;transform:none}
-}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
 <body>
-<div id="heat"></div>
-<div class="flash"></div>
 
-<nav class="nav" id="nav">
-  <a class="brand" href="#today">FORGED<b>52</b></a>
-  <div class="links">
-    <div class="tabs-top"><a href="#today" data-tab="today">Today</a><a href="#plan" data-tab="plan">Plan</a><a href="#why" data-tab="why">Why</a><a href="#join" data-tab="join">Join</a></div>
-    <span class="tools">
-      <button class="icon-btn" type="button" id="bigBtn" aria-pressed="false" title="Larger text">Aa<span class="t">Large text</span></button>
-      <button class="icon-btn" type="button" data-listen="today" title="Listen to today's reading"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg><span class="t">Listen</span></button>
-    </span>
+<header class="top">
+  <div class="top-in">
+    <a class="brand" href="#today"><img src="assets/logo.webp" alt="" width="50" height="34"><span>Forged<b>52</b></span></a>
+    <nav class="tabs" aria-label="Pages">
+      <a href="#today" data-tab="today">Today</a><a href="#plan" data-tab="plan">Plan</a><a href="#why" data-tab="why">Why</a><a href="#join" data-tab="join">Start</a>
+    </nav>
+    <button class="tool" id="bigBtn" type="button" aria-pressed="false" title="Larger text">Aa</button>
   </div>
+</header>
+
+<main>
+  <!-- TODAY -->
+  <section class="page" data-page="today">
+    <div class="greet">
+      <div><div class="kicker" id="tDate"></div><h1 id="tHello">Good morning</h1></div>
+      <div class="streak" id="tStreak"></div>
+    </div>
+    <div class="prog"><div class="prog-bar"><i id="tBar"></i></div><div class="prog-meta"><span id="tDayOf"></span><span id="tPct"></span></div></div>
+
+    <div class="reading">
+      <div class="kicker" id="tKick">Today's reading</div>
+      <div class="ref" id="tRef"></div>
+      <div class="cat" id="tCat"></div>
+      <div class="acts">
+        <button class="btn primary" type="button" id="tListen"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg>Listen</button>
+        <button class="btn" type="button" id="tDone"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M4 12l5 5L20 6"/></svg><span>Mark complete</span></button>
+      </div>
+      <div class="note" id="tNote"></div>
+    </div>
+
+    <div class="verse"><p id="vText"></p><cite id="vRef"></cite></div>
+
+    <div class="section">
+      <div class="section-head"><h2>This week</h2><span id="tWeekLbl"></span></div>
+      <div class="list" id="tWeek"></div>
+    </div>
+  </section>
+
+  <!-- PLAN -->
+  <section class="page" data-page="plan" hidden>
+    <div class="kicker">The plan</div>
+    <h1>The whole Bible in a year</h1>
+    <p class="lead">One reading a day, 15 to 20 minutes. Miss a day? Pick it back up tomorrow.</p>
+    <div class="seg" role="group" aria-label="Reading route">
+      <button type="button" data-route="topical">Mixed</button>
+      <button type="button" data-route="chrono">In order</button>
+    </div>
+    <p class="route-note" id="routeNote"></p>
+    <div class="startline"><label for="pStart">Start date</label><input type="date" id="pStart"></div>
+    <div class="weeks" id="weeks"></div>
+  </section>
+
+  <!-- WHY -->
+  <section class="page why" data-page="why" hidden>
+    <div class="kicker">Why Forged52</div>
+    <h1>A year in the Word, one day at a time.</h1>
+    <p class="lead">Forged52 is a simple challenge for men: read the whole Bible in 52 weeks. It isn't about speed or getting it perfect. It's about showing up every morning and letting Scripture shape the man your family follows.</p>
+    <div class="essay">
+      <div><h2>Your family follows your lead</h2><p>Every home has someone out front. Your wife and kids take their cues from how you handle pressure, how you talk, and what you build your life on. Leading them well starts with being led yourself.</p></div>
+      <div><h2>Steady beats intense</h2><p>A chapter or two a day, for a year. Some mornings it will hit hard. Some mornings it will feel like nothing happened. Show up anyway. That's how it gets into you.</p></div>
+      <div><h2>Read it like it matters</h2><p>If you can, use a paper Bible and leave the phone in another room. Underline what stops you. Write down one line of what God put on your heart. If reading is hard for you, listen instead. The point is the Word, not the format.</p></div>
+      <div><h2>It outlasts you</h2><p>Your kids won't remember every lesson you teach them. They will remember what you did every morning. One man's faithfulness can change the direction of a family for generations.</p></div>
+    </div>
+    <div class="big-verse"><p>“Be on guard. Stand firm in the faith. Be courageous. Be strong.”</p><cite>1 Corinthians 16:13 (NLT)</cite></div>
+    <div style="text-align:center;margin-top:26px"><a class="btn primary" href="#join">Start the challenge</a></div>
+  </section>
+
+  <!-- START / JOIN -->
+  <section class="page" data-page="join" hidden>
+    <div class="kicker">Start</div>
+    <h1>Take the challenge</h1>
+    <p class="lead">Three quick steps. No account needed. Your progress is saved on this device.</p>
+    <div class="steps">
+      <div class="step"><h3><span>1</span>Pick your start date</h3><p>Sundays work well. The mixed plan gives each weekday its own part of the Bible, starting with the letters on Sunday.</p>
+        <div class="field"><input type="date" id="jStart" aria-label="Start date"><button class="btn" type="button" id="jToday">Start today</button></div></div>
+      <div class="step"><h3><span>2</span>Choose how you'll read</h3><p><b>Mixed</b> rotates through the Letters, Law, History, Psalms, Wisdom, Prophets, and Gospels and Acts each week. <b>In order</b> reads the story as it happened, Genesis to Revelation.</p>
+        <div class="seg" role="group" aria-label="Reading route" style="margin-top:0"><button type="button" data-route="topical">Mixed</button><button type="button" data-route="chrono">In order</button></div></div>
+      <div class="step"><h3><span>3</span>Set a daily reminder</h3><p>Adds all 364 readings to your phone's calendar, each with the passage in the title.</p>
+        <div class="field"><input type="time" id="jTime" value="06:00" aria-label="Reminder time"><button class="btn primary" type="button" id="jIcs">Add to calendar</button></div></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>Bring someone with you</h2></div>
+      <p style="color:var(--muted)">It's easier with a brother next to you. Send him the link and read the same passage each day.</p>
+      <div style="margin-top:14px;display:flex;gap:10px;flex-wrap:wrap"><button class="btn" type="button" id="jShare">Copy invite link</button><a class="btn" href="https://forged52.lovable.app/auth" target="_blank" rel="noopener">Create an account</a></div>
+    </div>
+  </section>
+</main>
+
+<footer><span>Forged52 · Zeeland Fabrication</span><span>Build the man. Lead the family.</span></footer>
+
+<nav class="tabbar" aria-label="Pages">
+  <a href="#today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>Today</a>
+  <a href="#plan" data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Plan</a>
+  <a href="#why" data-tab="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Why</a>
+  <a href="#join" data-tab="join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Start</a>
 </nav>
-<nav class="tabbar" aria-label="Pages"><a href="#today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg><span>Today</span></a><a href="#plan" data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Plan</span></a><a href="#why" data-tab="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Why</span></a><a href="#join" data-tab="join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 2.3l7 7-2.1 2.1-1.4-1.4-2.8 2.8 1.4 1.4L9.7 21.3 2.7 14.3l7.1-7.1 1.4 1.4 2.8-2.8-1.4-1.4z"/></svg><span>Join</span></a></nav>
 
-<div class="page" data-page="today">
-<!-- HERO -->
-<section class="hero" id="top">
-  <div class="hero-bg" aria-hidden="true"><div class="rays"></div><div class="tex"></div><div class="heat"></div><div class="edge"></div></div>
-  <canvas id="embers" aria-hidden="true"></canvas>
-  <div class="hero-inner">
-    <div class="logo-wrap">
-      <img src="assets/logo.webp" alt="Forged52" width="900" height="617" fetchpriority="high">
-      <span class="shock"></span>
-    </div>
-    <div class="eyebrow" style="opacity:0;animation:fade .8s .9s both">Read the entire Bible in 52 weeks</div>
-    <h1 aria-label="Build the man. Lead the family.">
-      <span class="l1" data-words>BUILD THE MAN.</span>
-      <span class="l2" data-words>LEAD THE FAMILY.</span>
-    </h1>
-    
-  </div>
-</section>
-
-<!-- TODAY -->
-<section class="today-wrap">
-  <div class="wrap">
-    <div class="today-card" id="todayCard">
-      <div class="tc-top"><span class="tc-day" id="tDay">Day 1</span><span class="tc-streak" id="tStreak"></span></div>
-      <div class="tc-cat" id="tCat"></div>
-      <div class="tc-ref" id="tRef">Rom 1-2</div>
-      <div class="tc-actions">
-        <button class="btn primary tc-listen" type="button" data-listen="today"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg>Listen now</button>
-        <button class="btn tc-done" type="button" id="tDone" aria-pressed="false"><span class="ck"></span><span id="tDoneLbl">Mark as read</span></button>
-      </div>
-      <div class="tc-note" id="tNote"></div>
-    </div>
-    <div class="tw-head"><h2 class="tw-title">This week</h2><span class="tw-prog" id="tProg"></span></div>
-    <div class="tw-bar"><i id="tBar"></i></div>
-    <div class="tw-list" id="tWeek"></div>
-    <div class="go-cards">
-      <a class="go" href="#plan"><b>The plan</b><span>All 52 weeks, pick a route</span></a>
-      <a class="go" href="#why"><b>Why Forged52</b><span>The mission, for you and the men you send it to</span></a>
-      <a class="go" href="#join"><b>Take the oath</b><span>Commit, get your certificate and reminders</span></a>
-    </div>
-  </div>
-</section>
-</div><!-- /page today -->
-
-<div class="page" data-page="why" hidden>
-<section class="page-head"><div class="wrap"><div class="eyebrow">Why Forged52</div><h1 class="h2" style="margin-top:14px">Build the man.<br><em>Lead the family.</em></h1></div></section>
-<!-- STATS -->
-<section class="stats" id="stats">
-  <div class="wrap">
-    <div class="stat"><div class="n" data-count="52">0</div><div class="l">Weeks</div></div>
-    <div class="stat"><div class="n" data-count="364">0</div><div class="l">Readings</div></div>
-    <div class="stat"><div class="n" data-count="66">0</div><div class="l">Books</div></div>
-    <div class="stat"><div class="n" data-count="1">0</div><div class="l">Man</div></div>
-  </div>
-</section>
-
-<!-- LUKE 9:23 -->
-<section class="verse pad">
-  <div class="narrow">
-    <span class="mark" aria-hidden="true">“</span>
-    <blockquote id="luke">Whoever wants to be my disciple must deny themselves and take up their cross daily and follow me.</blockquote>
-    <cite>Luke 9:23</cite>
-  </div>
-</section>
-
-<!-- CONVOY -->
-<section class="convoy pad grid-bg" id="mission">
-  <div class="wrap convoy-grid">
-    <div class="copy">
-      <div class="eyebrow rv">The mission</div>
-      <h2 class="h2 rv d1" style="margin-top:18px">Every family is a <em>convoy</em> moving through hostile territory.</h2>
-      <p class="rv d2">And every convoy needs a point man. <strong>That's you.</strong> Out front. Eyes open. Leading your wife, your kids, your household through a culture that wants to pick them off one by one.</p>
-      <p class="rv d3">You don't get to coast. You don't get to check out. The enemy is real, and he's not taking days off.</p>
-      <div class="punch rv d4">Nobody else is coming.<br><span>This is your watch.</span></div>
-    </div>
-    <div class="rv d2">
-      <div class="radar" id="radar" aria-hidden="true">
-        <div class="cross"></div>
-        <div class="sweep"></div>
-        <div class="threat" style="left:18%;top:24%;animation-delay:.6s"></div>
-        <div class="threat" style="left:80%;top:30%;animation-delay:1.9s"></div>
-        <div class="threat" style="left:74%;top:78%;animation-delay:3.1s"></div>
-        <div class="threat" style="left:22%;top:70%;animation-delay:4.2s"></div>
-        <div class="unit point" data-p="50,26"><i></i><span>Point man</span></div>
-        <div class="unit" data-p="50,46"><i></i><span>Wife</span></div>
-        <div class="unit" data-p="38,62"><i></i><span>Son</span></div>
-        <div class="unit" data-p="62,62"><i></i><span>Daughter</span></div>
-        <div class="unit" data-p="50,78"><i></i><span>Household</span></div>
-        <div class="radar-label">Formation · Hostile AO</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- IMPACT -->
-<section class="impact pad">
-  <div class="wrap">
-    <div class="eyebrow rv">The ripple</div>
-    <h2 class="h2 rv d1" style="margin-top:18px;max-width:14ch">A man anchored in the Word <em>changes everything</em> downstream.</h2>
-    <div class="tiles">
-      <div class="tile rv"><div class="k">01</div><h3>Temper</h3><p>Slow to anger. Steady under pressure. The house stops bracing when you walk in.</p></div>
-      <div class="tile rv d1"><div class="k">02</div><h3>Marriage</h3><p>You lead by serving. She stops carrying what was always yours to carry.</p></div>
-      <div class="tile rv d2"><div class="k">03</div><h3>Kids</h3><p>They don't just hear about faith. They watch it get lived out at the kitchen table.</p></div>
-      <div class="tile rv d3"><div class="k">04</div><h3>Leadership</h3><p>At work, at church, in the community. Men follow a man who's under authority.</p></div>
-    </div>
-    <div class="gens" id="gens">
-      <div class="side curse"><small>What you inherited</small>Generational curse</div>
-      <div class="chain" aria-hidden="true"><b></b><b></b><b class="me"></b><b></b><b></b><b></b></div>
-      <div class="side bless"><small>What you hand down</small>Generational blessing</div>
-    </div>
-    <p class="lede rv" style="margin:34px auto 0;text-align:center">One man's obedience can break the pattern and start something that outlives him.</p>
-  </div>
-</section>
-
-<!-- RULES -->
-<section class="rules pad grid-bg">
-  <div class="wrap">
-    <div class="rules-head">
-      <div class="eyebrow rv">Rules of engagement</div>
-      <h2 class="h2 rv d1" style="margin-top:18px">The challenge</h2>
-    </div>
-    <div class="rule-list">
-      <div class="rule rv"><span class="stamp">Locked</span><div class="big">52</div><div class="cap">Weeks</div></div>
-      <div class="rule rv d1"><span class="stamp">Daily</span><div class="big">1</div><div class="cap">Reading a day</div></div>
-      <div class="rule rv d2"><span class="stamp">Zero</span><div class="big lime">0</div><div class="cap">Days off</div></div>
-      <div class="rule rv d3"><span class="stamp">Full</span><div class="big">100%</div><div class="cap">No half-effort</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- FIELD MANUAL -->
-<section class="manual pad">
-  <div class="wrap manual-grid">
-    <div class="sticky-card rv">
-      <div class="bible" aria-hidden="true">
-        <div class="emb">
-          <svg viewBox="0 0 70 100" fill="none" stroke="currentColor" stroke-width="5"><path d="M35 4v92M8 30h54"/></svg>
-          <div>HOLY BIBLE</div>
-          <small>LEATHER · PAPER · INK</small>
-        </div>
-        <span class="ribbon"></span>
-      </div>
-      <div class="phone-off"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M3 3l18 18"/></svg>Phone stays in the other room</div>
-    </div>
-    <div>
-      <div class="eyebrow rv">Field manual</div>
-      <h2 class="h2 rv d1" style="margin:18px 0 34px">Wear that Bible <em>out.</em></h2>
-      <div class="steps">
-        <div class="step rv"><div><h4>Get a real Bible</h4><p>Leather, paper, ink. Something you can hold, that will still be on your shelf when your grandkids pull it down.</p></div></div>
-        <div class="step rv"><div><h4>Put the phone away</h4><p>No notifications. No "just checking." Fifteen minutes of undivided attention, every single day.</p></div></div>
-        <div class="step rv"><div><h4>Mark it up</h4><p>Dog-ear pages. Underline what hits you in the chest. Argue with it in the margins.</p></div></div>
-        <div class="step rv"><div><h4>Write it down</h4><p>Write what God puts on your heart. One line is enough. A year from now you'll read it back and see the man you were becoming.</p></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="marquee" aria-hidden="true"><div class="track" data-marquee="DON'T SKIM IT LIKE A TEXTBOOK|BE FORGED|TAKE THE POINT|NO DAYS OFF"></div></div>
-<div class="marquee alt" aria-hidden="true"><div class="track" data-marquee="STAND FIRM|BE COURAGEOUS|BE STRONG|LEAD YOUR FAMILY HOME"></div></div>
-
-<!-- BURN -->
-<section class="burn pad" id="burn">
-  <div class="wrap">
-    <h2>Let it burn<br>through you like<br><span class="fire" id="fire">fire through<br>dry wood.</span></h2>
-    <p class="rv">Don't skim it like a textbook. Read it like orders from the front.</p>
-  </div>
-</section>
-
-
-
-<!-- FAMILY -->
-<section class="family pad grid-bg" id="family">
-  <div class="wrap">
-    <div class="eyebrow rv">Who's watching</div>
-    <h2 class="h2 rv d1" style="margin-top:18px;max-width:16ch">They're learning what a man looks like <em>from you.</em></h2>
-    <div class="fam-grid">
-      <div class="fam rv">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="7" r="4"/><path d="M5 21v-2a7 7 0 0 1 14 0v2"/></svg>
-        <div class="who">YOUR SON</div>
-        <h3>Watches how you handle pressure.</h3>
-        <p>He'll handle it the same way. Your temper, your patience, your prayers in the hard seasons — that's his inheritance.</p>
-      </div>
-      <div class="fam rv d1">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></svg>
-        <div class="who">YOUR DAUGHTER</div>
-        <h3>Learns what a man looks like.</h3>
-        <p>The way you treat her mother sets the bar for every man she'll ever let into her life.</p>
-      </div>
-      <div class="fam rv d2">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-        <div class="who">YOUR WIFE</div>
-        <h3>Needs a point man, not a bystander.</h3>
-        <p>Not perfect. Present. A man who's in the Word, on his knees, and out front.</p>
-      </div>
-    </div>
-    <div class="excuse rv">
-      <h3>Be the man they don't have to<br><span>make excuses for.</span></h3>
-    </div>
-  </div>
-</section>
-
-<!-- 1 COR 16:13 -->
-<section class="v2 pad">
-  <div class="ref" aria-hidden="true">16:13</div>
-  <div class="wrap">
-    <div class="lines">
-      <div class="rv">Be on guard.</div>
-      <div class="rv d1">Stand firm in the faith.</div>
-      <div class="rv d2">Be courageous.</div>
-      <div class="rv d3">Be strong.</div>
-    </div>
-    <cite class="rv">1 Corinthians 16:13</cite>
-  </div>
-</section>
-
-</div><!-- /page why -->
-
-<div class="page" data-page="plan" hidden>
-<!-- PLAN -->
-<section class="plan pad" id="plan">
-  <div class="wrap">
-    <div class="plan-head">
-      <div>
-        <div class="eyebrow rv">The plan</div>
-        <h2 class="h2 rv d1" style="margin-top:18px">364 readings.<br><em>Pick your route.</em></h2>
-      </div>
-      <p class="lede rv d2" style="max-width:40ch"><b style="color:var(--fg)">Topical</b> gives you a different part of the Bible each day of the week. <b style="color:var(--fg)">Chronological</b> reads it in the order it happened, from Creation to Revelation.</p>
-    </div>
-
-    <div class="panel rv">
-      <div class="panel-top">
-        <div class="seg" role="group" aria-label="Reading plan">
-          <button type="button" data-plan="topical" aria-pressed="true">Topical</button>
-          <button type="button" data-plan="chrono" aria-pressed="false">Chronological</button>
-        </div>
-        <label class="field">Start date <input type="date" id="start"></label>
-      </div>
-      <div class="week-ctl">
-        <div class="week-row">
-          <div class="week-num"><small>WEEK</small><span id="wk">1</span><span class="of"> / 52</span></div>
-          <div class="stage-msg" id="stage"><b>STAGE</b>…</div>
-        </div>
-        <div class="weeks" id="weeks" role="slider" aria-label="Week" aria-valuemin="1" aria-valuemax="52" aria-valuenow="1" tabindex="0"></div>
-        <div class="weeks-legend"><span>Cold steel</span><span>Drag or use ← → to pick a week</span><span>White hot</span></div>
-      </div>
-      <div class="days" id="days"></div>
-      <div class="panel-foot"><span id="foot">Pick your start date to see where you are today.</span><button class="lt" type="button" data-listen="today">▶ Listen to today</button><a href="https://forged52.lovable.app/auth">Track it in the app →</a></div>
-    </div>
-
-    <div class="stages">
-      <div class="eyebrow rv" style="margin-bottom:22px">Stages of the forge</div>
-      <div class="bar"></div>
-      <div class="stage-pts" id="stagePts"></div>
-    </div>
-  </div>
-</section>
-</div>
-
-<div class="page" data-page="join" hidden>
-<!-- OATH -->
-<section class="oath pad" id="oath">
-  <div class="wrap">
-    <div class="eyebrow rv">Accept the challenge</div>
-    <h2 class="h2 rv d1" style="margin-top:18px">Take the point.<br><em>Lead your family home.</em></h2>
-
-    <div class="oath-card rv d2" id="oathCard">
-      <div class="oath-text">
-        <p>Before God and my family, I commit to <b>52 weeks</b> in His Word.</p>
-        <p><b>One reading a day.</b> No days off. No half-effort.</p>
-        <p>I will lead from the front.</p>
-      </div>
-      <div class="oath-fields">
-        <label>Your name <input id="name" autocomplete="given-name" maxlength="28" placeholder="First name"></label>
-        <label>Start date <input id="oathDate" type="date"></label>
-      </div>
-      <button class="hold" id="hold" type="button" aria-label="Press and hold to commit">
-        <span class="fill" id="holdFill"></span>
-        <span class="lbl" id="holdLbl"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M14.7 2.3l7 7-2.1 2.1-1.4-1.4-2.8 2.8 1.4 1.4L9.7 21.3 2.7 14.3l7.1-7.1 1.4 1.4 2.8-2.8-1.4-1.4z"/></svg><span>HOLD TO STRIKE THE IRON</span></span>
-      </button>
-      <div class="hint" id="hint">Press and hold</div>
-    </div>
-
-    <div class="forged" id="forged">
-      <canvas id="cert" width="1600" height="1000"></canvas>
-      <div class="actions">
-        <button class="btn" type="button" id="dl">Save the certificate</button>
-        <button class="btn" type="button" id="ics">Add daily reminder</button>
-        <a class="btn primary" href="https://forged52.lovable.app/auth">Create your account</a>
-      </div>
-      <p class="next">Your first reading: <b id="firstRead" style="color:var(--lime)"></b></p>
-    </div>
-  </div>
-</section>
-
-</div><!-- /page join -->
+<div class="toast" id="toast" role="status"></div>
 
 <div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="plRef">
-  <div class="pl-top">
-    <div><div class="pl-day" id="plDay">Day 1</div><div class="pl-ref" id="plRef">Rom 1-2</div></div>
-    <button class="pl-close" type="button" id="plClose" aria-label="Close player">×</button>
+  <div class="pl-head">
+    <div class="t"><div class="kicker" id="plDay">Day 1</div><h2 id="plRef">Romans 1–2</h2></div>
+    <button class="pl-x" type="button" id="plClose" aria-label="Close">×</button>
   </div>
   <div class="pl-chaps" id="plChaps"></div>
-  <div class="pl-text" id="plText" aria-live="off"></div>
-  <div class="pl-ctl">
-    <div class="pl-main">
+  <div class="pl-text" id="plText"><div class="in" id="plIn"></div></div>
+  <div class="pl-foot">
+    <div class="pl-ctl">
       <button type="button" id="plPrev" aria-label="Previous verse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
       <button type="button" id="plPlay" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path id="plIcon" d="M7 4v16l13-8z"/></svg></button>
       <button type="button" id="plNext" aria-label="Next verse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
     </div>
     <div class="pl-opts">
-      <div class="grp" role="group" aria-label="Speed"><span class="lbl">Speed</span><button type="button" data-rate="0.8">0.8×</button><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.25">1.25×</button><button type="button" data-rate="1.5">1.5×</button></div>
-      <div class="grp" role="group" aria-label="Text size"><span class="lbl">Text</span><button type="button" id="plSmaller" aria-label="Smaller text">A−</button><button type="button" id="plBigger" aria-label="Bigger text">A+</button></div>
-      <div class="grp" role="group" aria-label="Translation"><button type="button" data-tr="nlt">NLT</button><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
-      <div class="grp" id="plVoiceGrp" hidden><label class="lbl" for="plVoice">Voice</label><select id="plVoice"></select></div>
+      <div class="g" role="group" aria-label="Speed"><button type="button" data-rate="0.85">0.85×</button><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.2">1.2×</button></div>
+      <div class="g" role="group" aria-label="Text size"><button type="button" id="plSmaller" aria-label="Smaller text">A−</button><button type="button" id="plBigger" aria-label="Bigger text">A+</button></div>
+      <div class="g" role="group" aria-label="Translation"><button type="button" data-tr="nlt">NLT</button><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
+      <select id="plVoice" aria-label="Voice" hidden></select>
     </div>
+    <div class="pl-small">Want a human narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play this chapter in the Bible app</a></div>
     <div class="pl-copy" id="plCopy" hidden>Scripture quotations are taken from the Holy Bible, New Living Translation, copyright © 1996, 2004, 2015 by Tyndale House Foundation. Used by permission of Tyndale House Publishers, Carol Stream, Illinois 60188. All rights reserved.</div>
-    <div class="pl-narr">Prefer a real narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play this chapter in the Bible app →</a></div>
   </div>
 </div>
 
-<footer>
-  <div class="f1">FORGED<b>52</b></div>
-  <div class="f2">Build the man · Lead the family</div>
-  <div class="f2" style="margin-top:18px;letter-spacing:.3em">Zeeland Fabrication</div>
-</footer>
-
 <script>
 const PLANS = {"topical":[{"week":1,"sunday":"Rom 1-2","monday":"Gen 1-3","tuesday":"Joshua 1-5","wednesday":"Psalms 1-2","thursday":"Job 1-2","friday":"Isaiah 1-6","saturday":"Matt 1-2"},{"week":2,"sunday":"Rom 3-4","monday":"Gen 4-7","tuesday":"Joshua 6-10","wednesday":"Psalms 3-5","thursday":"Job 3-4","friday":"Isaiah 7-11","saturday":"Matt 3-4"},{"week":3,"sunday":"Rom 5-6","monday":"Gen 8-11","tuesday":"Joshua 11-15","wednesday":"Psalms 6-8","thursday":"Job 5-6","friday":"Isaiah 12-17","saturday":"Matt 5-7"},{"week":4,"sunday":"Rom 7-8","monday":"Gen 12-15","tuesday":"Joshua 16-20","wednesday":"Psalms 9-11","thursday":"Job 7-8","friday":"Isaiah 18-22","saturday":"Matt 8-10"},{"week":5,"sunday":"Rom 9-10","monday":"Gen 16-19","tuesday":"Joshua 21-24","wednesday":"Psalms 12-14","thursday":"Job 9-10","friday":"Isaiah 23-28","saturday":"Matt 11-13"},{"week":6,"sunday":"Rom 11-12","monday":"Gen 20-23","tuesday":"Judges 1-6","wednesday":"Psalms 15-17","thursday":"Job 11-12","friday":"Isaiah 29-33","saturday":"Matt 14-16"},{"week":7,"sunday":"Rom 13-14","monday":"Gen 24-27","tuesday":"Judges 7-11","wednesday":"Psalms 18-20","thursday":"Job 13-14","friday":"Isaiah 34-39","saturday":"Matt 17-19"},{"week":8,"sunday":"Rom 15-16","monday":"Gen 28-31","tuesday":"Judges 12-16","wednesday":"Psalms 21-23","thursday":"Job 15-16","friday":"Isaiah 40-44","saturday":"Matt 20-22"},{"week":9,"sunday":"I Cor 1-2","monday":"Gen 32-35","tuesday":"Judges 17-21","wednesday":"Psalms 24-26","thursday":"Job 17-18","friday":"Isaiah 45-50","saturday":"Matt 23-25"},{"week":10,"sunday":"I Cor 3-4","monday":"Gen 36-39","tuesday":"Ruth","wednesday":"Psalms 27-29","thursday":"Job 19-20","friday":"Isaiah 51-55","saturday":"Matt 26-28"},{"week":11,"sunday":"I Cor 5-6","monday":"Gen 40-43","tuesday":"I Sam 1-5","wednesday":"Psalms 30-32","thursday":"Job 21-22","friday":"Isaiah56-61","saturday":"Mark 1-2"},{"week":12,"sunday":"I Cor 7-8","monday":"Gen 44-47","tuesday":"I Sam 6-10","wednesday":"Psalms 33-35","thursday":"Job 23-24","friday":"Isaiah 62-66","saturday":"Mark 3-4"},{"week":13,"sunday":"I Cor 9-10","monday":"Gen 48-50","tuesday":"I Sam 11-15","wednesday":"Psalms 36-38","thursday":"Job 25-26","friday":"Jer 1-6","saturday":"Mark 5-6"},{"week":14,"sunday":"I Cor 11-2","monday":"Exo 1-4","tuesday":"I Sam 16-20","wednesday":"Psalms 39-41","thursday":"Job 27-28","friday":"Jer 7-11","saturday":"Mark 7-8"},{"week":15,"sunday":"I Cor 13-14","monday":"Exo 5-8","tuesday":"I Sam 21-25","wednesday":"Psalms 42-44","thursday":"Job 29-30","friday":"Jer 12-16","saturday":"Mark 9-10"},{"week":16,"sunday":"I Cor 15-16","monday":"Exo 9-12","tuesday":"I Sam 26-31","wednesday":"Psalms 45-47","thursday":"Job 31-32","friday":"Jer 17-21","saturday":"Mark 11-12"},{"week":17,"sunday":"II Cor 1-3","monday":"Exo 13-16","tuesday":"II Sam 1-4","wednesday":"Psalms 48-50","thursday":"Job 33-34","friday":"Jer 22-26","saturday":"Mark 13-14"},{"week":18,"sunday":"II Cor 4-5","monday":"Exo 17-20","tuesday":"II Sam 5-9","wednesday":"Psalms 51-53","thursday":"Job 35-36","friday":"Jer 27-31","saturday":"Mark 15-16"},{"week":19,"sunday":"II Cor 6-8","monday":"Exo 21-24","tuesday":"II Sam 10-14","wednesday":"Psalms 54-56","thursday":"Job 37-38","friday":"Jer 32-36","saturday":"Luke 1-2"},{"week":20,"sunday":"II Cor 9-10","monday":"Exo 25-28","tuesday":"II Sam 15-19","wednesday":"Psalms 57-59","thursday":"Job 39-40","friday":"Jer 37-41","saturday":"Luke 3-4"},{"week":21,"sunday":"II Cor 11-13","monday":"Exo 29-32","tuesday":"II Sam 20-24","wednesday":"Psalms 60-62","thursday":"Job 41-42","friday":"Jer 42-46","saturday":"Luke 5-6"},{"week":22,"sunday":"Gal 1-3","monday":"Exo 33-36","tuesday":"I Kings 1-4","wednesday":"Psalms 63-65","thursday":"Prov 1","friday":"Jer 47-52","saturday":"Luke 7-8"},{"week":23,"sunday":"Gal 4-6","monday":"Exo 37-40","tuesday":"I Kings 5-9","wednesday":"Psalms 66-68","thursday":"Prov 2-3","friday":"Lamentations","saturday":"Luke 9-10"},{"week":24,"sunday":"Eph 1-3","monday":"Lev 1-3","tuesday":"I Kings 10-13","wednesday":"Psalms 69-71","thursday":"Prov 4","friday":"Ezek 1-6","saturday":"Luke 11-12"},{"week":25,"sunday":"Eph 4-6","monday":"Lev 4-6","tuesday":"I Kings 14-18","wednesday":"Psalms 72-74","thursday":"Prov 5-6","friday":"Ezek 7-12","saturday":"Luke 13-14"},{"week":26,"sunday":"Phil 1-2","monday":"Lev 7-9","tuesday":"I Kings 19-22","wednesday":"Psalms 75-77","thursday":"Prov 7","friday":"Ezek 13-18","saturday":"Luke 15-16"},{"week":27,"sunday":"Phil 3-4","monday":"Lev 10-12","tuesday":"II Kings 1-5","wednesday":"Psalms 78-80","thursday":"Prov 8-9","friday":"Ezek 19-24","saturday":"Luke 17-18"},{"week":28,"sunday":"Col 1-2","monday":"Lev 13-15","tuesday":"II Kings 6-10","wednesday":"Psalms 81-83","thursday":"Prov 10","friday":"Ezek 25-30","saturday":"Luke 19-20"},{"week":29,"sunday":"Col 3-4","monday":"Lev 16-18","tuesday":"II Kings 11-15","wednesday":"Psalms 84-86","thursday":"Prov 11-12","friday":"Ezek 31-36","saturday":"Luke 21-22"},{"week":30,"sunday":"I Thes 1-3","monday":"Lev 19-21","tuesday":"II Kings 16-20","wednesday":"Psalms 87-89","thursday":"Prov 13","friday":"Ezek 37-42","saturday":"Luke 23-24"},{"week":31,"sunday":"I Thes 4-5","monday":"Lev 22-24","tuesday":"II Kings 21-25","wednesday":"Psalms 90-92","thursday":"Prov 14-15","friday":"Ezek 43-48","saturday":"John 1-2"},{"week":32,"sunday":"II Thes","monday":"Lev 25-27","tuesday":"I Kings 1-4","wednesday":"Psalms 93-95","thursday":"Prov 16","friday":"Daniel 1-6","saturday":"John 3-4"},{"week":33,"sunday":"I Tim 1-3","monday":"Num 1-4","tuesday":"I Chron 5-9","wednesday":"Psalms 96-98","thursday":"Prov 17-18","friday":"Daniel 7-12","saturday":"John 5-6"},{"week":34,"sunday":"I Tim 4-6","monday":"Num 5-8","tuesday":"I Chron 10-14","wednesday":"Psalms 99-101","thursday":"Prov 19","friday":"Hosea 1-7","saturday":"John 7-9"},{"week":35,"sunday":"II Tim 1-2","monday":"Num 9-12","tuesday":"I Chron 15-19","wednesday":"Psalms 102-104","thursday":"Prov 20-21","friday":"Hosea 8-14","saturday":"John 10-12"},{"week":36,"sunday":"II Tim 3-4","monday":"Num 13-16","tuesday":"I Chron 20-24","wednesday":"Psalms 105-107","thursday":"Prov 22","friday":"Joel","saturday":"John 13-15"},{"week":37,"sunday":"Titus","monday":"Num 17-20","tuesday":"I Chron 25-29","wednesday":"Psalms 108-110","thursday":"Prov 23-24","friday":"Amos 1-4","saturday":"John 16-18"},{"week":38,"sunday":"Philemon","monday":"Num 21-24","tuesday":"II Chron 1-5","wednesday":"Psalms 111-113","thursday":"Prov 25","friday":"Amos 5-9","saturday":"John 19-21"},{"week":39,"sunday":"Heb 1-4","monday":"Num 25-28","tuesday":"II Chron 6-10","wednesday":"Psalms 114-116","thursday":"Prov 26-27","friday":"Obadiah","saturday":"Acts 1-2"},{"week":40,"sunday":"Heb 5-6","monday":"Num 29-32","tuesday":"II Chron 11-15","wednesday":"Psalms 117-118","thursday":"Prov 28","friday":"Jonah","saturday":"Acts 3-4"},{"week":41,"sunday":"Heb 8-10","monday":"Num 33-36","tuesday":"II Chron 16-20","wednesday":"Psalms 119","thursday":"Prov 29-30","friday":"Micah","saturday":"Acts 5-6"},{"week":42,"sunday":"Heb 11-13","monday":"Deut 1-3","tuesday":"II Chron 21-24","wednesday":"Psalms 120-121","thursday":"Prov 31","friday":"Nahum","saturday":"Acts 7-8"},{"week":43,"sunday":"James 1-3","monday":"Deut 4-6","tuesday":"II Chron 25-28","wednesday":"Psalms 122-124","thursday":"Eccl 1-2","friday":"Habakkuk","saturday":"Acts 9-10"},{"week":44,"sunday":"James 4-5","monday":"Deut 7-9","tuesday":"II Chron 29-32","wednesday":"Psalms 125-127","thursday":"Eccl 3-4","friday":"Zephaniah","saturday":"Acts 11-12"},{"week":45,"sunday":"I Peter 1-3","monday":"Deut 10-12","tuesday":"II Chron 33-36","wednesday":"Psalms 128-130","thursday":"Eccl 5-6","friday":"Haggai","saturday":"Acts 13-14"},{"week":46,"sunday":"I Peter 4-5","monday":"Deut 13-15","tuesday":"Ezra 1-5","wednesday":"Psalms 131-133","thursday":"Eccl 7-8","friday":"Zech 1-7","saturday":"Acts 15-16"},{"week":47,"sunday":"II Peter","monday":"Deut 16-19","tuesday":"Ezra 6-10","wednesday":"Psalms 134-136","thursday":"Eccl 9-10","friday":"Zech 8-14","saturday":"Acts 17-18"},{"week":48,"sunday":"I John 1-3","monday":"Deut 20-22","tuesday":"Neh 1-4","wednesday":"Psalms 137-139","thursday":"Eccl 11-12","friday":"Malachi","saturday":"Acts 19-20"},{"week":49,"sunday":"I John 4-5","monday":"Deut 23-25","tuesday":"Neh 5-9","wednesday":"Psalms 140-142","thursday":"Song 1-2","friday":"Rev 1-6","saturday":"Acts 21-22"},{"week":50,"sunday":"II John","monday":"Deut 26-28","tuesday":"Neh 10-13","wednesday":"Psalms 143-145","thursday":"Song 3-4","friday":"Rev 7-11","saturday":"Acts 23-24"},{"week":51,"sunday":"III John","monday":"Deut 29-31","tuesday":"Esther 1-5","wednesday":"Psalms 146-148","thursday":"Song 5-6","friday":"Rev 12-17","saturday":"Acts 25-26"},{"week":52,"sunday":"Jude","monday":"Deut 32-34","tuesday":"Esther 6-10","wednesday":"Psalms 149-150","thursday":"Song 7-8","friday":"Rev 18-22","saturday":"Acts 27-28"}],"chrono":[{"week":1,"sunday":"Gen 1-3","monday":"Gen 4-7","tuesday":"Gen 8-11","wednesday":"Job 1-5","thursday":"Job 6-9","friday":"Job 10-13","saturday":"Job 14-17"},{"week":2,"sunday":"Job 18-20","monday":"Job 21-23","tuesday":"Job 24-28","wednesday":"Job 29-31","thursday":"Job 32-34","friday":"Job 35-37","saturday":"Job 38-42"},{"week":3,"sunday":"Gen 12-15","monday":"Gen 16-18","tuesday":"Gen 19-21","wednesday":"Gen 22-24","thursday":"Gen 25-26","friday":"Gen 27-29","saturday":"Gen 30-31"},{"week":4,"sunday":"Gen 32-34","monday":"Gen 35-37","tuesday":"Gen 38-40","wednesday":"Gen 41-42","thursday":"Gen 43-45","friday":"Gen 46-47","saturday":"Gen 48-50"},{"week":5,"sunday":"Exo 1-3","monday":"Exo 4-6","tuesday":"Exo 7-9","wednesday":"Exo 10-12","thursday":"Exo 13-15","friday":"Exo 16-18","saturday":"Exo 19-21"},{"week":6,"sunday":"Exo 22-24","monday":"Exo 25-27","tuesday":"Exo 28-29","wednesday":"Exo 30-32","thursday":"Exo 33-35","friday":"Exo 36-38","saturday":"Exo 39-40"},{"week":7,"sunday":"Lev 1-4","monday":"Lev 5-7","tuesday":"Lev 8-10","wednesday":"Lev 11-13","thursday":"Lev 14-15","friday":"Lev 16-18","saturday":"Lev 19-21"},{"week":8,"sunday":"Lev 22-23","monday":"Lev 24-25","tuesday":"Lev 26-27","wednesday":"Num 1-2","thursday":"Num 3-4","friday":"Num 5-6","saturday":"Num 7-8"},{"week":9,"sunday":"Num 9-11","monday":"Num 12-14","tuesday":"Num 15-17","wednesday":"Num 18-20","thursday":"Num 21-22","friday":"Num 23-25","saturday":"Num 26-27"},{"week":10,"sunday":"Num 28-30","monday":"Num 31-32","tuesday":"Num 33-34","wednesday":"Num 35-36","thursday":"Deut 1-3","friday":"Deut 4-6","saturday":"Deut 7-9"},{"week":11,"sunday":"Deut 10-12","monday":"Deut 13-16","tuesday":"Deut 17-20","wednesday":"Deut 21-23","thursday":"Deut 24-27","friday":"Deut 28-29","saturday":"Deut 30-31"},{"week":12,"sunday":"Deut 32-34","monday":"Psalms 90","tuesday":"Joshua 1-4","wednesday":"Joshua 5-8","thursday":"Joshua 9-11","friday":"Joshua 12-15","saturday":"Joshua 16-18"},{"week":13,"sunday":"Joshua 19-21","monday":"Joshua 22-24","tuesday":"Judges 1-3","wednesday":"Judges 4-5","thursday":"Judges 6-7","friday":"Judges 8-9","saturday":"Judges 10-12"},{"week":14,"sunday":"Judges 13-15","monday":"Judges 16-18","tuesday":"Judges 19-21","wednesday":"Ruth 1-4","thursday":"I Sam 1-3","friday":"I Sam 4-8","saturday":"I Sam 9-12"},{"week":15,"sunday":"I Sam 13-14","monday":"I Sam 15-17","tuesday":"I Sam 18-20","wednesday":"Psalms 11, 59","thursday":"I Sam 21-24","friday":"Psalms 7, 27, 31","saturday":"Psalms 34, 52"},{"week":16,"sunday":"I Sam 25-27","monday":"Psalms 17, 35, 54","tuesday":"I Sam 28-31","wednesday":"Psalms 18, 56, 120","thursday":"II Sam 1-4","friday":"Psalms 6, 8-10","saturday":"II Sam 5-7"},{"week":17,"sunday":"Psalms 15-16, 19-21","monday":"I Chron 1-2","tuesday":"I Chron 3-5","wednesday":"Psalms 44, 49, 78","thursday":"I Chron 6","friday":"I Chron 7-10","saturday":"Psalms 102, 105-106"},{"week":18,"sunday":"II Sam 8-9","monday":"II Sam 10-12","tuesday":"Psalms 51, 32, 86","wednesday":"II Sam 13-15","thursday":"Psalms 3-4, 12-13, 28","friday":"II Sam 16-18","saturday":"Psalms 22, 26, 40, 58"},{"week":19,"sunday":"II Sam 19-21","monday":"Psalms 5, 38, 41-42","tuesday":"II Sam 22-23","wednesday":"Psalms 57, 95, 97-99","thursday":"II Sam 24","friday":"I Chron 21-22","saturday":"Psalms 30, 108-110"},{"week":20,"sunday":"I Chron 23-25","monday":"Psalms 131, 138-139, 143-145","tuesday":"I Chron 26-29","wednesday":"Psalms 1-2, 33, 43","thursday":"Psalms 45-46, 48, 84-85, 87","friday":"I Kings 1-2","saturday":"Psalms 37, 71, 94"},{"week":21,"sunday":"Psalms 119:1-88","monday":"I Kings 3-4","tuesday":"II Chron 1","wednesday":"Psalms 72, 127","thursday":"Prov 1-3","friday":"Prov 4-6","saturday":"Prov 7-9"},{"week":22,"sunday":"Prov 10-12","monday":"Prov 13-15","tuesday":"Prov 16-18","wednesday":"Prov 19-21","thursday":"Prov 22-24","friday":"Prov 25-27","saturday":"Prov 28-29"},{"week":23,"sunday":"Prov 30-31","monday":"Song 1-4","tuesday":"Song 5-8","wednesday":"I Kings 5-6","thursday":"I Kings 7-8","friday":"I Kings 9","saturday":"Psalms 50, 73"},{"week":24,"sunday":"Psalms 89","monday":"I Kings 10-11","tuesday":"Eccl 1-4","wednesday":"Eccl 5-8","thursday":"Eccl 9-12","friday":"I Kings 12-14","saturday":"II Chron 10-12"},{"week":25,"sunday":"I Kings 15","monday":"II Chron 13-16","tuesday":"I Kings 16","wednesday":"I Kings 17-19","thursday":"I Kings 20-21","friday":"I Kings 22","saturday":"II Chron 17-20"},{"week":26,"sunday":"II Kings 1-4","monday":"II Kings 5-8","tuesday":"II Chron 21","wednesday":"II Kings 8-10","thursday":"II Chron 22-23","friday":"II Kings 11-12","saturday":"II Kings 13-14"},{"week":27,"sunday":"II Chron 24-25","monday":"Jonah 1-4","tuesday":"II Kings 14-15","wednesday":"II Chron 26","thursday":"Amos 1-4","friday":"Amos 5-9","saturday":"Hosea 1-7"},{"week":28,"sunday":"Hosea 8-14","monday":"Isaiah 1-4","tuesday":"Isaiah 5-8","wednesday":"Isaiah 9-12","thursday":"Isaiah 13-17","friday":"Isaiah 18-22","saturday":"Isaiah 23-27"},{"week":29,"sunday":"Isaiah 28-30","monday":"Isaiah 31-35","tuesday":"II Kings 15-17","wednesday":"II Chron 27-28","thursday":"Micah 1-4","friday":"Micah 5-7","saturday":"II Chron 29-31"},{"week":30,"sunday":"II Kings 18-19","monday":"Isaiah 36-39","tuesday":"Isaiah 40-43","wednesday":"Isaiah 44-48","thursday":"II Kings 20-21","friday":"Isaiah 49-53","saturday":"Isaiah 54-58"},{"week":31,"sunday":"Isaiah 59-63","monday":"Isaiah 64-66","tuesday":"II Chron 32-33","wednesday":"Nahum 1-3","thursday":"II Kings 22-23","friday":"II Chron 34-35","saturday":"Zephaniah 1-3"},{"week":32,"sunday":"Jeremiah 1-4","monday":"Jeremiah 5-8","tuesday":"Jeremiah 9-12","wednesday":"Jeremiah 13-16","thursday":"Jeremiah 17-20","friday":"II Kings 24","saturday":"Jeremiah 22-26"},{"week":33,"sunday":"Jeremiah 27-29","monday":"Jeremiah 30-31","tuesday":"Jeremiah 32-34","wednesday":"Jeremiah 35-37","thursday":"Jeremiah 38-40","friday":"Jeremiah 41-44","saturday":"Jeremiah 45-48"},{"week":34,"sunday":"Jeremiah 49-50","monday":"Jeremiah 51-52","tuesday":"Habakkuk 1-3","wednesday":"II Kings 25","thursday":"II Chron 36","friday":"Lam 1-2","saturday":"Lam 3-5"},{"week":35,"sunday":"Obadiah","monday":"Psalms 74, 79-80, 82","tuesday":"Psalms 101, 103","wednesday":"Psalms 137, 147, 149-150","thursday":"Ezek 1-4","friday":"Ezek 5-8","saturday":"Ezek 9-12"},{"week":36,"sunday":"Ezek 13-15","monday":"Ezek 16-17","tuesday":"Ezek 18-20","wednesday":"Ezek 21-22","thursday":"Ezek 23-24","friday":"Ezek 25-28","saturday":"Ezek 29-32"},{"week":37,"sunday":"Ezek 33-35","monday":"Ezek 36-38","tuesday":"Ezek 39-40","wednesday":"Ezek 41-43","thursday":"Ezek 44-46","friday":"Ezek 47-48","saturday":"Daniel 1-3"},{"week":38,"sunday":"Daniel 4-6","monday":"Daniel 7-9","tuesday":"Daniel 10-12","wednesday":"Ezra 1-3","thursday":"Ezra 4-6","friday":"Haggai 1-2","saturday":"Zech 1-4"},{"week":39,"sunday":"Zech 5-9","monday":"Zech 10-14","tuesday":"Esther 1-3","wednesday":"Esther 4-7","thursday":"Esther 8-10","friday":"Ezra 7-10","saturday":"Neh 1-3"},{"week":40,"sunday":"Neh 4-6","monday":"Neh 7-9","tuesday":"Neh 10-11","wednesday":"Neh 12-13","thursday":"Malachi 1-4","friday":"Joel 1-3","saturday":"Psalms 25, 29, 33, 36"},{"week":41,"sunday":"Psalms 39, 47, 53, 55, 60-62","monday":"Psalms 63-68","tuesday":"Psalms 69, 75-77, 81, 83","wednesday":"Psalms 88, 91-93, 96, 100","thursday":"Psalms 104, 107, 111-118","friday":"Psalms 119:89-176","saturday":"Psalms 120-126, 128-130, 132-136"},{"week":42,"sunday":"Psalms 138-142, 146, 148","monday":"I Chron 11-14","tuesday":"I Chron 15-19","wednesday":"I Chron 20, 23-25","thursday":"I Chron 26-29","friday":"II Chron 2-5","saturday":"II Chron 6-9"},{"week":43,"sunday":"Matt 1-4","monday":"Matt 5-7","tuesday":"Matt 8-10","wednesday":"Matt 11-13","thursday":"Matt 14-16","friday":"Matt 17-19","saturday":"Matt 20-22"},{"week":44,"sunday":"Matt 23-25","monday":"Matt 26-28","tuesday":"Mark 1-3","wednesday":"Mark 4-6","thursday":"Mark 7-9","friday":"Mark 10-12","saturday":"Mark 13-14"},{"week":45,"sunday":"Mark 15-16","monday":"Luke 1-3","tuesday":"Luke 4-6","wednesday":"Luke 7-9","thursday":"Luke 10-12","friday":"Luke 13-15","saturday":"Luke 16-18"},{"week":46,"sunday":"Luke 19-21","monday":"Luke 22-24","tuesday":"John 1-3","wednesday":"John 4-6","thursday":"John 7-9","friday":"John 10-12","saturday":"John 13-15"},{"week":47,"sunday":"John 16-18","monday":"John 19-21","tuesday":"Acts 1-3","wednesday":"Acts 4-6","thursday":"Acts 7-8","friday":"Acts 9-10","saturday":"Acts 11-12"},{"week":48,"sunday":"Acts 13-14","monday":"James 1-5","tuesday":"Gal 1-3","wednesday":"Gal 4-6","thursday":"Acts 15-16","friday":"I Thes 1-5","saturday":"II Thes 1-3"},{"week":49,"sunday":"Acts 17-18","monday":"I Cor 1-4","tuesday":"I Cor 5-8","wednesday":"I Cor 9-11","thursday":"I Cor 12-14","friday":"I Cor 15-16","saturday":"II Cor 1-4"},{"week":50,"sunday":"II Cor 5-9","monday":"II Cor 10-13","tuesday":"Acts 19-20","wednesday":"Rom 1-4","thursday":"Rom 5-8","friday":"Rom 9-12","saturday":"Rom 13-16"},{"week":51,"sunday":"Acts 21-23","monday":"Acts 24-26","tuesday":"Acts 27-28","wednesday":"Eph 1-3","thursday":"Eph 4-6","friday":"Phil 1-4","saturday":"Col 1-4"},{"week":52,"sunday":"Philemon","monday":"I Tim 1-6","tuesday":"Titus 1-3, II Tim 1-4","wednesday":"I Peter 1-5","thursday":"II Peter 1-3, Jude","friday":"Heb 1-7","saturday":"Heb 8-13"}]};
-const TOPICAL_LABELS = {sunday:"Letters",monday:"Foundations",tuesday:"The Story",wednesday:"Prayer & Worship",thursday:"Wisdom",friday:"The Prophets",saturday:"Jesus"};
-const DAYS = ["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
-const STAGES = [
-  [0,"Every forge starts with a single spark."],
-  [1,"The fire is lit. Keep feeding it."],
-  [10,"Iron is starting to glow. Don't stop now."],
-  [25,"You're being hammered into shape. Stay on the anvil."],
-  [50,"Past the halfway mark. Warriors don't quit."],
-  [75,"The blade is almost forged. Finish strong."],
-  [90,"The final strikes. Make them count."],
-  [100,"Forged. Tempered. Unbreakable."]
+const DAYS=["sunday","monday","tuesday","wednesday","thursday","friday","saturday"];
+const CATS={sunday:"Letters",monday:"Law",tuesday:"History",wednesday:"Psalms",thursday:"Wisdom",friday:"Prophets",saturday:"Gospels & Acts"};
+const VERSES=[
+ ["As iron sharpens iron, so one person sharpens another.","Proverbs 27:17"],
+ ["Your word is a lamp for my feet, a light on my path.","Psalm 119:105"],
+ ["Be on your guard; stand firm in the faith; be courageous; be strong.","1 Corinthians 16:13"],
+ ["For the Spirit God gave us does not make us timid, but gives us power, love and self-discipline.","2 Timothy 1:7"],
+ ["Above all else, guard your heart, for everything you do flows from it.","Proverbs 4:23"],
+ ["But seek first his kingdom and his righteousness, and all these things will be given to you as well.","Matthew 6:33"],
+ ["Let us not become weary in doing good, for at the proper time we will reap a harvest if we do not give up.","Galatians 6:9"],
+ ["Be still, and know that I am God.","Psalm 46:10"],
+ ["Whatever you do, work at it with all your heart, as working for the Lord.","Colossians 3:23"],
+ ["The LORD is my light and my salvation, whom shall I fear?","Psalm 27:1"],
+ ["My grace is sufficient for you, for my power is made perfect in weakness.","2 Corinthians 12:9"],
+ ["Finally, be strong in the Lord and in his mighty power.","Ephesians 6:10"],
+ ["Everyone who hears these words of mine and puts them into practice is like a wise man who built his house on the rock.","Matthew 7:24"],
+ ["Even though I walk through the darkest valley, I will fear no evil, for you are with me.","Psalm 23:4"]
 ];
-function nice(ref){ const F={Gen:'Genesis',Exo:'Exodus',Lev:'Leviticus',Num:'Numbers',Deut:'Deuteronomy','I Sam':'1 Samuel','II Sam':'2 Samuel','I Kings':'1 Kings','II Kings':'2 Kings','I Chron':'1 Chronicles','II Chron':'2 Chronicles',Neh:'Nehemiah',Prov:'Proverbs',Eccl:'Ecclesiastes',Song:'Song of Songs',Jer:'Jeremiah',Lam:'Lamentations',Ezek:'Ezekiel',Zech:'Zechariah',Matt:'Matthew',Rom:'Romans','I Cor':'1 Corinthians','II Cor':'2 Corinthians',Gal:'Galatians',Eph:'Ephesians',Phil:'Philippians',Col:'Colossians','I Thes':'1 Thessalonians','II Thes':'2 Thessalonians','I Tim':'1 Timothy','II Tim':'2 Timothy',Heb:'Hebrews','I Peter':'1 Peter','II Peter':'2 Peter','I John':'1 John','II John':'2 John','III John':'3 John',Rev:'Revelation'};
-  return ref.replace(/(^|, )((?:I{1,3} )?[A-Za-z]+)/g,(m,p,b)=>p+(F[b]||b)).replace(/(\d)-(\d)/g,'$1–$2'); }
-const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
-const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
-const $ = s=>document.querySelector(s), $$ = s=>[...document.querySelectorAll(s)];
+const BOOKS={Gen:['Genesis','GEN'],Exo:['Exodus','EXO'],Lev:['Leviticus','LEV'],Num:['Numbers','NUM'],Deut:['Deuteronomy','DEU'],Joshua:['Joshua','JOS'],Judges:['Judges','JDG'],Ruth:['Ruth','RUT'],
+ 'I Sam':['1 Samuel','1SA'],'II Sam':['2 Samuel','2SA'],'I Kings':['1 Kings','1KI'],'II Kings':['2 Kings','2KI'],'I Chron':['1 Chronicles','1CH'],'II Chron':['2 Chronicles','2CH'],Ezra:['Ezra','EZR'],Neh:['Nehemiah','NEH'],Esther:['Esther','EST'],
+ Job:['Job','JOB'],Psalms:['Psalms','PSA'],Prov:['Proverbs','PRO'],Eccl:['Ecclesiastes','ECC'],Song:['Song of Songs','SNG'],Isaiah:['Isaiah','ISA'],Jer:['Jeremiah','JER'],Jeremiah:['Jeremiah','JER'],Lam:['Lamentations','LAM'],Lamentations:['Lamentations','LAM'],
+ Ezek:['Ezekiel','EZK'],Daniel:['Daniel','DAN'],Hosea:['Hosea','HOS'],Joel:['Joel','JOL'],Amos:['Amos','AMO'],Obadiah:['Obadiah','OBA'],Jonah:['Jonah','JON'],Micah:['Micah','MIC'],Nahum:['Nahum','NAM'],Habakkuk:['Habakkuk','HAB'],Zephaniah:['Zephaniah','ZEP'],Haggai:['Haggai','HAG'],Zech:['Zechariah','ZEC'],Malachi:['Malachi','MAL'],
+ Matt:['Matthew','MAT'],Mark:['Mark','MRK'],Luke:['Luke','LUK'],John:['John','JHN'],Acts:['Acts','ACT'],Rom:['Romans','ROM'],'I Cor':['1 Corinthians','1CO'],'II Cor':['2 Corinthians','2CO'],Gal:['Galatians','GAL'],Eph:['Ephesians','EPH'],Phil:['Philippians','PHP'],Col:['Colossians','COL'],
+ 'I Thes':['1 Thessalonians','1TH'],'II Thes':['2 Thessalonians','2TH'],'I Tim':['1 Timothy','1TI'],'II Tim':['2 Timothy','2TI'],Titus:['Titus','TIT'],Philemon:['Philemon','PHM'],Heb:['Hebrews','HEB'],James:['James','JAS'],
+ 'I Peter':['1 Peter','1PE'],'II Peter':['2 Peter','2PE'],'I John':['1 John','1JN'],'II John':['2 John','2JN'],'III John':['3 John','3JN'],Jude:['Jude','JUD'],Rev:['Revelation','REV']};
+const BOOK_RE=/(^|, )((?:I{1,3} )?[A-Za-z]+)/g;
+const nice=ref=>ref.replace(BOOK_RE,(m,p,b)=>p+(BOOKS[b]?BOOKS[b][0]:b)).replace(/(\d)-(\d)/g,'$1–$2');
 
-/* ---------- hero words ---------- */
-let wd = 0.75;
-$$('[data-words]').forEach(el=>{
-  el.innerHTML = el.textContent.split(' ').map(w=>`<span class="w" style="animation-delay:${(wd+=0.12).toFixed(2)}s">${w}</span>`).join(' ');
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return null}},set(k,v){try{localStorage.setItem(k,v)}catch(e){}}};
+const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M4 12l5 5L20 6"/></svg>';
+const PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 4v16l13-8z"/></svg>';
+
+/* ---------- state ---------- */
+const iso=d=>new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
+const parseDate=s=>{const[y,m,d]=s.split('-').map(Number);return new Date(y,m-1,d)};
+const nextSunday=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate()+((7-d.getDay())%7));return d};
+let route=store.get('f52.plan')||'topical';
+let start=store.get('f52.start')||iso(nextSunday());
+let done=new Set(JSON.parse(store.get('f52.done')||'[]'));
+function save(){store.set('f52.plan',route);store.set('f52.start',start);store.set('f52.done',JSON.stringify([...done]))}
+function dayIndex(){const s=parseDate(start),n=new Date();n.setHours(0,0,0,0);return Math.round((n-s)/864e5)} // 0 = day 1
+function curDay(){const i=dayIndex();return i<0?1:i>=364?364:i+1}
+function dateFor(n){const d=parseDate(start);d.setDate(d.getDate()+n-1);return d}
+function reading(n){const w=Math.floor((n-1)/7),k=DAYS[(n-1)%7];return{ref:PLANS[route][w][k],cat:route==='topical'?CATS[k]:'',week:w+1}}
+const fmt=(d,o)=>d.toLocaleDateString(undefined,o);
+function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2200)}
+function setDone(n,v){n=+n;(v??!done.has(n))?done.add(n):done.delete(n);save();renderAll()}
+function setStart(v){if(!v)return;start=v;save();renderAll(true)}
+function setRoute(r){route=r;save();renderAll(true)}
+
+function rowHTML(n,isNow){const r=reading(n),on=done.has(n);
+  return `<div class="row${isNow?' now':''}"><button type="button" class="check" data-done="${n}" aria-pressed="${on}" aria-label="Mark day ${n} complete">${CHECK}</button>
+  <div><div class="d">${isNow?'Today · ':''}${fmt(dateFor(n),{weekday:'short',month:'short',day:'numeric'})} · Day ${n}</div><div class="r">${nice(r.ref)}</div>${r.cat?`<div class="c">${r.cat}</div>`:''}</div>
+  <button type="button" class="play" data-play="${n}" aria-label="Listen to day ${n}">${PLAY}</button></div>`}
+
+/* ---------- TODAY ---------- */
+function renderToday(){
+  const idx=dayIndex(), n=curDay(), r=reading(n), before=idx<0, after=idx>=364;
+  const h=new Date().getHours();
+  $('#tHello').textContent=before?'Getting ready':h<12?'Good morning':h<17?'Good afternoon':'Good evening';
+  $('#tDate').textContent=fmt(new Date(),{weekday:'long',month:'long',day:'numeric'});
+  $('#tKick').textContent=before?`Day 1 · ${fmt(dateFor(1),{weekday:'long',month:'short',day:'numeric'})}`:after?'Finished':`Today's reading · Day ${n}`;
+  $('#tRef').textContent=nice(r.ref);
+  $('#tCat').textContent=r.cat?`Week ${r.week} · ${r.cat}`:`Week ${r.week}`;
+  const isDone=done.has(n); const b=$('#tDone'); b.classList.toggle('done',isDone); b.querySelector('span').textContent=isDone?'Completed':'Mark complete';
+  let st=0; if(!before){let k=done.has(n)?n:n-1;while(k>0&&done.has(k)){st++;k--}} $('#tStreak').textContent=st>1?`${st} days in a row`:'';
+  const pct=Math.round(done.size/364*100); $('#tBar').style.width=(done.size/364*100)+'%';
+  $('#tDayOf').textContent=before?`Starts in ${-idx} day${-idx>1?'s':''}`:`Day ${n} of 364`; $('#tPct').textContent=`${done.size} read · ${pct}%`;
+  $('#tNote').innerHTML=before?`Your plan starts ${fmt(dateFor(1),{weekday:'long'})}. <button class="link-btn" type="button" id="tNow">Start today instead</button>`:'';
+  const tn=$('#tNow'); if(tn) tn.onclick=()=>{setStart(iso(new Date()));toast('Starting today')};
+  const v=VERSES[(Math.max(0,idx)+VERSES.length*10)%VERSES.length]; $('#vText').textContent=`“${v[0]}”`; $('#vRef').textContent=v[1];
+  const w0=(r.week-1)*7+1; let html=''; for(let k=w0;k<w0+7;k++) html+=rowHTML(k,!before&&!after&&k===n);
+  $('#tWeek').innerHTML=html;
+  $('#tWeekLbl').textContent=`Week ${r.week} of 52`;
+}
+$('#tListen').onclick=()=>openPlayer(curDay());
+$('#tDone').onclick=()=>{const n=curDay();setDone(n);toast(done.has(n)?'Nice work. See you tomorrow.':'Unmarked')};
+
+/* ---------- PLAN ---------- */
+let openWeeks=new Set();
+function renderPlan(jump){
+  $$('[data-route]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.route===route));
+  $('#routeNote').textContent=route==='topical'?'A different part of the Bible each day of the week: Letters, Law, History, Psalms, Wisdom, Prophets, and Gospels and Acts.':'The Bible in the order events happened, from Creation to Revelation.';
+  $('#pStart').value=start; $('#jStart').value=start;
+  const n=curDay(), cw=Math.ceil(n/7), idx=dayIndex();
+  if(jump||!openWeeks.size){openWeeks=new Set([cw])}
+  let html='';
+  for(let w=1;w<=52;w++){
+    let c=0; for(let k=(w-1)*7+1;k<=w*7;k++) if(done.has(k)) c++;
+    const d1=dateFor((w-1)*7+1), d7=dateFor(w*7);
+    let rows=''; for(let k=(w-1)*7+1;k<=w*7;k++) rows+=rowHTML(k,idx>=0&&idx<364&&k===n);
+    html+=`<details class="wk${w===cw?' cur':''}" data-w="${w}"${openWeeks.has(w)?' open':''}><summary><div><b>Week ${w}</b><span class="dt">${fmt(d1,{month:'short',day:'numeric'})} – ${fmt(d7,{month:'short',day:'numeric'})}</span>${w===cw?'<span class="tag">This week</span>':''}</div><span class="cnt">${c}/7<i><b style="width:${c/7*100}%"></b></i></span></summary><div class="list">${rows}</div></details>`;
+  }
+  $('#weeks').innerHTML=html;
+  $$('#weeks details').forEach(d=>d.addEventListener('toggle',()=>{const w=+d.dataset.w;d.open?openWeeks.add(w):openWeeks.delete(w)}));
+  if(jump&&location.hash==='#plan'){const el=$(`#weeks details[data-w="${cw}"]`);if(el&&cw>1)setTimeout(()=>el.scrollIntoView({block:'start',behavior:'smooth'}),60)}
+}
+$$('[data-route]').forEach(b=>b.onclick=()=>setRoute(b.dataset.route));
+$('#pStart').onchange=e=>setStart(e.target.value);
+$('#jStart').onchange=e=>{setStart(e.target.value);toast('Start date saved')};
+$('#jToday').onclick=()=>{setStart(iso(new Date()));toast('Starting today')};
+
+/* ---------- JOIN ---------- */
+$('#jIcs').onclick=()=>{
+  const [hh,mm]=($('#jTime').value||'06:00').split(':'); const pad=x=>String(x).padStart(2,'0');
+  const ymd=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`; const stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const L=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Forged52//Plan//EN','CALSCALE:GREGORIAN'];
+  for(let n=1;n<=364;n++){const d=dateFor(n),r=reading(n);const endM=(+mm+15)%60,endH=(+hh+(+mm+15>=60?1:0));
+    L.push('BEGIN:VEVENT',`UID:f52-${route}-${start}-${n}@forged52`,`DTSTAMP:${stamp}`,`DTSTART:${ymd(d)}T${pad(hh)}${pad(mm)}00`,`DTEND:${ymd(d)}T${pad(endH)}${pad(endM)}00`,`SUMMARY:Forged52 Day ${n}: ${nice(r.ref)}`,`DESCRIPTION:Week ${r.week}${r.cat?' · '+r.cat:''}`,'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Forged52 reading','TRIGGER:PT0M','END:VALARM','END:VEVENT')}
+  L.push('END:VCALENDAR');
+  const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([L.join('\r\n')],{type:'text/calendar'}));a.download='forged52-reminders.ics';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
+  toast('Calendar file downloaded');
+};
+$('#jShare').onclick=async()=>{const url=location.href.split('#')[0];try{await navigator.clipboard.writeText(url);toast('Link copied')}catch(e){toast(url)}};
+
+/* ---------- shared list clicks ---------- */
+document.addEventListener('click',e=>{
+  const c=e.target.closest('[data-done]'); if(c){setDone(c.dataset.done);return}
+  const p=e.target.closest('[data-play]'); if(p){openPlayer(+p.dataset.play)}
 });
 
-/* ---------- embers ---------- */
-(()=>{
-  const c = $('#embers'), x = c.getContext('2d');
-  let W,H,dpr,parts=[],mouse={x:-999,y:-999,vx:0,vy:0};
-  const N = reduce ? 0 : (innerWidth<700?60:120);
-  function size(){dpr=Math.min(devicePixelRatio||1,2);W=c.clientWidth;H=c.clientHeight;c.width=W*dpr;c.height=H*dpr;x.setTransform(dpr,0,0,dpr,0,0)}
-  function spawn(p,init){p.x=Math.random()*W;p.y=init?Math.random()*H:H+10;p.r=Math.random()*1.1+.3;p.vy=-(Math.random()*.9+.3);p.vx=(Math.random()-.5)*.4;p.life=0;p.max=Math.random()*400+200;p.lime=Math.random()<.6;p.ph=Math.random()*6.28;return p}
-  size(); addEventListener('resize',size);
-  for(let i=0;i<N;i++) parts.push(spawn({},true));
-  const hero = $('.hero');
-  hero.addEventListener('pointermove',e=>{const r=c.getBoundingClientRect();const nx=e.clientX-r.left,ny=e.clientY-r.top;mouse.vx=nx-mouse.x;mouse.vy=ny-mouse.y;mouse.x=nx;mouse.y=ny;
-    if(!reduce && Math.abs(mouse.vx)+Math.abs(mouse.vy)>6 && parts.length<N+120){for(let i=0;i<2;i++){const p=spawn({},false);p.x=nx;p.y=ny;p.vx=(Math.random()-.5)*2+mouse.vx*.05;p.vy=-Math.random()*2-.5;p.max=60+Math.random()*60;p.burst=1;p.lime=Math.random()<.5;parts.push(p)}}});
-  hero.addEventListener('pointerleave',()=>{mouse.x=mouse.y=-999});
-  let vis=true; new IntersectionObserver(([e])=>vis=e.isIntersecting).observe(hero);
-  window.burst = (cx,cy,n=60,canvas=null)=>{ // global spark burst on any element
-    if(reduce) return;
-    const cv = canvas || document.createElement('canvas');
-    if(!canvas){cv.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:80';document.body.appendChild(cv)}
-    const g=cv.getContext('2d'),d=Math.min(devicePixelRatio||1,2);cv.width=innerWidth*d;cv.height=innerHeight*d;g.setTransform(d,0,0,d,0,0);
-    const s=[];for(let i=0;i<n;i++){const a=Math.random()*6.28,v=Math.random()*9+2;s.push({x:cx,y:cy,vx:Math.cos(a)*v,vy:Math.sin(a)*v-3,l:0,m:40+Math.random()*50,lime:Math.random()<.4})}
-    (function f(){g.clearRect(0,0,innerWidth,innerHeight);let alive=0;g.globalCompositeOperation='lighter';
-      for(const p of s){if(p.l++>p.m)continue;alive++;p.vy+=.25;p.vx*=.98;const ox=p.x,oy=p.y;p.x+=p.vx;p.y+=p.vy;const t=1-p.l/p.m;
-        g.strokeStyle=p.lime?`rgba(184,255,61,${t})`:`rgba(255,${150+t*90|0},${40+t*80|0},${t})`;g.lineWidth=2*t+.5;g.beginPath();g.moveTo(ox,oy);g.lineTo(p.x,p.y);g.stroke()}
-      if(alive)requestAnimationFrame(f);else cv.remove()})();
-  };
-  (function loop(t){
-    requestAnimationFrame(loop); if(!vis||!N) return;
-    x.clearRect(0,0,W,H); x.globalCompositeOperation='lighter';
-    for(let i=parts.length-1;i>=0;i--){const p=parts[i];p.life++;
-      p.ph+=.03;p.x+=p.vx+Math.sin(p.ph)*.35;p.y+=p.vy;
-      const dx=p.x-mouse.x,dy=p.y-mouse.y,dd=dx*dx+dy*dy; if(dd<12000&&!p.burst){const f=(1-dd/12000)*1.6;p.x+=dx/Math.sqrt(dd+1)*f;p.y+=dy/Math.sqrt(dd+1)*f}
-      if(p.burst) p.vy+=.03;
-      const t=p.life/p.max,a=t<.1?t*10:1-(t-.1)/.9;
-      if(p.life>p.max||p.y<-20){ if(p.burst){parts.splice(i,1);continue} spawn(p,false); continue }
-      const col=p.lime?`184,255,61`:`255,${130+((1-t)*90|0)},${30+((1-t)*40|0)}`;
-      const gr=x.createRadialGradient(p.x,p.y,0,p.x,p.y,p.r*3.2);gr.addColorStop(0,`rgba(${col},${a*.55})`);gr.addColorStop(1,`rgba(${col},0)`);
-      x.fillStyle=gr;x.beginPath();x.arc(p.x,p.y,p.r*3.2,0,6.283);x.fill();
-      x.fillStyle=`rgba(255,255,240,${a*.9})`;x.beginPath();x.arc(p.x,p.y,p.r*.55,0,6.283);x.fill();
-    }
-  })();
-})();
+/* ---------- large text ---------- */
+(()=>{const b=$('#bigBtn');const set=on=>{document.documentElement.classList.toggle('big',on);b.setAttribute('aria-pressed',on);store.set('f52.big',on?'1':'0')};set(store.get('f52.big')==='1');b.onclick=()=>set(!document.documentElement.classList.contains('big'))})();
 
-/* ---------- nav + heat bar + scroll FX ---------- */
-const heat=$('#heat'), nav=$('#nav'), fire=$('#fire');
-function onScroll(){
-  const h=document.documentElement, p=h.scrollTop/(h.scrollHeight-h.clientHeight);
-  heat.style.width=(p*100).toFixed(2)+'%';
-  nav.classList.add('show');
-  // fire text fills as section scrolls through
-  const r=fire.getBoundingClientRect(); const fp=Math.min(1,Math.max(0,(innerHeight*.85-r.top)/(innerHeight*.55)));
-  fire.style.backgroundPosition=`0 ${100-fp*100}%`;
+/* ---------- router ---------- */
+function renderAll(jump){renderToday();renderPlan(jump)}
+function show(){
+  let h=location.hash.slice(1); if(!['today','plan','why','join'].includes(h)) h='today';
+  $$('.page').forEach(p=>p.hidden=p.dataset.page!==h);
+  $$('[data-tab]').forEach(a=>a.dataset.tab===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+  scrollTo(0,0);
+  if(h==='plan'){renderPlan(true)}
 }
-addEventListener('scroll',onScroll,{passive:true}); onScroll();
+addEventListener('hashchange',show); renderAll(); show();
 
-/* ---------- reveal ---------- */
-const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.15,rootMargin:'0px 0px -6% 0px'});
-$$('.rv').forEach(el=>io.observe(el));
-
-/* ---------- count up ---------- */
-const cio=new IntersectionObserver(es=>es.forEach(e=>{if(!e.isIntersecting)return;cio.unobserve(e.target);
-  const el=e.target,to=+el.dataset.count,dur=reduce?1:1600,t0=performance.now();
-  (function f(t){const k=Math.min(1,(t-t0)/dur),v=Math.round(to*(1-Math.pow(1-k,4)));el.textContent=v;if(k<1)requestAnimationFrame(f)})(t0);
-}),{threshold:.6});
-$$('[data-count]').forEach(el=>cio.observe(el));
-
-/* ---------- Luke: words ignite with scroll ---------- */
-(()=>{
-  const q=$('#luke'); const words=q.textContent.split(' ');
-  q.innerHTML=words.map(w=>`<span class="ch">${w}</span>`).join(' ');
-  const hot=new Set(['deny','cross','daily','follow']);
-  const spans=[...q.children];
-  spans.forEach(s=>{if(hot.has(s.textContent.replace(/\W/g,'')))s.dataset.hot=1});
-  function upd(){const r=q.getBoundingClientRect();const p=Math.min(1,Math.max(0,(innerHeight*.8-r.top)/(r.height+innerHeight*.35)));
-    const n=Math.round(p*spans.length*1.15);spans.forEach((s,i)=>{s.classList.toggle('lit',i<n||reduce);s.classList.toggle('hot',(i<n||reduce)&&!!s.dataset.hot)})}
-  addEventListener('scroll',upd,{passive:true});upd();
-})();
-
-/* ---------- convoy formation ---------- */
-(()=>{
-  const units=$$('#radar .unit'); const scatter=[[50,50],[30,40],[68,36],[40,72],[64,68]];
-  units.forEach((u,i)=>{u.style.left=scatter[i][0]+'%';u.style.top=scatter[i][1]+'%'});
-  const o=new IntersectionObserver(([e])=>{if(e.isIntersecting){units.forEach((u,i)=>{const [l,t]=u.dataset.p.split(',');setTimeout(()=>{u.style.left=l+'%';u.style.top=t+'%'},i*140)});o.disconnect()}},{threshold:.45});
-  o.observe($('#radar'));
-})();
-
-/* ---------- generations chain ---------- */
-(()=>{
-  const bs=$$('#gens .chain b');
-  const o=new IntersectionObserver(([e])=>{if(!e.isIntersecting)return;o.disconnect();
-    bs.forEach((b,i)=>{if(i>=2)setTimeout(()=>b.classList.add('on'),400+(i-2)*280)})},{threshold:.6});
-  o.observe($('#gens'));
-})();
-
-/* ---------- marquees ---------- */
-$$('[data-marquee]').forEach(t=>{const items=t.dataset.marquee.split('|');const one=items.map(s=>`<span>${s}</span>`).join('');t.innerHTML=one+one+one+one});
-
-/* ---------- PLAN EXPLORER ---------- */
-const heatColor = k => { // k 0..1 → steel → white hot
-  const stops=[[58,63,68],[85,48,31],[139,26,0],[212,58,0],[255,106,0],[255,162,48],[255,217,138],[255,251,232]];
-  const f=k*(stops.length-1),i=Math.min(stops.length-2,Math.floor(f)),t=f-i,a=stops[i],b=stops[i+1];
-  return `rgb(${a.map((v,j)=>Math.round(v+(b[j]-v)*t)).join(',')})`;
-};
-const stageFor = pct => { let s=STAGES[0]; for(const st of STAGES) if(pct>=st[0]) s=st; return s; };
-const iso = d => new Date(d.getTime()-d.getTimezoneOffset()*6e4).toISOString().slice(0,10);
-const parseDate = s => { const [y,m,d]=s.split('-').map(Number); return new Date(y,m-1,d); };
-const nextSunday = () => { const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()+((7-d.getDay())%7)); return d; };
-
-let plan = store.get('f52.plan')||'topical';
-let start = store.get('f52.start')||iso(nextSunday());
-let week = 1;
-const weeksEl=$('#weeks'), daysEl=$('#days');
-for(let i=1;i<=52;i++){const b=document.createElement('i');b.style.background=heatColor((i-1)/51);b.title='Week '+i;weeksEl.appendChild(b)}
-$('#start').value=start; $('#oathDate').value=start;
-
-function todayPos(){ // returns {week, dayIdx} or null
-  const s=parseDate(start), now=new Date(); now.setHours(0,0,0,0);
-  const diff=Math.round((now-s)/864e5); if(diff<0||diff>=364) return {before:diff<0, diff};
-  return {week:Math.floor(diff/7)+1, day:diff%7, diff};
-}
-function render(){
-  $$('.seg button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.plan===plan));
-  const w=PLANS[plan][week-1], tp=todayPos(), s=parseDate(start);
-  $('#wk').textContent=week;
-  weeksEl.setAttribute('aria-valuenow',week);
-  [...weeksEl.children].forEach((b,i)=>{b.classList.toggle('sel',i===week-1);b.classList.toggle('today',tp.week===i+1)});
-  const pct=Math.round((week-1)/52*100), st=stageFor(week===1?0:Math.max(1,pct));
-  $('#stage').innerHTML=`<b>${pct}% FORGED</b>${st[1]}`;
-  daysEl.innerHTML='';
-  // day order: plan runs 7 days from the start date's weekday
-  for(let i=0;i<7;i++){
-    const date=new Date(s); date.setDate(s.getDate()+(week-1)*7+i);
-    const key=DAYS[i];
-    const el=document.createElement('div'); el.className='day'+(tp.week===week&&tp.day===i?' today':'');
-    el.innerHTML=`<div class="dn">Day ${(week-1)*7+i+1} · ${date.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div><div class="cat">${plan==='topical'?TOPICAL_LABELS[key]:'&nbsp;'}</div><div class="ref">${nice(w[key])}</div><button class="day-play" type="button" data-ref="${w[key]}" data-day="${(week-1)*7+i+1}">▶ Listen</button>`;
-    daysEl.appendChild(el);
-  }
-  const foot=$('#foot');
-  if(tp.week){const r=PLANS[plan][tp.week-1][DAYS[tp.day]];foot.innerHTML=`Today is <b style="color:var(--fg)">Day ${tp.diff+1}</b> — read <b style="color:var(--lime)">${nice(r)}</b>.`}
-  else if(tp.before){const n=-tp.diff;foot.innerHTML=`Day 1 is in <b style="color:var(--fg)">${n} day${n>1?'s':''}</b>: <b style="color:var(--lime)">${nice(PLANS[plan][0].sunday)}</b>.`}
-  else foot.textContent='52 weeks complete. Forged.';
-  if(window.doneSet) renderToday();
-}
-function setWeek(n){week=Math.max(1,Math.min(52,n));render()}
-$$('.seg button').forEach(b=>b.onclick=()=>{plan=b.dataset.plan;store.set('f52.plan',plan);render()});
-$('#start').onchange=e=>{if(!e.target.value)return;setStart(e.target.value)};
-function setStart(v){start=v;$('#start').value=v;store.set('f52.start',start);$('#oathDate').value=start;const tp=todayPos();if(tp.week)week=tp.week;render()}
-let dragging=false;
-const pick=e=>{const r=weeksEl.getBoundingClientRect();setWeek(Math.floor((e.clientX-r.left)/r.width*52)+1)};
-weeksEl.addEventListener('pointerdown',e=>{dragging=true;weeksEl.setPointerCapture(e.pointerId);pick(e)});
-weeksEl.addEventListener('pointermove',e=>{if(dragging)pick(e)});
-weeksEl.addEventListener('pointerup',()=>dragging=false);
-weeksEl.addEventListener('keydown',e=>{if(e.key==='ArrowRight'||e.key==='ArrowUp'){setWeek(week+1);e.preventDefault()}if(e.key==='ArrowLeft'||e.key==='ArrowDown'){setWeek(week-1);e.preventDefault()}if(e.key==='Home')setWeek(1);if(e.key==='End')setWeek(52)});
-{const tp=todayPos(); if(tp.week) week=tp.week;}
-render();
-
-// stage points
-$('#stagePts').innerHTML=STAGES.map(([p,t])=>{const wk=p===0?'Day 1':'Week '+Math.max(1,Math.round(p/100*52));return `<div class="sp rv"><div class="pct" style="color:${heatColor(p/100)}">${p}%</div><div class="wk">${wk}</div><p>${t}</p></div>`}).join('');
-$$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.observe(el)});
-
-/* ---------- OATH ---------- */
-(()=>{
-  const hold=$('#hold'), fill=$('#holdFill'), lbl=$('#holdLbl span'), hint=$('#hint');
-  const DUR=1500; let t0=0, raf=0, done=false, ac=null;
-  function clang(){ try{
-    ac=ac||new (window.AudioContext||window.webkitAudioContext)(); const now=ac.currentTime;
-    const out=ac.createGain(); out.gain.setValueAtTime(.35,now); out.gain.exponentialRampToValueAtTime(.001,now+2.2); out.connect(ac.destination);
-    [523,1187,1703,2459,3311].forEach((f,i)=>{const o=ac.createOscillator(),g=ac.createGain();o.type='sine';o.frequency.value=f*(1+Math.random()*.004);g.gain.setValueAtTime(.5/(i+1),now);g.gain.exponentialRampToValueAtTime(.0001,now+2.2/(i*.6+1));o.connect(g).connect(out);o.start(now);o.stop(now+2.3)});
-    const n=ac.createBufferSource(),b=ac.createBuffer(1,ac.sampleRate*.08,ac.sampleRate),d=b.getChannelData(0);for(let i=0;i<d.length;i++)d[i]=(Math.random()*2-1)*Math.pow(1-i/d.length,3);n.buffer=b;const ng=ac.createGain();ng.gain.value=.5;n.connect(ng).connect(out);n.start(now);
-  }catch(e){} }
-  function hum(on){ /* subtle rising tone while holding */
-    try{ if(on){ac=ac||new (window.AudioContext||window.webkitAudioContext)();const o=ac.createOscillator(),g=ac.createGain();o.type='sawtooth';o.frequency.setValueAtTime(60,ac.currentTime);o.frequency.exponentialRampToValueAtTime(240,ac.currentTime+DUR/1000);g.gain.setValueAtTime(0,ac.currentTime);g.gain.linearRampToValueAtTime(.04,ac.currentTime+.2);o.connect(g).connect(ac.destination);o.start();hum.o=o;hum.g=g}
-      else if(hum.o){hum.g.gain.cancelScheduledValues(ac.currentTime);hum.g.gain.setTargetAtTime(0,ac.currentTime,.03);hum.o.stop(ac.currentTime+.15);hum.o=null} }catch(e){} }
-  function tick(t){const k=Math.min(1,(t-t0)/DUR);fill.style.transform=`scaleX(${k})`;
-    hold.style.boxShadow=`0 0 ${k*60}px ${k*6}px rgba(145,230,0,${k*.45})`;
-    if(!reduce) hold.style.transform=`translate(${(Math.random()-.5)*k*3}px,${(Math.random()-.5)*k*3}px)`;
-    hint.textContent=k<.5?'Keep holding…':k<.9?'Heating the iron…':'Almost…';
-    if(k>=1) return complete(); raf=requestAnimationFrame(tick)}
-  function startHold(e){ if(done)return; e.preventDefault(); t0=performance.now(); hum(true); raf=requestAnimationFrame(tick) }
-  function cancel(){ if(done)return; cancelAnimationFrame(raf); hum(false); fill.style.transition='transform .35s';fill.style.transform='scaleX(0)';hold.style.boxShadow='';hold.style.transform='';setTimeout(()=>fill.style.transition='',360);hint.textContent='Press and hold' }
-  hold.addEventListener('pointerdown',startHold);
-  ['pointerup','pointerleave','pointercancel'].forEach(ev=>hold.addEventListener(ev,cancel));
-  hold.addEventListener('keydown',e=>{if((e.key===' '||e.key==='Enter')&&!e.repeat&&!t0Active){t0Active=true;startHold(e)}});
-  hold.addEventListener('keyup',e=>{if(e.key===' '||e.key==='Enter'){t0Active=false;cancel()}});
-  let t0Active=false;
-  function complete(){
-    done=true; hum(false); clang(); hold.classList.add('done'); hold.style.transform=''; lbl.textContent='COMMITTED';
-    hint.textContent='The iron is struck.';
-    const r=hold.getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2,120);
-    if(!reduce){document.body.classList.remove('shake');void document.body.offsetWidth;document.body.classList.add('shake')}
-    const name=($('#name').value||'').trim(), sd=$('#oathDate').value||start;
-    store.set('f52.name',name); store.set('f52.start',sd); start=sd; $('#start').value=sd; render();
-    drawCert(name,sd);
-    $('#firstRead').textContent=`${nice(PLANS[plan][0].sunday)} · ${parseDate(sd).toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})}`;
-    setTimeout(()=>{const f=$('#forged');f.classList.add('show');f.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})},700);
-  }
-  const savedName=store.get('f52.name'); if(savedName) $('#name').value=savedName;
-
-  /* certificate */
-  const logo=new Image(); logo.src='assets/logo.webp';
-  function drawCert(name,sd){
-    const c=$('#cert'),g=c.getContext('2d'),W=c.width,H=c.height;
-    const go=()=>{
-      g.fillStyle='#0a0a0a';g.fillRect(0,0,W,H);
-      const rg=g.createRadialGradient(W/2,H*.62,40,W/2,H*.62,W*.6);rg.addColorStop(0,'rgba(145,230,0,.16)');rg.addColorStop(1,'rgba(145,230,0,0)');g.fillStyle=rg;g.fillRect(0,0,W,H);
-      g.strokeStyle='rgba(145,230,0,.05)';g.lineWidth=1;for(let x=0;x<W;x+=40){g.beginPath();g.moveTo(x,0);g.lineTo(x,H);g.stroke()}for(let y=0;y<H;y+=40){g.beginPath();g.moveTo(0,y);g.lineTo(W,y);g.stroke()}
-      // sparks
-      for(let i=0;i<160;i++){const x=Math.random()*W,y=H*.5+Math.random()*H*.5,r=Math.random()*2+.4;g.fillStyle=Math.random()<.3?'rgba(184,255,61,.8)':`rgba(255,${120+Math.random()*100|0},40,${Math.random()*.8+.2})`;g.beginPath();g.arc(x,y,r,0,7);g.fill()}
-      g.strokeStyle='#2a2a2a';g.lineWidth=2;g.strokeRect(40,40,W-80,H-80);
-      g.strokeStyle='#91e600';g.lineWidth=5;
-      [[40,40,1,1],[W-40,40,-1,1],[40,H-40,1,-1],[W-40,H-40,-1,-1]].forEach(([x,y,sx,sy])=>{g.beginPath();g.moveTo(x,y+70*sy);g.lineTo(x,y);g.lineTo(x+70*sx,y);g.stroke()});
-      if(logo.complete&&logo.naturalWidth){const lw=460,lh=lw*logo.naturalHeight/logo.naturalWidth;g.drawImage(logo,(W-lw)/2,70,lw,lh)}
-      g.textAlign='center';
-      g.fillStyle='#91e600';g.font='600 26px "Barlow Condensed"';g.letterSpacing='10px';g.fillText('THIS CERTIFIES THAT',W/2,470);
-      g.letterSpacing='4px';g.fillStyle='#f2f2f2';g.font='150px "Bebas Neue"';
-      const nm=(name||'A man of God').toUpperCase();let fs=150;while(g.measureText(nm).width>W-260&&fs>60){fs-=6;g.font=fs+'px "Bebas Neue"'}
-      g.fillText(nm,W/2,620);
-      g.letterSpacing='2px';g.fillStyle='#a6a6a6';g.font='400 34px Cinzel';
-      g.fillText('has taken the point and accepted the 52-week challenge',W/2,700);
-      g.fillStyle='#ececec';g.font='700 30px Cinzel';
-      const d=parseDate(sd), e=new Date(d);e.setDate(d.getDate()+363);
-      const f=x=>x.toLocaleDateString(undefined,{month:'long',day:'numeric',year:'numeric'});
-      g.fillText(`${f(d).toUpperCase()}  —  ${f(e).toUpperCase()}`,W/2,770);
-      g.fillStyle='#91e600';g.font='54px "Bebas Neue"';g.letterSpacing='6px';
-      g.fillText('BE FORGED. TAKE THE POINT. LEAD YOUR FAMILY HOME.',W/2,870);
-      g.fillStyle='#6b6b6b';g.font='500 20px "Barlow Condensed"';g.letterSpacing='8px';g.fillText('1 CORINTHIANS 16:13 · FORGED52',W/2,920);
-      g.letterSpacing='0px';
-    };
-    (document.fonts?document.fonts.ready:Promise.resolve()).then(()=>logo.decode?logo.decode().catch(()=>{}):0).then(go,go);
-  }
-  $('#dl').onclick=()=>{const a=document.createElement('a');a.download='forged52-oath.png';a.href=$('#cert').toDataURL('image/png');a.click()};
-  $('#ics').onclick=()=>{
-    const sd=parseDate($('#oathDate').value||start); const pad=n=>String(n).padStart(2,'0');
-    const ymd=d=>`${d.getFullYear()}${pad(d.getMonth()+1)}${pad(d.getDate())}`;
-    const stamp=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
-    const lines=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Forged52//Plan//EN','CALSCALE:GREGORIAN'];
-    for(let i=0;i<364;i++){const d=new Date(sd);d.setDate(sd.getDate()+i);const w=Math.floor(i/7),k=DAYS[i%7];const ref=PLANS[plan][w][k];
-      lines.push('BEGIN:VEVENT',`UID:f52-${plan}-${ymd(sd)}-${i}@forged52`,`DTSTAMP:${stamp}`,`DTSTART:${ymd(d)}T060000`,`DTEND:${ymd(d)}T061500`,
-        `SUMMARY:Forged52 · Day ${i+1}: ${ref}`,`DESCRIPTION:Week ${w+1}${plan==='topical'?' · '+TOPICAL_LABELS[k]:''}. One reading a day. No days off.`,
-        'BEGIN:VALARM','ACTION:DISPLAY','DESCRIPTION:Forged52 reading','TRIGGER:PT0M','END:VALARM','END:VEVENT')}
-    lines.push('END:VCALENDAR');
-    const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`forged52-${plan}.ics`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
-  };
-})();
-
-/* ---------- LARGE TEXT ---------- */
-(()=>{
-  const b=$('#bigBtn'); const set=on=>{document.documentElement.classList.toggle('big',on);b.setAttribute('aria-pressed',on);store.set('f52.big',on?'1':'0')};
-  set(store.get('f52.big')==='1'); b.onclick=()=>set(!document.documentElement.classList.contains('big'));
-})();
-
-/* ---------- LISTEN: fetch the passage and read it aloud, verse by verse ---------- */
-(()=>{
-  const BOOKS={Gen:['genesis','GEN'],Exo:['exodus','EXO'],Lev:['leviticus','LEV'],Num:['numbers','NUM'],Deut:['deuteronomy','DEU'],Joshua:['joshua','JOS'],Judges:['judges','JDG'],Ruth:['ruth','RUT'],
-    'I Sam':['1 samuel','1SA'],'II Sam':['2 samuel','2SA'],'I Kings':['1 kings','1KI'],'II Kings':['2 kings','2KI'],'I Chron':['1 chronicles','1CH'],'II Chron':['2 chronicles','2CH'],Ezra:['ezra','EZR'],Neh:['nehemiah','NEH'],Esther:['esther','EST'],
-    Job:['job','JOB'],Psalms:['psalms','PSA'],Prov:['proverbs','PRO'],Eccl:['ecclesiastes','ECC'],Song:['song of solomon','SNG'],Isaiah:['isaiah','ISA'],Jer:['jeremiah','JER'],Jeremiah:['jeremiah','JER'],Lam:['lamentations','LAM'],Lamentations:['lamentations','LAM'],
-    Ezek:['ezekiel','EZK'],Daniel:['daniel','DAN'],Hosea:['hosea','HOS'],Joel:['joel','JOL'],Amos:['amos','AMO'],Obadiah:['obadiah','OBA'],Jonah:['jonah','JON'],Micah:['micah','MIC'],Nahum:['nahum','NAM'],Habakkuk:['habakkuk','HAB'],Zephaniah:['zephaniah','ZEP'],Haggai:['haggai','HAG'],Zech:['zechariah','ZEC'],Malachi:['malachi','MAL'],
-    Matt:['matthew','MAT'],Mark:['mark','MRK'],Luke:['luke','LUK'],John:['john','JHN'],Acts:['acts','ACT'],Rom:['romans','ROM'],'I Cor':['1 corinthians','1CO'],'II Cor':['2 corinthians','2CO'],Gal:['galatians','GAL'],Eph:['ephesians','EPH'],Phil:['philippians','PHP'],Col:['colossians','COL'],
-    'I Thes':['1 thessalonians','1TH'],'II Thes':['2 thessalonians','2TH'],'I Tim':['1 timothy','1TI'],'II Tim':['2 timothy','2TI'],Titus:['titus','TIT'],Philemon:['philemon','PHM'],Heb:['hebrews','HEB'],James:['james','JAS'],
-    'I Peter':['1 peter','1PE'],'II Peter':['2 peter','2PE'],'I John':['1 john','1JN'],'II John':['2 john','2JN'],'III John':['3 john','3JN'],Jude:['jude','JUD'],Rev:['revelation','REV']};
-  const cap=s=>s.replace(/\b[a-z]/g,c=>c.toUpperCase());
-  // "Psalms 131, 138-139" / "Titus 1-3, II Tim 1-4" / "Psalms 119:1-88" / "Jude" -> list of chapters
-  function parse(ref){
-    const out=[]; let book=null;
-    ref.split(',').map(x=>x.trim()).forEach(part=>{
-      const m=part.match(/^((?:I{1,3} )?[A-Za-z]+)\s*(.*)$/);
-      let rest=part; if(m&&BOOKS[m[1]]){book=BOOKS[m[1]];rest=m[2]}
-      if(!book) return;
-      if(!rest){out.push({name:book[0],usfm:book[1],ch:1});return}
-      const vm=rest.match(/^(\d+):(\d+-\d+)$/); if(vm){out.push({name:book[0],usfm:book[1],ch:+vm[1],vv:vm[2]});return}
-      const [a,b]=rest.split('-').map(Number); for(let c=a;c<=(b||a);c++) out.push({name:book[0],usfm:book[1],ch:c});
-    });
-    return out;
-  }
-  const el={p:$('#player'),day:$('#plDay'),ref:$('#plRef'),chaps:$('#plChaps'),text:$('#plText'),play:$('#plPlay'),icon:$('#plIcon'),narr:$('#plNarr'),voice:$('#plVoice')};
-  const synth=window.speechSynthesis;
-  let curDay=0,chs=[],ci=0,verses=[],vi=0,playing=false,tr=store.get('f52.tr2')||'nlt',rate=+(store.get('f52.rate')||1),size=+(store.get('f52.size')||30),lock=null,lastFocus=null,token=0;
-  const cache={};
-  el.p.style.setProperty('--pl-size',size+'px');
-
-  function setIcon(){el.icon.setAttribute('d',playing?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4v16l13-8z');el.play.setAttribute('aria-label',playing?'Pause':'Play')}
-  function marks(){
-    $$('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));
-    $$('[data-tr]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tr===tr));
-  }
-  function loadVoices(){
-    if(!synth) return; const vs=synth.getVoices().filter(v=>/^en/i.test(v.lang)); if(!vs.length) return;
-    const saved=store.get('f52.voice'); const score=v=>(/premium|enhanced|natural|neural/i.test(v.name)?3:0)+(/google|samantha|daniel|alex|aaron|arthur/i.test(v.name)?1:0)+(/en-US/i.test(v.lang)?.5:0);
-    const sorted=vs.slice().sort((a,b)=>score(b)-score(a)); $('#plVoiceGrp').hidden=false;
-    el.voice.innerHTML=sorted.map(v=>`<option value="${v.name}">${v.name.replace(/\s*\(.*\)/,'')}</option>`).join('');
-    el.voice.value=saved&&vs.some(v=>v.name===saved)?saved:sorted[0].name;
-  }
-  if(synth){loadVoices(); synth.onvoiceschanged=loadVoices}
-  el.voice.onchange=()=>{store.set('f52.voice',el.voice.value); if(playing){stop();speak()}};
-
-  let usedTr='nlt';
-  async function fetchNLT(c){
-    // Tyndale's NLT API: 50 verses per anonymous request, so read a chapter in chunks
-    const name=c.name==='song of solomon'?'song':c.name; let a=1, end=999, out=[], seen=new Set();
-    if(c.vv){ [a,end]=c.vv.split('-').map(Number) }
-    while(a<=end){
-      const b=Math.min(end,a+49);
-      const r=await fetch(`https://api.nlt.to/api/passages?ref=${encodeURIComponent(name+'.'+c.ch+':'+a+'-'+b)}&version=NLT&key=TEST`); if(!r.ok) throw new Error(r.status);
-      const html=await r.text(); let added=0; const re=/<verse_export[^>]*\bch="(\d+)"[^>]*\bvn="(\d+)"[^>]*>([\s\S]*?)<\/verse_export>/g; let m;
-      while((m=re.exec(html))){ const ch=+m[1], n=+m[2]; if(ch!==c.ch||n<a||n>b||seen.has(n)) continue;
-        let h=m[3].replace(/<h[23][^>]*>[\s\S]*?<\/h[23]>/g,'').replace(/<span class="tn-ref">[\s\S]*?<\/span>/g,'').replace(/<span class="tn">[\s\S]*?<\/span>/g,'').replace(/<a class="a-tn">[\s\S]*?<\/a>/g,'').replace(/<span class="vn">[\s\S]*?<\/span>/g,'').replace(/<[^>]+>/g,' ');
-        const t=new DOMParser().parseFromString(h,'text/html').body.textContent.replace(/\s+/g,' ').trim(); if(!t) continue; seen.add(n); out.push({n,t}); added++ }
-      if(added<b-a+1) break; a=b+1;
-    }
-    if(!out.length) throw new Error('empty'); return out;
-  }
-  async function fetchCh(c){
-    const key=tr+'|'+c.name+c.ch+(c.vv||''); if(cache[key]){ usedTr=cache[key].tr; return cache[key] }
-    usedTr=tr;
-    if(tr==='nlt'){ try{ const v=await fetchNLT(c); v.tr='nlt'; return cache[key]=v }catch(e){ usedTr='web' } }
-    const q=encodeURIComponent(c.name+' '+c.ch+(c.vv?':'+c.vv:''));
-    const r=await fetch(`https://bible-api.com/${q}?translation=${usedTr}`); if(!r.ok) throw new Error(r.status);
-    const j=await r.json(); const v=j.verses.map(v=>({n:v.verse,t:v.text.replace(/\s+/g,' ').trim()})); v.tr=usedTr; return cache[key]=v;
-  }
-  function renderChaps(){
-    el.chaps.innerHTML=chs.map((c,i)=>`<button type="button" data-ci="${i}" class="${i===ci?'cur':i<ci?'done':''}">${cap(c.name)} ${c.ch}${c.vv?':'+c.vv:''}</button>`).join('');
-    const c=chs[ci]; el.narr.href=`https://www.bible.com/audio-bible/116/${c.usfm}.${c.ch}.NLT`;
-  }
-  async function openCh(i,autoplay){
-    const my=++token; ci=i; vi=0; renderChaps(); const c=chs[ci];
-    el.text.innerHTML='<p class="pl-msg">Loading…</p>';
-    try{ verses=await fetchCh(c) }catch(e){
-      if(my!==token) return; playing=false; setIcon();
-      el.text.innerHTML=`<p class="pl-msg">Couldn't load ${cap(c.name)} ${c.ch}. Check your internet connection and press play to try again, or <a href="${el.narr.href}" target="_blank" rel="noopener">play it in the Bible app</a>.</p>`; verses=[]; return }
-    if(my!==token) return;
-    $('#plCopy').hidden=usedTr!=='nlt';
-    el.text.innerHTML=(tr==='nlt'&&usedTr!=='nlt'?'<p class="pl-note">The NLT text couldn\'t be loaded, so this is the WEB translation. The Bible app link below still plays the NLT.</p>':'')+`<h3>${cap(c.name)} ${c.ch}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
-    el.text.scrollTop=0; highlight();
-    if(autoplay) speak(true);
-  }
-  function highlight(){
-    $$('#plText p.now').forEach(p=>p.classList.remove('now'));
-    const p=el.text.querySelector(`p[data-vi="${vi}"]`); if(p){p.classList.add('now'); p.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}
-  }
-  function utter(text,onend){
-    const u=new SpeechSynthesisUtterance(text); u.rate=rate; u.lang='en-US';
-    const v=synth.getVoices().find(v=>v.name===el.voice.value); if(v) u.voice=v;
-    u.onend=onend; u.onerror=e=>{ if(e.error!=='interrupted'&&e.error!=='canceled') onend() };
-    synth.speak(u);
-  }
-  function speak(announce){
-    if(!synth){el.text.insertAdjacentHTML('afterbegin','<p class="pl-msg">This browser can\'t read aloud. Use the Bible app link below.</p>');return}
-    if(!verses.length){ openCh(ci,true); return }
-    playing=true; setIcon(); wake(true); const my=token;
-    const go=()=>{
-      if(!playing||my!==token) return;
-      if(vi>=verses.length){
-        if(ci<chs.length-1){ openCh(ci+1,true) }
-        else { playing=false; setIcon(); wake(false); if(window.markDone) markDone(curDay,true); el.text.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--lime);margin-top:1em">Reading complete and marked as read. Well done. See you tomorrow.</p>'); el.text.scrollTop=el.text.scrollHeight }
-        return }
-      highlight(); utter(verses[vi].t,()=>{ if(!playing||my!==token) return; vi++; go() });
-    };
-    if(announce){ const c=chs[ci]; utter(`${cap(c.name)}, chapter ${c.ch}.`, go) } else go();
-  }
-  function stop(){ playing=false; token++; synth&&synth.cancel(); setIcon(); wake(false) }
-  async function wake(on){ try{ if(on&&'wakeLock' in navigator&&!lock){lock=await navigator.wakeLock.request('screen');lock.addEventListener('release',()=>lock=null)} else if(!on&&lock){lock.release();lock=null} }catch(e){} }
-
-  window.openPlayer=(ref,dayN)=>{
-    chs=parse(ref); if(!chs.length) return; lastFocus=document.activeElement; curDay=+dayN;
-    el.day.textContent=`Day ${dayN}`; el.ref.textContent=nice(ref); marks(); el.p.hidden=false; document.body.style.overflow='hidden';
-    el.play.focus(); stop(); openCh(0,false);
-  };
-  function close(){ stop(); el.p.hidden=true; document.body.style.overflow=''; lastFocus&&lastFocus.focus&&lastFocus.focus() }
-  el.play.onclick=()=>{ if(playing) stop(); else { token++; speak(vi===0) } };
-  $('#plPrev').onclick=()=>{ const was=playing; stop(); if(vi>0) vi--; else if(ci>0){ openCh(ci-1,false); return } highlight(); if(was) speak() };
-  $('#plNext').onclick=()=>{ const was=playing; stop(); if(vi<verses.length-1){vi++;highlight(); if(was) speak()} else if(ci<chs.length-1) openCh(ci+1,was) };
-  $('#plClose').onclick=close;
-  el.p.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); if(e.key===' '&&e.target.tagName!=='SELECT'&&e.target.tagName!=='BUTTON'){e.preventDefault();el.play.click()} });
-  el.chaps.onclick=e=>{ const b=e.target.closest('[data-ci]'); if(!b) return; const was=playing; stop(); openCh(+b.dataset.ci,was) };
-  el.text.onclick=e=>{ const p=e.target.closest('p[data-vi]'); if(!p) return; const was=playing; stop(); vi=+p.dataset.vi; highlight(); if(was) speak() };
-  $$('[data-rate]').forEach(b=>b.onclick=()=>{ rate=+b.dataset.rate; store.set('f52.rate',rate); marks(); if(playing){stop();speak()} });
-  $$('[data-tr]').forEach(b=>b.onclick=()=>{ tr=b.dataset.tr; store.set('f52.tr2',tr); marks(); const was=playing; stop(); openCh(ci,was) });
-  const sz=d=>{ size=Math.max(20,Math.min(56,size+d)); store.set('f52.size',size); el.p.style.setProperty('--pl-size',size+'px'); highlight() };
-  $('#plBigger').onclick=()=>sz(4); $('#plSmaller').onclick=()=>sz(-4);
-
-  function today(){ const tp=todayPos(); if(tp.week) return [PLANS[plan][tp.week-1][DAYS[tp.day]], tp.diff+1]; return [PLANS[plan][0].sunday,1] }
-  document.addEventListener('click',e=>{
-    const t=e.target.closest('[data-listen="today"]'); if(t){ const [r,d]=today(); openPlayer(r,d); return }
-    const d=e.target.closest('.day-play'); if(d) openPlayer(d.dataset.ref,d.dataset.day);
+/* ---------- PLAYER: read the passage aloud, verse by verse ---------- */
+const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+function parse(ref){
+  const out=[];let book=null;
+  ref.split(',').map(x=>x.trim()).forEach(part=>{
+    const m=part.match(/^((?:I{1,3} )?[A-Za-z]+)\s*(.*)$/); let rest=part;
+    if(m&&BOOKS[m[1]]){book=BOOKS[m[1]];rest=m[2]}
+    if(!book) return;
+    if(!rest){out.push({name:book[0],usfm:book[1],ch:1});return}
+    const vm=rest.match(/^(\d+):(\d+)-(\d+)$/); if(vm){out.push({name:book[0],usfm:book[1],ch:+vm[1],v1:+vm[2],v2:+vm[3]});return}
+    const[a,b]=rest.split('-').map(Number); for(let c=a;c<=(b||a);c++) out.push({name:book[0],usfm:book[1],ch:c});
   });
-})();
-/* ---------- TODAY + PROGRESS ---------- */
-var doneSet=new Set(JSON.parse(store.get('f52.done')||'[]'));
-window.markDone=(n,val)=>{ n=+n; if(!n) return; (val??!doneSet.has(n))?doneSet.add(n):doneSet.delete(n); store.set('f52.done',JSON.stringify([...doneSet])); renderToday() };
-const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M4 12l5 5L20 6"/></svg>';
-function dateFor(n){ const d=parseDate(start); d.setDate(d.getDate()+n-1); return d }
-function readingFor(n){ const w=Math.floor((n-1)/7), k=DAYS[(n-1)%7]; return {ref:PLANS[plan][w][k], cat:plan==='topical'?TOPICAL_LABELS[k]:'', week:w+1} }
-function renderToday(){
-  const tp=todayPos(); const n=tp.week?tp.diff+1:(tp.before?1:364); const r=readingFor(n); const d=dateFor(n);
-  const fmt=x=>x.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});
-  $('#tDay').textContent=tp.week?`Day ${n} · ${fmt(d)}`:tp.before?`Day 1 · ${fmt(d)}`:'52 weeks complete';
-  $('#tCat').textContent=r.cat?`Week ${r.week} · ${r.cat}`:`Week ${r.week}`;
-  $('#tRef').textContent=nice(r.ref);
-  const isDone=doneSet.has(n); $('#tDone').setAttribute('aria-pressed',isDone); $('#tDoneLbl').textContent=isDone?'Read':'Mark as read';
-  let st=0; if(tp.week){ let k=doneSet.has(n)?n:n-1; while(k>0&&doneSet.has(k)){st++;k--} }
-  $('#tStreak').textContent=st>1?`${st}-day streak`:'';
-  const note=$('#tNote');
-  if(tp.before){ const dd=-tp.diff; note.innerHTML=`Your challenge starts in ${dd} day${dd>1?'s':''}. <button type="button" id="tNow">Start today instead</button><label>Start date <input type="date" id="tStart" value="${start}"></label>` }
-  else note.innerHTML=`<label>Start date <input type="date" id="tStart" value="${start}"></label>`;
-  const ns=$('#tNow'); if(ns) ns.onclick=()=>setStart(iso(new Date()));
-  $('#tStart').onchange=e=>{ if(e.target.value) setStart(e.target.value) };
-  const w0=(r.week-1)*7+1; let html='';
-  for(let k=w0;k<w0+7;k++){ const rr=readingFor(k), on=doneSet.has(k), today=tp.week&&k===n;
-    html+=`<div class="tw-row${today?' is-today':''}"><button type="button" class="ckb" data-done="${k}" aria-pressed="${on}" aria-label="Mark day ${k} as read">${CHECK}</button><div><div class="meta">${today?'Today · ':''}Day ${k} · ${dateFor(k).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</div><div class="rf">${nice(rr.ref)}</div></div><button type="button" class="pl day-play" data-ref="${rr.ref}" data-day="${k}">▶ Listen</button></div>` }
-  $('#tWeek').innerHTML=html;
-  const total=doneSet.size; $('#tProg').textContent=`${total} of 364 read`; $('#tBar').style.width=(total/364*100)+'%';
+  return out;
 }
-$('#tDone').onclick=()=>{ const tp=todayPos(); const n=tp.week?tp.diff+1:1; markDone(n); if(doneSet.has(n)){ const r=$('#tDone').getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2,50) } };
-$('#tWeek').addEventListener('click',e=>{ const b=e.target.closest('[data-done]'); if(b) markDone(b.dataset.done) });
-renderToday();
+const P={el:$('#player'),chaps:$('#plChaps'),inn:$('#plIn'),text:$('#plText'),play:$('#plPlay'),icon:$('#plIcon'),voice:$('#plVoice'),narr:$('#plNarr')};
+const synth=window.speechSynthesis;
+let day=0,chs=[],ci=0,verses=[],vi=0,playing=false,token=0,lock=null,lastFocus=null,usedTr='nlt';
+let tr=store.get('f52.tr2')||'nlt', rate=+(store.get('f52.rate2')||1), size=+(store.get('f52.size2')||1.45);
+const cache={};
+P.el.style.setProperty('--pl-size',size+'rem');
+const label=c=>`${c.name} ${c.ch}${c.v1?`:${c.v1}–${c.v2}`:''}`;
 
-/* ---------- PAGES (hash routes) ---------- */
-(()=>{
-  const pages=['today','plan','why','join'];
-  const alias={top:'today',stats:'why',mission:'why',family:'why',burn:'why',oath:'join'};
-  function show(){
-    let h=location.hash.slice(1); h=alias[h]||h; if(!pages.includes(h)) h='today';
-    $$('.page').forEach(p=>p.hidden=p.dataset.page!==h);
-    $$('[data-tab]').forEach(a=>a.dataset.tab===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
-    scrollTo(0,0); dispatchEvent(new Event('resize')); onScroll();
+async function fetchNLT(c){
+  const name=c.usfm==='SNG'?'song':c.name.toLowerCase(); let a=c.v1||1,end=c.v2||999,out=[],seen=new Set();
+  while(a<=end){
+    const b=Math.min(end,a+49);
+    const r=await fetch(`https://api.nlt.to/api/passages?ref=${encodeURIComponent(name+'.'+c.ch+':'+a+'-'+b)}&version=NLT&key=TEST`); if(!r.ok) throw new Error(r.status);
+    const html=await r.text(); let added=0,m; const re=/<verse_export[^>]*\bch="(\d+)"[^>]*\bvn="(\d+)"[^>]*>([\s\S]*?)<\/verse_export>/g;
+    while((m=re.exec(html))){const ch=+m[1],n=+m[2]; if(ch!==c.ch||n<a||n>b||seen.has(n)) continue;
+      const h=m[3].replace(/<h[23][^>]*>[\s\S]*?<\/h[23]>/g,'').replace(/<span class="tn-ref">[\s\S]*?<\/span>/g,'').replace(/<span class="tn">[\s\S]*?<\/span>/g,'').replace(/<a class="a-tn">[\s\S]*?<\/a>/g,'').replace(/<span class="vn">[\s\S]*?<\/span>/g,'').replace(/<[^>]+>/g,' ');
+      const t=new DOMParser().parseFromString(h,'text/html').body.textContent.replace(/\s+/g,' ').trim(); if(!t) continue; seen.add(n); out.push({n,t}); added++}
+    if(added<b-a+1) break; a=b+1;
   }
-  addEventListener('hashchange',show); show();
-})();
-
+  if(!out.length) throw new Error('empty'); return out;
+}
+async function fetchCh(c){
+  const key=tr+'|'+label(c); if(cache[key]){usedTr=cache[key].tr;return cache[key]}
+  usedTr=tr;
+  if(tr==='nlt'){try{const v=await fetchNLT(c);v.tr='nlt';return cache[key]=v}catch(e){usedTr='web'}}
+  const q=encodeURIComponent(c.name.toLowerCase()+' '+c.ch+(c.v1?`:${c.v1}-${c.v2}`:''));
+  const r=await fetch(`https://bible-api.com/${q}?translation=${usedTr}`); if(!r.ok) throw new Error(r.status);
+  const j=await r.json(); const v=j.verses.map(x=>({n:x.verse,t:x.text.replace(/\s+/g,' ').trim()})); v.tr=usedTr; return cache[key]=v;
+}
+function marks(){$$('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));$$('[data-tr]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tr===tr))}
+function setIcon(){P.icon.setAttribute('d',playing?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4v16l13-8z');P.play.setAttribute('aria-label',playing?'Pause':'Play')}
+function loadVoices(){ if(!synth) return; const vs=synth.getVoices().filter(v=>/^en/i.test(v.lang)); if(!vs.length) return;
+  const score=v=>(/premium|enhanced|natural|neural/i.test(v.name)?3:0)+(/google|samantha|daniel|alex|aaron|arthur/i.test(v.name)?1:0)+(/en-US/i.test(v.lang)?.5:0);
+  const s=vs.slice().sort((a,b)=>score(b)-score(a)); const saved=store.get('f52.voice');
+  P.voice.innerHTML=s.map(v=>`<option value="${v.name}">${v.name.replace(/\s*\(.*\)/,'')}</option>`).join(''); P.voice.value=saved&&vs.some(v=>v.name===saved)?saved:s[0].name; P.voice.hidden=false }
+if(synth){loadVoices();synth.onvoiceschanged=loadVoices}
+P.voice.onchange=()=>{store.set('f52.voice',P.voice.value);if(playing){stop();speak()}};
+function renderChaps(){P.chaps.innerHTML=chs.map((c,i)=>`<button type="button" data-ci="${i}" class="${i===ci?'cur':''}">${label(c)}</button>`).join('');const c=chs[ci];P.narr.href=`https://www.bible.com/audio-bible/116/${c.usfm}.${c.ch}.NLT`}
+async function openCh(i,auto){
+  const my=++token; ci=i; vi=0; renderChaps(); const c=chs[ci];
+  P.inn.innerHTML='<p class="pl-msg">Loading…</p>';
+  try{verses=await fetchCh(c)}catch(e){ if(my!==token) return; playing=false; setIcon(); verses=[];
+    P.inn.innerHTML=`<p class="pl-msg">Couldn't load ${label(c)}. Check your connection and press play to try again, or <a href="${P.narr.href}" target="_blank" rel="noopener">play it in the Bible app</a>.</p>`; return }
+  if(my!==token) return;
+  $('#plCopy').hidden=usedTr!=='nlt';
+  P.inn.innerHTML=(tr==='nlt'&&usedTr!=='nlt'?'<p class="pl-msg">The NLT text isn\'t available right now, so this is the WEB translation. The Bible app link below still plays the NLT.</p>':'')+`<h3>${label(c)}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
+  P.text.scrollTop=0; hl(); if(auto) speak(true);
+}
+function hl(){$$('#plIn p.now').forEach(p=>p.classList.remove('now'));const p=P.inn.querySelector(`p[data-vi="${vi}"]`);if(p){p.classList.add('now');p.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}}
+function utter(text,end){const u=new SpeechSynthesisUtterance(text);u.rate=rate;u.lang='en-US';const v=synth.getVoices().find(v=>v.name===P.voice.value);if(v)u.voice=v;u.onend=end;u.onerror=e=>{if(e.error!=='interrupted'&&e.error!=='canceled')end()};synth.speak(u)}
+function speak(announce){
+  if(!synth){toast('This browser can\'t read aloud. Use the Bible app link.');return}
+  if(!verses.length){openCh(ci,true);return}
+  playing=true; setIcon(); wake(true); const my=token;
+  const go=()=>{ if(!playing||my!==token) return;
+    if(vi>=verses.length){ if(ci<chs.length-1) openCh(ci+1,true); else { playing=false; setIcon(); wake(false); setDone(day,true); P.inn.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--accent)!important;margin-top:1em">Finished. Marked complete.</p>'); P.text.scrollTop=P.text.scrollHeight } return }
+    hl(); utter(verses[vi].t,()=>{ if(!playing||my!==token) return; vi++; go() }) };
+  if(announce){const c=chs[ci];utter(`${c.name}, chapter ${c.ch}.`,go)} else go();
+}
+function stop(){playing=false;token++;synth&&synth.cancel();setIcon();wake(false)}
+async function wake(on){try{if(on&&'wakeLock' in navigator&&!lock){lock=await navigator.wakeLock.request('screen');lock.addEventListener('release',()=>lock=null)}else if(!on&&lock){lock.release();lock=null}}catch(e){}}
+function openPlayer(n){
+  day=n; const r=reading(n); chs=parse(r.ref); if(!chs.length) return; lastFocus=document.activeElement;
+  $('#plDay').textContent=`Day ${n}${r.cat?' · '+r.cat:''}`; $('#plRef').textContent=nice(r.ref);
+  marks(); P.el.hidden=false; document.body.style.overflow='hidden'; P.play.focus(); stop(); openCh(0,false);
+}
+function closeP(){stop();P.el.hidden=true;document.body.style.overflow='';lastFocus&&lastFocus.focus&&lastFocus.focus()}
+P.play.onclick=()=>{if(playing)stop();else{token++;speak(vi===0)}};
+$('#plPrev').onclick=()=>{const w=playing;stop();if(vi>0)vi--;else if(ci>0){openCh(ci-1,false);return}hl();if(w)speak()};
+$('#plNext').onclick=()=>{const w=playing;stop();if(vi<verses.length-1){vi++;hl();if(w)speak()}else if(ci<chs.length-1)openCh(ci+1,w)};
+$('#plClose').onclick=closeP;
+P.el.addEventListener('keydown',e=>{if(e.key==='Escape')closeP()});
+P.chaps.onclick=e=>{const b=e.target.closest('[data-ci]');if(!b)return;const w=playing;stop();openCh(+b.dataset.ci,w)};
+P.inn.onclick=e=>{const p=e.target.closest('p[data-vi]');if(!p)return;const w=playing;stop();vi=+p.dataset.vi;hl();if(w)speak()};
+$$('[data-rate]').forEach(b=>b.onclick=()=>{rate=+b.dataset.rate;store.set('f52.rate2',rate);marks();if(playing){stop();speak()}});
+$$('[data-tr]').forEach(b=>b.onclick=()=>{tr=b.dataset.tr;store.set('f52.tr2',tr);marks();const w=playing;stop();openCh(ci,w)});
+const sz=d=>{size=Math.max(1.1,Math.min(2.6,+(size+d).toFixed(2)));store.set('f52.size2',size);P.el.style.setProperty('--pl-size',size+'rem');hl()};
+$('#plBigger').onclick=()=>sz(.15); $('#plSmaller').onclick=()=>sz(-.15);
 </script>
 </body>
 </html>

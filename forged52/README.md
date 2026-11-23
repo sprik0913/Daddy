@@ -1,29 +1,14 @@
-# Forged52 site
+# Forged52
 
-Four pages in one file, switched by the menu (top bar on desktop, tab bar at the bottom on phones):
-- **Today** (`#today`, the default): today's reading in big type, Listen, Mark as read, streak, this week's checklist and overall progress
-- **Plan** (`#plan`): the 52-week explorer and stages of the forge
-- **Why** (`#why`): the mission and scripture sections
-- **Join** (`#join`): the oath, certificate and calendar reminders
+A calm, four-page site for the Forged52 challenge: read the whole Bible in 52 weeks. Open `index.html` or host the folder on any static host.
 
-Progress (which days are read) is saved in the visitor's browser; no account needed.
+- **Today** (default): today's reading, Listen, Mark complete, streak, progress, a verse for the day, and this week's checklist
+- **Plan**: choose Mixed (each weekday a different part of the Bible) or In order (chronological), set a start date, and see all 52 weeks. It opens on your current week; changing the start date moves everything with it
+- **Why**: a short explanation of the challenge
+- **Start**: pick a start date and route, add all 364 readings to your calendar as reminders, and copy an invite link
 
-## Original landing page notes
+**Listening**: each reading opens a player that reads the passage aloud verse by verse with the phone's voice, highlighting the current verse in large type. NLT comes from Tyndale's NLT API (anonymous, non-commercial; Tyndale ends public access January 1, 2027, after which it falls back to WEB automatically). WEB and KJV come from bible-api.com. A link opens the same chapter with a human NLT narrator in the YouVersion Bible app. Finishing a reading marks it complete.
 
-A standalone, no-build rebuild of the landing page at https://forged52.lovable.app/.
-Open `index.html` directly or drop the `forged52/` folder on any static host.
+**Large text**: the Aa button scales the whole site up and brightens secondary text.
 
-What's new compared with the original page:
-- Hero: the logo "strikes" in with a flash and shockwave, live ember particles that scatter around the cursor, and a slow push-in on the forge background
-- Stats count up on scroll: 52 weeks, 364 readings, 66 books, 1 man
-- Luke 9:23 lights up word by word as you scroll, and the key words glow
-- Convoy section: a radar where the family moves into formation behind the point man
-- Generational curse to blessing chain, rules of engagement "stamps", and a field manual with a 3D leather Bible
-- **Plan explorer**: both real 52-week plans from the app (Topical and Chronological). Pick a start date, drag across a heat bar to pick a week, and today's reading is highlighted
-- Stages of the forge, the app's own progress messages laid out on a cold-steel to white-hot bar
-- **Oath**: enter your name and start date, then press and hold to strike the iron (with sparks, a screen shake and a synthesized anvil clang). It produces a downloadable certificate and a `.ics` file with all 364 daily readings as calendar reminders at 6:00 AM
-- **Listen**: every reading has a Listen button (plus "Listen to today's reading" in the hero and top bar). It loads the passage in the NLT from Tyndale's official NLT API (anonymous, non-commercial use, 50 verses per request; Tyndale is ending public access on January 1, 2027, after which the player falls back to WEB automatically), or WEB/KJV from bible-api.com (public domain) and reads it aloud verse by verse with the phone's built-in voice, highlighting each verse in large type. Speed, text size, voice and translation controls; tap any verse to jump there; keeps the screen awake while playing. A link opens the same chapter in the NLT with a human narrator in the YouVersion Bible app
-- **Large text** button (Aa) in the top bar enlarges and brightens all small text, and is remembered
-- Respects reduced-motion settings; works on phones
-
-Sign-up buttons link to the existing app at `https://forged52.lovable.app/auth`.
+Progress is stored in the browser (localStorage); no account required. Reading plans come from the Forged52 app.
