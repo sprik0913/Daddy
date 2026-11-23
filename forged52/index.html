@@ -41,8 +41,12 @@ body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;o
 #heat{position:fixed;top:0;left:0;height:3px;width:0;z-index:60;background:linear-gradient(90deg,#3a3f44,#8b1a00,#ff4d00,#ffb347,#fff3c4,var(--lime));box-shadow:0 0 12px rgba(255,122,26,.7)}
 
 /* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,40px);transform:translateY(-100%);transition:transform .45s cubic-bezier(.2,.8,.2,1),background .3s}
-.nav.show{transform:none;background:rgba(10,10,10,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
+.nav{position:fixed;top:0;left:0;right:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:14px clamp(16px,4vw,40px);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+.nav .brand,.nav .btn.primary{transition:opacity .3s}
+.nav:not(.show) .brand{opacity:0;pointer-events:none}
+.nav:not(.show) .btn.primary{display:none}
+.nav .links{margin-left:auto}
+.nav.show{background:rgba(10,10,10,.78);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)}
 .nav .brand{font-family:var(--display);font-size:28px;letter-spacing:.06em;text-decoration:none}
 .nav .brand b{color:var(--lime);font-weight:400}
 .nav .links{display:flex;gap:28px;align-items:center}
@@ -321,6 +325,61 @@ footer .f1{font-family:var(--display);font-size:30px;letter-spacing:.08em}
 footer .f1 b{color:var(--lime);font-weight:400}
 footer .f2{font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:var(--fg-3);margin-top:8px}
 
+/* ---------- LISTEN ---------- */
+.btn.listen{border-color:var(--lime);color:var(--lime)}
+.btn.listen:hover{background:rgba(145,230,0,.1)}
+.nav .tools{display:flex;gap:10px;align-items:center}
+.icon-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;height:44px;min-width:44px;padding:0 12px;border:1px solid var(--line-2);font-family:var(--body);font-weight:700;font-size:17px;letter-spacing:.06em;color:var(--fg)}
+.icon-btn:hover{border-color:var(--lime)}
+.icon-btn[aria-pressed="true"]{background:var(--fg);color:#000;border-color:var(--fg)}
+@media (max-width:720px){.icon-btn .t{display:none}}
+.day-play{margin-top:14px;display:inline-flex;align-items:center;gap:8px;font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(145,230,0,.45);padding:7px 12px}
+.day-play:hover{background:rgba(145,230,0,.12)}
+@media (max-width:900px){.day-play{grid-column:2;margin-top:6px;justify-self:start}}
+.panel-foot .lt{background:none;border:0;color:var(--lime);font:inherit;font-weight:600;letter-spacing:.2em;text-transform:uppercase;cursor:pointer;padding:0}
+
+.player{position:fixed;inset:0;z-index:120;background:#050505;display:flex;flex-direction:column;padding:max(16px,env(safe-area-inset-top)) max(16px,env(safe-area-inset-right)) max(16px,env(safe-area-inset-bottom)) max(16px,env(safe-area-inset-left))}
+.player[hidden]{display:none}
+.pl-top{display:flex;align-items:center;justify-content:space-between;gap:12px;max-width:900px;width:100%;margin:0 auto}
+.pl-day{font-family:var(--body);font-weight:700;font-size:18px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime)}
+.pl-ref{font-family:var(--display);font-size:clamp(40px,7vw,64px);line-height:1;color:#fff}
+.pl-close{width:60px;height:60px;border:2px solid #555;font-size:34px;line-height:1;color:#fff;flex:none}
+.pl-close:hover{border-color:#fff}
+.pl-chaps{display:flex;gap:8px;flex-wrap:wrap;max-width:900px;width:100%;margin:16px auto 0}
+.pl-chaps button{font-family:var(--body);font-weight:700;font-size:17px;padding:8px 14px;border:1px solid #444;color:#ddd}
+.pl-chaps button.cur{background:var(--lime);color:#000;border-color:var(--lime)}
+.pl-chaps button.done{border-color:var(--lime-dim);color:var(--lime)}
+.pl-text{flex:1;overflow-y:auto;max-width:900px;width:100%;margin:18px auto;padding:6px 4px;-webkit-overflow-scrolling:touch}
+.pl-text p{font-family:Georgia,"Times New Roman",serif;font-size:var(--pl-size,30px);line-height:1.55;color:#8a8a8a;margin:0 0 .6em;transition:color .3s}
+.pl-text p sup{font-family:var(--body);font-weight:700;font-size:.55em;color:var(--lime);margin-right:.35em;vertical-align:.5em}
+.pl-text p.now{color:#fff}
+.pl-text h3{font-family:var(--display);font-weight:400;font-size:calc(var(--pl-size,30px) * 1.2);color:var(--lime);margin:.4em 0 .5em;letter-spacing:.04em}
+.pl-msg{font-size:24px;color:#ddd;line-height:1.5}
+.pl-msg a{color:var(--lime)}
+.pl-ctl{max-width:900px;width:100%;margin:0 auto;display:grid;gap:14px}
+.pl-main{display:flex;align-items:center;justify-content:center;gap:clamp(16px,5vw,40px)}
+.pl-main button{width:64px;height:64px;border:2px solid #555;display:grid;place-items:center;color:#fff}
+.pl-main button svg{width:30px;height:30px}
+.pl-main #plPlay{width:96px;height:96px;border-radius:50%;background:var(--lime);border-color:var(--lime);color:#000;box-shadow:0 0 40px rgba(145,230,0,.35)}
+.pl-main #plPlay svg{width:44px;height:44px}
+.pl-opts{display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:center;align-items:center}
+.pl-opts .grp{display:flex;align-items:center;gap:6px}
+.pl-opts .lbl{font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.16em;text-transform:uppercase;color:#aaa;margin-right:4px}
+.pl-opts button{min-width:52px;height:48px;padding:0 10px;border:1px solid #555;font-family:var(--body);font-weight:700;font-size:18px;color:#fff}
+.pl-opts button[aria-pressed="true"]{background:#fff;color:#000;border-color:#fff}
+.pl-opts select{height:48px;max-width:240px;background:#111;color:#fff;border:1px solid #555;font:600 17px var(--body);padding:0 8px;color-scheme:dark}
+.pl-narr{text-align:center;font-family:var(--body);font-size:18px;color:#bbb}
+.pl-narr a{color:var(--lime);font-weight:700}
+
+/* large text mode for low vision */
+html.big body{font-size:25px}
+html.big{--fg-2:#dcdcdc;--fg-3:#b4b4b4}
+html.big .lede,html.big .convoy .copy p,html.big .tile p,html.big .step p,html.big .fam p,html.big .burn p,html.big .panel-foot,html.big .stage-msg,html.big .sp p,html.big .oath-text{font-size:24px!important;line-height:1.5}
+html.big .eyebrow,html.big .stat .l,html.big .day .dn,html.big .day .cat,html.big .weeks-legend,html.big .hint,html.big .field,html.big footer .f2,html.big .rule .cap,html.big .oath-fields label,html.big .nav .links a:not(.btn),html.big .verse cite,html.big .v2 cite,html.big .sp .wk,html.big .unit span{font-size:17px!important;letter-spacing:.12em!important}
+html.big .day .ref{font-size:34px}
+html.big .verse blockquote .ch{opacity:1!important}
+html.big .hero .sub{font-size:22px;color:#e0e0e0}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none}
@@ -337,6 +396,10 @@ footer .f2{font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:var
     <a href="#mission">Mission</a>
     <a href="#plan">The Plan</a>
     <a href="#family">Family</a>
+    <span class="tools">
+      <button class="icon-btn" type="button" id="bigBtn" aria-pressed="false" title="Larger text">Aa<span class="t">Large text</span></button>
+      <button class="icon-btn" type="button" data-listen="today" title="Listen to today's reading"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg><span class="t">Listen</span></button>
+    </span>
     <a class="btn primary sm" href="#oath">Take the Oath</a>
   </div>
 </nav>
@@ -358,6 +421,7 @@ footer .f2{font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:var
     <p class="sub">One reading a day · No days off</p>
     <div class="ctas">
       <a class="btn primary" href="#oath">Accept the challenge</a>
+      <button class="btn listen" type="button" data-listen="today"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg>Listen to today's reading</button>
       <a class="btn" href="#plan">See the plan</a>
     </div>
   </div>
@@ -514,7 +578,7 @@ footer .f2{font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:var
         <div class="weeks-legend"><span>Cold steel</span><span>Drag or use ← → to pick a week</span><span>White hot</span></div>
       </div>
       <div class="days" id="days"></div>
-      <div class="panel-foot"><span id="foot">Pick your start date to see where you are today.</span><a href="https://forged52.lovable.app/auth">Track it in the app →</a></div>
+      <div class="panel-foot"><span id="foot">Pick your start date to see where you are today.</span><button class="lt" type="button" data-listen="today">▶ Listen to today</button><a href="https://forged52.lovable.app/auth">Track it in the app →</a></div>
     </div>
 
     <div class="stages">
@@ -604,6 +668,29 @@ footer .f2{font-size:13px;letter-spacing:.5em;text-transform:uppercase;color:var
     </div>
   </div>
 </section>
+
+<div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="plRef">
+  <div class="pl-top">
+    <div><div class="pl-day" id="plDay">Day 1</div><div class="pl-ref" id="plRef">Rom 1-2</div></div>
+    <button class="pl-close" type="button" id="plClose" aria-label="Close player">×</button>
+  </div>
+  <div class="pl-chaps" id="plChaps"></div>
+  <div class="pl-text" id="plText" aria-live="off"></div>
+  <div class="pl-ctl">
+    <div class="pl-main">
+      <button type="button" id="plPrev" aria-label="Previous verse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h2v14H6zM20 5v14L9 12z"/></svg></button>
+      <button type="button" id="plPlay" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path id="plIcon" d="M7 4v16l13-8z"/></svg></button>
+      <button type="button" id="plNext" aria-label="Next verse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
+    </div>
+    <div class="pl-opts">
+      <div class="grp" role="group" aria-label="Speed"><span class="lbl">Speed</span><button type="button" data-rate="0.8">0.8×</button><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.25">1.25×</button><button type="button" data-rate="1.5">1.5×</button></div>
+      <div class="grp" role="group" aria-label="Text size"><span class="lbl">Text</span><button type="button" id="plSmaller" aria-label="Smaller text">A−</button><button type="button" id="plBigger" aria-label="Bigger text">A+</button></div>
+      <div class="grp" role="group" aria-label="Translation"><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
+      <div class="grp" id="plVoiceGrp" hidden><label class="lbl" for="plVoice">Voice</label><select id="plVoice"></select></div>
+    </div>
+    <div class="pl-narr">Prefer a real narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/111/ROM.1.NIV" target="_blank" rel="noopener">Play this chapter in the Bible app →</a></div>
+  </div>
+</div>
 
 <footer>
   <div class="f1">FORGED<b>52</b></div>
@@ -767,7 +854,7 @@ function render(){
     const date=new Date(s); date.setDate(s.getDate()+(week-1)*7+i);
     const key=DAYS[i];
     const el=document.createElement('div'); el.className='day'+(tp.week===week&&tp.day===i?' today':'');
-    el.innerHTML=`<div class="dn">Day ${(week-1)*7+i+1} · ${date.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div><div class="cat">${plan==='topical'?TOPICAL_LABELS[key]:'&nbsp;'}</div><div class="ref">${w[key]}</div>`;
+    el.innerHTML=`<div class="dn">Day ${(week-1)*7+i+1} · ${date.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div><div class="cat">${plan==='topical'?TOPICAL_LABELS[key]:'&nbsp;'}</div><div class="ref">${w[key]}</div><button class="day-play" type="button" data-ref="${w[key]}" data-day="${(week-1)*7+i+1}">▶ Listen</button>`;
     daysEl.appendChild(el);
   }
   const foot=$('#foot');
@@ -874,6 +961,129 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
     lines.push('END:VCALENDAR');
     const blob=new Blob([lines.join('\r\n')],{type:'text/calendar'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=`forged52-${plan}.ics`;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),2000);
   };
+})();
+
+/* ---------- LARGE TEXT ---------- */
+(()=>{
+  const b=$('#bigBtn'); const set=on=>{document.documentElement.classList.toggle('big',on);b.setAttribute('aria-pressed',on);store.set('f52.big',on?'1':'0')};
+  set(store.get('f52.big')==='1'); b.onclick=()=>set(!document.documentElement.classList.contains('big'));
+})();
+
+/* ---------- LISTEN: fetch the passage and read it aloud, verse by verse ---------- */
+(()=>{
+  const BOOKS={Gen:['genesis','GEN'],Exo:['exodus','EXO'],Lev:['leviticus','LEV'],Num:['numbers','NUM'],Deut:['deuteronomy','DEU'],Joshua:['joshua','JOS'],Judges:['judges','JDG'],Ruth:['ruth','RUT'],
+    'I Sam':['1 samuel','1SA'],'II Sam':['2 samuel','2SA'],'I Kings':['1 kings','1KI'],'II Kings':['2 kings','2KI'],'I Chron':['1 chronicles','1CH'],'II Chron':['2 chronicles','2CH'],Ezra:['ezra','EZR'],Neh:['nehemiah','NEH'],Esther:['esther','EST'],
+    Job:['job','JOB'],Psalms:['psalms','PSA'],Prov:['proverbs','PRO'],Eccl:['ecclesiastes','ECC'],Song:['song of solomon','SNG'],Isaiah:['isaiah','ISA'],Jer:['jeremiah','JER'],Jeremiah:['jeremiah','JER'],Lam:['lamentations','LAM'],Lamentations:['lamentations','LAM'],
+    Ezek:['ezekiel','EZK'],Daniel:['daniel','DAN'],Hosea:['hosea','HOS'],Joel:['joel','JOL'],Amos:['amos','AMO'],Obadiah:['obadiah','OBA'],Jonah:['jonah','JON'],Micah:['micah','MIC'],Nahum:['nahum','NAM'],Habakkuk:['habakkuk','HAB'],Zephaniah:['zephaniah','ZEP'],Haggai:['haggai','HAG'],Zech:['zechariah','ZEC'],Malachi:['malachi','MAL'],
+    Matt:['matthew','MAT'],Mark:['mark','MRK'],Luke:['luke','LUK'],John:['john','JHN'],Acts:['acts','ACT'],Rom:['romans','ROM'],'I Cor':['1 corinthians','1CO'],'II Cor':['2 corinthians','2CO'],Gal:['galatians','GAL'],Eph:['ephesians','EPH'],Phil:['philippians','PHP'],Col:['colossians','COL'],
+    'I Thes':['1 thessalonians','1TH'],'II Thes':['2 thessalonians','2TH'],'I Tim':['1 timothy','1TI'],'II Tim':['2 timothy','2TI'],Titus:['titus','TIT'],Philemon:['philemon','PHM'],Heb:['hebrews','HEB'],James:['james','JAS'],
+    'I Peter':['1 peter','1PE'],'II Peter':['2 peter','2PE'],'I John':['1 john','1JN'],'II John':['2 john','2JN'],'III John':['3 john','3JN'],Jude:['jude','JUD'],Rev:['revelation','REV']};
+  const cap=s=>s.replace(/\b[a-z]/g,c=>c.toUpperCase());
+  // "Psalms 131, 138-139" / "Titus 1-3, II Tim 1-4" / "Psalms 119:1-88" / "Jude" -> list of chapters
+  function parse(ref){
+    const out=[]; let book=null;
+    ref.split(',').map(x=>x.trim()).forEach(part=>{
+      const m=part.match(/^((?:I{1,3} )?[A-Za-z]+)\s*(.*)$/);
+      let rest=part; if(m&&BOOKS[m[1]]){book=BOOKS[m[1]];rest=m[2]}
+      if(!book) return;
+      if(!rest){out.push({name:book[0],usfm:book[1],ch:1});return}
+      const vm=rest.match(/^(\d+):(\d+-\d+)$/); if(vm){out.push({name:book[0],usfm:book[1],ch:+vm[1],vv:vm[2]});return}
+      const [a,b]=rest.split('-').map(Number); for(let c=a;c<=(b||a);c++) out.push({name:book[0],usfm:book[1],ch:c});
+    });
+    return out;
+  }
+  const el={p:$('#player'),day:$('#plDay'),ref:$('#plRef'),chaps:$('#plChaps'),text:$('#plText'),play:$('#plPlay'),icon:$('#plIcon'),narr:$('#plNarr'),voice:$('#plVoice')};
+  const synth=window.speechSynthesis;
+  let chs=[],ci=0,verses=[],vi=0,playing=false,tr=store.get('f52.tr')||'web',rate=+(store.get('f52.rate')||1),size=+(store.get('f52.size')||30),lock=null,lastFocus=null,token=0;
+  const cache={};
+  el.p.style.setProperty('--pl-size',size+'px');
+
+  function setIcon(){el.icon.setAttribute('d',playing?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4v16l13-8z');el.play.setAttribute('aria-label',playing?'Pause':'Play')}
+  function marks(){
+    $$('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));
+    $$('[data-tr]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tr===tr));
+  }
+  function loadVoices(){
+    if(!synth) return; const vs=synth.getVoices().filter(v=>/^en/i.test(v.lang)); if(!vs.length) return;
+    const saved=store.get('f52.voice'); const score=v=>(/premium|enhanced|natural|neural/i.test(v.name)?3:0)+(/google|samantha|daniel|alex|aaron|arthur/i.test(v.name)?1:0)+(/en-US/i.test(v.lang)?.5:0);
+    const sorted=vs.slice().sort((a,b)=>score(b)-score(a)); $('#plVoiceGrp').hidden=false;
+    el.voice.innerHTML=sorted.map(v=>`<option value="${v.name}">${v.name.replace(/\s*\(.*\)/,'')}</option>`).join('');
+    el.voice.value=saved&&vs.some(v=>v.name===saved)?saved:sorted[0].name;
+  }
+  if(synth){loadVoices(); synth.onvoiceschanged=loadVoices}
+  el.voice.onchange=()=>{store.set('f52.voice',el.voice.value); if(playing){stop();speak()}};
+
+  async function fetchCh(c){
+    const key=tr+'|'+c.name+c.ch+(c.vv||''); if(cache[key]) return cache[key];
+    const q=encodeURIComponent(c.name+' '+c.ch+(c.vv?':'+c.vv:''));
+    const r=await fetch(`https://bible-api.com/${q}?translation=${tr}`); if(!r.ok) throw new Error(r.status);
+    const j=await r.json(); return cache[key]=j.verses.map(v=>({n:v.verse,t:v.text.replace(/\s+/g,' ').trim()}));
+  }
+  function renderChaps(){
+    el.chaps.innerHTML=chs.map((c,i)=>`<button type="button" data-ci="${i}" class="${i===ci?'cur':i<ci?'done':''}">${cap(c.name)} ${c.ch}${c.vv?':'+c.vv:''}</button>`).join('');
+    const c=chs[ci]; el.narr.href=`https://www.bible.com/audio-bible/111/${c.usfm}.${c.ch}.NIV`;
+  }
+  async function openCh(i,autoplay){
+    const my=++token; ci=i; vi=0; renderChaps(); const c=chs[ci];
+    el.text.innerHTML='<p class="pl-msg">Loading…</p>';
+    try{ verses=await fetchCh(c) }catch(e){
+      if(my!==token) return; playing=false; setIcon();
+      el.text.innerHTML=`<p class="pl-msg">Couldn't load ${cap(c.name)} ${c.ch}. Check your internet connection and press play to try again, or <a href="${el.narr.href}" target="_blank" rel="noopener">play it in the Bible app</a>.</p>`; verses=[]; return }
+    if(my!==token) return;
+    el.text.innerHTML=`<h3>${cap(c.name)} ${c.ch}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
+    el.text.scrollTop=0; highlight();
+    if(autoplay) speak(true);
+  }
+  function highlight(){
+    $$('#plText p.now').forEach(p=>p.classList.remove('now'));
+    const p=el.text.querySelector(`p[data-vi="${vi}"]`); if(p){p.classList.add('now'); p.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}
+  }
+  function utter(text,onend){
+    const u=new SpeechSynthesisUtterance(text); u.rate=rate; u.lang='en-US';
+    const v=synth.getVoices().find(v=>v.name===el.voice.value); if(v) u.voice=v;
+    u.onend=onend; u.onerror=e=>{ if(e.error!=='interrupted'&&e.error!=='canceled') onend() };
+    synth.speak(u);
+  }
+  function speak(announce){
+    if(!synth){el.text.insertAdjacentHTML('afterbegin','<p class="pl-msg">This browser can\'t read aloud. Use the Bible app link below.</p>');return}
+    if(!verses.length){ openCh(ci,true); return }
+    playing=true; setIcon(); wake(true); const my=token;
+    const go=()=>{
+      if(!playing||my!==token) return;
+      if(vi>=verses.length){
+        if(ci<chs.length-1){ openCh(ci+1,true) }
+        else { playing=false; setIcon(); wake(false); el.text.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--lime);margin-top:1em">Reading complete. Well done. See you tomorrow.</p>'); el.text.scrollTop=el.text.scrollHeight }
+        return }
+      highlight(); utter(verses[vi].t,()=>{ if(!playing||my!==token) return; vi++; go() });
+    };
+    if(announce){ const c=chs[ci]; utter(`${cap(c.name)}, chapter ${c.ch}.`, go) } else go();
+  }
+  function stop(){ playing=false; token++; synth&&synth.cancel(); setIcon(); wake(false) }
+  async function wake(on){ try{ if(on&&'wakeLock' in navigator&&!lock){lock=await navigator.wakeLock.request('screen');lock.addEventListener('release',()=>lock=null)} else if(!on&&lock){lock.release();lock=null} }catch(e){} }
+
+  window.openPlayer=(ref,dayN)=>{
+    chs=parse(ref); if(!chs.length) return; lastFocus=document.activeElement;
+    el.day.textContent=`Day ${dayN}`; el.ref.textContent=ref; marks(); el.p.hidden=false; document.body.style.overflow='hidden';
+    el.play.focus(); stop(); openCh(0,false);
+  };
+  function close(){ stop(); el.p.hidden=true; document.body.style.overflow=''; lastFocus&&lastFocus.focus&&lastFocus.focus() }
+  el.play.onclick=()=>{ if(playing) stop(); else { token++; speak(vi===0) } };
+  $('#plPrev').onclick=()=>{ const was=playing; stop(); if(vi>0) vi--; else if(ci>0){ openCh(ci-1,false); return } highlight(); if(was) speak() };
+  $('#plNext').onclick=()=>{ const was=playing; stop(); if(vi<verses.length-1){vi++;highlight(); if(was) speak()} else if(ci<chs.length-1) openCh(ci+1,was) };
+  $('#plClose').onclick=close;
+  el.p.addEventListener('keydown',e=>{ if(e.key==='Escape') close(); if(e.key===' '&&e.target.tagName!=='SELECT'&&e.target.tagName!=='BUTTON'){e.preventDefault();el.play.click()} });
+  el.chaps.onclick=e=>{ const b=e.target.closest('[data-ci]'); if(!b) return; const was=playing; stop(); openCh(+b.dataset.ci,was) };
+  el.text.onclick=e=>{ const p=e.target.closest('p[data-vi]'); if(!p) return; const was=playing; stop(); vi=+p.dataset.vi; highlight(); if(was) speak() };
+  $$('[data-rate]').forEach(b=>b.onclick=()=>{ rate=+b.dataset.rate; store.set('f52.rate',rate); marks(); if(playing){stop();speak()} });
+  $$('[data-tr]').forEach(b=>b.onclick=()=>{ tr=b.dataset.tr; store.set('f52.tr',tr); marks(); const was=playing; stop(); openCh(ci,was) });
+  const sz=d=>{ size=Math.max(20,Math.min(56,size+d)); store.set('f52.size',size); el.p.style.setProperty('--pl-size',size+'px'); highlight() };
+  $('#plBigger').onclick=()=>sz(4); $('#plSmaller').onclick=()=>sz(-4);
+
+  function today(){ const tp=todayPos(); if(tp.week) return [PLANS[plan][tp.week-1][DAYS[tp.day]], tp.diff+1]; return [PLANS[plan][0].sunday,1] }
+  document.addEventListener('click',e=>{
+    const t=e.target.closest('[data-listen="today"]'); if(t){ const [r,d]=today(); openPlayer(r,d); return }
+    const d=e.target.closest('.day-play'); if(d) openPlayer(d.dataset.ref,d.dataset.day);
+  });
 })();
 </script>
 </body>
