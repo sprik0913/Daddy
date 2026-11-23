@@ -9,7 +9,7 @@
 <link rel="icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow+Condensed:wght@400;500;600;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Barlow:wght@400;500;600;700;800&family=Barlow+Condensed:wght@500;600;700&family=Cinzel:wght@400;700;900&display=swap" rel="stylesheet">
 <style>
 :root{
   --bg:#0a0a0a; --bg-2:#111; --card:#131313; --line:#1f1f1f; --line-2:#2a2a2a;
@@ -17,7 +17,8 @@
   --lime:#91e600; --lime-2:#b8ff3d; --lime-dim:#4f7d00;
   --ember:#ff7a1a; --ember-2:#ffb347; --steel:#6c7278;
   --display:"Bebas Neue",Impact,sans-serif;
-  --body:"Barlow Condensed","Arial Narrow",sans-serif;
+  --body:"Barlow",system-ui,sans-serif;
+  --head:"Barlow",system-ui,sans-serif;
   --serif:"Cinzel",Georgia,serif;
   color-scheme:dark;
 }
@@ -388,6 +389,29 @@ html.big .day .ref{font-size:34px}
 html.big .verse blockquote .ch{opacity:1!important}
 html.big .hero .sub{font-size:22px;color:#e0e0e0}
 
+/* ---------- lighter type ---------- */
+body{font-size:19px;line-height:1.55}
+.h2{font-family:var(--head);font-weight:700;font-size:clamp(32px,4.6vw,58px);line-height:1.08;letter-spacing:-.015em;text-wrap:balance}
+.tile h3,.step h4,.fam h3,.go b,.tw-title{font-family:var(--head);font-weight:700;letter-spacing:-.01em;line-height:1.18}
+.tile h3{font-size:26px}.step h4{font-size:22px}.fam h3{font-size:clamp(22px,2vw,27px)}.go b{font-size:21px}.tw-title{font-size:28px}
+.convoy .copy .punch{font-family:var(--head);font-weight:700;font-size:clamp(22px,2.4vw,30px);line-height:1.22;letter-spacing:-.01em}
+.gens .side{font-family:var(--head);font-weight:700;font-size:clamp(22px,2.6vw,34px);line-height:1.15}
+.burn h2{font-family:var(--head);font-weight:800;font-size:clamp(38px,6vw,84px);line-height:1.04;letter-spacing:-.025em}
+.excuse h3{font-family:var(--head);font-weight:700;font-size:clamp(30px,4.4vw,56px);line-height:1.1;letter-spacing:-.015em;text-wrap:balance}
+.v2 .lines div{font-family:var(--head);font-weight:700;font-size:clamp(32px,5vw,64px);line-height:1.12;letter-spacing:-.02em}
+.tc-ref{font-family:var(--head);font-weight:700;font-size:clamp(40px,7vw,62px);line-height:1.05;letter-spacing:-.02em}
+.tw-row .rf{font-family:var(--head);font-weight:600;font-size:22px;line-height:1.2;letter-spacing:-.005em}
+.day .ref{font-family:var(--head);font-weight:700;font-size:clamp(19px,1.6vw,22px);line-height:1.2;letter-spacing:-.005em}
+@media (max-width:900px){.day .ref{font-size:20px}}
+.pl-ref{font-family:var(--head);font-weight:700;font-size:clamp(30px,5vw,44px);line-height:1.1;letter-spacing:-.015em}
+.eyebrow{letter-spacing:.16em;font-size:14px}
+.stat .l,.rule .cap,.tw-row .meta,.day .dn,.weeks-legend,.field,.hint,footer .f2,.oath-fields label,.sp .wk,.unit span,.verse cite,.v2 cite,.radar-label,.fam .who,.tile .k,.tc-day,.pl-day,.pl-opts .lbl{letter-spacing:.1em!important}
+.tabs-top a,.tabbar a,.day-play,.tw-row .pl,.tc-note button,.panel-foot .lt,.panel-foot a{letter-spacing:.06em!important}
+.tc-day,.pl-day{font-size:16px}
+html.big .day .ref{font-size:26px}
+html.big .tw-row .rf{font-size:27px}
+.pl-copy{font-size:13px;color:#777;text-align:center;line-height:1.4;max-width:760px;margin:0 auto}
+.pl-note{font-size:18px;color:#ffb347;margin:0 0 14px}
 /* ---------- PAGES ---------- */
 .page[hidden]{display:none}
 .nav{background:rgba(10,10,10,.82)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)!important}
@@ -453,6 +477,13 @@ html.big .hero .sub{font-size:22px;color:#e0e0e0}
 html.big .tw-row .meta,html.big .tw-row .pl,html.big .tc-note,html.big .go span{font-size:19px!important}
 html.big .tw-row .rf{font-size:34px}
 
+/* lighter type for Today (after page styles) */
+.tc-ref{font-family:var(--head);font-weight:700;font-size:clamp(40px,7vw,62px);line-height:1.05;letter-spacing:-.02em}
+.tw-row .rf{font-family:var(--head);font-weight:600;font-size:22px;line-height:1.2;letter-spacing:-.005em}
+.go b{font-family:var(--head);font-weight:700;font-size:21px;letter-spacing:-.01em}
+.tw-title{font-family:var(--head);font-weight:700;font-size:28px;letter-spacing:-.01em}
+html.big .tw-row .rf{font-size:27px}
+html.big .tc-ref{font-size:clamp(46px,8vw,70px)}
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none}
@@ -638,7 +669,7 @@ html.big .tw-row .rf{font-size:34px}
 <!-- BURN -->
 <section class="burn pad" id="burn">
   <div class="wrap">
-    <h2>LET IT BURN<br>THROUGH YOU LIKE<br><span class="fire" id="fire">FIRE THROUGH<br>DRY WOOD.</span></h2>
+    <h2>Let it burn<br>through you like<br><span class="fire" id="fire">fire through<br>dry wood.</span></h2>
     <p class="rv">Don't skim it like a textbook. Read it like orders from the front.</p>
   </div>
 </section>
@@ -787,10 +818,11 @@ html.big .tw-row .rf{font-size:34px}
     <div class="pl-opts">
       <div class="grp" role="group" aria-label="Speed"><span class="lbl">Speed</span><button type="button" data-rate="0.8">0.8×</button><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.25">1.25×</button><button type="button" data-rate="1.5">1.5×</button></div>
       <div class="grp" role="group" aria-label="Text size"><span class="lbl">Text</span><button type="button" id="plSmaller" aria-label="Smaller text">A−</button><button type="button" id="plBigger" aria-label="Bigger text">A+</button></div>
-      <div class="grp" role="group" aria-label="Translation"><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
+      <div class="grp" role="group" aria-label="Translation"><button type="button" data-tr="nlt">NLT</button><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
       <div class="grp" id="plVoiceGrp" hidden><label class="lbl" for="plVoice">Voice</label><select id="plVoice"></select></div>
     </div>
-    <div class="pl-narr">Prefer a real narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/111/ROM.1.NIV" target="_blank" rel="noopener">Play this chapter in the Bible app →</a></div>
+    <div class="pl-copy" id="plCopy" hidden>Scripture quotations are taken from the Holy Bible, New Living Translation, copyright © 1996, 2004, 2015 by Tyndale House Foundation. Used by permission of Tyndale House Publishers, Carol Stream, Illinois 60188. All rights reserved.</div>
+    <div class="pl-narr">Prefer a real narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play this chapter in the Bible app →</a></div>
   </div>
 </div>
 
@@ -814,6 +846,8 @@ const STAGES = [
   [90,"The final strikes. Make them count."],
   [100,"Forged. Tempered. Unbreakable."]
 ];
+function nice(ref){ const F={Gen:'Genesis',Exo:'Exodus',Lev:'Leviticus',Num:'Numbers',Deut:'Deuteronomy','I Sam':'1 Samuel','II Sam':'2 Samuel','I Kings':'1 Kings','II Kings':'2 Kings','I Chron':'1 Chronicles','II Chron':'2 Chronicles',Neh:'Nehemiah',Prov:'Proverbs',Eccl:'Ecclesiastes',Song:'Song of Songs',Jer:'Jeremiah',Lam:'Lamentations',Ezek:'Ezekiel',Zech:'Zechariah',Matt:'Matthew',Rom:'Romans','I Cor':'1 Corinthians','II Cor':'2 Corinthians',Gal:'Galatians',Eph:'Ephesians',Phil:'Philippians',Col:'Colossians','I Thes':'1 Thessalonians','II Thes':'2 Thessalonians','I Tim':'1 Timothy','II Tim':'2 Timothy',Heb:'Hebrews','I Peter':'1 Peter','II Peter':'2 Peter','I John':'1 John','II John':'2 John','III John':'3 John',Rev:'Revelation'};
+  return ref.replace(/(^|, )((?:I{1,3} )?[A-Za-z]+)/g,(m,p,b)=>p+(F[b]||b)).replace(/(\d)-(\d)/g,'$1–$2'); }
 const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
 const store = { get(k){try{return localStorage.getItem(k)}catch(e){return null}}, set(k,v){try{localStorage.setItem(k,v)}catch(e){}} };
 const $ = s=>document.querySelector(s), $$ = s=>[...document.querySelectorAll(s)];
@@ -957,12 +991,12 @@ function render(){
     const date=new Date(s); date.setDate(s.getDate()+(week-1)*7+i);
     const key=DAYS[i];
     const el=document.createElement('div'); el.className='day'+(tp.week===week&&tp.day===i?' today':'');
-    el.innerHTML=`<div class="dn">Day ${(week-1)*7+i+1} · ${date.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div><div class="cat">${plan==='topical'?TOPICAL_LABELS[key]:'&nbsp;'}</div><div class="ref">${w[key]}</div><button class="day-play" type="button" data-ref="${w[key]}" data-day="${(week-1)*7+i+1}">▶ Listen</button>`;
+    el.innerHTML=`<div class="dn">Day ${(week-1)*7+i+1} · ${date.toLocaleDateString(undefined,{month:'short',day:'numeric'})}</div><div class="cat">${plan==='topical'?TOPICAL_LABELS[key]:'&nbsp;'}</div><div class="ref">${nice(w[key])}</div><button class="day-play" type="button" data-ref="${w[key]}" data-day="${(week-1)*7+i+1}">▶ Listen</button>`;
     daysEl.appendChild(el);
   }
   const foot=$('#foot');
-  if(tp.week){const r=PLANS[plan][tp.week-1][DAYS[tp.day]];foot.innerHTML=`Today is <b style="color:var(--fg)">Day ${tp.diff+1}</b> — read <b style="color:var(--lime)">${r}</b>.`}
-  else if(tp.before){const n=-tp.diff;foot.innerHTML=`Day 1 is in <b style="color:var(--fg)">${n} day${n>1?'s':''}</b>: <b style="color:var(--lime)">${PLANS[plan][0].sunday}</b>.`}
+  if(tp.week){const r=PLANS[plan][tp.week-1][DAYS[tp.day]];foot.innerHTML=`Today is <b style="color:var(--fg)">Day ${tp.diff+1}</b> — read <b style="color:var(--lime)">${nice(r)}</b>.`}
+  else if(tp.before){const n=-tp.diff;foot.innerHTML=`Day 1 is in <b style="color:var(--fg)">${n} day${n>1?'s':''}</b>: <b style="color:var(--lime)">${nice(PLANS[plan][0].sunday)}</b>.`}
   else foot.textContent='52 weeks complete. Forged.';
   if(window.doneSet) renderToday();
 }
@@ -1016,7 +1050,7 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
     const name=($('#name').value||'').trim(), sd=$('#oathDate').value||start;
     store.set('f52.name',name); store.set('f52.start',sd); start=sd; $('#start').value=sd; render();
     drawCert(name,sd);
-    $('#firstRead').textContent=`${PLANS[plan][0].sunday} · ${parseDate(sd).toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})}`;
+    $('#firstRead').textContent=`${nice(PLANS[plan][0].sunday)} · ${parseDate(sd).toLocaleDateString(undefined,{weekday:'long',month:'long',day:'numeric'})}`;
     setTimeout(()=>{const f=$('#forged');f.classList.add('show');f.scrollIntoView({behavior:reduce?'auto':'smooth',block:'center'})},700);
   }
   const savedName=store.get('f52.name'); if(savedName) $('#name').value=savedName;
@@ -1099,7 +1133,7 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
   }
   const el={p:$('#player'),day:$('#plDay'),ref:$('#plRef'),chaps:$('#plChaps'),text:$('#plText'),play:$('#plPlay'),icon:$('#plIcon'),narr:$('#plNarr'),voice:$('#plVoice')};
   const synth=window.speechSynthesis;
-  let curDay=0,chs=[],ci=0,verses=[],vi=0,playing=false,tr=store.get('f52.tr')||'web',rate=+(store.get('f52.rate')||1),size=+(store.get('f52.size')||30),lock=null,lastFocus=null,token=0;
+  let curDay=0,chs=[],ci=0,verses=[],vi=0,playing=false,tr=store.get('f52.tr2')||'nlt',rate=+(store.get('f52.rate')||1),size=+(store.get('f52.size')||30),lock=null,lastFocus=null,token=0;
   const cache={};
   el.p.style.setProperty('--pl-size',size+'px');
 
@@ -1118,15 +1152,33 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
   if(synth){loadVoices(); synth.onvoiceschanged=loadVoices}
   el.voice.onchange=()=>{store.set('f52.voice',el.voice.value); if(playing){stop();speak()}};
 
+  let usedTr='nlt';
+  async function fetchNLT(c){
+    // Tyndale's NLT API: 50 verses per anonymous request, so read a chapter in chunks
+    const name=c.name==='song of solomon'?'song':c.name; let a=1, end=999, out=[], seen=new Set();
+    if(c.vv){ [a,end]=c.vv.split('-').map(Number) }
+    while(a<=end){
+      const b=Math.min(end,a+49);
+      const r=await fetch(`https://api.nlt.to/api/passages?ref=${encodeURIComponent(name+'.'+c.ch+':'+a+'-'+b)}&version=NLT&key=TEST`); if(!r.ok) throw new Error(r.status);
+      const html=await r.text(); let added=0; const re=/<verse_export[^>]*\bch="(\d+)"[^>]*\bvn="(\d+)"[^>]*>([\s\S]*?)<\/verse_export>/g; let m;
+      while((m=re.exec(html))){ const ch=+m[1], n=+m[2]; if(ch!==c.ch||n<a||n>b||seen.has(n)) continue;
+        let h=m[3].replace(/<h[23][^>]*>[\s\S]*?<\/h[23]>/g,'').replace(/<span class="tn-ref">[\s\S]*?<\/span>/g,'').replace(/<span class="tn">[\s\S]*?<\/span>/g,'').replace(/<a class="a-tn">[\s\S]*?<\/a>/g,'').replace(/<span class="vn">[\s\S]*?<\/span>/g,'').replace(/<[^>]+>/g,' ');
+        const t=new DOMParser().parseFromString(h,'text/html').body.textContent.replace(/\s+/g,' ').trim(); if(!t) continue; seen.add(n); out.push({n,t}); added++ }
+      if(added<b-a+1) break; a=b+1;
+    }
+    if(!out.length) throw new Error('empty'); return out;
+  }
   async function fetchCh(c){
-    const key=tr+'|'+c.name+c.ch+(c.vv||''); if(cache[key]) return cache[key];
+    const key=tr+'|'+c.name+c.ch+(c.vv||''); if(cache[key]){ usedTr=cache[key].tr; return cache[key] }
+    usedTr=tr;
+    if(tr==='nlt'){ try{ const v=await fetchNLT(c); v.tr='nlt'; return cache[key]=v }catch(e){ usedTr='web' } }
     const q=encodeURIComponent(c.name+' '+c.ch+(c.vv?':'+c.vv:''));
-    const r=await fetch(`https://bible-api.com/${q}?translation=${tr}`); if(!r.ok) throw new Error(r.status);
-    const j=await r.json(); return cache[key]=j.verses.map(v=>({n:v.verse,t:v.text.replace(/\s+/g,' ').trim()}));
+    const r=await fetch(`https://bible-api.com/${q}?translation=${usedTr}`); if(!r.ok) throw new Error(r.status);
+    const j=await r.json(); const v=j.verses.map(v=>({n:v.verse,t:v.text.replace(/\s+/g,' ').trim()})); v.tr=usedTr; return cache[key]=v;
   }
   function renderChaps(){
     el.chaps.innerHTML=chs.map((c,i)=>`<button type="button" data-ci="${i}" class="${i===ci?'cur':i<ci?'done':''}">${cap(c.name)} ${c.ch}${c.vv?':'+c.vv:''}</button>`).join('');
-    const c=chs[ci]; el.narr.href=`https://www.bible.com/audio-bible/111/${c.usfm}.${c.ch}.NIV`;
+    const c=chs[ci]; el.narr.href=`https://www.bible.com/audio-bible/116/${c.usfm}.${c.ch}.NLT`;
   }
   async function openCh(i,autoplay){
     const my=++token; ci=i; vi=0; renderChaps(); const c=chs[ci];
@@ -1135,7 +1187,8 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
       if(my!==token) return; playing=false; setIcon();
       el.text.innerHTML=`<p class="pl-msg">Couldn't load ${cap(c.name)} ${c.ch}. Check your internet connection and press play to try again, or <a href="${el.narr.href}" target="_blank" rel="noopener">play it in the Bible app</a>.</p>`; verses=[]; return }
     if(my!==token) return;
-    el.text.innerHTML=`<h3>${cap(c.name)} ${c.ch}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
+    $('#plCopy').hidden=usedTr!=='nlt';
+    el.text.innerHTML=(tr==='nlt'&&usedTr!=='nlt'?'<p class="pl-note">The NLT text couldn\'t be loaded, so this is the WEB translation. The Bible app link below still plays the NLT.</p>':'')+`<h3>${cap(c.name)} ${c.ch}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
     el.text.scrollTop=0; highlight();
     if(autoplay) speak(true);
   }
@@ -1168,7 +1221,7 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
 
   window.openPlayer=(ref,dayN)=>{
     chs=parse(ref); if(!chs.length) return; lastFocus=document.activeElement; curDay=+dayN;
-    el.day.textContent=`Day ${dayN}`; el.ref.textContent=ref; marks(); el.p.hidden=false; document.body.style.overflow='hidden';
+    el.day.textContent=`Day ${dayN}`; el.ref.textContent=nice(ref); marks(); el.p.hidden=false; document.body.style.overflow='hidden';
     el.play.focus(); stop(); openCh(0,false);
   };
   function close(){ stop(); el.p.hidden=true; document.body.style.overflow=''; lastFocus&&lastFocus.focus&&lastFocus.focus() }
@@ -1180,7 +1233,7 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
   el.chaps.onclick=e=>{ const b=e.target.closest('[data-ci]'); if(!b) return; const was=playing; stop(); openCh(+b.dataset.ci,was) };
   el.text.onclick=e=>{ const p=e.target.closest('p[data-vi]'); if(!p) return; const was=playing; stop(); vi=+p.dataset.vi; highlight(); if(was) speak() };
   $$('[data-rate]').forEach(b=>b.onclick=()=>{ rate=+b.dataset.rate; store.set('f52.rate',rate); marks(); if(playing){stop();speak()} });
-  $$('[data-tr]').forEach(b=>b.onclick=()=>{ tr=b.dataset.tr; store.set('f52.tr',tr); marks(); const was=playing; stop(); openCh(ci,was) });
+  $$('[data-tr]').forEach(b=>b.onclick=()=>{ tr=b.dataset.tr; store.set('f52.tr2',tr); marks(); const was=playing; stop(); openCh(ci,was) });
   const sz=d=>{ size=Math.max(20,Math.min(56,size+d)); store.set('f52.size',size); el.p.style.setProperty('--pl-size',size+'px'); highlight() };
   $('#plBigger').onclick=()=>sz(4); $('#plSmaller').onclick=()=>sz(-4);
 
@@ -1201,7 +1254,7 @@ function renderToday(){
   const fmt=x=>x.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});
   $('#tDay').textContent=tp.week?`Day ${n} · ${fmt(d)}`:tp.before?`Day 1 · ${fmt(d)}`:'52 weeks complete';
   $('#tCat').textContent=r.cat?`Week ${r.week} · ${r.cat}`:`Week ${r.week}`;
-  $('#tRef').textContent=r.ref;
+  $('#tRef').textContent=nice(r.ref);
   const isDone=doneSet.has(n); $('#tDone').setAttribute('aria-pressed',isDone); $('#tDoneLbl').textContent=isDone?'Read':'Mark as read';
   let st=0; if(tp.week){ let k=doneSet.has(n)?n:n-1; while(k>0&&doneSet.has(k)){st++;k--} }
   $('#tStreak').textContent=st>1?`${st}-day streak`:'';
@@ -1212,7 +1265,7 @@ function renderToday(){
   $('#tStart').onchange=e=>{ if(e.target.value) setStart(e.target.value) };
   const w0=(r.week-1)*7+1; let html='';
   for(let k=w0;k<w0+7;k++){ const rr=readingFor(k), on=doneSet.has(k), today=tp.week&&k===n;
-    html+=`<div class="tw-row${today?' is-today':''}"><button type="button" class="ckb" data-done="${k}" aria-pressed="${on}" aria-label="Mark day ${k} as read">${CHECK}</button><div><div class="meta">${today?'Today · ':''}Day ${k} · ${dateFor(k).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</div><div class="rf">${rr.ref}</div></div><button type="button" class="pl day-play" data-ref="${rr.ref}" data-day="${k}">▶ Listen</button></div>` }
+    html+=`<div class="tw-row${today?' is-today':''}"><button type="button" class="ckb" data-done="${k}" aria-pressed="${on}" aria-label="Mark day ${k} as read">${CHECK}</button><div><div class="meta">${today?'Today · ':''}Day ${k} · ${dateFor(k).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</div><div class="rf">${nice(rr.ref)}</div></div><button type="button" class="pl day-play" data-ref="${rr.ref}" data-day="${k}">▶ Listen</button></div>` }
   $('#tWeek').innerHTML=html;
   const total=doneSet.size; $('#tProg').textContent=`${total} of 364 read`; $('#tBar').style.width=(total/364*100)+'%';
 }
