@@ -1,4 +1,14 @@
-# Forged52 landing page (upgraded)
+# Forged52 site
+
+Four pages in one file, switched by the menu (top bar on desktop, tab bar at the bottom on phones):
+- **Today** (`#today`, the default): today's reading in big type, Listen, Mark as read, streak, this week's checklist and overall progress
+- **Plan** (`#plan`): the 52-week explorer and stages of the forge
+- **Why** (`#why`): the mission and scripture sections
+- **Join** (`#join`): the oath, certificate and calendar reminders
+
+Progress (which days are read) is saved in the visitor's browser; no account needed.
+
+## Original landing page notes
 
 A standalone, no-build rebuild of the landing page at https://forged52.lovable.app/.
 Open `index.html` directly or drop the `forged52/` folder on any static host.

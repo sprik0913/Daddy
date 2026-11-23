@@ -78,7 +78,7 @@ section{position:relative}
 .rv.d1{transition-delay:.1s}.rv.d2{transition-delay:.2s}.rv.d3{transition-delay:.3s}.rv.d4{transition-delay:.4s}
 
 /* HERO */
-.hero{min-height:100svh;display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:90px 16px 110px}
+.hero{display:grid;place-items:center;overflow:hidden;isolation:isolate;padding:84px 16px 26px}
 .hero-bg{position:absolute;inset:0;z-index:-3;overflow:hidden;background:
   radial-gradient(ellipse 34% 30% at 50% 34%,rgba(170,255,40,.20),rgba(145,230,0,.06) 55%,transparent 75%),
   radial-gradient(ellipse 80% 38% at 50% 108%,rgba(145,230,0,.30),rgba(90,150,0,.10) 45%,transparent 75%),
@@ -92,7 +92,7 @@ section{position:relative}
 .hero::after{content:"";position:absolute;inset:0;z-index:-2;background:radial-gradient(ellipse 70% 55% at 50% 42%,transparent 0,rgba(10,10,10,.55) 60%,var(--bg) 100%),linear-gradient(to bottom,rgba(10,10,10,.2),transparent 30%,transparent 70%,var(--bg))}
 #embers{position:absolute;inset:0;z-index:-1;width:100%;height:100%}
 .hero-inner{text-align:center;display:flex;flex-direction:column;align-items:center}
-.logo-wrap{position:relative;width:min(500px,88vw,58vh);aspect-ratio:1492/1023;margin-bottom:6px}
+.logo-wrap{position:relative;width:min(320px,52vw,26vh);aspect-ratio:1492/1023;margin-bottom:6px}
 .logo-wrap img{width:100%;height:100%;object-fit:contain;filter:drop-shadow(0 0 40px rgba(145,230,0,.25));animation:strike 1.1s cubic-bezier(.2,1.4,.3,1) .2s both, breathe 5s ease-in-out 1.5s infinite}
 @keyframes strike{0%{opacity:0;transform:scale(1.5) rotate(-3deg);filter:brightness(4) blur(6px)}55%{opacity:1;filter:brightness(2.4) drop-shadow(0 0 80px var(--lime))}100%{transform:none;filter:drop-shadow(0 0 40px rgba(145,230,0,.25))}}
 @keyframes breathe{50%{filter:drop-shadow(0 0 70px rgba(145,230,0,.45)) brightness(1.08)}}
@@ -100,7 +100,7 @@ section{position:relative}
 @keyframes shock{0%{opacity:.9;transform:scale(.2)}100%{opacity:0;transform:scale(28)}}
 .flash{position:fixed;inset:0;background:#fff;opacity:0;pointer-events:none;z-index:90;animation:flash .5s ease-out .5s both}
 @keyframes flash{0%{opacity:.0}10%{opacity:.35}100%{opacity:0}}
-.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(48px,9.5vw,132px);line-height:.88;letter-spacing:.01em;margin-top:8px}
+.hero h1{font-family:var(--display);font-weight:400;font-size:clamp(38px,6.4vw,88px);line-height:.88;letter-spacing:.01em;margin-top:8px}
 .hero h1 .l1{display:block}
 .hero h1 .l1 .w{background:linear-gradient(180deg,#fff 0%,#c9cdd1 45%,#6d7378 52%,#d9dcdf 100%);-webkit-background-clip:text;background-clip:text;color:transparent}
 .hero h1 .l2{display:block;color:var(--lime);text-shadow:0 0 40px rgba(145,230,0,.45)}
@@ -388,6 +388,71 @@ html.big .day .ref{font-size:34px}
 html.big .verse blockquote .ch{opacity:1!important}
 html.big .hero .sub{font-size:22px;color:#e0e0e0}
 
+/* ---------- PAGES ---------- */
+.page[hidden]{display:none}
+.nav{background:rgba(10,10,10,.82)!important;backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-bottom:1px solid var(--line)!important}
+.nav .brand{opacity:1!important;pointer-events:auto!important}
+.tabs-top{display:flex;gap:4px}
+.tabs-top a{font-family:var(--body);font-weight:700;font-size:16px;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;color:var(--fg-2);padding:10px 14px;border-bottom:2px solid transparent}
+.tabs-top a:hover{color:var(--fg)}
+.tabs-top a[aria-current="page"]{color:var(--lime);border-bottom-color:var(--lime)}
+.tabbar{display:none}
+@media (max-width:720px){
+  .tabs-top{display:none}
+  .tabbar{display:grid;grid-template-columns:repeat(4,1fr);position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(10,10,10,.94);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border-top:1px solid var(--line-2);padding:6px max(6px,env(safe-area-inset-right)) calc(6px + env(safe-area-inset-bottom)) max(6px,env(safe-area-inset-left))}
+  .tabbar a{display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 0;text-decoration:none;color:var(--fg-2);font-family:var(--body);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase}
+  .tabbar svg{width:26px;height:26px}
+  .tabbar a[aria-current="page"]{color:var(--lime)}
+  body{padding-bottom:calc(76px + env(safe-area-inset-bottom))}
+}
+.page-head{padding:130px 0 50px;border-bottom:1px solid var(--line)}
+.plan.pad,.oath.pad{padding-top:120px}
+.today-wrap{padding:10px 0 90px}
+.today-card{position:relative;max-width:760px;margin:0 auto;border:1px solid var(--lime-dim);background:linear-gradient(180deg,rgba(145,230,0,.09),rgba(20,20,20,.9) 55%);padding:clamp(22px,4vw,38px);box-shadow:0 30px 80px -40px rgba(145,230,0,.45)}
+.tc-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:baseline}
+.tc-day{font-family:var(--body);font-weight:700;font-size:18px;letter-spacing:.2em;text-transform:uppercase;color:var(--lime)}
+.tc-streak{font-family:var(--body);font-weight:700;font-size:18px;letter-spacing:.06em;color:#ffb347}
+.tc-cat{font-size:18px;color:var(--fg-2);margin-top:14px;min-height:1.2em}
+.tc-ref{font-family:var(--display);font-size:clamp(56px,11vw,104px);line-height:.92;margin-top:4px;color:#fff}
+.tc-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:24px}
+.tc-listen{font-size:24px;padding:16px 28px 14px}
+.tc-done .ck{width:22px;height:22px;border:2px solid currentColor;display:inline-block;position:relative}
+.tc-done[aria-pressed="true"]{border-color:var(--lime);color:var(--lime)}
+.tc-done[aria-pressed="true"] .ck{background:var(--lime);border-color:var(--lime)}
+.tc-done[aria-pressed="true"] .ck::after{content:"";position:absolute;left:6px;top:1px;width:6px;height:12px;border:solid #000;border-width:0 3px 3px 0;transform:rotate(45deg)}
+@media (max-width:520px){.tc-actions .btn{flex:1 1 100%}}
+.tc-note{margin-top:18px;font-size:18px;color:var(--fg-2);display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center}
+.tc-note label{display:flex;gap:10px;align-items:center}
+.tc-note input{font:inherit;font-size:17px;color:var(--fg);background:#0b0b0b;border:1px solid var(--line-2);padding:8px 10px;color-scheme:dark}
+.tc-note button{font-family:var(--body);font-weight:700;font-size:16px;letter-spacing:.14em;text-transform:uppercase;color:var(--lime);border:1px solid var(--lime-dim);padding:8px 12px}
+.tw-head{max-width:760px;margin:44px auto 10px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap}
+.tw-title{font-family:var(--display);font-weight:400;font-size:40px;letter-spacing:.02em}
+.tw-prog{font-size:17px;color:var(--fg-2)}
+.tw-bar{max-width:760px;margin:0 auto 14px;height:6px;background:#222}
+.tw-bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#4f7d00,var(--lime));box-shadow:0 0 12px rgba(145,230,0,.5);transition:width .6s}
+.tw-list{max-width:760px;margin:0 auto;border:1px solid var(--line-2)}
+.tw-row{display:grid;grid-template-columns:44px 1fr auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--line)}
+.tw-row:first-child{border-top:0}
+.tw-row.is-today{background:rgba(145,230,0,.08)}
+.tw-row .ckb{width:38px;height:38px;border:2px solid #555;display:grid;place-items:center;color:#000}
+.tw-row .ckb[aria-pressed="true"]{background:var(--lime);border-color:var(--lime)}
+.tw-row .ckb svg{width:22px;height:22px;opacity:0}
+.tw-row .ckb[aria-pressed="true"] svg{opacity:1}
+.tw-row .meta{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-3)}
+.tw-row.is-today .meta{color:var(--lime)}
+.tw-row .rf{font-family:var(--display);font-size:28px;line-height:1.05;letter-spacing:.02em}
+.tw-row .pl{margin:0;font-family:var(--body);font-weight:700;font-size:15px;letter-spacing:.12em;text-transform:uppercase;color:var(--lime);border:1px solid rgba(145,230,0,.45);padding:9px 12px;white-space:nowrap}
+@media (max-width:900px){.tw-row .pl{grid-column:auto;justify-self:end}}
+.go-cards{max-width:760px;margin:40px auto 0;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+@media (max-width:720px){.go-cards{grid-template-columns:1fr}}
+.go{display:block;text-decoration:none;border:1px solid var(--line-2);padding:18px;background:#0e0e0e;transition:border-color .2s,transform .2s}
+.go:hover{border-color:var(--lime);transform:translateY(-2px)}
+.go b{display:block;font-family:var(--display);font-weight:400;font-size:28px;letter-spacing:.03em}
+.go b::after{content:" →";color:var(--lime)}
+.go span{color:var(--fg-2);font-size:17px}
+html.big .tw-row .meta,html.big .tw-row .pl,html.big .tc-note,html.big .go span{font-size:19px!important}
+html.big .tw-row .rf{font-size:34px}
+
 @media (prefers-reduced-motion:reduce){
   *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;scroll-behavior:auto!important}
   .rv{opacity:1;transform:none}
@@ -399,19 +464,18 @@ html.big .hero .sub{font-size:22px;color:#e0e0e0}
 <div class="flash"></div>
 
 <nav class="nav" id="nav">
-  <a class="brand" href="#top">FORGED<b>52</b></a>
+  <a class="brand" href="#today">FORGED<b>52</b></a>
   <div class="links">
-    <a href="#mission">Mission</a>
-    <a href="#plan">The Plan</a>
-    <a href="#family">Family</a>
+    <div class="tabs-top"><a href="#today" data-tab="today">Today</a><a href="#plan" data-tab="plan">Plan</a><a href="#why" data-tab="why">Why</a><a href="#join" data-tab="join">Join</a></div>
     <span class="tools">
       <button class="icon-btn" type="button" id="bigBtn" aria-pressed="false" title="Larger text">Aa<span class="t">Large text</span></button>
       <button class="icon-btn" type="button" data-listen="today" title="Listen to today's reading"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg><span class="t">Listen</span></button>
     </span>
-    <a class="btn primary sm" href="#oath">Take the Oath</a>
   </div>
 </nav>
+<nav class="tabbar" aria-label="Pages"><a href="#today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg><span>Today</span></a><a href="#plan" data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><span>Plan</span></a><a href="#why" data-tab="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg><span>Why</span></a><a href="#join" data-tab="join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 2.3l7 7-2.1 2.1-1.4-1.4-2.8 2.8 1.4 1.4L9.7 21.3 2.7 14.3l7.1-7.1 1.4 1.4 2.8-2.8-1.4-1.4z"/></svg><span>Join</span></a></nav>
 
+<div class="page" data-page="today">
 <!-- HERO -->
 <section class="hero" id="top">
   <div class="hero-bg" aria-hidden="true"><div class="rays"></div><div class="tex"></div><div class="heat"></div><div class="edge"></div></div>
@@ -426,16 +490,37 @@ html.big .hero .sub{font-size:22px;color:#e0e0e0}
       <span class="l1" data-words>BUILD THE MAN.</span>
       <span class="l2" data-words>LEAD THE FAMILY.</span>
     </h1>
-    <p class="sub">One reading a day · No days off</p>
-    <div class="ctas">
-      <a class="btn primary" href="#oath">Accept the challenge</a>
-      <button class="btn listen" type="button" data-listen="today"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg>Listen to today's reading</button>
-      <a class="btn" href="#plan">See the plan</a>
-    </div>
+    
   </div>
-  <a class="scroll-cue" href="#stats">Scroll<i></i></a>
 </section>
 
+<!-- TODAY -->
+<section class="today-wrap">
+  <div class="wrap">
+    <div class="today-card" id="todayCard">
+      <div class="tc-top"><span class="tc-day" id="tDay">Day 1</span><span class="tc-streak" id="tStreak"></span></div>
+      <div class="tc-cat" id="tCat"></div>
+      <div class="tc-ref" id="tRef">Rom 1-2</div>
+      <div class="tc-actions">
+        <button class="btn primary tc-listen" type="button" data-listen="today"><svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1v-7h3zM3 19a2 2 0 0 0 2 2h1v-7H3z"/></svg>Listen now</button>
+        <button class="btn tc-done" type="button" id="tDone" aria-pressed="false"><span class="ck"></span><span id="tDoneLbl">Mark as read</span></button>
+      </div>
+      <div class="tc-note" id="tNote"></div>
+    </div>
+    <div class="tw-head"><h2 class="tw-title">This week</h2><span class="tw-prog" id="tProg"></span></div>
+    <div class="tw-bar"><i id="tBar"></i></div>
+    <div class="tw-list" id="tWeek"></div>
+    <div class="go-cards">
+      <a class="go" href="#plan"><b>The plan</b><span>All 52 weeks, pick a route</span></a>
+      <a class="go" href="#why"><b>Why Forged52</b><span>The mission, for you and the men you send it to</span></a>
+      <a class="go" href="#join"><b>Take the oath</b><span>Commit, get your certificate and reminders</span></a>
+    </div>
+  </div>
+</section>
+</div><!-- /page today -->
+
+<div class="page" data-page="why" hidden>
+<section class="page-head"><div class="wrap"><div class="eyebrow">Why Forged52</div><h1 class="h2" style="margin-top:14px">Build the man.<br><em>Lead the family.</em></h1></div></section>
 <!-- STATS -->
 <section class="stats" id="stats">
   <div class="wrap">
@@ -558,44 +643,7 @@ html.big .hero .sub{font-size:22px;color:#e0e0e0}
   </div>
 </section>
 
-<!-- PLAN -->
-<section class="plan pad" id="plan">
-  <div class="wrap">
-    <div class="plan-head">
-      <div>
-        <div class="eyebrow rv">The plan</div>
-        <h2 class="h2 rv d1" style="margin-top:18px">364 readings.<br><em>Pick your route.</em></h2>
-      </div>
-      <p class="lede rv d2" style="max-width:40ch"><b style="color:var(--fg)">Topical</b> gives you a different part of the Bible each day of the week. <b style="color:var(--fg)">Chronological</b> reads it in the order it happened, from Creation to Revelation.</p>
-    </div>
 
-    <div class="panel rv">
-      <div class="panel-top">
-        <div class="seg" role="group" aria-label="Reading plan">
-          <button type="button" data-plan="topical" aria-pressed="true">Topical</button>
-          <button type="button" data-plan="chrono" aria-pressed="false">Chronological</button>
-        </div>
-        <label class="field">Start date <input type="date" id="start"></label>
-      </div>
-      <div class="week-ctl">
-        <div class="week-row">
-          <div class="week-num"><small>WEEK</small><span id="wk">1</span><span class="of"> / 52</span></div>
-          <div class="stage-msg" id="stage"><b>STAGE</b>…</div>
-        </div>
-        <div class="weeks" id="weeks" role="slider" aria-label="Week" aria-valuemin="1" aria-valuemax="52" aria-valuenow="1" tabindex="0"></div>
-        <div class="weeks-legend"><span>Cold steel</span><span>Drag or use ← → to pick a week</span><span>White hot</span></div>
-      </div>
-      <div class="days" id="days"></div>
-      <div class="panel-foot"><span id="foot">Pick your start date to see where you are today.</span><button class="lt" type="button" data-listen="today">▶ Listen to today</button><a href="https://forged52.lovable.app/auth">Track it in the app →</a></div>
-    </div>
-
-    <div class="stages">
-      <div class="eyebrow rv" style="margin-bottom:22px">Stages of the forge</div>
-      <div class="bar"></div>
-      <div class="stage-pts" id="stagePts"></div>
-    </div>
-  </div>
-</section>
 
 <!-- FAMILY -->
 <section class="family pad grid-bg" id="family">
@@ -642,6 +690,50 @@ html.big .hero .sub{font-size:22px;color:#e0e0e0}
   </div>
 </section>
 
+</div><!-- /page why -->
+
+<div class="page" data-page="plan" hidden>
+<!-- PLAN -->
+<section class="plan pad" id="plan">
+  <div class="wrap">
+    <div class="plan-head">
+      <div>
+        <div class="eyebrow rv">The plan</div>
+        <h2 class="h2 rv d1" style="margin-top:18px">364 readings.<br><em>Pick your route.</em></h2>
+      </div>
+      <p class="lede rv d2" style="max-width:40ch"><b style="color:var(--fg)">Topical</b> gives you a different part of the Bible each day of the week. <b style="color:var(--fg)">Chronological</b> reads it in the order it happened, from Creation to Revelation.</p>
+    </div>
+
+    <div class="panel rv">
+      <div class="panel-top">
+        <div class="seg" role="group" aria-label="Reading plan">
+          <button type="button" data-plan="topical" aria-pressed="true">Topical</button>
+          <button type="button" data-plan="chrono" aria-pressed="false">Chronological</button>
+        </div>
+        <label class="field">Start date <input type="date" id="start"></label>
+      </div>
+      <div class="week-ctl">
+        <div class="week-row">
+          <div class="week-num"><small>WEEK</small><span id="wk">1</span><span class="of"> / 52</span></div>
+          <div class="stage-msg" id="stage"><b>STAGE</b>…</div>
+        </div>
+        <div class="weeks" id="weeks" role="slider" aria-label="Week" aria-valuemin="1" aria-valuemax="52" aria-valuenow="1" tabindex="0"></div>
+        <div class="weeks-legend"><span>Cold steel</span><span>Drag or use ← → to pick a week</span><span>White hot</span></div>
+      </div>
+      <div class="days" id="days"></div>
+      <div class="panel-foot"><span id="foot">Pick your start date to see where you are today.</span><button class="lt" type="button" data-listen="today">▶ Listen to today</button><a href="https://forged52.lovable.app/auth">Track it in the app →</a></div>
+    </div>
+
+    <div class="stages">
+      <div class="eyebrow rv" style="margin-bottom:22px">Stages of the forge</div>
+      <div class="bar"></div>
+      <div class="stage-pts" id="stagePts"></div>
+    </div>
+  </div>
+</section>
+</div>
+
+<div class="page" data-page="join" hidden>
 <!-- OATH -->
 <section class="oath pad" id="oath">
   <div class="wrap">
@@ -676,6 +768,8 @@ html.big .hero .sub{font-size:22px;color:#e0e0e0}
     </div>
   </div>
 </section>
+
+</div><!-- /page join -->
 
 <div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="plRef">
   <div class="pl-top">
@@ -777,7 +871,7 @@ const heat=$('#heat'), nav=$('#nav'), fire=$('#fire');
 function onScroll(){
   const h=document.documentElement, p=h.scrollTop/(h.scrollHeight-h.clientHeight);
   heat.style.width=(p*100).toFixed(2)+'%';
-  nav.classList.toggle('show', h.scrollTop>innerHeight*.7);
+  nav.classList.add('show');
   // fire text fills as section scrolls through
   const r=fire.getBoundingClientRect(); const fp=Math.min(1,Math.max(0,(innerHeight*.85-r.top)/(innerHeight*.55)));
   fire.style.backgroundPosition=`0 ${100-fp*100}%`;
@@ -870,10 +964,12 @@ function render(){
   if(tp.week){const r=PLANS[plan][tp.week-1][DAYS[tp.day]];foot.innerHTML=`Today is <b style="color:var(--fg)">Day ${tp.diff+1}</b> — read <b style="color:var(--lime)">${r}</b>.`}
   else if(tp.before){const n=-tp.diff;foot.innerHTML=`Day 1 is in <b style="color:var(--fg)">${n} day${n>1?'s':''}</b>: <b style="color:var(--lime)">${PLANS[plan][0].sunday}</b>.`}
   else foot.textContent='52 weeks complete. Forged.';
+  if(window.doneSet) renderToday();
 }
 function setWeek(n){week=Math.max(1,Math.min(52,n));render()}
 $$('.seg button').forEach(b=>b.onclick=()=>{plan=b.dataset.plan;store.set('f52.plan',plan);render()});
-$('#start').onchange=e=>{if(!e.target.value)return;start=e.target.value;store.set('f52.start',start);$('#oathDate').value=start;const tp=todayPos();if(tp.week)week=tp.week;render()};
+$('#start').onchange=e=>{if(!e.target.value)return;setStart(e.target.value)};
+function setStart(v){start=v;$('#start').value=v;store.set('f52.start',start);$('#oathDate').value=start;const tp=todayPos();if(tp.week)week=tp.week;render()}
 let dragging=false;
 const pick=e=>{const r=weeksEl.getBoundingClientRect();setWeek(Math.floor((e.clientX-r.left)/r.width*52)+1)};
 weeksEl.addEventListener('pointerdown',e=>{dragging=true;weeksEl.setPointerCapture(e.pointerId);pick(e)});
@@ -1003,7 +1099,7 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
   }
   const el={p:$('#player'),day:$('#plDay'),ref:$('#plRef'),chaps:$('#plChaps'),text:$('#plText'),play:$('#plPlay'),icon:$('#plIcon'),narr:$('#plNarr'),voice:$('#plVoice')};
   const synth=window.speechSynthesis;
-  let chs=[],ci=0,verses=[],vi=0,playing=false,tr=store.get('f52.tr')||'web',rate=+(store.get('f52.rate')||1),size=+(store.get('f52.size')||30),lock=null,lastFocus=null,token=0;
+  let curDay=0,chs=[],ci=0,verses=[],vi=0,playing=false,tr=store.get('f52.tr')||'web',rate=+(store.get('f52.rate')||1),size=+(store.get('f52.size')||30),lock=null,lastFocus=null,token=0;
   const cache={};
   el.p.style.setProperty('--pl-size',size+'px');
 
@@ -1061,7 +1157,7 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
       if(!playing||my!==token) return;
       if(vi>=verses.length){
         if(ci<chs.length-1){ openCh(ci+1,true) }
-        else { playing=false; setIcon(); wake(false); el.text.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--lime);margin-top:1em">Reading complete. Well done. See you tomorrow.</p>'); el.text.scrollTop=el.text.scrollHeight }
+        else { playing=false; setIcon(); wake(false); if(window.markDone) markDone(curDay,true); el.text.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--lime);margin-top:1em">Reading complete and marked as read. Well done. See you tomorrow.</p>'); el.text.scrollTop=el.text.scrollHeight }
         return }
       highlight(); utter(verses[vi].t,()=>{ if(!playing||my!==token) return; vi++; go() });
     };
@@ -1071,7 +1167,7 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
   async function wake(on){ try{ if(on&&'wakeLock' in navigator&&!lock){lock=await navigator.wakeLock.request('screen');lock.addEventListener('release',()=>lock=null)} else if(!on&&lock){lock.release();lock=null} }catch(e){} }
 
   window.openPlayer=(ref,dayN)=>{
-    chs=parse(ref); if(!chs.length) return; lastFocus=document.activeElement;
+    chs=parse(ref); if(!chs.length) return; lastFocus=document.activeElement; curDay=+dayN;
     el.day.textContent=`Day ${dayN}`; el.ref.textContent=ref; marks(); el.p.hidden=false; document.body.style.overflow='hidden';
     el.play.focus(); stop(); openCh(0,false);
   };
@@ -1094,6 +1190,49 @@ $$('#stagePts .rv').forEach((el,i)=>{el.style.transitionDelay=(i*.07)+'s';io.obs
     const d=e.target.closest('.day-play'); if(d) openPlayer(d.dataset.ref,d.dataset.day);
   });
 })();
+/* ---------- TODAY + PROGRESS ---------- */
+var doneSet=new Set(JSON.parse(store.get('f52.done')||'[]'));
+window.markDone=(n,val)=>{ n=+n; if(!n) return; (val??!doneSet.has(n))?doneSet.add(n):doneSet.delete(n); store.set('f52.done',JSON.stringify([...doneSet])); renderToday() };
+const CHECK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.5"><path d="M4 12l5 5L20 6"/></svg>';
+function dateFor(n){ const d=parseDate(start); d.setDate(d.getDate()+n-1); return d }
+function readingFor(n){ const w=Math.floor((n-1)/7), k=DAYS[(n-1)%7]; return {ref:PLANS[plan][w][k], cat:plan==='topical'?TOPICAL_LABELS[k]:'', week:w+1} }
+function renderToday(){
+  const tp=todayPos(); const n=tp.week?tp.diff+1:(tp.before?1:364); const r=readingFor(n); const d=dateFor(n);
+  const fmt=x=>x.toLocaleDateString(undefined,{weekday:'long',month:'short',day:'numeric'});
+  $('#tDay').textContent=tp.week?`Day ${n} · ${fmt(d)}`:tp.before?`Day 1 · ${fmt(d)}`:'52 weeks complete';
+  $('#tCat').textContent=r.cat?`Week ${r.week} · ${r.cat}`:`Week ${r.week}`;
+  $('#tRef').textContent=r.ref;
+  const isDone=doneSet.has(n); $('#tDone').setAttribute('aria-pressed',isDone); $('#tDoneLbl').textContent=isDone?'Read':'Mark as read';
+  let st=0; if(tp.week){ let k=doneSet.has(n)?n:n-1; while(k>0&&doneSet.has(k)){st++;k--} }
+  $('#tStreak').textContent=st>1?`${st}-day streak`:'';
+  const note=$('#tNote');
+  if(tp.before){ const dd=-tp.diff; note.innerHTML=`Your challenge starts in ${dd} day${dd>1?'s':''}. <button type="button" id="tNow">Start today instead</button><label>Start date <input type="date" id="tStart" value="${start}"></label>` }
+  else note.innerHTML=`<label>Start date <input type="date" id="tStart" value="${start}"></label>`;
+  const ns=$('#tNow'); if(ns) ns.onclick=()=>setStart(iso(new Date()));
+  $('#tStart').onchange=e=>{ if(e.target.value) setStart(e.target.value) };
+  const w0=(r.week-1)*7+1; let html='';
+  for(let k=w0;k<w0+7;k++){ const rr=readingFor(k), on=doneSet.has(k), today=tp.week&&k===n;
+    html+=`<div class="tw-row${today?' is-today':''}"><button type="button" class="ckb" data-done="${k}" aria-pressed="${on}" aria-label="Mark day ${k} as read">${CHECK}</button><div><div class="meta">${today?'Today · ':''}Day ${k} · ${dateFor(k).toLocaleDateString(undefined,{weekday:'short',month:'short',day:'numeric'})}</div><div class="rf">${rr.ref}</div></div><button type="button" class="pl day-play" data-ref="${rr.ref}" data-day="${k}">▶ Listen</button></div>` }
+  $('#tWeek').innerHTML=html;
+  const total=doneSet.size; $('#tProg').textContent=`${total} of 364 read`; $('#tBar').style.width=(total/364*100)+'%';
+}
+$('#tDone').onclick=()=>{ const tp=todayPos(); const n=tp.week?tp.diff+1:1; markDone(n); if(doneSet.has(n)){ const r=$('#tDone').getBoundingClientRect(); burst(r.left+r.width/2,r.top+r.height/2,50) } };
+$('#tWeek').addEventListener('click',e=>{ const b=e.target.closest('[data-done]'); if(b) markDone(b.dataset.done) });
+renderToday();
+
+/* ---------- PAGES (hash routes) ---------- */
+(()=>{
+  const pages=['today','plan','why','join'];
+  const alias={top:'today',stats:'why',mission:'why',family:'why',burn:'why',oath:'join'};
+  function show(){
+    let h=location.hash.slice(1); h=alias[h]||h; if(!pages.includes(h)) h='today';
+    $$('.page').forEach(p=>p.hidden=p.dataset.page!==h);
+    $$('[data-tab]').forEach(a=>a.dataset.tab===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
+    scrollTo(0,0); dispatchEvent(new Event('resize')); onScroll();
+  }
+  addEventListener('hashchange',show); show();
+})();
+
 </script>
 </body>
 </html>
