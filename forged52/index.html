@@ -593,13 +593,20 @@ async function fetchNLT(c){
   }
   if(!out.length) throw new Error('empty'); return out;
 }
+let WEB=null;
+async function localWEB(c){
+  if(!WEB){const r=await fetch('assets/web.json');if(!r.ok)throw new Error('web');WEB=await r.json()}
+  const ch=(WEB[c.usfm]||[])[c.ch-1]; if(!ch) throw new Error('missing');
+  const a=c.v1||1,b=c.v2||ch.length; const out=[]; for(let v=a;v<=Math.min(b,ch.length);v++) if(ch[v-1]) out.push({n:v,t:ch[v-1]});
+  return out;
+}
 async function fetchCh(c){
   const key=tr+'|'+label(c); if(cache[key]){usedTr=cache[key].tr;return cache[key]}
-  usedTr=tr;
-  if(tr==='nlt'){try{const v=await fetchNLT(c);v.tr='nlt';return cache[key]=v}catch(e){usedTr='web'}}
-  const q=encodeURIComponent(c.name.toLowerCase()+' '+c.ch+(c.v1?`:${c.v1}-${c.v2}`:''));
-  const r=await fetch(`https://bible-api.com/${q}?translation=${usedTr}`); if(!r.ok) throw new Error(r.status);
-  const j=await r.json(); const v=j.verses.map(x=>({n:x.verse,t:x.text.replace(/\s+/g,' ').trim()})); v.tr=usedTr; return cache[key]=v;
+  let v;
+  if(tr==='nlt'){ try{v=await fetchNLT(c);v.tr='nlt'}catch(e){v=null} }
+  if(!v&&tr==='kjv'){ try{const q=encodeURIComponent(c.name.toLowerCase()+' '+c.ch+(c.v1?`:${c.v1}-${c.v2}`:''));const r=await fetch(`https://bible-api.com/${q}?translation=kjv`);if(!r.ok)throw 0;const j=await r.json();v=j.verses.map(x=>({n:x.verse,t:x.text.replace(/\s+/g,' ').trim()}));v.tr='kjv'}catch(e){v=null} }
+  if(!v){ v=await localWEB(c); v.tr='web' }   // built-in copy: works offline and inside the preview
+  usedTr=v.tr; return cache[key]=v;
 }
 function marks(){$$('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));$$('[data-tr]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tr===tr))}
 function setIcon(){P.icon.setAttribute('d',playing?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4v16l13-8z');P.play.setAttribute('aria-label',playing?'Pause':'Play')}
@@ -617,7 +624,7 @@ async function openCh(i,auto){
     P.inn.innerHTML=`<p class="pl-msg">Couldn't load ${label(c)}. Check your connection and press play to try again, or <a href="${P.narr.href}" target="_blank" rel="noopener">play it in the Bible app</a>.</p>`; return }
   if(my!==token) return;
   $('#plCopy').hidden=usedTr!=='nlt';
-  P.inn.innerHTML=(tr==='nlt'&&usedTr!=='nlt'?'<p class="pl-msg">The NLT text isn\'t available right now, so this is the WEB translation. The Bible app link below still plays the NLT.</p>':'')+`<h3>${label(c)}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
+  P.inn.innerHTML=(tr!==usedTr?`<p class="pl-msg">${tr.toUpperCase()} couldn't be loaded here, so this is the World English Bible (WEB). The Bible app link below plays the NLT with a narrator.</p>`:'')+`<h3>${label(c)}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
   P.text.scrollTop=0; hl(); if(auto) speak(true);
 }
 function hl(){$$('#plIn p.now').forEach(p=>p.classList.remove('now'));const p=P.inn.querySelector(`p[data-vi="${vi}"]`);if(p){p.classList.add('now');p.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}}
