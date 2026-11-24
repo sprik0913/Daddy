@@ -10,7 +10,7 @@
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Roboto+Slab:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Saira+Stencil+One&family=Barlow+Condensed:wght@600;700;800&family=IBM+Plex+Mono:wght@500;600&family=IBM+Plex+Sans:wght@400;500;600&family=Roboto+Slab:wght@400;500&display=swap" rel="stylesheet">
 <style>
 /* Layout: one working column like a field manual page; square edges, hard rules, condensed headings, mono labels. */
 :root{
@@ -193,6 +193,87 @@ footer{max-width:700px;margin:0 auto;padding:16px 18px 60px;border-top:2px solid
 .pl-small{text-align:center;font-size:.9rem;color:var(--faint);margin-top:12px}
 .pl-small a{color:var(--accent);font-weight:600}
 .pl-copy{font-size:.72rem;color:#5d635b;text-align:center;margin-top:8px;line-height:1.4}
+
+/* ===== TACTICAL: black, coyote tan, olive; stencil display; notched gear-tag corners; topo map ground ===== */
+:root{
+  --bg:#0e0f0c; --surface:#161712; --surface-2:#1f2119; --line:#2c2e26; --line-2:#43463a;
+  --text:#ebe6d8; --muted:#aea891; --faint:#7f7a66; --steel:#8c8775;
+  --accent:#c8a96e; --accent-ink:#151009; --accent-soft:rgba(200,169,110,.10);
+  --olive:#3d4731; --blaze:#d9662b; --warm:#d9662b;
+  --stencil:"Saira Stencil One","Barlow Condensed",Impact,sans-serif;
+  --notch:polygon(12px 0,100% 0,100% calc(100% - 12px),calc(100% - 12px) 100%,0 100%,0 12px);
+}
+html.big{--muted:#cfc9b4;--faint:#aaa58f}
+body{background:#0e0f0c url(assets/topo.png) 0 0/900px 900px repeat}
+.top{background:rgba(10,11,9,.94);border-bottom:2px solid var(--olive)}
+.brand img{filter:grayscale(1) sepia(.6) saturate(1.4) brightness(1.08)}
+.brand span{font-family:var(--stencil);font-weight:400;font-size:1.55rem;letter-spacing:.03em}
+.brand b{color:var(--accent);font-weight:400}
+.tabs a[aria-current="page"]{border-bottom-color:var(--accent)}
+.tool{border-color:var(--olive)}
+@media (max-width:760px){.tabbar{background:#0a0b09;border-top:2px solid var(--olive)}.tabbar a[aria-current="page"]{border-top-color:var(--accent);color:var(--accent)}}
+
+h1{font-family:var(--stencil);font-weight:400;font-size:clamp(2.3rem,7.4vw,3.3rem);line-height:1;letter-spacing:.01em}
+.kicker{color:var(--accent)}
+.btn{clip-path:var(--notch);border-color:var(--line-2);background:var(--surface-2)}
+.btn:hover{border-color:var(--accent)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{background:#d8bc84;border-color:#d8bc84}
+.btn.done{background:transparent;border-color:var(--accent);color:var(--accent)}
+
+.streak{color:var(--blaze);border-color:rgba(217,102,43,.55);clip-path:var(--notch)}
+.segbar i{background:rgba(255,255,255,.04);border-color:var(--line-2)}
+.segbar i.part{background:rgba(200,169,110,.45)}
+.segbar i.full{background:var(--accent)}
+.segbar i.cur{outline-color:var(--text)}
+.prog-meta{color:var(--muted)}
+
+.reading{clip-path:var(--notch);background:linear-gradient(180deg,rgba(61,71,49,.55),rgba(22,23,18,.96) 60%);border:2px solid var(--line-2);border-top:2px solid var(--line-2)}
+.reading::before{content:"";position:absolute;left:0;top:0;right:0;height:4px;background:var(--accent)}
+.reading::after{display:none}
+.reading .ref{font-family:var(--stencil);font-weight:400;font-size:clamp(2.4rem,10vw,3.8rem);line-height:1;letter-spacing:.01em}
+.reading .tagline{display:flex;justify-content:space-between;align-items:center;gap:10px}
+@media (max-width:480px){.reading .serial{display:none}}
+.reading .serial{font-family:var(--mono);font-size:.72rem;letter-spacing:.14em;color:var(--faint)}
+.verse{border-left-color:var(--olive);background:rgba(22,23,18,.92)}
+.list{background:rgba(22,23,18,.94);border-color:var(--line-2)}
+.row.now{background:rgba(200,169,110,.08);box-shadow:inset 4px 0 0 var(--accent)}
+.check{border-color:var(--line-2)}
+.check[aria-pressed="true"]{background:var(--accent);border-color:var(--accent)}
+.play{border-color:var(--line-2)}
+.play:hover{border-color:var(--accent);color:var(--accent)}
+.row.now .d{color:var(--accent)}
+
+.seg{clip-path:var(--notch);border-color:var(--line-2);background:rgba(22,23,18,.9)}
+.seg button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.wk{background:rgba(22,23,18,.94);border-color:var(--line-2)}
+.wk.cur{border-color:var(--accent)}
+.wk summary .tag{background:var(--accent);color:var(--accent-ink)}
+.wk summary .cnt i b.on{background:var(--accent);border-color:var(--accent)}
+
+.patch{display:block;width:min(300px,78vw);height:auto;margin:6px 0 22px;filter:drop-shadow(0 10px 18px rgba(0,0,0,.55))}
+.essay>div{border-top-color:var(--line-2)}
+.essay .n{color:var(--accent)}
+.big-verse{clip-path:var(--notch);background:linear-gradient(180deg,rgba(61,71,49,.6),rgba(22,23,18,.95));border-color:var(--line-2)}
+.big-verse p{font-family:var(--stencil);font-weight:400;font-size:clamp(1.6rem,5.6vw,2.4rem);line-height:1.08}
+.step{clip-path:var(--notch);background:rgba(22,23,18,.94);border-color:var(--line-2)}
+.step h3 span{background:var(--accent);color:var(--accent-ink)}
+.startline input,.field input{background:rgba(22,23,18,.95);border-color:var(--line-2)}
+.toast{background:var(--accent);color:var(--accent-ink);clip-path:var(--notch)}
+footer{border-top-color:var(--olive)}
+
+.player{background:#0b0c0a url(assets/topo.png) 0 0/900px 900px repeat}
+.pl-head{border-bottom-color:var(--olive);background:rgba(11,12,10,.92)}
+.pl-head h2{font-family:var(--stencil);font-weight:400;font-size:1.8rem}
+.pl-chaps button.cur{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.pl-foot{border-top-color:var(--olive);background:rgba(11,12,10,.94)}
+.pl-ctl #plPlay{background:var(--accent);border-color:var(--accent);color:var(--accent-ink);clip-path:var(--notch)}
+.pl-ctl button{border-color:var(--line-2)}
+.pl-opts .g{border-color:var(--line-2)}
+.pl-opts .g button[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink)}
+.pl-text p.now sup{color:var(--accent)}
+.pl-small a{color:var(--accent)}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -218,7 +299,7 @@ footer{max-width:700px;margin:0 auto;padding:16px 18px 60px;border-top:2px solid
     <div class="prog"><div class="segbar" id="tSeg" aria-hidden="true"></div><div class="prog-meta"><span id="tDayOf"></span><span id="tPct"></span></div></div>
 
     <div class="reading">
-      <div class="kicker" id="tKick">Today's reading</div>
+      <div class="tagline"><div class="kicker" id="tKick">Today's reading</div><span class="serial" id="tSerial">F52</span></div>
       <div class="ref" id="tRef"></div>
       <div class="cat" id="tCat"></div>
       <div class="acts">
@@ -252,6 +333,14 @@ footer{max-width:700px;margin:0 auto;padding:16px 18px 60px;border-top:2px solid
 
   <!-- WHY -->
   <section class="page why" data-page="why" hidden>
+    <svg class="patch" viewBox="0 0 300 170" role="img" aria-label="Forged52 patch">
+  <rect x="3" y="3" width="294" height="164" rx="22" fill="#3d4731" stroke="#232a1c" stroke-width="4"/>
+  <rect x="13" y="13" width="274" height="144" rx="15" fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-dasharray="7 5"/>
+  <text x="150" y="50" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">BUILD THE MAN</text>
+  <g fill="#ebe6d8"><rect x="40" y="70" width="8" height="34"/><rect x="31" y="78" width="26" height="7"/><rect x="252" y="70" width="8" height="34"/><rect x="243" y="78" width="26" height="7"/></g>
+  <text x="150" y="104" text-anchor="middle" font-family="'Saira Stencil One',sans-serif" font-size="46" fill="#ebe6d8">FORGED52</text>
+  <text x="150" y="138" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">LEAD THE FAMILY</text>
+</svg>
     <div class="kicker">Why Forged52</div>
     <h1>A year in the Word, one day at a time.</h1>
     <p class="lead">Forged52 is a simple challenge for men: read the whole Bible in 52 weeks. It isn't about speed or getting it perfect. It's about showing up every morning and letting Scripture shape the man your family follows.</p>
@@ -267,6 +356,14 @@ footer{max-width:700px;margin:0 auto;padding:16px 18px 60px;border-top:2px solid
 
   <!-- START / JOIN -->
   <section class="page" data-page="join" hidden>
+    <svg class="patch" style="width:min(220px,60vw)" viewBox="0 0 300 170" role="img" aria-label="Forged52 patch">
+  <rect x="3" y="3" width="294" height="164" rx="22" fill="#3d4731" stroke="#232a1c" stroke-width="4"/>
+  <rect x="13" y="13" width="274" height="144" rx="15" fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-dasharray="7 5"/>
+  <text x="150" y="50" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">BUILD THE MAN</text>
+  <g fill="#ebe6d8"><rect x="40" y="70" width="8" height="34"/><rect x="31" y="78" width="26" height="7"/><rect x="252" y="70" width="8" height="34"/><rect x="243" y="78" width="26" height="7"/></g>
+  <text x="150" y="104" text-anchor="middle" font-family="'Saira Stencil One',sans-serif" font-size="46" fill="#ebe6d8">FORGED52</text>
+  <text x="150" y="138" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">LEAD THE FAMILY</text>
+</svg>
     <div class="kicker">Start</div>
     <h1>Take the challenge</h1>
     <p class="lead">Three quick steps. No account needed. Your progress is saved on this device.</p>
@@ -383,10 +480,10 @@ function rowHTML(n,isNow){const r=reading(n),on=done.has(n);
 function renderToday(){
   const idx=dayIndex(), n=curDay(), r=reading(n), before=idx<0, after=idx>=364;
   const h=new Date().getHours();
-  $('#tHello').textContent=before?'Starts '+fmt(dateFor(1),{weekday:'long'}):after?'52 weeks done':`Day ${n} of 364`;
+  $('#tHello').textContent=before?'Starts '+fmt(dateFor(1),{weekday:'long'}):after?'52 weeks done':`Day ${String(n).padStart(3,'0')} / 364`;
   $('#tDate').textContent=fmt(new Date(),{weekday:'long',month:'long',day:'numeric'});
   $('#tKick').textContent=before?`Day 001 · ${fmt(dateFor(1),{weekday:'short',month:'short',day:'numeric'})}`:after?'Finished':`Today's reading · Day ${String(n).padStart(3,'0')}`;
-  $('#tRef').textContent=nice(r.ref);
+  $('#tRef').textContent=nice(r.ref); $('#tSerial').textContent=`F52-W${String(r.week).padStart(2,'0')}-D${String(n).padStart(3,'0')}`;
   $('#tCat').textContent=r.cat?`Week ${r.week} · ${r.cat}`:`Week ${r.week}`;
   const isDone=done.has(n); const b=$('#tDone'); b.classList.toggle('done',isDone); b.querySelector('span').textContent=isDone?'Completed':'Mark complete';
   let st=0; if(!before){let k=done.has(n)?n:n-1;while(k>0&&done.has(k)){st++;k--}} const se=$('#tStreak'); se.textContent=st>1?`${st} days straight`:''; se.hidden=st<2;
