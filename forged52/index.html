@@ -646,7 +646,7 @@ function openPlayer(n){
   marks(); P.el.hidden=false; document.body.style.overflow='hidden'; P.play.focus(); stop(); openCh(0,false);
 }
 function closeP(){stop();P.el.hidden=true;document.body.style.overflow='';lastFocus&&lastFocus.focus&&lastFocus.focus()}
-P.play.onclick=()=>{if(playing)stop();else{token++;speak(vi===0)}};
+P.play.onclick=()=>{if(playing){stop();return} if(synth){try{synth.cancel();const u=new SpeechSynthesisUtterance(' ');u.volume=0;synth.speak(u)}catch(e){}} token++;speak(vi===0)}; // the silent utterance unlocks speech on iPhone during the tap
 $('#plPrev').onclick=()=>{const w=playing;stop();if(vi>0)vi--;else if(ci>0){openCh(ci-1,false);return}hl();if(w)speak()};
 $('#plNext').onclick=()=>{const w=playing;stop();if(vi<verses.length-1){vi++;hl();if(w)speak()}else if(ci<chs.length-1)openCh(ci+1,w)};
 $('#plClose').onclick=closeP;

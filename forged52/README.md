@@ -1,5 +1,7 @@
 # Forged52
 
+Live: https://forged52-daily.netlify.app (Netlify site `forged52-daily`, deployed by uploading this folder as a zip)
+
 A calm, four-page site for the Forged52 challenge: read the whole Bible in 52 weeks. Open `index.html` or host the folder on any static host.
 
 - **Today** (default): today's reading, Listen, Mark complete, streak, progress, a verse for the day, and this week's checklist
