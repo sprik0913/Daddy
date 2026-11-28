@@ -9,7 +9,7 @@ const BASE = process.env.BASE || 'http://localhost:8765/';
 const OUT = process.argv[2] || 'test-results';
 mkdirSync(OUT, { recursive: true });
 const OFFLINE_HOSTS = /supabase\.co|api\.nlt\.to|ebible\.org/; // keep tests independent of live services
-const ROUTES = ['today', 'journey', 'week-28', 'study', 'study-books', 'study-book-ROM', 'study-bible-timeline', 'study-manhood', 'study-manhood-husband', 'study-questions-suffering', 'study-prayer-lords', 'study-library-courage', 'study-saved', 'study-assistant', 'crew', 'lead-28', 'profile', 'journal', 'memory', 'word'];
+const ROUTES = ['today', 'journey', 'week-28', 'study', 'study-books', 'study-book-ROM', 'study-bible-timeline', 'study-manhood', 'study-manhood-husband', 'study-questions-suffering', 'study-questions-endtimes', 'study-bible-geography', 'study-prayer', 'study-prayer-lords', 'study-library-courage', 'study-saved', 'study-assistant', 'crew', 'lead-28', 'profile', 'journal', 'memory', 'word'];
 const WIDTHS = [[390, 844, 'm'], [768, 1024, 't'], [1280, 860, 'd']];
 // A man on week 28 of the old app, with a journal line and a saved theme
 const LEGACY = { 'f52.plan': 'topical', 'f52.start': '', 'f52.done': '', 'f52.name': 'Josh', 'f52.joined': '1', 'f52.j.190': 'God kept me steady today.', 'f52.color': 'iron' };

@@ -5,7 +5,8 @@
 FORGED52 is the flagship program of FORGED, a free discipleship app for men. It covers the whole Bible in 52 weeks, with a weekly theme, devotional, mission, prayer, Scripture memory and private crews. There are no ads and no subscriptions, and no account is needed to begin.
 
 - **Live (production):** https://forged52.pages.dev. This is a Cloudflare Pages project, `forged52`.
-- **Preview of this redesign:** https://preview.forged52.pages.dev (Pages branch `preview`).
+- **Preview branch:** https://preview.forged52.pages.dev (Pages branch `preview`).
+- **Rollback:** the last pre-redesign production deployment is `658f8cc1` (https://658f8cc1.forged52.pages.dev). Roll back in the Cloudflare dashboard under Pages → forged52 → Deployments.
 
 ## Architecture
 
@@ -39,7 +40,7 @@ tests/                  unit tests (node:test) and a Playwright smoke test
 | `#start` | 7-step onboarding |
 | `#today` | Daily dashboard: the Word, the Forge, the Mission, the Prayer, the Brotherhood, Scripture memory, completion |
 | `#journey`, `#week-N` | 12 phases and 52 weeks; each week's devotional, readings, questions, mission, discussion guide |
-| `#study`, `#study-<section>[-<id>]` | Understand the Bible, Biblical manhood, Hard questions, Prayer room, Scripture library, My library, Study assistant (not configured) |
+| `#study`, `#study-<section>[-<id>]` | Understand the Bible (66 book intros, timeline, covenants, prophecies, genres, places, background), Biblical manhood (20 topics), Hard questions (21), Prayer room (16 guides), Scripture library (22 topics), My library, Study assistant (not configured) |
 | `#crew`, `#lead-N` | Brotherhood (crews) and the printable Point Man meeting guide |
 | `#profile`, `#journal`, `#memory`, `#word` | Profile and settings, private journal, Scripture memory, posting the weekly word |
 

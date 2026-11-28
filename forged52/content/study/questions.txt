@@ -68,7 +68,7 @@ summary: Christians still sin, but they cannot be at peace with sin.
 
 John says if we say we have no sin we deceive ourselves, and also that whoever is born of God does not keep on sinning. Paul asks, "Shall we sin so grace may abound? By no means!" The Christian life involves real struggle between flesh and Spirit, real confession and real growth.
 
-## assurance | Can I know I’m saved?
+## assurance | Can I know I’m saved? Can salvation be lost?
 refs: 1JN.5.11-13 ; JHN.10.27-30 ; ROM.8.1 ; ROM.8.38-39 ; EPH.2.8-9
 summary: John wrote so that believers may know they have eternal life.
 
@@ -99,3 +99,85 @@ summary: Every believer has gifts from the Spirit to serve the church.
 Paul lists gifts such as teaching, serving, encouraging, giving, leading and mercy. The point is not to label yourself, but to serve. Gifts are often discovered by serving and listening to others’ feedback.
 
 views: Christians differ on whether certain miraculous gifts (tongues, prophecy) continue today (continuationist versus cessationist views).
+
+## pharaoh | Why did God harden Pharaoh’s heart?
+refs: EXO.4.21 ; EXO.8.15 ; EXO.8.32 ; EXO.9.12 ; ROM.9.17-18
+summary: Exodus says both that Pharaoh hardened his own heart and that God hardened it.
+
+Exodus describes Pharaoh hardening his own heart several times (for example 8:15 and 8:32) and also says the Lord hardened his heart (9:12 and later). The text holds both together: Pharaoh freely resisted God, and God confirmed and used that resistance to display his power and rescue Israel. Paul quotes this in Romans 9 to show God’s sovereign freedom in mercy and judgment.
+
+Application: persistent resistance to God is dangerous. Today, if you hear his voice, do not harden your heart (Hebrews 3:15).
+
+views: Reformed readers emphasize God’s sovereign decree; Arminian and Wesleyan readers emphasize that God gave Pharaoh over to a hardness he chose. Both affirm Pharaoh was responsible and God is just.
+
+## death | What happens when we die?
+refs: 2CO.5.6-8 ; PHP.1.21-23 ; LUK.23.42-43 ; 1TH.4.13-18 ; 1CO.15.51-55
+summary: For the believer, to be absent from the body is to be present with the Lord, awaiting the resurrection.
+
+Jesus told the thief on the cross, "Today you will be with me in Paradise." Paul says that departing to be with Christ is far better. Scripture also looks beyond that to the resurrection of the body when Christ returns, when death itself is swallowed up in victory.
+
+The Christian hope is not only going to heaven when we die, but bodily resurrection and life in a renewed creation.
+
+views: Most Christians believe in a conscious "intermediate state" with Christ before the resurrection. Some hold to "soul sleep." Catholic teaching includes purgatory, which Protestants reject.
+
+## salvation | What is salvation?
+refs: EPH.2.1-10 ; ROM.3.23-26 ; ROM.10.9-10 ; TIT.3.4-7 ; JHN.3.16-18
+summary: Salvation is God rescuing sinners from sin and death through Jesus Christ, received by faith.
+
+All have sinned and fall short of God’s glory. Jesus died for our sins and rose again. Salvation is by grace through faith, not by works, so no one can boast. Yet we are saved for good works, which flow from new life rather than earning it.
+
+Salvation includes forgiveness (justification), a new heart and growth in holiness (sanctification) and the future hope of glory.
+
+views: Protestants emphasize justification by faith alone. Catholic and Orthodox traditions describe salvation more as a process involving the sacraments. All affirm that salvation is God’s gracious work in Christ.
+
+## judgment | If God forgives, why is there a final judgment?
+refs: 2CO.5.10 ; ROM.8.1 ; REV.20.11-15 ; ACT.17.30-31 ; JHN.5.24
+summary: Judgment shows that God takes evil seriously and sets the world right. In Christ, believers face it without condemnation.
+
+A good judge does not ignore evil. The final judgment means that every injustice will be answered. For those in Christ, there is no condemnation, because Jesus bore judgment for them. Jesus said whoever believes has passed from death to life.
+
+Believers will still give an account of their lives (2 Corinthians 5:10), not to determine salvation but to receive what God in grace rewards.
+
+## ot-hard | Why are there difficult passages in the Old Testament?
+refs: DEU.20.16-18 ; GEN.15.16 ; EZK.18.23 ; MAT.19.8 ; HEB.1.1-2
+summary: Some passages are hard. Read them in context, in the whole story of Scripture, and in light of Jesus.
+
+Passages about the conquest of Canaan, harsh laws or violence are genuinely difficult. Context helps: God waited centuries before judging Canaan (Genesis 15:16), these commands were limited to a specific time, and God takes no pleasure in the death of the wicked (Ezekiel 18:23). Jesus taught that some laws were concessions to hardened hearts. Describing an event is not the same as approving it.
+
+God’s revelation unfolds over time and reaches its fullness in Jesus. It is fine to wrestle; many faithful believers have.
+
+views: Christians explain these texts differently (for example, hyperbolic ancient war language, unique judgment, progressive revelation). Honest humility is appropriate.
+
+## warfare | What is spiritual warfare?
+refs: EPH.6.10-18 ; 1PE.5.8-9 ; JAS.4.7 ; 2CO.10.3-5 ; COL.2.15
+summary: Christians face real spiritual opposition, and Christ has already won the decisive victory.
+
+Paul says our struggle is not against flesh and blood but against spiritual forces of evil, and he describes the armor of God: truth, righteousness, the gospel, faith, salvation, the Word and prayer. Peter warns that the devil prowls like a lion. Yet Christ disarmed the powers at the cross.
+
+Spiritual warfare is mostly ordinary faithfulness: knowing Scripture, praying, resisting temptation, confessing sin and standing together.
+
+## revelation | What does the book of Revelation teach?
+refs: REV.1.1-3 ; REV.5.9-10 ; REV.19.11-16 ; REV.21.1-5 ; REV.22.20
+summary: Revelation is a vision of Jesus reigning, his people persevering and God making all things new.
+
+Revelation was written to suffering churches. It uses symbolic imagery (much drawn from Daniel, Ezekiel and Zechariah) to show that the Lamb who was slain is on the throne, that evil will be judged and that God will dwell with his people in a new creation.
+
+Its main call is faithful endurance and worship. It ends with a prayer: "Come, Lord Jesus."
+
+views: Interpreters read it as mostly future (futurist), fulfilled in the first century (preterist), describing church history (historicist) or as timeless symbols of the battle between good and evil (idealist). Many combine these.
+
+## endtimes | How do Christians understand end-times prophecy?
+refs: MAT.24.36-44 ; ACT.1.6-11 ; 1TH.5.1-11 ; 2PE.3.8-13 ; REV.20.1-6
+summary: Christians agree Jesus will return bodily, judge the world and renew creation. They differ on the details.
+
+Jesus said no one knows the day or hour, and he called his followers to stay awake and be ready. The angels promised he would return the same way he left. Peter says the delay is God’s patience.
+
+views: Premillennial views (including dispensational and historic premillennialism) expect Christ to return before a thousand-year reign. Amillennial views read the thousand years as the present reign of Christ. Postmillennial views expect the gospel to bring a long era of flourishing before Christ returns. Christians also differ on a rapture. All affirm the blessed hope of his return.
+
+## heaven | What does the Bible teach about heaven and the new earth?
+refs: REV.21.1-4 ; REV.22.1-5 ; ISA.65.17-25 ; ROM.8.19-23 ; 1CO.2.9
+summary: The final hope is not floating in clouds but God dwelling with his people in a renewed heaven and earth.
+
+Scripture ends with a new heaven and new earth, a holy city, no more death or mourning and God’s people seeing his face. Creation itself will be set free from decay. The best thing about heaven is God himself.
+
+This hope gives meaning to present faithfulness: nothing done in the Lord is wasted (1 Corinthians 15:58).

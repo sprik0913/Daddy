@@ -42,7 +42,7 @@ function books(S) {
   const ot = S.books.slice(0, 39), nt = S.books.slice(39);
   const list = (bs) => `<div class="list">${bs.map((b) => `<a class="li" href="#study-book-${b.u}"><span class="grow"><span class="t">${esc(b.name)}</span><br><span class="s">${esc(b.big.slice(0, 110))}${b.big.length > 110 ? '…' : ''}</span></span>${icon('chevron-right')}</a>`).join('')}</div>`;
   return `${back('#study', 'Understand the Bible')}<h1 class="h1">Understand the Bible</h1>
-  <div class="tiles section">${S.bible.map((s) => `<a class="tile" href="#study-bible-${s.id}">${icon({ timeline: 'milestone', covenants: 'link', prophecies: 'crown', genres: 'library-big', connections: 'git-merge' }[s.id] || 'book')}<b>${esc(s.title)}</b><span>${s.items.length} ${s.id === 'timeline' ? 'eras' : 'entries'}</span></a>`).join('')}</div>
+  <div class="tiles section">${S.bible.map((s) => `<a class="tile" href="#study-bible-${s.id}">${icon({ timeline: 'milestone', covenants: 'link', prophecies: 'crown', genres: 'library-big', connections: 'git-merge', geography: 'map', background: 'landmark' }[s.id] || 'book')}<b>${esc(s.title)}</b><span>${s.items.length} ${s.id === 'timeline' ? 'eras' : 'entries'}</span></a>`).join('')}</div>
   <section class="section"><h2 class="h2">Old Testament</h2><div style="margin-top:10px">${list(ot)}</div></section>
   <section class="section"><h2 class="h2">New Testament</h2><div style="margin-top:10px">${list(nt)}</div></section>${draft()}`;
 }
@@ -68,14 +68,15 @@ const TOPIC_META = { manhood: ['Biblical manhood', 'Study what Scripture says ab
 function topicList(S, sec, id) {
   const list = S[sec]; const [title, sub] = TOPIC_META[sec];
   if (id) { const t = list.find((x) => x.id === id); if (t) return sec === 'prayer' ? prayerGuide(t) : sec === 'library' ? libTopic(t) : article(t, sec, title); }
-  return `${back('#study', title)}<h1 class="h1">${esc(title)}</h1><p class="lead" style="margin-top:6px">${esc(sub)}</p>
+  const extra = sec === 'prayer' ? `<div class="row-btns section"><a class="btn" href="#journal">${icon('notebook-pen')} My prayer journal</a><button class="btn ghost" type="button" data-prayreq>${icon('plus')} New prayer request</button></div><p class="faint" style="margin-top:8px">Your prayers and answered prayers live in your private journal. Mark a request answered to keep a record of God’s faithfulness.</p>` : '';
+  return `${back('#study', title)}<h1 class="h1">${esc(title)}</h1><p class="lead" style="margin-top:6px">${esc(sub)}</p>${extra}
   <div class="list section">${list.map((t) => `<a class="li" href="#study-${sec}-${t.id}"><span class="grow"><span class="t">${esc(t.title)}</span>${t.summary ? `<br><span class="s">${esc(t.summary)}</span>` : `<br><span class="s">${t.refs.length} verses</span>`}</span>${icon('chevron-right')}</a>`).join('')}</div>${sec === 'library' ? '' : draft()}`;
 }
 
 function article(t, sec, title) {
   return `${back('#study-' + sec, title)}<article class="article"><h1 class="h1">${esc(t.title)}</h1><p class="lead" style="margin-top:8px">${esc(t.summary)}</p>
-  <h3>Scripture</h3>${refBtns(t.refs)}
-  ${t.body.map((p) => `<p style="margin-top:12px">${esc(p)}</p>`).join('')}
+  <h3>Scripture</h3><p class="faint">Read these first. Scripture is the authority; everything below is explanation.</p>${refBtns(t.refs)}
+  <h3>${sec === 'questions' ? 'Explanation and context' : 'Teaching'}</h3>${t.body.map((p, i) => `<p style="margin-top:${i ? 12 : 4}px">${esc(p)}</p>`).join('')}
   ${t.views ? `<h3>Where Christians differ</h3><p>${esc(t.views)}</p>` : ''}
   ${t.practice ? `<h3>Put it into practice</h3><ul class="checklist">${t.practice.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}
   ${t.ask ? `<h3>Ask yourself</h3><ul class="checklist">${t.ask.map((x) => `<li>${esc(x)}</li>`).join('')}</ul>` : ''}

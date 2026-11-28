@@ -54,3 +54,28 @@ prompts: Name three people who don’t know Jesus. || Ask God to open their hear
 refs: 1TI.2.1-2 ; JER.29.7
 summary: Pray for those in authority and for the peace of your city.
 prompts: Pray for national and local leaders. || Pray for your pastor and church. || Pray for justice and peace in your community. || Pray for revival.
+
+## personal | A personal prayer
+refs: PSA.139.23-24 ; HEB.4.16
+summary: Come boldly to the throne of grace with whatever is on your heart.
+prompts: Be still for a moment and remember God is with you. || Tell him what is on your mind, plainly. || Ask him to search your heart. || Write down one thing you sense he is saying through Scripture.
+
+## finances | For financial wisdom
+refs: PRO.3.9-10 ; PHP.4.19 ; MAT.6.31-33 ; PRO.22.7
+summary: Seek first his kingdom. Ask for wisdom, contentment and generosity.
+prompts: Thank God for his provision. || Confess any fear, greed or debt that weighs on you. || Ask for wisdom for a specific money decision. || Ask for a generous heart.
+
+## hardship | In hardship
+refs: PSA.46.1-3 ; 2CO.4.8-9 ; ROM.8.28 ; ISA.43.2
+summary: God is our refuge and strength, a very present help in trouble.
+prompts: Tell God honestly what is hard right now. || Remember one time he was faithful before. || Ask for strength for today, not all of tomorrow. || Ask who you can lean on.
+
+## growth | For spiritual growth
+refs: COL.1.9-12 ; EPH.3.14-19 ; 2PE.3.18
+summary: Pray Paul’s prayers for yourself and others.
+prompts: Ask to be filled with knowledge of his will. || Ask to grasp how wide and deep Christ’s love is. || Ask for fruit in one specific area. || Thank him for growth you have seen.
+
+## marriage | For your marriage
+refs: ECC.4.12 ; COL.3.12-14 ; 1CO.13.4-7
+summary: A cord of three strands is not quickly broken.
+prompts: Thank God for your wife and your marriage. || Confess where you have been impatient or unkind. || Pray 1 Corinthians 13 over your marriage. || Ask for unity, joy and faithfulness.

@@ -50,3 +50,22 @@ item: Manna | Exodus 16 → John 6 | Jesus is the bread of life. | EXO.16.4 ; JH
 item: Temple | 1 Kings 8 → John 2:19–21 | Jesus is where God dwells with man. | 1KI.8.10-11 ; JHN.2.19-21
 item: Jonah | Jonah 1 → Matthew 12:40 | Three days and three nights. | JON.1.17 ; MAT.12.40
 item: Adam | Genesis 3 → Romans 5 | Death through one man, life through one man. | ROM.5.18-19
+
+## geography | Places of the Bible
+item: Eden and Mesopotamia | Genesis 2, 11 | The story begins near the Tigris and Euphrates. Abraham is called from Ur, in southern Mesopotamia. | GEN.2.10-14 ; GEN.11.31
+item: Canaan / Israel | Promised land | A narrow land bridge between Egypt and Mesopotamia, about 150 miles long. God placed his people at the crossroads of the nations. | GEN.12.5-7 ; DEU.8.7-9
+item: Egypt | Genesis 37 – Exodus 14 | Joseph rises to power, Israel grows into a nation and is enslaved, and God brings them out at the Red Sea. | EXO.14.21-22
+item: Mount Sinai | Exodus 19 | In the Sinai wilderness God gives the law and makes his covenant with Israel. | EXO.19.16-20
+item: Jerusalem | 2 Samuel 5 onward | David’s capital and site of the temple. Jesus is crucified and rises just outside its walls. | 2SA.5.6-7 ; LUK.24.46-47
+item: Babylon | 2 Kings 25; Daniel | The empire that destroyed Jerusalem in 586 BC and carried Judah into exile. | DAN.1.1-2
+item: Galilee | The Gospels | The northern region where Jesus grew up in Nazareth and centered his ministry around the Sea of Galilee. | MAT.4.12-17
+item: Antioch, Asia Minor and Greece | Acts 13–20 | The church sends Paul and Barnabas from Antioch. Paul plants churches in Galatia, Philippi, Thessalonica, Corinth and Ephesus. | ACT.13.1-3
+item: Rome | Acts 28; Romans | Capital of the empire. Paul arrives in chains and keeps preaching the kingdom of God. | ACT.28.30-31
+
+## background | Historical and Cultural Background
+item: Covenant and honor | Ancient Near East | Covenants were binding relationships sealed with oaths and signs. Honor and shame shaped social life more than individual reputation. | GEN.15.9-18
+item: Temple and sacrifice | Leviticus | Sacrifices taught that sin brings death and that God provides a substitute. The temple was where heaven and earth met. | LEV.17.11 ; HEB.9.22-26
+item: Jewish groups in Jesus’ day | First century | Pharisees (strict law-keepers), Sadducees (priestly elite, denied resurrection), Zealots (revolutionaries) and Essenes (separatists). | ACT.23.6-8
+item: Roman rule | 63 BC onward | Rome ruled Judea through client kings like Herod and governors like Pilate. Crucifixion was Rome’s punishment for rebels and slaves. | LUK.2.1 ; LUK.23.1-4
+item: Meals and table fellowship | The Gospels | Eating with someone signaled acceptance. Jesus eating with tax collectors and sinners was a scandal. | LUK.15.1-2
+item: Letters in the ancient world | New Testament | Letters were read aloud to whole churches and carried by trusted messengers. They answered real situations. | COL.4.16
