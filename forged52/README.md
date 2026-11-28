@@ -13,6 +13,8 @@ A calm, four-page site for the Forged52 challenge: read the whole Bible in 52 we
 
 **Dig deeper**: under each day's reading on Today: a one-line recap of every chapter read, a briefing on each book (author, setting, big idea, where Jesus shows up), three questions to think on, and a "Where did you see God today?" journal saved per day that can be shared with a brother. The recaps and briefings live in `content/*.txt` (one line per chapter, written for this site; worth a review by a pastor or Bible teacher) and are compiled to `assets/recap.json` by `python3 tools/build_recap.py`, which also checks all 1,189 chapters are covered.
 
+**Sync link**: `https://forged52.pages.dev/?plan=topical&week=28&day=7` sets the plan, lines today up with that week and day (day 1 = Sunday) and marks earlier days complete, then cleans the address.
+
 **Large text**: the Aa button scales the whole site up and brightens secondary text.
 
 Progress is stored in the browser (localStorage); no account required. Reading plans come from the Forged52 app.

@@ -810,6 +810,18 @@ document.addEventListener('click',e=>{
 /* ---------- large text ---------- */
 (()=>{const b=$('#bigBtn');const set=on=>{document.documentElement.classList.toggle('big',on);b.setAttribute('aria-pressed',on);store.set('f52.big',on?'1':'0')};set(store.get('f52.big')==='1');b.onclick=()=>set(!document.documentElement.classList.contains('big'))})();
 
+/* ---------- sync link: ?plan=topical&week=28&day=7 sets progress to that spot (day 1 = Sunday) ---------- */
+(()=>{
+  const q=new URLSearchParams(location.search); const w=+q.get('week'), d=+q.get('day');
+  if(!(w>=1&&w<=52&&d>=1&&d<=7)) return;
+  const pl=q.get('plan'); if(pl==='topical'||pl==='chrono') route=pl;
+  const n=(w-1)*7+d, t=new Date(); t.setHours(0,0,0,0); t.setDate(t.getDate()-(n-1));
+  start=iso(t); for(let k=1;k<n;k++) done.add(k); store.set('f52.joined','1'); save();
+  q.delete('week'); q.delete('day'); q.delete('plan'); const rest=q.toString();
+  history.replaceState(null,'',location.pathname+(rest?'?'+rest:'')+'#today');
+  setTimeout(()=>toast(`Synced: week ${w}, ${DAYS[d-1][0].toUpperCase()+DAYS[d-1].slice(1)}`),400);
+})();
+
 /* ---------- router ---------- */
 function renderAll(jump){renderToday();renderPlan(jump);if(window.renderDig)renderDig()}
 function show(){
