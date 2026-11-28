@@ -1,6 +1,6 @@
 # Forged52
 
-Live: https://forged52-daily.netlify.app (Netlify site `forged52-daily`, deployed by uploading this folder as a zip)
+Live: https://forged52.pages.dev (Cloudflare Pages project `forged52`; the folder is packed into one `_worker.js` and uploaded as a direct deployment). The older copy at https://forged52-daily.netlify.app stopped updating when the Netlify account ran out of credits.
 
 A calm, four-page site for the Forged52 challenge: read the whole Bible in 52 weeks. Open `index.html` or host the folder on any static host.
 
@@ -14,3 +14,7 @@ A calm, four-page site for the Forged52 challenge: read the whole Bible in 52 we
 **Large text**: the Aa button scales the whole site up and brightens secondary text.
 
 Progress is stored in the browser (localStorage); no account required. Reading plans come from the Forged52 app.
+
+## Deploying
+
+`python3 tools/build_worker.py <folder with index.html and assets/> _worker.js` packs the site into one Cloudflare Pages advanced-mode worker. Upload it as a direct deployment to the `forged52` Pages project (multipart POST to `/accounts/<id>/pages/projects/forged52/deployments` with `manifest={}`, `branch=main` and the `_worker.js` file).

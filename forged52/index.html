@@ -826,7 +826,7 @@ addEventListener('hashchange',show); renderAll(); show();
   document.addEventListener('click',e=>{ if(e.target.closest('[data-callout]')){ $('#coLink').textContent=''; open('#calloutSheet'); setTimeout(()=>nm.focus(),250) } });
   $('#coSend').onclick=async()=>{
     const name=nm.value.trim().replace(/[^A-Za-z .'-]/g,'').slice(0,20); store.set('f52.name',name);
-    const base=(location.protocol.startsWith('http')&&!location.hostname.endsWith('claude.ai')&&!location.hostname.includes('claudeusercontent'))?location.origin+location.pathname:'https://forged52-daily.netlify.app/';
+    const base=(location.protocol.startsWith('http')&&!location.hostname.endsWith('claude.ai')&&!location.hostname.includes('claudeusercontent'))?location.origin+location.pathname:'https://forged52.pages.dev/';
     const url=base+(name?`?from=${encodeURIComponent(name)}`:'')+'#challenge';
     const text=`${name?name+' here. ':''}I'm reading the whole Bible in 52 weeks and I'm calling you out. You in?`;
     try{ if(navigator.share){ await navigator.share({title:'Forged52 Challenge',text,url}); return } }catch(err){ if(err&&err.name==='AbortError') return }
