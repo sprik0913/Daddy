@@ -5,7 +5,7 @@ Live: https://forged52-daily.netlify.app (Netlify site `forged52-daily`, deploye
 A calm, four-page site for the Forged52 challenge: read the whole Bible in 52 weeks. Open `index.html` or host the folder on any static host.
 
 - **Today** (default): today's reading, Listen, Mark complete, streak, progress, a verse for the day, and this week's checklist
-- **Plan**: choose Mixed (each weekday a different part of the Bible) or In order (chronological), set a start date, and see all 52 weeks. It opens on your current week; changing the start date moves everything with it
+- **Plan**: choose Topical (each weekday a different part of the Bible, same labels and order as the Forged52 app) or Chronological, set a start date, and see all 52 weeks. It opens on your current week; changing the start date moves everything with it
 - **Challenge** (`#challenge`, the first page new visitors see): a full-screen challenge with rising sparks, the 1-in-10 stat (LifeWay Research, 2017), a phone-time calculator, "I'm in" (pick start day and plan, then a COMMITTED stamp drops you into Day 1), and "Call out a brother", which shares a link like `?from=Josh` that opens with "JOSH CALLED YOU OUT."
 - **Setup**: pick a start date and route, add all 364 readings to your calendar as reminders, and copy an invite link
 
