@@ -356,6 +356,13 @@ body.on-landing footer{display:none}
 @media (prefers-reduced-motion:reduce){.ld-title span,.ld-sub,.ld-ctas{opacity:1;transform:none;animation:none}}
 
 body.on-landing main,body.on-landing footer{display:none}
+.resume{border-color:var(--accent)!important;margin-top:28px}
+.resume h3 span{font-family:var(--sans)!important;font-size:1rem!important}
+.mini{display:flex;align-items:center;gap:8px;font-family:var(--mono);font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.mini select{font-family:var(--sans);font-size:1rem;letter-spacing:0;text-transform:none;background:rgba(22,23,18,.95);border:2px solid var(--line-2);color:var(--text);min-height:50px;padding:0 10px;color-scheme:dark}
+.mini.chk{text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:.95rem;color:var(--muted)}
+.mini.chk input{width:22px;height:22px;accent-color:var(--accent)}
+.rPrev{color:var(--muted);font-size:.95rem}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -457,6 +464,7 @@ body.on-landing main,body.on-landing footer{display:none}
       <button type="button" data-r="chrono" aria-pressed="false"><b>In order</b><span>Genesis to Revelation, as it happened</span></button>
     </div>
     <button class="btn primary" type="button" id="lockIn" style="width:100%;margin-top:18px">Lock it in</button>
+    <p class="ld-p small" style="margin-top:14px;text-align:center">Already partway through? <a class="link-btn" href="#join" data-close data-resume>Pick up where you are</a></p>
     <div class="stamp" id="stamp" aria-hidden="true">Committed</div>
   </div>
 </div>
@@ -533,6 +541,16 @@ body.on-landing main,body.on-landing footer{display:none}
     <div class="kicker">Setup</div>
     <h1>Your plan</h1>
     <p class="lead">Three quick steps. No account needed. Your progress is saved on this device.</p>
+    <div class="step resume" id="resume">
+      <h3><span>&#8635;</span>Already reading? Pick up where you are</h3>
+      <p>Coming from the Forged52 app or another plan? Enter the week and day you're on today. Your dates line up and everything before it is marked complete.</p>
+      <div class="field">
+        <label class="mini">Week <select id="rWeek"></select></label>
+        <label class="mini">Day <select id="rDay"></select></label>
+        <label class="mini chk"><input type="checkbox" id="rMark" checked> Mark earlier days complete</label>
+      </div>
+      <div class="field" style="margin-top:12px"><button class="btn primary" type="button" id="rGo">Set my progress</button><span class="rPrev" id="rPrev"></span></div>
+    </div>
     <div class="steps">
       <div class="step"><h3><span>01</span>Pick your start date</h3><p>Sundays work well. The mixed plan gives each weekday its own part of the Bible, starting with the letters on Sunday.</p>
         <div class="field"><input type="date" id="jStart" aria-label="Start date"><button class="btn" type="button" id="jToday">Start today</button></div></div>
@@ -635,7 +653,7 @@ const fmt=(d,o)=>d.toLocaleDateString(undefined,o);
 function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>e.classList.remove('show'),2200)}
 function setDone(n,v){n=+n;(v??!done.has(n))?done.add(n):done.delete(n);save();renderAll()}
 function setStart(v){if(!v)return;start=v;save();renderAll(true)}
-function setRoute(r){route=r;save();renderAll(true)}
+function setRoute(r){route=r;save();renderAll(true);if(window.refreshResume)refreshResume()}
 
 function rowHTML(n,isNow){const r=reading(n),on=done.has(n);
   return `<div class="row${isNow?' now':''}"><button type="button" class="check" data-done="${n}" aria-pressed="${on}" aria-label="Mark day ${n} complete">${CHECK}</button>
@@ -703,6 +721,22 @@ $('#jIcs').onclick=()=>{
   toast('Calendar file downloaded');
 };
 $('#jShare').onclick=async()=>{const url=location.href.split('#')[0];try{await navigator.clipboard.writeText(url);toast('Link copied')}catch(e){toast(url)}};
+
+/* ---------- resume: line up with a week/day already in progress ---------- */
+(()=>{
+  const W=$('#rWeek'),Dd=$('#rDay');
+  W.innerHTML=[...Array(52)].map((_,i)=>`<option value="${i+1}">${i+1}</option>`).join('');
+  const fill=()=>{const w=+W.value;Dd.innerHTML=[...Array(7)].map((_,i)=>{const r=reading((w-1)*7+i+1);return `<option value="${i+1}">${i+1} · ${nice(r.ref)}</option>`}).join('')};
+  const cur=curDay(); W.value=Math.ceil(cur/7); fill(); Dd.value=((cur-1)%7)+1;
+  const prev=()=>{const n=(+W.value-1)*7+ +Dd.value;$('#rPrev').textContent=`Today becomes Day ${n} of 364`};
+  W.onchange=()=>{fill();prev()}; Dd.onchange=prev; prev();
+  window.refreshResume=()=>{const v=Dd.value;fill();Dd.value=v;prev()};
+  $('#rGo').onclick=()=>{
+    const n=(+W.value-1)*7+ +Dd.value; const d=new Date(); d.setHours(0,0,0,0); d.setDate(d.getDate()-(n-1));
+    start=iso(d); if($('#rMark').checked){ for(let k=1;k<n;k++) done.add(k) } store.set('f52.joined','1'); save(); renderAll(true);
+    toast(`Set to week ${W.value}, day ${Dd.value}`); location.hash='today';
+  };
+})();
 
 /* ---------- shared list clicks ---------- */
 document.addEventListener('click',e=>{
