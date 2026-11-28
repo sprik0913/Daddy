@@ -1,7 +1,7 @@
 # Compile content/*.txt into assets/recap.json and check every chapter of every book is covered.
 import json, glob, os, sys
 here = os.path.dirname(os.path.abspath(__file__)); root = os.path.dirname(here)
-web = json.load(open(os.path.join(root, 'assets/web.json'), encoding='utf-8'))
+web = json.load(open(os.path.join(root, 'data/web.json'), encoding='utf-8'))
 books, ch = {}, {}
 missions, talk, verses = {}, {}, {}
 NAMES = {}
@@ -48,5 +48,5 @@ for i in range(1, 53):
     if not missions.get(i): missing.append(f'mission {i}')
 for code in web:
     if code not in talk: missing.append(f'talk {code}')
-json.dump(out, open(os.path.join(root, 'assets/recap.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
+json.dump(out, open(os.path.join(root, 'data/recap.json'), 'w', encoding='utf-8'), ensure_ascii=False, separators=(',', ':'))
 print('books', len(books), 'chapters', sum(len(v) for v in ch.values()), 'missing', missing)

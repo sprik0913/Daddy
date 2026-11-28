@@ -1,4 +1,4 @@
-// Forged52 API: device transfer codes, crew nudges, weekly word posting, test notifications.
+// FORGED API: device transfer codes, crew nudges and notifications, weekly word posting, test notifications, account deletion.
 import { createClient } from "npm:@supabase/supabase-js@2.45.4";
 import webpush from "npm:web-push@3.6.7";
 
@@ -24,12 +24,14 @@ async function caller(req: Request) {
   return data.user;
 }
 
-export async function pushTo(userId: string, title: string, body: string, url = "/#today") {
+// Sends to every device of a user. With a category, devices that turned that category off are skipped.
+export async function pushTo(userId: string, title: string, body: string, url = "/#today", category?: string, tag?: string) {
   const { data: subs } = await admin.from("push_subs").select("*").eq("user_id", userId);
   let sent = 0;
   for (const s of subs || []) {
+    if (category && s.prefs && s.prefs[category] === false) continue;
     try {
-      await webpush.sendNotification({ endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } }, JSON.stringify({ title, body, url }));
+      await webpush.sendNotification({ endpoint: s.endpoint, keys: { p256dh: s.p256dh, auth: s.auth } }, JSON.stringify({ title, body, url, tag }));
       sent++;
     } catch (e) {
       const code = (e as { statusCode?: number }).statusCode;
@@ -78,12 +80,45 @@ Deno.serve(async (req) => {
       const { error } = await admin.from("nudges").insert({ crew_id, from_user: user.id, to_user });
       if (error) return json({ ok: false, already: true });
       const { data: p } = await admin.from("profiles").select("name").eq("id", user.id).maybeSingle();
-      const sent = await pushTo(to_user, "Forged52", `${p?.name || "A brother"} is picking you up. Today's reading is waiting.`);
+      const sent = await pushTo(to_user, "FORGED52", `${p?.name || "A brother"} is thinking of you. Today's reading is waiting.`, "/#today", "encourage");
       return json({ ok: true, delivered: sent > 0 });
+    }
+    if (action === "crew_notify") {
+      // Tell crewmates something new was shared. Never includes the text itself (lock screens are not private).
+      const user = await caller(req); if (!user) return json({ error: "Not signed in" }, 401);
+      const crew_id = String(body.crew_id || ""); const kind = String(body.kind || "discussion");
+      const { data: members } = await admin.from("crew_members").select("user_id").eq("crew_id", crew_id);
+      const ids = (members || []).map((m) => m.user_id);
+      if (!ids.includes(user.id)) return json({ error: "Not in this crew" }, 403);
+      const [{ data: p }, { data: crew }] = await Promise.all([
+        admin.from("profiles").select("name").eq("id", user.id).maybeSingle(),
+        admin.from("crews").select("name,owner").eq("id", crew_id).maybeSingle(),
+      ]);
+      if (kind === "announcement" && crew?.owner !== user.id) return json({ error: "Only the Point Man can announce" }, 403);
+      const who = p?.name || "A brother";
+      const msg: Record<string, [string, string]> = {
+        prayer: ["prayers", `${who} shared a prayer request.`],
+        announcement: ["discussion", `${who} posted an announcement.`],
+        testimony: ["discussion", `${who} shared a testimony.`],
+        encourage: ["encourage", `${who} posted an encouragement.`],
+        discussion: ["discussion", `${who} added to the discussion.`],
+      };
+      const [cat, text] = msg[kind] || msg.discussion;
+      let sent = 0;
+      for (const id of ids) if (id !== user.id) sent += await pushTo(id, crew?.name || "Your crew", text, "/#crew", cat, "crew-" + crew_id);
+      return json({ ok: true, sent });
+    }
+    if (action === "delete_account") {
+      // Permanently deletes the caller's account. Progress, journal backup, profile, memberships, posts,
+      // prayer requests, push subscriptions and crews they lead are removed by ON DELETE CASCADE.
+      const user = await caller(req); if (!user) return json({ error: "Not signed in" }, 401);
+      const { error } = await admin.auth.admin.deleteUser(user.id);
+      if (error) return json({ error: error.message }, 500);
+      return json({ ok: true });
     }
     if (action === "test_push") {
       const user = await caller(req); if (!user) return json({ error: "Not signed in" }, 401);
-      const sent = await pushTo(user.id, "Forged52", "Reminders are on. See you tomorrow morning.");
+      const sent = await pushTo(user.id, "FORGED52", "Notifications are on. See you at your reading time.");
       return json({ ok: sent > 0 });
     }
     if (action === "post_word") {

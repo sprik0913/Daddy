@@ -1,0 +1,56 @@
+# Prayer room. Same format. "prompts:" are short guided lines (|| separated).
+
+## acts | ACTS: A simple pattern
+refs: PSA.100.1-5 ; 1JN.1.9 ; PHP.4.6
+summary: Adoration, Confession, Thanksgiving, Supplication.
+prompts: Adoration: Praise God for who he is. Name one of his attributes. || Confession: Tell him honestly where you sinned. || Thanksgiving: Thank him for three specific things from today. || Supplication: Ask for what you and others need.
+
+## lords | Praying the Lord’s Prayer
+refs: MAT.6.9-13
+summary: Jesus’ own model, line by line.
+prompts: Our Father in heaven: Thank him that you are his son. || Hallowed be your name: Praise him. || Your kingdom come, your will be done: Surrender your plans. || Give us today our daily bread: Ask for what you need today. || Forgive us as we forgive: Confess, and release someone who hurt you. || Lead us not into temptation: Ask for strength where you are weak.
+
+## wife | For your wife
+refs: EPH.5.25-28 ; 1PE.3.7
+summary: Pray for her heart, her health, her walk with God and your marriage.
+prompts: Thank God for one specific quality in her. || Pray for her burdens today. || Ask God to make you a better husband to her. || Pray for unity and joy in your marriage.
+
+## children | For your children
+refs: PSA.127.3-5 ; 3JN.1.4
+summary: Pray for their faith, character, friends and future.
+prompts: Pray each child’s name and their current need. || Ask God to draw them to himself. || Pray for their friendships and protection. || Ask for patience and wisdom as their father.
+
+## work | For your work
+refs: COL.3.23-24 ; PRO.16.3
+summary: Commit your work to the Lord.
+prompts: Offer today’s work to God. || Pray for coworkers by name. || Ask for integrity in hard decisions. || Ask God for opportunities to serve.
+
+## temptation | In temptation
+refs: 1CO.10.13 ; HEB.4.15-16 ; JAS.4.7
+summary: Draw near to the throne of grace.
+prompts: Tell God honestly what is tempting you. || Thank him that Jesus was tempted and did not sin. || Ask for the way of escape he promises. || Text a brother now.
+
+## anxiety | When anxious
+refs: PHP.4.6-7 ; 1PE.5.7 ; PSA.56.3-4
+summary: Cast your anxiety on him because he cares for you.
+prompts: Name what you are anxious about. || Hand each worry to God one at a time. || Thank him for something he has already done. || Ask for his peace that passes understanding.
+
+## grief | In grief
+refs: PSA.34.18 ; JHN.11.35 ; 2CO.1.3-4
+summary: The Lord is near the brokenhearted.
+prompts: Tell God exactly how you feel. || Remember that Jesus wept. || Ask him to comfort you. || Ask him to bring people around you.
+
+## brothers | For your brothers
+refs: EPH.6.18 ; JAS.5.16
+summary: Pray for the men in your crew.
+prompts: Pray for each brother by name. || Pray for their marriages and families. || Pray for their battles. || Pray that they would finish strong.
+
+## lost | For those who don’t know Christ
+refs: ROM.10.1 ; COL.4.2-6 ; 1TI.2.1-4
+summary: Pray for people by name and for open doors.
+prompts: Name three people who don’t know Jesus. || Ask God to open their hearts. || Ask for an opportunity to talk with them. || Ask for courage and gentleness.
+
+## nation | For leaders and nation
+refs: 1TI.2.1-2 ; JER.29.7
+summary: Pray for those in authority and for the peace of your city.
+prompts: Pray for national and local leaders. || Pray for your pastor and church. || Pray for justice and peace in your community. || Pray for revival.

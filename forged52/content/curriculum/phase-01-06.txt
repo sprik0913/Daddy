@@ -1,0 +1,298 @@
+# FORGED52 curriculum, weeks 1-24. DRAFT for pastoral review.
+# Format: "## WEEK n | Theme" then key: value lines. Lists use " || " between items.
+# memory: USFM|chapter|verse-from|verse-to  (text is pulled from the World English Bible at build time)
+
+## WEEK 1 | A New Identity
+foundation: 2 Corinthians 5:17-21
+truth: In Christ you are not a project to be fixed. You are a new creation, reconciled to God by grace.
+devotional: Most men carry a story about who they are: the screw-up, the provider, the one who has it together, the one who never will. Paul says something stronger is true of anyone in Christ. "The old has passed away; behold, the new has come." That is not a pep talk. It is a fact God declares because Jesus took our sin and gave us his righteousness (v. 21). This year is not about earning a new identity. It is about learning to live from the one you have been given.
+pointman: Brothers, we start here on purpose. Before we talk about marriage, money or leadership, settle this: your worth was decided at the cross. Read like a son, not like an employee trying to keep his job.
+reflect: What old labels do you still believe about yourself? || What does it mean that God made you "the righteousness of God" in Christ? || How would you live this week if you really believed you were new?
+mission: Write down one old label you carry. Next to it, write what God says about you in 2 Corinthians 5:17-21. Keep it where you'll see it every morning.
+discuss: Share one label you grew up carrying. || Why do men find it easier to perform than to receive grace? || What changes in a home when a man knows who he is in Christ?
+endweek: Where did you catch yourself living from your old identity this week, and what did God remind you?
+prayer: Father, thank you that in Christ I am new. Tear down the old names I still answer to. Teach me to live as your son, reconciled and loved, not because of what I do but because of what Jesus has done. Amen.
+memory: 2CO|5|17|17
+
+## WEEK 2 | Saved by Grace
+foundation: Ephesians 2:1-10
+truth: Salvation is God's gift from start to finish. Good works are the fruit of grace, never the price of it.
+devotional: Ephesians 2 opens with bad news: we were dead, not just struggling. Dead men don't help with their own rescue. "But God, being rich in mercy..." made us alive with Christ. Verse 8 is clear: by grace, through faith, and not from yourselves. Then verse 10 shows what grace produces: we are God's workmanship, created for good works he prepared in advance. Discipline without legalism starts right here. You don't read the Bible to get God to love you. You read it because he already does.
+pointman: If you ever miss days this year, come back to this chapter. Grace is not permission to quit. It's the reason you can get back up without shame.
+reflect: Where are you still trying to earn God's approval? || What does "you were dead" mean to you personally? || What good works might God have prepared for you this week?
+mission: Thank God out loud, specifically, for three things grace has done for you. Then do one good work this week that no one will know about.
+discuss: How would you explain grace to a coworker in one minute? || Why is it dangerous to think spiritual habits earn God's favor? || How does grace change the way we treat our families when they fail?
+endweek: When did you feel the pull to earn God's love this week, and how did grace answer it?
+prayer: God, I was dead, and you made me alive. Thank you for saving me by grace through faith. Guard me from pride and from shame. Let everything I do this year flow from gratitude, not fear. Amen.
+memory: EPH|2|8|9
+
+## WEEK 3 | Surrender
+foundation: Luke 9:23-26
+truth: Following Jesus means daily handing him the controls, and finding real life on the other side.
+devotional: Jesus never hid the cost. "If anyone would come after me, let him deny himself and take up his cross daily and follow me." A cross was not a burden you carried for a while. It was the end of your own plans. Daily matters too: surrender is not one big moment but ten thousand small ones. Yet Jesus attaches a promise: whoever loses his life for his sake will save it. Surrender isn't losing yourself. It's finally becoming the man God made.
+pointman: Pick one area you've kept off-limits from God: your phone, your calendar, your money, your temper. That's where your cross is this week.
+reflect: What area of your life are you most reluctant to surrender? || What does "daily" surrender look like at 6 a.m. on a Tuesday? || Where have you seen that losing your life for Jesus actually saves it?
+mission: Each morning this week, pray one sentence before you look at your phone: "Lord, today is yours. Lead me."
+discuss: What does surrender look like for a man who is used to being in charge? || What is the difference between surrender and passivity? || How have you seen a man's surrender bless his family?
+endweek: What did you hand over to God this week, and what did you take back?
+prayer: Jesus, I want to follow you, not just admire you. I give you my plans, my fears and my rights today. Help me pick up my cross daily and trust that life with you is better than life on my own terms. Amen.
+memory: LUK|9|23|23
+
+## WEEK 4 | Faith That Trusts
+foundation: Hebrews 11:1-6; Proverbs 3:5-6
+truth: Faith is confident trust in who God is and what he has promised, even when you can't see the outcome.
+devotional: Hebrews 11 is a roll call of ordinary men who trusted an extraordinary God: Noah building in dry weather, Abraham leaving without a map, Moses choosing hardship over comfort. Faith wasn't the absence of questions. It was leaning their full weight on God's character. Proverbs 3 puts it simply: trust the LORD with all your heart and don't lean on your own understanding. Your understanding is real, but it is small. God's is not.
+pointman: Faith grows like muscle: under load. Name the decision you're facing and bring it to God before you bring it to your spreadsheet.
+reflect: Where are you leaning on your own understanding right now? || Which person in Hebrews 11 do you relate to most, and why? || What promise of God do you need to hold onto this week?
+mission: Write down one situation you are worried about. Pray about it each day and resist trying to fix it yourself for one week. Note what happens.
+discuss: Share a time God came through when you couldn't see the way. || How do faith and planning work together? || How can we model trust in God for our kids or the people around us?
+endweek: How did God show himself trustworthy this week?
+prayer: Lord, I believe; help my unbelief. I bring you the things I can't control. Teach me to trust you with all my heart and acknowledge you in all my ways. Make my path straight. Amen.
+memory: PRO|3|5|6
+
+## WEEK 5 | The Reality of Sin
+foundation: Romans 3:9-26
+truth: Everyone has sinned, and everyone can be justified freely by God's grace through Jesus.
+devotional: Romans 3 levels the field: "There is none righteous, no, not one." Not the worst man you know, and not the best. That honesty matters, because you can't receive a cure for a disease you deny. But Paul doesn't leave us there. Verses 21-26 are some of the best news ever written: righteousness from God, through faith in Jesus Christ, for all who believe, justified freely by his grace. Conviction is God's kindness. Condemnation is not his voice for those in Christ.
+pointman: Men minimize sin or drown in it. Neither is the gospel. Call sin what God calls it, then run to the cross, not away from it.
+reflect: Do you tend to minimize your sin or wallow in it? || What sin have you been calling by a softer name? || How does "justified freely" change the way you approach God after failing?
+mission: Spend ten minutes this week in honest confession. Write it down, bring it to God, then destroy the paper as a reminder that it is forgiven.
+discuss: Why do men find it hard to admit sin to each other? || What is the difference between conviction and condemnation? || How does a man's honesty about his sin affect his home?
+endweek: Where did God convict you this week, and how did you respond?
+prayer: Holy God, I have sinned against you. I don't want to hide or excuse it. Thank you that Jesus paid for it fully. Wash me, and give me a heart that hates sin and loves you more. Amen.
+memory: ROM|3|23|24
+
+## WEEK 6 | Temptation
+foundation: James 1:12-15; 1 Corinthians 10:12-13
+truth: God never tempts you, and he always provides a way out.
+devotional: James traces how sin grows: desire, then conception, then sin, then death. Temptation rarely starts with the big moment. It starts with small permissions. Paul adds a promise: no temptation has seized you that is not common, and God is faithful. He will provide a way of escape so you can endure it. The way out is often early and unglamorous: closing the app, leaving the room, making the call, going to bed.
+pointman: Know your patterns. Tired, alone, bored, stressed: most of us fall at the same times and places. Build your fences there.
+reflect: When and where are you most vulnerable to temptation? || What small permissions usually come before you fall? || What "way of escape" has God already put in front of you?
+mission: Identify your top temptation and put one practical guardrail in place this week. Tell one brother what it is.
+alt: Identify your top temptation and put one practical guardrail in place this week. Tell one trusted brother what it is.
+discuss: Why does temptation feel so personal when Scripture calls it common? || What guardrails have actually helped you? || How can we help each other without shaming one another?
+endweek: Did your guardrail hold? What did you learn about yourself?
+prayer: Father, lead me not into temptation and deliver me from evil. Show me the way out every time, and give me the humility to take it. Thank you that you are faithful even when I am weak. Amen.
+memory: 1CO|10|13|13
+
+## WEEK 7 | Repentance
+foundation: Psalm 51
+truth: God does not despise a broken and contrite heart. Real repentance leads to restoration and joy.
+devotional: Psalm 51 is David's prayer after his sin with Bathsheba and Nathan's confrontation. He doesn't blame or bargain. "Against you, you only, have I sinned." He asks for more than forgiveness. He asks for a clean heart and a renewed spirit. Repentance isn't feeling bad for getting caught. It's turning around: agreeing with God, turning from sin, and turning toward him. And it ends in restored joy and a heart ready to help others return.
+pointman: Repentance is a man's strongest move, not his weakest. The quickest way back to joy is honest confession.
+reflect: Is there anything you need to bring into the light? || What is the difference between regret and repentance? || What would restored joy look like in your life?
+mission: If you've wronged someone, go to them this week and own it without excuses. If there's no one, pray Psalm 51 slowly once a day.
+discuss: What makes a real apology? || How did David's repentance differ from Saul's in 1 Samuel 15? || How do we create homes where confession is safe?
+endweek: What did repentance look like for you this week?
+prayer: Have mercy on me, O God, according to your steadfast love. Create in me a clean heart and renew a right spirit within me. Restore to me the joy of your salvation. Amen.
+memory: PSA|51|10|10
+
+## WEEK 8 | Obedience and Character
+foundation: John 14:15-24
+truth: Obedience is love in action, empowered by the Holy Spirit, not a ladder to earn God's love.
+devotional: Jesus ties love and obedience together: "If you love me, you will keep my commandments." Then he promises the Helper, the Spirit of truth, to live in us. Obedience isn't white-knuckled willpower; it's the Spirit producing a life that matches what we say we believe. Character is built in the small, repeated choices nobody applauds: keeping your word, finishing the job, being the same man at home as at church.
+pointman: Character is what you are in the dark. This week, pick one area where your private life and public life don't match, and close the gap.
+reflect: Where is God asking for obedience you've been delaying? || Where do your private and public lives not match? || How have you seen the Spirit change you over time?
+mission: Do the thing you already know God has asked you to do but have been putting off.
+discuss: Why is delayed obedience still disobedience? || What daily habits build character? || Who taught you what integrity looks like?
+endweek: Where did you choose obedience this week when it cost you something?
+prayer: Jesus, I love you, and I want my life to show it. Fill me with your Spirit. Make me the same man in private as I am in public, and help me obey quickly and gladly. Amen.
+memory: JHN|14|15|15
+
+## WEEK 9 | Prayer
+foundation: Matthew 6:5-15
+truth: Prayer is honest conversation with a Father who already knows what you need and loves to hear you.
+devotional: Jesus assumes his followers pray: "When you pray," not "if." He warns against prayer as performance and gives a pattern instead. Praise: hallowed be your name. Submission: your kingdom come, your will be done. Provision: give us today our daily bread. Forgiveness: forgive us as we forgive. Protection: lead us not into temptation. You don't need impressive words. You need a closed door, an honest heart and a Father who is listening.
+pointman: Most men don't pray because they don't know what to say. Use the Lord's Prayer as a frame and fill in your real life.
+reflect: What keeps you from praying more? || Which line of the Lord's Prayer is hardest for you to pray honestly? || What would change if you prayed for your family every day by name?
+mission: Pray through the Lord's Prayer line by line each day this week, adding your own words to each part.
+discuss: How did you learn to pray, or did you? || What does it look like to pray with your wife or kids? || How can a crew pray for each other well?
+endweek: What did you notice about God or yourself as you prayed this week?
+prayer: Our Father in heaven, hallowed be your name. Teach me to pray. Make my prayers honest, my heart humble and my faith bold. Let your will be done in my home as it is in heaven. Amen.
+memory: PHP|4|6|7
+
+## WEEK 10 | The Word
+foundation: Psalm 119:9-16; 2 Timothy 3:14-17
+truth: Scripture is God-breathed and enough to equip you for every good work.
+devotional: "How can a young man keep his way pure? By guarding it according to your word." Psalm 119 isn't about information. It's about a man treasuring God's word like riches, meditating on it, delighting in it. Paul tells Timothy that all Scripture is God-breathed and useful for teaching, correcting and training in righteousness, so the man of God may be complete. You're not reading a textbook this year. You're hearing your Father speak.
+pointman: Read with a pen. Underline what hits you. One verse you actually obey beats ten chapters you skim.
+reflect: What helps you read the Bible with focus? || What verse has stuck with you so far this year? || Where do you need Scripture to correct or train you right now?
+mission: Pick one verse from this week's readings, write it on a card, and read it at every meal.
+discuss: Why is Scripture called "God-breathed"? || How do we keep Bible reading from becoming a checkbox? || How can we bring Scripture into normal family life?
+endweek: Which passage spoke to you most this week, and what did you do about it?
+prayer: Lord, your word is a lamp to my feet and a light to my path. Give me a hunger for it. Open my eyes to see wonderful things in your law, and help me obey what I read. Amen.
+memory: 2TI|3|16|17
+
+## WEEK 11 | Self-Control
+foundation: 1 Corinthians 9:24-27; Matthew 6:16-18
+truth: The Spirit grows self-control in us, training our desires to serve God rather than rule us.
+devotional: Paul uses an athlete's language: "I discipline my body and keep it under control." Self-control is a fruit of the Spirit, not a personality trait for a lucky few. Jesus talks about fasting the same way he talks about prayer and giving: when you fast. Fasting reminds a man that his appetites don't run him. Saying no to something good for a short time makes room to say yes to God. This isn't about earning points. It's about freedom.
+pointman: If you've never fasted, start small: one meal, replaced with prayer. The goal is hunger for God, not a diet.
+reflect: Which appetite tends to control you most? || What would it look like to train rather than just try harder? || How could fasting draw you closer to God?
+mission: Fast from one thing this week (a meal, social media, sports talk, sugar) and use that time to pray. If you have a medical condition, choose a non-food fast.
+discuss: Where do men lack self-control most in our culture? || How do you keep fasting from becoming legalism? || What fruit of the Spirit do you want most?
+endweek: What did your fast reveal about your heart?
+prayer: Spirit of God, grow self-control in me. Free me from the appetites that rule me. Teach me to hunger for you more than anything else. Amen.
+memory: GAL|5|22|23
+
+## WEEK 12 | Rhythms of Rest and Worship
+foundation: Mark 1:32-39; Hebrews 10:23-25
+truth: God built us for rhythms of work, rest, private devotion and shared worship.
+devotional: After a night of healing the crowds, Jesus got up very early and went to a desolate place to pray. If the Son of God needed time alone with his Father, so do we. Hebrews adds the other half: don't neglect meeting together. A disciplined life isn't a frantic one. It's built on rhythms: a daily time with God, a weekly Sabbath rest, and showing up with God's people. Men burn out when they skip the rhythm and try to run on adrenaline.
+pointman: Look at your calendar. If rest and worship aren't on it, they won't happen. Put them on it this week.
+reflect: What does your current rhythm of rest look like? || What keeps you from consistent worship with God's people? || When and where do you meet with God best?
+mission: Plan one real Sabbath rest this week: a block of time with no work, no errands, and something that refreshes you in God.
+discuss: Why do men resist rest? || What does a healthy weekly rhythm look like for your family? || How can we encourage each other to stay connected to church?
+endweek: Did you rest this week? What helped or got in the way?
+prayer: Lord of the Sabbath, teach me to rest in you. Slow my hurried heart. Give me rhythms that keep me close to you and connected to your people. Amen.
+memory: PSA|46|10|10
+
+## WEEK 13 | Love Like Christ
+foundation: Ephesians 5:21-33
+truth: A husband is called to love his wife the way Christ loves the church: sacrificially, faithfully and for her good.
+devotional: Paul's instruction to husbands is the highest bar imaginable: "Love your wives, as Christ loved the church and gave himself up for her." Christ's love moved toward his bride when she was unlovely, laid down his life, and works for her flourishing. Headship in Scripture is never about control. It's about responsibility and sacrifice. A man who loves like this goes first: first to apologize, first to serve, first to pray.
+pointman: Single brothers, don't skip this week. Learn what Christlike love looks like now. It shapes every relationship you have.
+reflect: How does Christ's love for the church challenge the way you love? || Where have you confused leadership with control? || What would "giving yourself up" look like this week?
+mission: Ask your wife, "What is one way I can love you better this week?" Then do it without commentary.
+alt: Ask a married couple you respect what sacrificial love looks like day to day, and serve someone in your life this week without being asked.
+discuss: What does sacrificial love look like in ordinary life? || Why is "submit to one another" (v. 21) important context? || How can single men prepare to love well?
+endweek: Where did you give yourself up for someone this week?
+prayer: Jesus, you loved your church and gave yourself up for her. Teach me to love like that. Make me the first to serve, the first to forgive and the first to pray. Amen.
+memory: EPH|5|25|25
+
+## WEEK 14 | Faithfulness
+foundation: Proverbs 5:15-23; Matthew 5:27-30
+truth: Faithfulness begins in the heart and the eyes, long before it is tested in action.
+devotional: Proverbs 5 is a father's warning and an invitation: "Drink water from your own cistern... rejoice in the wife of your youth." Faithfulness isn't only avoiding an affair; it's cultivating delight in the spouse God gave you. Jesus goes deeper: lust in the heart is already adultery. That's not meant to crush us; it's meant to show how seriously he takes our hearts and how much grace we need. Cut off what feeds lust, and pour into what feeds love.
+pointman: Faithfulness is built with fences and fed with delight. Build the fence. Then go on a date.
+reflect: What feeds lust in your life, and what would it mean to cut it off? || How can you grow in delight for your wife? || Who knows the truth about your struggles?
+mission: Remove one source of temptation this week (an app, a show, a habit) and plan one evening of focused time with your wife.
+alt: Remove one source of temptation this week and ask a trusted brother to check in with you about it.
+discuss: Why does Jesus focus on the heart, not just behavior? || What practical boundaries protect faithfulness? || How can we talk about sexual integrity honestly and without shame?
+endweek: What did you cut off this week, and what did you invest in?
+prayer: Lord, guard my eyes and my heart. Make me faithful in private and in public. Help me delight in what you've given me and run from what would destroy it. Amen.
+memory: HEB|13|4|4
+
+## WEEK 15 | Communication
+foundation: James 1:19-20; Ephesians 4:25-32
+truth: Godly communication is honest, gentle and quick to listen.
+devotional: James gives a three-part rule men need daily: quick to hear, slow to speak, slow to anger. Paul adds that our words should build up and give grace to those who hear, and that we shouldn't let the sun go down on our anger. Most marriage fights aren't about the topic; they're about tone, timing and not feeling heard. A man who listens well is rare and powerful.
+pointman: This week, practice listening until the other person feels understood before you respond. It's harder than it sounds.
+reflect: Are you quicker to speak or to listen? || What tone do your family members hear from you most? || Is there a conversation you've been avoiding?
+mission: Have one conversation this week where you only ask questions and listen, with no fixing or defending. Ask, "Did I understand you?"
+discuss: What does "slow to anger" look like in practice? || How do you repair after harsh words? || What helps conversations stay honest and kind?
+endweek: How did your words build up or tear down this week?
+prayer: Lord, set a guard over my mouth. Make me quick to listen and slow to anger. Let my words give grace to the people I love most. Amen.
+memory: JAS|1|19|20
+
+## WEEK 16 | Serving Your Wife
+foundation: 1 Peter 3:7; Philippians 2:3-8
+truth: Christ came to serve, and a husband shows strength by serving and honoring his wife.
+devotional: Peter tells husbands to live with their wives in an understanding way, showing honor, as heirs together of the grace of life, "so that your prayers may not be hindered." Paul shows what that looks like: count others more significant than yourself, like Jesus who took the form of a servant. Serving isn't occasional grand gestures. It's noticing: what's heavy for her, what she needs, what would make her feel honored.
+pointman: Learn your wife. What fills her up? What drains her? Serving starts with understanding.
+reflect: How well do you understand what your wife carries day to day? || Where do you expect to be served instead of serving? || What would honor look like in your home this week?
+mission: Take one recurring burden off your wife's plate this week and keep doing it.
+alt: Take one recurring burden off someone in your life (a parent, roommate, neighbor) this week.
+discuss: Why does Peter connect how we treat our wives to our prayers? || What are practical ways to show honor? || How did Jesus redefine greatness?
+endweek: What did you learn about serving this week?
+prayer: Jesus, you took the form of a servant. Give me your humility. Help me understand and honor the people you've given me, and serve them gladly. Amen.
+memory: 1PE|3|7|7
+
+## WEEK 17 | A Father's Heart
+foundation: Luke 15:11-32; Psalm 103:8-14
+truth: God the Father runs toward his children with compassion, and earthly fathers are called to reflect him.
+devotional: In the story of the prodigal son, the father sees his son "while he was still a long way off," feels compassion, runs, embraces and restores him. That's Jesus' picture of God. Psalm 103 says, "As a father shows compassion to his children, so the LORD shows compassion to those who fear him." Whatever your earthly father was or wasn't, your heavenly Father is like this. And fathers are called to show their kids a glimpse of him.
+pointman: Your kids will form their first picture of God by watching you. That's not pressure; it's privilege. Run toward them.
+reflect: How has your relationship with your father shaped how you see God? || Which son are you more like in the story? || How can you show your children compassion like the father did?
+mission: Tell each of your children this week, "I love you, and I'm proud of you," and name one specific reason.
+alt: Write a note of thanks to a man who was like a father to you, or encourage a young man who doesn't have a father around.
+discuss: What did your father model well, and what do you want to do differently? || How does God's fatherhood heal father wounds? || What does running toward your kids look like?
+endweek: When did you reflect the Father's heart this week?
+prayer: Father, thank you for running to me when I was far away. Heal what my earthly father couldn't give. Make me a father, mentor and friend who points others to you. Amen.
+memory: PSA|103|13|13
+
+## WEEK 18 | Presence and Patience
+foundation: Ephesians 6:1-4; Colossians 3:20-21
+truth: Fathers are called to bring up children in the Lord's discipline and instruction without provoking them to anger.
+devotional: Paul gives fathers a warning before an instruction: "Do not provoke your children to anger." Harshness, inconsistency, hypocrisy and absence all provoke. Then: "bring them up in the discipline and instruction of the Lord." Discipline in Scripture is training, not just punishment. And training requires presence. You can't disciple kids you're never with, or never really with because your mind is on your phone.
+pointman: Presence is spelled T-I-M-E. Put the phone in a drawer at dinner and look your kids in the eye.
+reflect: How might you be provoking your children? || What does discipline as training look like in your home? || Where are you physically present but mentally absent?
+mission: Spend 30 uninterrupted minutes with each child this week doing something they choose.
+alt: Spend 30 uninterrupted minutes this week with someone younger who looks up to you (a nephew, a neighbor kid, a young coworker).
+discuss: How do you discipline without anger? || What steals your attention from your family most? || What do your kids remember most about time with you?
+endweek: When were you fully present this week?
+prayer: Lord, make me patient and present. Forgive me for the times I've been harsh or distracted. Help me train my children in your ways with a gentle, steady hand. Amen.
+memory: EPH|6|4|4
+
+## WEEK 19 | Teaching the Faith
+foundation: Deuteronomy 6:4-9
+truth: Faith is passed down through everyday conversations, not just Sunday mornings.
+devotional: The Shema calls Israel to love God with all their heart, soul and might, then shows how to pass it on: "You shall teach them diligently to your children, and shall talk of them when you sit in your house, when you walk by the way, when you lie down and when you rise." Faith transfers best in normal moments: the car ride, the dinner table, bedtime. You don't need to be a theologian. You need to be a man who loves God out loud.
+pointman: Use Table Talk this week. One question at dinner. Let your kids see your faith is real, not a performance.
+reflect: How often do your kids hear you talk about God outside church? || What normal moments could become teaching moments? || What do you most want your children to know about God?
+mission: Pray with your kids at bedtime every night this week, and ask one faith question at dinner.
+alt: Share something from your Bible reading with a friend, family member or coworker this week.
+discuss: Who taught you about God, and how? || Why do everyday conversations matter more than lectures? || How can we teach the faith when we feel unqualified?
+endweek: What conversation about God happened in your home this week?
+prayer: Lord, help me love you with all my heart, soul and strength, and let that love spill over to my children. Give me natural opportunities to talk about you every day. Amen.
+memory: DEU|6|6|7
+
+## WEEK 20 | Generational Legacy
+foundation: Psalm 78:1-8
+truth: Each generation is called to tell the next about God's works, so their children set their hope in him.
+devotional: Psalm 78 looks forward: "We will not hide them from their children, but tell to the coming generation the glorious deeds of the LORD... so that they should set their hope in God." The goal of legacy isn't a name or an inheritance. It's grandchildren and great-grandchildren who trust God. Some men are breaking a cycle; others are continuing one. Either way, faithfulness today shapes people you'll never meet.
+pointman: Write down the stories of God's faithfulness in your life. Your grandkids will need them.
+reflect: What spiritual legacy did you inherit? || What patterns do you want to end with you? || What stories of God's faithfulness should your family know?
+mission: Write one story of how God came through for you and share it with your family or a younger believer.
+discuss: What legacy do you want to leave? || How can a man break a generational sin pattern? || Why do stories matter so much in passing on faith?
+endweek: What did you do this week that will matter in 50 years?
+prayer: God of all generations, thank you for your faithfulness. Let my children and their children set their hope in you. Break what needs to be broken, and build what needs to be built. Amen.
+memory: PSA|78|4|4
+
+## WEEK 21 | Everything Belongs to God
+foundation: Psalm 24:1-2; Matthew 25:14-30
+truth: God owns everything; we manage what he entrusts to us and will give an account.
+devotional: "The earth is the LORD's and the fullness thereof." That changes the question from "How much of my money do I give to God?" to "How do I manage God's money?" In the parable of the talents, the master entrusts different amounts to different servants. Faithfulness, not the amount, is what he commends. Stewardship covers money, time, skills, body, relationships and opportunities.
+pointman: You're a manager, not an owner. That's freeing: it's not all on you, but it all matters.
+reflect: What do you treat as "yours" that really belongs to God? || Which talents has God entrusted to you? || Where are you burying something out of fear?
+mission: List what God has entrusted to you (money, time, skills, people). Choose one area to manage more faithfully this week.
+discuss: How does ownership vs. stewardship change decisions? || Why was the third servant afraid? || What does faithful management look like at your stage of life?
+endweek: Where were you a faithful steward this week?
+prayer: Lord, everything I have is yours. Make me a faithful steward of my money, time, gifts and relationships. Let me hear "well done" one day. Amen.
+memory: PSA|24|1|1
+
+## WEEK 22 | Money and Contentment
+foundation: 1 Timothy 6:6-10, 17-19
+truth: Godliness with contentment is great gain; the love of money is a root of all kinds of evil.
+devotional: Paul doesn't say money is evil. He says the love of money is a root of all kinds of evil, and that those who desire to be rich fall into temptation and a snare. The antidote is contentment: "if we have food and clothing, with these we will be content." To those who are rich, which by world standards includes most of us, he says be generous, ready to share, and set your hope on God, not on uncertain riches.
+pointman: Debt, envy and overspending are spiritual issues before they're financial ones. Talk honestly about money with your wife and your crew.
+reflect: Where do you see the love of money in your heart? || What would contentment look like this month? || Where is your financial hope really placed?
+mission: Review your spending from last month. Identify one area driven by discontent and make a change. Talk about it with your wife or a trusted brother.
+discuss: Why is money such a strong pull for men? || What is the link between contentment and generosity? || How do you talk about money in your home?
+endweek: What did you learn about your heart and money this week?
+prayer: Lord, free me from the love of money. Teach me contentment. Let my hope rest in you, not in my bank account, and make me generous with what you've given. Amen.
+memory: HEB|13|5|5
+
+## WEEK 23 | Generosity
+foundation: 2 Corinthians 9:6-15
+truth: God loves a cheerful giver and supplies everything we need to be generous.
+devotional: Paul uses a farmer's image: whoever sows sparingly will reap sparingly. Giving isn't loss; it's planting. "Each one must give as he has decided in his heart, not reluctantly or under compulsion, for God loves a cheerful giver." Generosity flows from God's indescribable gift (v. 15). We give because he gave first. Generosity also includes time, hospitality and attention.
+pointman: Generosity is a muscle. If you're not giving regularly, start with an amount that stretches you a little and grow from there.
+reflect: Do you give reluctantly or cheerfully? || What would it look like to plant generously this year? || Who around you needs generosity right now?
+mission: Give something this week that costs you something: money, time or a skill. Do it quietly.
+discuss: What makes generosity hard? || How did someone's generosity impact you? || How can families practice generosity together?
+endweek: How did generosity change your heart this week?
+prayer: Thank you, God, for your indescribable gift. Make me a cheerful giver. Let my generosity point others to your goodness. Amen.
+memory: 2CO|9|7|7
+
+## WEEK 24 | Work as Worship
+foundation: Colossians 3:17, 22-24; Genesis 2:15
+truth: Your work matters to God; do it heartily, as for the Lord.
+devotional: Before sin entered the world, God put Adam in the garden "to work it and keep it." Work is not a curse; it's part of our calling. Paul tells believers to work "heartily, as for the Lord and not for men," knowing that from the Lord we receive the inheritance. Whether you run a business, swing a hammer or manage a team, you can worship God through excellence, integrity and how you treat people.
+pointman: Your job site is a mission field and a sanctuary. Do excellent work, tell the truth, and treat people like they're made in God's image.
+reflect: Do you see your work as worship? || Where is your integrity tested at work? || How do you treat the people who work for or with you?
+mission: Pray for your work and coworkers by name at the start of each workday this week. Do one task with extra excellence as an offering to God.
+discuss: How does Genesis 2 change how we see work? || How do we keep work from becoming an idol? || What does integrity at work look like for you?
+endweek: How did you honor God in your work this week?
+prayer: Lord, I give you my work. Let me do it heartily, honestly and for your glory. Make my workplace a place where people see Jesus. Amen.
+memory: COL|3|23|24

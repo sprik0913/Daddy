@@ -1,0 +1,52 @@
+# Understand the Bible. Sections with items: "item: Title | label | text | refs"
+# Dates are approximate and follow commonly used conservative scholarship; some are debated.
+
+## timeline | The Story of the Bible
+item: Creation and fall | Beginning | God creates a good world and humanity in his image. Adam and Eve rebel, and sin and death enter. God promises a descendant who will crush the serpent. | GEN.1.1 ; GEN.3.15
+item: The flood and Babel | Early history | Humanity grows violent. God judges with the flood, saves Noah and covenants with creation. Babel shows human pride scattered. | GEN.6.5-8 ; GEN.9.8-17
+item: The patriarchs | c. 2000–1800 BC | God calls Abraham and promises land, offspring and blessing for all nations. The promise passes to Isaac, Jacob and Joseph. | GEN.12.1-3
+item: Exodus and Sinai | c. 1446 BC (some date c. 1260 BC) | God rescues Israel from Egypt through Moses, gives the law at Sinai and dwells among them in the tabernacle. | EXO.19.4-6 ; EXO.20.1-3
+item: Conquest and judges | c. 1400–1050 BC | Joshua leads Israel into Canaan. Israel cycles through sin, oppression, crying out and rescue under the judges. | JOS.21.43-45 ; JDG.21.25
+item: The kingdom | c. 1050–930 BC | Saul, David and Solomon reign. God promises David an eternal throne. Solomon builds the temple. | 2SA.7.12-16
+item: Divided kingdom | 930–586 BC | Israel splits into north (Israel) and south (Judah). Prophets call both to return. Assyria conquers the north (722 BC). | 1KI.12.16-20
+item: Exile | 586–538 BC | Babylon destroys Jerusalem and the temple. Daniel and Ezekiel minister in exile. God promises a new covenant. | 2KI.25.8-11 ; JER.31.31-34
+item: Return | 538–430 BC | Persia allows the Jews to return. The temple and walls are rebuilt under Zerubbabel, Ezra and Nehemiah. | EZR.1.1-4
+item: Between the testaments | 430–5 BC | Around 400 years of no new canonical prophecy. Greek then Roman rule. Synagogues and expectation for the Messiah grow. | MAL.4.5-6
+item: Jesus | c. 5 BC–AD 30/33 | The Son of God becomes man, proclaims the kingdom, dies for sin and rises from the dead. | JHN.1.14 ; 1CO.15.3-4
+item: The church | AD 30–95 | The Spirit comes at Pentecost. The gospel spreads from Jerusalem to Rome. The apostles write the New Testament. | ACT.1.8
+item: New creation | Future | Christ returns, judges the world and makes all things new. God dwells with his people forever. | REV.21.1-5
+
+## covenants | The Covenants
+item: Noah | Genesis 9 | God promises never again to destroy the earth by flood. Sign: the rainbow. | GEN.9.8-17
+item: Abraham | Genesis 12, 15, 17 | God promises land, descendants and blessing to all nations through Abraham’s offspring. Sign: circumcision. | GEN.15.4-6
+item: Moses (Sinai) | Exodus 19–24 | God makes Israel his treasured people and gives his law. Sign: the Sabbath. | EXO.19.5-6
+item: David | 2 Samuel 7 | God promises David a son whose throne will last forever. | 2SA.7.16
+item: The new covenant | Jeremiah 31; Luke 22 | God promises to write his law on hearts and forgive sin forever. Jesus inaugurates it with his blood. | JER.31.33-34 ; LUK.22.20
+
+## prophecies | Promises of the Messiah
+item: Offspring of the woman | Genesis 3:15 | A descendant will crush the serpent. | GEN.3.15 ; GAL.4.4
+item: Blessing to the nations | Genesis 22:18 | All nations blessed through Abraham’s offspring. | GEN.22.18 ; GAL.3.16
+item: Born in Bethlehem | Micah 5:2 | A ruler from Bethlehem. | MIC.5.2 ; MAT.2.1-6
+item: Son of David | Isaiah 9:6–7 | A child on David’s throne forever. | ISA.9.6-7 ; LUK.1.32-33
+item: Born of a virgin | Isaiah 7:14 | A sign: Immanuel. | ISA.7.14 ; MAT.1.22-23
+item: Riding on a donkey | Zechariah 9:9 | The humble king comes. | ZEC.9.9 ; MAT.21.4-5
+item: The suffering servant | Isaiah 53 | Pierced for our transgressions. | ISA.53.4-6 ; 1PE.2.24
+item: Forsaken | Psalm 22 | My God, my God, why have you forsaken me? | PSA.22.1 ; MAT.27.46
+item: Not abandoned to the grave | Psalm 16:10 | The Holy One will not see decay. | PSA.16.10 ; ACT.2.29-32
+
+## genres | How to Read Each Kind of Book
+item: Law | Genesis–Deuteronomy | Story and instruction. Ask what it shows about God’s holiness and how Christ fulfills it. | MAT.5.17
+item: History | Joshua–Esther, Acts | True stories of God’s faithfulness. Not every action described is approved. | ROM.15.4
+item: Poetry and wisdom | Job–Song of Songs | Feel, pray and ponder. Proverbs are general principles, not promises. | PSA.1.1-3
+item: Prophets | Isaiah–Malachi | God’s messengers calling people back to covenant, with judgment and hope. | 2PE.1.21
+item: Gospels | Matthew–John | Four eyewitness-based portraits of Jesus. | JHN.20.31
+item: Letters | Romans–Jude | Written to real churches. Read the whole letter and its situation. | 2TI.3.16
+item: Apocalyptic | Daniel, Revelation | Symbolic visions. Main point: God wins and Christ reigns. | REV.1.1-3
+
+## connections | Old and New Testament Connections
+item: Passover lamb | Exodus 12 → 1 Corinthians 5:7 | Christ our Passover lamb has been sacrificed. | EXO.12.13 ; 1CO.5.7
+item: Bronze serpent | Numbers 21 → John 3:14 | As the serpent was lifted up, so the Son of Man. | NUM.21.8-9 ; JHN.3.14-15
+item: Manna | Exodus 16 → John 6 | Jesus is the bread of life. | EXO.16.4 ; JHN.6.35
+item: Temple | 1 Kings 8 → John 2:19–21 | Jesus is where God dwells with man. | 1KI.8.10-11 ; JHN.2.19-21
+item: Jonah | Jonah 1 → Matthew 12:40 | Three days and three nights. | JON.1.17 ; MAT.12.40
+item: Adam | Genesis 3 → Romans 5 | Death through one man, life through one man. | ROM.5.18-19

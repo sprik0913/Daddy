@@ -1,14 +1,23 @@
 {
-  "name": "Forged52",
-  "short_name": "Forged52",
-  "description": "Read the whole Bible in 52 weeks. Build the man. Lead the family.",
+  "name": "FORGED52",
+  "short_name": "FORGED52",
+  "description": "Forged by the Word. Strengthened by brothers. Transformed by Christ. A 52-week Bible discipleship journey for men.",
+  "id": "/",
   "start_url": "/#today",
   "scope": "/",
   "display": "standalone",
-  "background_color": "#0e0f0c",
-  "theme_color": "#0e0f0c",
+  "orientation": "portrait",
+  "background_color": "#141613",
+  "theme_color": "#141613",
+  "categories": ["books", "education", "lifestyle"],
   "icons": [
-    { "src": "assets/icon.png?v=2", "sizes": "256x256", "type": "image/png" },
-    { "src": "assets/icon-512.png?v=2", "sizes": "512x512", "type": "image/png", "purpose": "any maskable" }
+    { "src": "assets/icon.png?v=3", "sizes": "256x256", "type": "image/png" },
+    { "src": "assets/icon-512.png?v=3", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "assets/icon-512.png?v=3", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Today", "url": "/#today" },
+    { "name": "Journal", "url": "/#journal" },
+    { "name": "Scripture memory", "url": "/#memory" }
   ]
 }

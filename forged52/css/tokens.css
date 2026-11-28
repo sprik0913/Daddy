@@ -1,0 +1,51 @@
+/* FORGED design tokens. Iron & Bronze is the signature theme; others override the same variables. */
+:root, :root[data-theme="iron"] {
+  --bg: #141613; --bg-2: #1D211B; --card: #272B25; --card-2: #2E332B; --line: #393B34; --line-2: #4A4D43;
+  --text: #F4F0E7; --text-2: #B7B8AE; --text-3: #8C8E84;
+  --accent: #C59B61; --accent-2: #D8B37C; --accent-ink: #1A140B; --accent-rgb: 197,155,97;
+  --olive: #626B52; --olive-rgb: 98,107,82;
+  --good: #8FA876; --warn: #D99A4E; --danger: #D0705F;
+  --shadow: 0 1px 0 rgba(255,255,255,.03) inset, 0 10px 30px -18px rgba(0,0,0,.8);
+  --tex-opacity: .05;
+  color-scheme: dark;
+}
+:root[data-theme="bone"] {
+  --bg: #F4F0E7; --bg-2: #EAE4D7; --card: #FFFDF8; --card-2: #F7F2E8; --line: #DDD5C5; --line-2: #CBC1AE;
+  --text: #1D211B; --text-2: #4E5246; --text-3: #6E7164;
+  --accent: #8A6532; --accent-2: #A07843; --accent-ink: #FFFDF8; --accent-rgb: 138,101,50;
+  --olive: #626B52; --olive-rgb: 98,107,82;
+  --good: #4F6B3A; --warn: #A2621B; --danger: #A2402F;
+  --shadow: 0 10px 30px -20px rgba(60,45,20,.35);
+  --tex-opacity: .035;
+  color-scheme: light;
+}
+:root[data-theme="venom"] {
+  --bg: #0F110E; --bg-2: #171A15; --card: #1F231C; --card-2: #262B22; --line: #33382E; --line-2: #454B3E;
+  --text: #F1F3EC; --text-2: #B3B8AA; --text-3: #868B7E;
+  --accent: #A3E635; --accent-2: #BEF264; --accent-ink: #0B1400; --accent-rgb: 163,230,53;
+  --olive: #4D6B2E; --olive-rgb: 77,107,46;
+  --good: #A3E635; --warn: #F59E0B; --danger: #EF6B5B;
+  --shadow: 0 10px 30px -18px rgba(0,0,0,.8);
+  --tex-opacity: .05;
+  color-scheme: dark;
+}
+:root[data-theme="contrast"] {
+  --bg: #000000; --bg-2: #0A0A0A; --card: #111111; --card-2: #1A1A1A; --line: #6B6B6B; --line-2: #9A9A9A;
+  --text: #FFFFFF; --text-2: #E6E6E6; --text-3: #CFCFCF;
+  --accent: #FFD27A; --accent-2: #FFE1A3; --accent-ink: #000000; --accent-rgb: 255,210,122;
+  --olive: #9FB27F; --olive-rgb: 159,178,127;
+  --good: #B8E38F; --warn: #FFC266; --danger: #FF9A8A;
+  --shadow: none; --tex-opacity: 0;
+  color-scheme: dark;
+}
+:root {
+  --font-head: "Barlow Condensed", "Oswald", "Arial Narrow", sans-serif;
+  --font-ui: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --r-sm: 8px; --r: 12px; --r-lg: 16px; --r-pill: 999px;
+  --s1: 4px; --s2: 8px; --s3: 12px; --s4: 16px; --s5: 24px; --s6: 32px; --s7: 48px;
+  --nav-h: 64px; --side-w: 248px; --content-w: 760px;
+  --ease: cubic-bezier(.2,.8,.2,1);
+  --scale: 1;
+}
+html.big { --scale: 1.18; }

@@ -1,0 +1,175 @@
+# Biblical manhood topics. Format:
+# ## id | Title
+# refs: USFM.ch.v1-v2 ; ...   (validated against the WEB at build time)
+# summary: one line
+# (blank line) body paragraphs
+# practice: item || item
+# ask: question || question
+
+## identity | Identity in Christ
+refs: 2CO.5.17 ; GAL.2.20 ; EPH.2.8-10 ; 1JN.3.1
+focus: Spiritual discipline
+summary: Before you are a husband, father, worker or leader, you are a son of God through Christ.
+
+Most men build their identity on what they produce: income, title, strength, reputation. When those are shaken, the man is shaken. Scripture gives a different foundation. In Christ you are a new creation, saved by grace and not by works, and created for good works God prepared in advance.
+
+This does not make a man passive. It frees him. A man who knows he is loved and accepted in Christ can take risks for the good of others, admit failure without being crushed and serve without needing applause.
+
+practice: Write down the three things you most often lean on for your sense of worth. || Read Ephesians 1 and list every phrase that begins with "in him" or "in Christ."
+ask: Where do you feel most like a failure, and what does God say about you there? || What would change this week if you believed your worth was settled?
+
+## husband | The Husband
+refs: EPH.5.25-33 ; 1PE.3.7 ; COL.3.19 ; GEN.2.24
+focus: Marriage
+summary: A husband loves his wife the way Christ loves the church: sacrificially, faithfully and with understanding.
+
+Paul’s command to husbands is not "be in charge." It is "love your wife as Christ loved the church and gave himself up for her." The measure of a husband’s leadership is the cross. Peter adds that husbands should live with their wives in an understanding way and honor them, so that their prayers will not be hindered.
+
+Biblical headship is responsibility, not privilege. It means going first in repentance, prayer, forgiveness and service. It means protecting your wife’s heart, guarding your eyes and keeping your promises when feelings fade.
+
+practice: Ask your wife: "What is one thing I could do this week that would make you feel loved?" Then do it. || Pray with your wife for two minutes, even if it feels awkward.
+ask: Where are you asking your wife to serve you more than you serve her? || What does "understanding" your wife require of you right now?
+
+## father | The Father
+refs: EPH.6.4 ; DEU.6.4-9 ; PSA.103.13 ; PRO.22.6
+focus: Fatherhood
+summary: Fathers reflect the heavenly Father by teaching, disciplining with patience and being present.
+
+Scripture calls fathers to bring up children in the discipline and instruction of the Lord and not to provoke them to anger. Deuteronomy 6 pictures faith taught along the way: at the table, on the road, at bedtime and in the morning.
+
+Children learn what a father values by where he spends his attention. The most powerful lessons are rarely lectures. They are a father who admits wrong, prays out loud, keeps his word and delights in his kids.
+
+practice: Bless each child this week by name, out loud, with a specific trait you see God growing in them. || Put the phone away for the first 20 minutes after you get home.
+ask: What are your kids learning about God from how you treat them? || Where do you tend to provoke rather than instruct?
+
+## integrity | Integrity
+refs: PRO.10.9 ; PSA.15.1-5 ; MAT.5.37 ; PRO.11.3
+focus: Leadership
+summary: Integrity means being the same man in private as in public, and keeping your word.
+
+The man who walks in integrity walks securely. Psalm 15 describes the person who may dwell with God: he speaks truth in his heart and keeps his oath even when it hurts. Jesus says simply: let your yes be yes and your no be no.
+
+Integrity is built in small moments: the hours you bill, the corners you do not cut, the jokes you do not tell, the screen you turn off when no one is watching.
+
+practice: Identify one place where your private life does not match your public life, and tell a brother. || Keep every small promise you make this week.
+ask: Who would be surprised if they saw your whole week? || What promise have you not kept?
+
+## purity | Sexual Purity
+refs: 1TH.4.3-8 ; MAT.5.27-30 ; 1CO.6.18-20 ; JOB.31.1 ; 1JN.1.9
+focus: Overcoming temptation
+summary: God calls men to sexual purity, offers full forgiveness and gives power to fight.
+
+Jesus raised the standard: lust in the heart is adultery. Paul tells believers to flee sexual immorality because the body is a temple of the Holy Spirit. Job made a covenant with his eyes.
+
+Shame says hide. The gospel says confess. If we confess our sins, God is faithful and just to forgive. Lasting freedom usually involves honest confession to a trusted brother, practical barriers (filters, device rules, changed routines) and replacing secrecy with light.
+
+practice: Install accountability software or remove the app you know is a problem. || Tell one brother the truth about your struggle this week.
+ask: When are you most vulnerable to temptation (time, place, mood)? || What is one barrier you could put in place today?
+
+## work | Work and Calling
+refs: COL.3.23-24 ; GEN.2.15 ; PRO.6.6-11 ; 2TH.3.10-12 ; ECC.9.10
+focus: Business and work
+summary: Work is a gift from God, done for the Lord and not for men.
+
+Before sin entered the world, God put Adam in the garden to work it and keep it. Work is not a curse; the curse made it toilsome. Paul tells believers to work heartily as for the Lord, knowing their reward comes from him.
+
+A Christian man works with diligence, honesty and excellence. He refuses to make work an idol and refuses to be lazy. He sees his job as a place to serve others and to show the character of Christ.
+
+practice: Begin each workday this week with a one-sentence prayer offering your work to God. || Do one task with excellence that no one will notice.
+ask: Is work more of an idol or more of a burden for you right now? || How could your coworkers see Christ in how you work?
+
+## money | Money and Stewardship
+refs: MAT.6.19-24 ; 1TI.6.6-10 ; PRO.3.9-10 ; 2CO.9.6-8 ; LUK.16.10-11
+focus: Financial stewardship
+summary: Everything belongs to God. A steward manages it faithfully, gives generously and avoids the love of money.
+
+Jesus said you cannot serve both God and money. Paul warns that the love of money is a root of all kinds of evil and commends godliness with contentment. Scripture also calls us to honor the Lord with the first of our income and to give cheerfully.
+
+Faithful stewardship is practical: living below your means, avoiding debt that enslaves, providing for your household, saving wisely and giving first.
+
+practice: Look at last month’s spending with your wife or a trusted friend. || Set a giving amount you will give first, before anything else.
+ask: Where does money compete with God for your trust? || What would contentment look like for you this year?
+
+## anger | Anger and Self-Control
+refs: JAS.1.19-20 ; EPH.4.26-27 ; PRO.16.32 ; PRO.15.1 ; GAL.5.22-23
+focus: Spiritual discipline
+summary: Be quick to hear, slow to speak and slow to anger. Self-control is fruit of the Spirit.
+
+Not all anger is sin. Jesus was angry at injustice. But James warns that human anger does not produce the righteousness of God. Paul says do not let the sun go down on your anger, which gives the devil a foothold.
+
+Ruling your own spirit is better than conquering a city. Self-control is not white-knuckle effort alone; it is fruit the Spirit grows as we walk with him.
+
+practice: When you feel anger rise, pause and breathe before you speak. || Ask your family when your anger hurts them most, and listen without defending.
+ask: What usually sits underneath your anger: fear, pride, exhaustion? || Who needs an apology from you?
+
+## leadership | Servant Leadership
+refs: MRK.10.42-45 ; JHN.13.12-17 ; 1PE.5.2-3 ; PHP.2.3-8
+focus: Leadership
+summary: In the kingdom, the greatest is the servant of all.
+
+Jesus redefined leadership: whoever wants to be great must be the servant of all, for the Son of Man came not to be served but to serve. He washed his disciples’ feet and told them to do the same.
+
+A servant leader goes first, takes responsibility, gives credit away, listens before deciding and uses authority to build others up, not to protect himself.
+
+practice: Do one unseen act of service for someone you lead. || Ask someone under your leadership: "How could I serve you better?"
+ask: Where do you use your position to be served? || Who is following your example, for better or worse?
+
+## courage | Courage
+refs: JOS.1.6-9 ; 1CO.16.13-14 ; 2TI.1.7 ; PSA.27.1
+focus: Overcoming temptation
+summary: Biblical courage is not the absence of fear but obedience because God is with you.
+
+God told Joshua three times to be strong and courageous, and grounded it in a promise: the Lord your God is with you wherever you go. Paul tells the church to stand firm, act like men, be strong, and let all be done in love.
+
+Courage looks like telling the truth, having the hard conversation, admitting sin, standing for the vulnerable and sharing your faith.
+
+practice: Have the conversation you have been avoiding. || Memorize Joshua 1:9.
+ask: What fear is keeping you from obedience right now? || Where do you need courage combined with love?
+
+## friendship | Brotherhood and Friendship
+refs: PRO.27.17 ; ECC.4.9-12 ; HEB.10.24-25 ; JAS.5.16 ; PRO.18.24
+focus: Brotherhood
+summary: Iron sharpens iron. Men need brothers who know them and push them toward Christ.
+
+Many men have coworkers and acquaintances but no one who truly knows them. Scripture says two are better than one, and a threefold cord is not quickly broken. Hebrews tells believers not to give up meeting together but to stir one another up to love and good works.
+
+Real brotherhood requires honesty, regular time together, confession and prayer for one another.
+
+practice: Invite one man to coffee this week with no agenda but to know him. || Share one real struggle with your crew.
+ask: Who knows the real you? || What keeps you from letting other men in?
+
+## prayer | A Man of Prayer
+refs: MAT.6.5-13 ; 1TH.5.16-18 ; PHP.4.6-7 ; LUK.18.1
+focus: Prayer
+summary: Prayer is not a performance. It is a son talking with his Father.
+
+Jesus taught his disciples to pray to "Our Father," and he often withdrew to lonely places to pray. Paul tells believers to pray without ceasing and to bring every anxiety to God with thanksgiving.
+
+Many men feel awkward praying. Start simple: thank God, confess sin, ask for help, pray for others. Use the Lord’s Prayer as a framework. Consistency matters more than eloquence.
+
+practice: Pray through the Lord’s Prayer slowly each day this week. || Keep a list of prayer requests and note answers.
+ask: What keeps you from praying? || What would you ask God for if you really believed he listens?
+
+## suffering | Suffering and Perseverance
+refs: ROM.5.3-5 ; JAS.1.2-4 ; 2CO.4.16-18 ; 1PE.5.10
+focus: Spiritual discipline
+summary: God uses trials to produce endurance, character and hope.
+
+Christians are not promised an easy life. James says to count it joy when you face trials, because testing produces steadfastness. Paul says suffering produces endurance, endurance produces character and character produces hope.
+
+Suffering is real and grief is not faithlessness. The Psalms are full of honest lament. God does not waste pain, and he is near the brokenhearted.
+
+practice: Write an honest lament to God, using Psalm 13 as a model. || Reach out to one brother who is suffering.
+ask: What trial are you in right now? || What might God be producing in you through it?
+
+## legacy | Legacy
+refs: PSA.78.4-7 ; 2TI.2.2 ; PRO.13.22 ; 2TI.4.7-8
+focus: Fatherhood
+summary: A godly man lives for what outlasts him: faith passed to the next generation.
+
+Psalm 78 calls one generation to tell the next about the works of the Lord so that they would set their hope in God. Paul told Timothy to entrust what he had learned to faithful men who would teach others.
+
+Legacy is not mainly an inheritance of money. It is the faith, character and memories you leave in the people you love.
+
+practice: Write a letter to your children or a younger man about what God has done in your life. || Choose one younger man to invest in this year.
+ask: What will people remember about you? || Who are you discipling?
