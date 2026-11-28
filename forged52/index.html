@@ -367,6 +367,32 @@ body.on-landing main,body.on-landing footer{display:none}
 .pl-seek input{flex:1;accent-color:var(--accent);height:30px}
 .player.mode-narrator .tts-only{display:none!important}
 .player.mode-tts .nar-only,.player.mode-tts .pl-seek{display:none!important}
+.dig{margin-top:26px;border:2px solid var(--line-2);background:rgba(22,23,18,.94);clip-path:var(--notch)}
+.dig-head{display:flex;justify-content:space-between;align-items:baseline;padding:18px 20px 14px;border-bottom:2px solid var(--line)}
+.dig-head h2{font-family:var(--stencil);font-weight:400;font-size:1.7rem}
+.dig-head span{font-family:var(--mono);font-size:.75rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.dig-block{padding:18px 20px;border-top:1px solid var(--line)}
+.dig-block:first-of-type{border-top:0}
+.dig-k{font-family:var(--mono);font-size:.78rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin-bottom:10px}
+.rc{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;margin-top:10px}
+.rc b{font-family:var(--head);font-weight:800;font-size:1.05rem;letter-spacing:.04em;text-transform:uppercase;color:var(--text);white-space:nowrap}
+.rc span{color:var(--muted);font-size:1rem;line-height:1.5}
+.bk{border:1px solid var(--line-2);margin-top:10px}
+.bk summary{cursor:pointer;list-style:none;padding:12px 14px;font-family:var(--head);font-weight:800;font-size:1.2rem;letter-spacing:.04em;text-transform:uppercase;display:flex;justify-content:space-between;gap:10px}
+.bk summary::-webkit-details-marker{display:none}
+.bk summary::after{content:"+";color:var(--accent)}
+.bk[open] summary::after{content:"–"}
+.bk dl{padding:0 14px 14px;display:grid;gap:10px}
+.bk dt{font-family:var(--mono);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint)}
+.bk dd{color:var(--muted);font-size:1rem;line-height:1.5}
+.bk a{color:var(--accent);font-weight:600}
+.dig-q{padding-left:22px;color:var(--muted);display:grid;gap:8px}
+.dig-q b{color:var(--text)}
+#dJournal{width:100%;background:rgba(10,11,9,.9);border:2px solid var(--line-2);color:var(--text);font:inherit;font-size:1.05rem;padding:12px;resize:vertical;min-height:90px}
+#dJournal:focus{outline:none;border-color:var(--accent)}
+.dig-acts{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
+#dSaved{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.pl-dig{display:block;margin:18px auto 0;text-align:center}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -506,6 +532,17 @@ body.on-landing main,body.on-landing footer{display:none}
       <div class="note" id="tNote"></div>
     </div>
 
+    <div class="dig" id="dig">
+      <div class="dig-head"><h2>Dig deeper</h2><span>After you read</span></div>
+      <div class="dig-block"><div class="dig-k">Recap</div><div id="dRecap"></div></div>
+      <div class="dig-block" id="dBooks"></div>
+      <div class="dig-block"><div class="dig-k">Think on it</div>
+        <ol class="dig-q"><li>What does this show you about <b>God</b>? His character, his promises, what he cares about.</li><li>What does it show you about <b>people</b>, and about <b>you</b>?</li><li>What's <b>one thing you'll do</b> differently today because of it?</li></ol></div>
+      <div class="dig-block"><div class="dig-k">Where did you see God today?</div>
+        <textarea id="dJournal" rows="3" placeholder="One line. What stood out, what convicted you, what you're taking with you."></textarea>
+        <div class="dig-acts"><span id="dSaved"></span><button class="btn" type="button" id="dShare">Send to a brother</button></div></div>
+    </div>
+
     <div class="verse"><p id="vText"></p><cite id="vRef"></cite></div>
 
     <div class="section">
@@ -597,14 +634,11 @@ body.on-landing main,body.on-landing footer{display:none}
     </div>
     <div class="pl-seek" id="plSeek"><span id="tCur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="Position"><span id="tDur">0:00</span></div>
     <div class="pl-opts">
-      <div class="g" role="group" aria-label="Who reads"><button type="button" data-mode="narrator">Narrator</button><button type="button" data-mode="tts">Phone voice</button></div>
       <div class="g" role="group" aria-label="Speed"><button type="button" data-rate="0.85">0.85×</button><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.2">1.2×</button></div>
       <div class="g" role="group" aria-label="Text size"><button type="button" id="plSmaller" aria-label="Smaller text">A−</button><button type="button" id="plBigger" aria-label="Bigger text">A+</button></div>
-      <div class="g tts-only" role="group" aria-label="Translation"><button type="button" data-tr="nlt">NLT</button><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
-      <select id="plVoice" class="tts-only" aria-label="Voice" hidden></select>
     </div>
-    <div class="pl-small nar-only">World English Bible, read by Winfred W. Henson. Prefer the NLT? <a class="nlt-link" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play it in the Bible app</a></div>
-    <div class="pl-small tts-only">Want a human narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play this chapter in the Bible app</a></div>
+    <div class="pl-small nar-only">World English Bible, read by Winfred W. Henson. Want the NLT instead? <a class="nlt-link" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play it in the Bible app</a></div>
+    <select id="plVoice" hidden></select><a id="plNarr" hidden href="#"></a>
     <div class="pl-copy" id="plCopy" hidden>Scripture quotations are taken from the Holy Bible, New Living Translation, copyright © 1996, 2004, 2015 by Tyndale House Foundation. Used by permission of Tyndale House Publishers, Carol Stream, Illinois 60188. All rights reserved.</div>
   </div>
 </div>
@@ -746,6 +780,27 @@ $('#jShare').onclick=async()=>{const url=location.href.split('#')[0];try{await n
   };
 })();
 
+
+/* ---------- DIG DEEPER: chapter recaps, book briefings, questions, journal ---------- */
+var RECAP=null;
+fetch('assets/recap.json').then(r=>r.json()).then(j=>{RECAP=j;renderDig()}).catch(()=>{});
+function renderDig(){
+  const n=curDay(), r=reading(n), chs=parse(r.ref);
+  if(!RECAP){ $('#dRecap').innerHTML='<span class="rc"><span>Loading…</span></span>'; }
+  else {
+    $('#dRecap').innerHTML='<div class="rc">'+chs.map(c=>{const t=(RECAP.ch[c.usfm]||[])[c.ch-1]||'';return `<b>${c.name} ${c.ch}${c.v1?`:${c.v1}–${c.v2}`:''}</b><span>${t}</span>`}).join('')+'</div>';
+    const seen=[...new Set(chs.map(c=>c.usfm))];
+    $('#dBooks').innerHTML='<div class="dig-k">The book</div>'+seen.map((u,i)=>{const b=RECAP.books[u];const nm=chs.find(c=>c.usfm===u).name;if(!b)return'';
+      return `<details class="bk"${i===0&&seen.length===1?' open':''}><summary>${nm}</summary><dl><div><dt>Written by</dt><dd>${b.who}</dd></div><div><dt>When &amp; where</dt><dd>${b.when}</dd></div><div><dt>The big idea</dt><dd>${b.big}</dd></div><div><dt>Where Jesus shows up</dt><dd>${b.jesus}</dd></div><div><dd><a href="https://bibleproject.com/explore/" target="_blank" rel="noopener">Find the short ${nm} overview video at BibleProject</a></dd></div></dl></details>`}).join('');
+  }
+  const j=$('#dJournal'); j.dataset.day=n; j.value=store.get('f52.j.'+n)||''; $('#dSaved').textContent=j.value?'Saved':'';
+}
+$('#dJournal').addEventListener('input',e=>{ const n=e.target.dataset.day; store.set('f52.j.'+n,e.target.value); $('#dSaved').textContent='Saved' });
+$('#dShare').onclick=async()=>{ const n=curDay(), r=reading(n), line=$('#dJournal').value.trim();
+  const text=`Forged52 Day ${n}: ${nice(r.ref)}.${line?` Where I saw God: "${line}"`:''} What stood out to you?`;
+  try{ if(navigator.share){ await navigator.share({text}); return } }catch(e){ if(e&&e.name==='AbortError') return }
+  try{ await navigator.clipboard.writeText(text); toast('Copied. Paste it in a text.') }catch(e){ toast(text) } };
+
 /* ---------- shared list clicks ---------- */
 document.addEventListener('click',e=>{
   const c=e.target.closest('[data-done]'); if(c){setDone(c.dataset.done);return}
@@ -756,7 +811,7 @@ document.addEventListener('click',e=>{
 (()=>{const b=$('#bigBtn');const set=on=>{document.documentElement.classList.toggle('big',on);b.setAttribute('aria-pressed',on);store.set('f52.big',on?'1':'0')};set(store.get('f52.big')==='1');b.onclick=()=>set(!document.documentElement.classList.contains('big'))})();
 
 /* ---------- router ---------- */
-function renderAll(jump){renderToday();renderPlan(jump)}
+function renderAll(jump){renderToday();renderPlan(jump);if(window.renderDig)renderDig()}
 function show(){
   let h=location.hash.slice(1); const joined=store.get('f52.joined')==='1', called=/[?&]from=/.test(location.search);
   if(!['challenge','today','plan','join'].includes(h)) h=(called||!joined)?'challenge':'today';
@@ -852,7 +907,7 @@ function parse(ref){
 const P={el:$('#player'),chaps:$('#plChaps'),inn:$('#plIn'),text:$('#plText'),play:$('#plPlay'),icon:$('#plIcon'),voice:$('#plVoice'),narr:$('#plNarr')};
 const synth=window.speechSynthesis;
 let day=0,chs=[],ci=0,verses=[],vi=0,playing=false,token=0,lock=null,lastFocus=null,usedTr='nlt';
-let mode=store.get('f52.mode')||'narrator', tr=store.get('f52.tr2')||'nlt', rate=+(store.get('f52.rate2')||1), size=+(store.get('f52.size2')||1.45);
+let mode='narrator', tr=store.get('f52.tr2')||'nlt', rate=+(store.get('f52.rate2')||1), size=+(store.get('f52.size2')||1.45);
 const cache={};
 P.el.style.setProperty('--pl-size',size+'rem');
 const label=c=>`${c.name} ${c.ch}${c.v1?`:${c.v1}–${c.v2}`:''}`;
@@ -957,7 +1012,7 @@ function nPlay(fromTap){
   const p=AU.play(); if(p&&p.catch) p.catch(err=>{ if(err&&err.name==='NotAllowedError'){ setIcon() } else nFail() });
   media();
 }
-function nFail(){ playing=false; setIcon(); P.inn.insertAdjacentHTML('afterbegin','<p class="pl-msg">The narration couldn\'t load here. Check your connection, or tap <b>Phone voice</b> below.</p>') }
+function nFail(){ playing=false; setIcon(); P.inn.insertAdjacentHTML('afterbegin','<p class="pl-msg">The narration couldn\'t load here. Check your connection and try again. If you are in a preview window, open forged52.pages.dev in Safari.</p>') }
 AU.addEventListener('loadedmetadata',()=>{ if(AU.dataset.fresh==='1'){ AU.dataset.fresh=''; if(span&&span.start>0.001) AU.currentTime=span.start*AU.duration } $('#tDur').textContent=mmss(span?(span.end-span.start)*AU.duration:AU.duration) });
 AU.addEventListener('play',()=>{playing=true;setIcon();wake(true)});
 AU.addEventListener('pause',()=>{playing=false;setIcon();wake(false)});
@@ -970,7 +1025,7 @@ AU.addEventListener('timeupdate',()=>{
   if(span.end<0.999&&f>=span.end) nEnded();
 });
 AU.addEventListener('ended',()=>nEnded());
-function nEnded(){ if(ci<chs.length-1){ nGo(ci+1,true) } else { AU.pause(); playing=false; setIcon(); setDone(day,true); P.inn.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--accent)!important;margin-top:1em">Finished. Marked complete.</p>'); P.text.scrollTop=P.text.scrollHeight } }
+function nEnded(){ if(ci<chs.length-1){ nGo(ci+1,true) } else { AU.pause(); playing=false; setIcon(); setDone(day,true); P.inn.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--accent)!important;margin-top:1em">Finished. Marked complete.</p><button class="btn primary pl-dig" type="button" onclick="closeP();location.hash=\'today\';setTimeout(()=>document.getElementById(\'dig\').scrollIntoView({behavior:\'smooth\'}),150)">Dig deeper</button>'); P.text.scrollTop=P.text.scrollHeight } }
 async function nGo(i,autoplay){ AU.pause(); ci=i; await openCh(i,false); await prepTiming(chs[ci]); nLoad(); if(autoplay) nPlay() }
 function nNext(){ if(ci<chs.length-1) nGo(ci+1,playing) }
 function nPrev(){ const into=AU.duration?(AU.currentTime-(span?span.start*AU.duration:0)):0; if(into>5||ci===0){ AU.currentTime=span?span.start*AU.duration:0 } else nGo(ci-1,playing) }
