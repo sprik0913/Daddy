@@ -1,6 +1,6 @@
 // FORGED service worker: offline app shell + data, and reminder/crew notifications.
 // Bump VERSION on every deploy so clients pick up new files.
-const VERSION = 'forged-v3-2';
+const VERSION = 'forged-v3-3';
 const SHELL = ['./', 'index.html', 'manifest.webmanifest', 'css/tokens.css', 'css/app.css',
   'js/app.js', 'js/config.js', 'js/core/plan.js', 'js/core/store.js', 'js/core/bible.js', 'js/core/ui.js', 'js/core/cloud.js', 'js/core/data.js',
   'js/screens/today.js', 'js/screens/reader.js', 'js/screens/journey.js', 'js/screens/memory.js', 'js/screens/achievements.js', 'js/screens/journal.js',

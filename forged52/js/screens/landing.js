@@ -4,25 +4,9 @@ import { store } from '../core/store.js';
 import { verseText } from '../core/bible.js';
 import { esc, icon, paintIcons, share, sheet, sheetHead } from '../core/ui.js';
 
-const FORGE_ART = `<svg viewBox="0 0 480 480" role="img" aria-label="Glowing iron on an anvil, sparks rising" style="display:block;width:100%;height:100%">
-  <defs>
-    <radialGradient id="la-glow" cx="50%" cy="58%" r="60%"><stop offset="0" stop-color="#E0A04F" stop-opacity=".55"/><stop offset=".35" stop-color="#8A5A2A" stop-opacity=".25"/><stop offset="1" stop-color="#141613" stop-opacity="0"/></radialGradient>
-    <linearGradient id="la-bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1D211B"/><stop offset="1" stop-color="#0F110E"/></linearGradient>
-    <linearGradient id="la-hot" x1="0" y1="0" x2="1" y2="0"><stop offset="0" stop-color="#7A2E10"/><stop offset=".35" stop-color="#E07A2A"/><stop offset=".6" stop-color="#FFD9A0"/><stop offset=".85" stop-color="#E07A2A"/><stop offset="1" stop-color="#7A2E10"/></linearGradient>
-    <linearGradient id="la-iron" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#4A4D43"/><stop offset="1" stop-color="#1D211B"/></linearGradient>
-    <linearGradient id="la-bronze" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#E2C08A"/><stop offset="1" stop-color="#8A6532"/></linearGradient>
-    <filter id="la-blur"><feGaussianBlur stdDeviation="6"/></filter>
-  </defs>
-  <rect width="480" height="480" fill="url(#la-bg)"/>
-  <rect width="480" height="480" fill="url(#la-glow)"/>
-  <g fill="#C59B61" opacity=".9">${Array.from({ length: 26 }, (_, i) => { const x = 150 + ((i * 53) % 190), y = 120 + ((i * 37) % 150), r = 1 + (i % 3) * 0.7; return `<circle cx="${x}" cy="${y}" r="${r}"><animate attributeName="cy" values="${y + 60};${y - 70}" dur="${2.4 + (i % 5) * 0.5}s" begin="${(i % 7) * 0.35}s" repeatCount="indefinite"/><animate attributeName="opacity" values="0;1;0" dur="${2.4 + (i % 5) * 0.5}s" begin="${(i % 7) * 0.35}s" repeatCount="indefinite"/></circle>`; }).join('')}</g>
-  <ellipse cx="240" cy="276" rx="120" ry="14" fill="#E07A2A" opacity=".35" filter="url(#la-blur)"/>
-  <rect x="150" y="262" width="180" height="16" rx="5" fill="url(#la-hot)"/>
-  <path d="M84 286 H368 C392 286 408 296 418 312 H352 L334 334 V352 L360 372 V392 H150 V372 L176 352 V334 L158 312 H96 C88 304 84 296 84 286 Z" fill="url(#la-iron)" stroke="#626B52" stroke-opacity=".5"/>
-  <rect x="140" y="392" width="230" height="22" rx="3" fill="#272B25"/>
-  <g transform="rotate(-28 330 190)"><rect x="318" y="120" width="14" height="150" rx="5" fill="#5A4430"/><rect x="290" y="104" width="72" height="34" rx="5" fill="url(#la-bronze)"/></g>
-  <path d="M226 210 h28 v20 h20 v14 h-20 v30 h-28 v-30 h-20 v-14 h20 z" fill="#C59B61" opacity=".18"/>
-</svg>`;
+// Hero photo: "Vintage smith's workshop - 0172" by Jorge Royan, CC BY-SA 3.0, via Wikimedia Commons
+// (cropped and color-graded for FORGED; credit shown in the footer as the license requires).
+const HERO = `<img src="assets/hero-forge.webp" width="1008" height="832" alt="A blacksmith's hammer over glowing iron on an anvil" fetchpriority="high" decoding="async">`;
 
 export async function render(root) {
   const from = (new URLSearchParams(location.search).get('from') || '').replace(/[^A-Za-z .'-]/g, '').slice(0, 20);
@@ -39,7 +23,7 @@ export async function render(root) {
       <div class="row-btns" style="margin-top:26px"><a class="btn primary" href="#start">${icon('flame')} Accept the challenge</a><button class="btn" type="button" id="lInvite">${icon('user-plus')} Invite a brother</button></div>
       <p class="faint" style="margin-top:14px">Free. No ads. No account needed to begin.</p>
     </div>
-    <div class="forge-art">${FORGE_ART}</div>
+    <div class="forge-art">${HERO}</div>
   </header>
 
   <section class="land-sec"><div class="big3"><div><b>52</b><span>Weeks</span></div><div><b>66</b><span>Books</span></div><div><b>1</b><span>Commitment</span></div></div>

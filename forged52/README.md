@@ -82,6 +82,7 @@ Every product name, tagline and hero line lives in `BRAND` in `js/config.js`. To
 
 - **World English Bible (WEB):** public domain and bundled in `data/web.json` (from TehShrike/world-english-bible). It is used offline, in the Study library and for memory verses.
 - **NLT:** loaded from Tyndale's public NLT API (`api.nlt.to`, anonymous, non-commercial, 50 verses per request). The text is never cached to storage, and the copyright line is shown. **Tyndale ends public access on January 1, 2027**; after that, `FLAGS.nltEnabled` turns off and the reader uses WEB. Continued NLT use needs a license from Tyndale.
+- **Landing hero photo:** "Vintage smith's workshop - 0172" by Jorge Royan, CC BY-SA 3.0, via Wikimedia Commons (cropped and color-graded). The license requires the credit line shown in the landing page footer.
 - **Narration:** Winfred W. Henson's public-domain WEB recording, streamed from ebible.org.
 - **No text changes:** Scripture text is never edited. Memory and library verses are copied exactly, and a unit test checks every memory verse against the WEB.
 
