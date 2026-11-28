@@ -363,6 +363,10 @@ body.on-landing main,body.on-landing footer{display:none}
 .mini.chk{text-transform:none;letter-spacing:0;font-family:var(--sans);font-size:.95rem;color:var(--muted)}
 .mini.chk input{width:22px;height:22px;accent-color:var(--accent)}
 .rPrev{color:var(--muted);font-size:.95rem}
+.pl-seek{display:flex;align-items:center;gap:12px;max-width:620px;margin:14px auto 0;font-family:var(--mono);font-size:.8rem;color:var(--faint);font-variant-numeric:tabular-nums}
+.pl-seek input{flex:1;accent-color:var(--accent);height:30px}
+.player.mode-narrator .tts-only{display:none!important}
+.player.mode-tts .nar-only,.player.mode-tts .pl-seek{display:none!important}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -591,13 +595,16 @@ body.on-landing main,body.on-landing footer{display:none}
       <button type="button" id="plPlay" aria-label="Play"><svg viewBox="0 0 24 24" fill="currentColor"><path id="plIcon" d="M7 4v16l13-8z"/></svg></button>
       <button type="button" id="plNext" aria-label="Next verse"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 5h2v14h-2zM4 5v14l11-7z"/></svg></button>
     </div>
+    <div class="pl-seek" id="plSeek"><span id="tCur">0:00</span><input type="range" id="seek" min="0" max="1000" value="0" aria-label="Position"><span id="tDur">0:00</span></div>
     <div class="pl-opts">
+      <div class="g" role="group" aria-label="Who reads"><button type="button" data-mode="narrator">Narrator</button><button type="button" data-mode="tts">Phone voice</button></div>
       <div class="g" role="group" aria-label="Speed"><button type="button" data-rate="0.85">0.85×</button><button type="button" data-rate="1">1×</button><button type="button" data-rate="1.2">1.2×</button></div>
       <div class="g" role="group" aria-label="Text size"><button type="button" id="plSmaller" aria-label="Smaller text">A−</button><button type="button" id="plBigger" aria-label="Bigger text">A+</button></div>
-      <div class="g" role="group" aria-label="Translation"><button type="button" data-tr="nlt">NLT</button><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
-      <select id="plVoice" aria-label="Voice" hidden></select>
+      <div class="g tts-only" role="group" aria-label="Translation"><button type="button" data-tr="nlt">NLT</button><button type="button" data-tr="web">WEB</button><button type="button" data-tr="kjv">KJV</button></div>
+      <select id="plVoice" class="tts-only" aria-label="Voice" hidden></select>
     </div>
-    <div class="pl-small">Want a human narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play this chapter in the Bible app</a></div>
+    <div class="pl-small nar-only">World English Bible, read by Winfred W. Henson. Prefer the NLT? <a class="nlt-link" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play it in the Bible app</a></div>
+    <div class="pl-small tts-only">Want a human narrator? <a id="plNarr" href="https://www.bible.com/audio-bible/116/ROM.1.NLT" target="_blank" rel="noopener">Play this chapter in the Bible app</a></div>
     <div class="pl-copy" id="plCopy" hidden>Scripture quotations are taken from the Holy Bible, New Living Translation, copyright © 1996, 2004, 2015 by Tyndale House Foundation. Used by permission of Tyndale House Publishers, Carol Stream, Illinois 60188. All rights reserved.</div>
   </div>
 </div>
@@ -844,7 +851,7 @@ function parse(ref){
 const P={el:$('#player'),chaps:$('#plChaps'),inn:$('#plIn'),text:$('#plText'),play:$('#plPlay'),icon:$('#plIcon'),voice:$('#plVoice'),narr:$('#plNarr')};
 const synth=window.speechSynthesis;
 let day=0,chs=[],ci=0,verses=[],vi=0,playing=false,token=0,lock=null,lastFocus=null,usedTr='nlt';
-let tr=store.get('f52.tr2')||'nlt', rate=+(store.get('f52.rate2')||1), size=+(store.get('f52.size2')||1.45);
+let mode=store.get('f52.mode')||'narrator', tr=store.get('f52.tr2')||'nlt', rate=+(store.get('f52.rate2')||1), size=+(store.get('f52.size2')||1.45);
 const cache={};
 P.el.style.setProperty('--pl-size',size+'rem');
 const label=c=>`${c.name} ${c.ch}${c.v1?`:${c.v1}–${c.v2}`:''}`;
@@ -870,6 +877,7 @@ async function localWEB(c){
   return out;
 }
 async function fetchCh(c){
+  if(mode==='narrator'){ const k='nar|'+label(c); if(cache[k]){usedTr='web';return cache[k]} const v=await localWEB(c); v.tr='web'; usedTr='web'; return cache[k]=v }
   const key=tr+'|'+label(c); if(cache[key]){usedTr=cache[key].tr;return cache[key]}
   let v;
   if(tr==='nlt'){ try{v=await fetchNLT(c);v.tr='nlt'}catch(e){v=null} }
@@ -877,7 +885,7 @@ async function fetchCh(c){
   if(!v){ v=await localWEB(c); v.tr='web' }   // built-in copy: works offline and inside the preview
   usedTr=v.tr; return cache[key]=v;
 }
-function marks(){$$('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));$$('[data-tr]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tr===tr))}
+function marks(){$$('[data-mode]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.mode===mode));P.el.classList.toggle('mode-narrator',mode==='narrator');P.el.classList.toggle('mode-tts',mode!=='narrator');$$('[data-rate]').forEach(b=>b.setAttribute('aria-pressed',+b.dataset.rate===rate));$$('[data-tr]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.tr===tr))}
 function setIcon(){P.icon.setAttribute('d',playing?'M6 4h4v16H6zM14 4h4v16h-4z':'M7 4v16l13-8z');P.play.setAttribute('aria-label',playing?'Pause':'Play')}
 function loadVoices(){ if(!synth) return; const vs=synth.getVoices().filter(v=>/^en/i.test(v.lang)); if(!vs.length) return;
   const score=v=>(/premium|enhanced|natural|neural/i.test(v.name)?3:0)+(/google|samantha|daniel|alex|aaron|arthur/i.test(v.name)?1:0)+(/en-US/i.test(v.lang)?.5:0);
@@ -885,15 +893,15 @@ function loadVoices(){ if(!synth) return; const vs=synth.getVoices().filter(v=>/
   P.voice.innerHTML=s.map(v=>`<option value="${v.name}">${v.name.replace(/\s*\(.*\)/,'')}</option>`).join(''); P.voice.value=saved&&vs.some(v=>v.name===saved)?saved:s[0].name; P.voice.hidden=false }
 if(synth){loadVoices();synth.onvoiceschanged=loadVoices}
 P.voice.onchange=()=>{store.set('f52.voice',P.voice.value);if(playing){stop();speak()}};
-function renderChaps(){P.chaps.innerHTML=chs.map((c,i)=>`<button type="button" data-ci="${i}" class="${i===ci?'cur':''}">${label(c)}</button>`).join('');const c=chs[ci];P.narr.href=`https://www.bible.com/audio-bible/116/${c.usfm}.${c.ch}.NLT`}
+function renderChaps(){ if(chs[ci]) $$('.nlt-link').forEach(a=>a.href=`https://www.bible.com/audio-bible/116/${chs[ci].usfm}.${chs[ci].ch}.NLT`);P.chaps.innerHTML=chs.map((c,i)=>`<button type="button" data-ci="${i}" class="${i===ci?'cur':''}">${label(c)}</button>`).join('');const c=chs[ci];P.narr.href=`https://www.bible.com/audio-bible/116/${c.usfm}.${c.ch}.NLT`}
 async function openCh(i,auto){
   const my=++token; ci=i; vi=0; renderChaps(); const c=chs[ci];
   P.inn.innerHTML='<p class="pl-msg">Loading…</p>';
   try{verses=await fetchCh(c)}catch(e){ if(my!==token) return; playing=false; setIcon(); verses=[];
     P.inn.innerHTML=`<p class="pl-msg">Couldn't load ${label(c)}. Check your connection and press play to try again, or <a href="${P.narr.href}" target="_blank" rel="noopener">play it in the Bible app</a>.</p>`; return }
   if(my!==token) return;
-  $('#plCopy').hidden=usedTr!=='nlt';
-  P.inn.innerHTML=(tr!==usedTr?`<p class="pl-msg">${tr.toUpperCase()} couldn't be loaded here, so this is the World English Bible (WEB). The Bible app link below plays the NLT with a narrator.</p>`:'')+`<h3>${label(c)}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
+  $('#plCopy').hidden=usedTr!=='nlt'||mode==='narrator';
+  P.inn.innerHTML=(mode!=='narrator'&&tr!==usedTr?`<p class="pl-msg">${tr.toUpperCase()} couldn't be loaded here, so this is the World English Bible (WEB). The Bible app link below plays the NLT with a narrator.</p>`:'')+`<h3>${label(c)}</h3>`+verses.map((v,k)=>`<p data-vi="${k}"><sup>${v.n}</sup>${v.t}</p>`).join('');
   P.text.scrollTop=0; hl(); if(auto) speak(true);
 }
 function hl(){$$('#plIn p.now').forEach(p=>p.classList.remove('now'));const p=P.inn.querySelector(`p[data-vi="${vi}"]`);if(p){p.classList.add('now');p.scrollIntoView({block:'center',behavior:reduce?'auto':'smooth'})}}
@@ -907,23 +915,68 @@ function speak(announce){
     hl(); utter(verses[vi].t,()=>{ if(!playing||my!==token) return; vi++; go() }) };
   if(announce){const c=chs[ci];utter(`${c.name}, chapter ${c.ch}.`,go)} else go();
 }
-function stop(){playing=false;token++;synth&&synth.cancel();setIcon();wake(false)}
+function stop(){playing=false;token++;synth&&synth.cancel();if(window.AU)AU.pause();setIcon();wake(false)}
 async function wake(on){try{if(on&&'wakeLock' in navigator&&!lock){lock=await navigator.wakeLock.request('screen');lock.addEventListener('release',()=>lock=null)}else if(!on&&lock){lock.release();lock=null}}catch(e){}}
 function openPlayer(n){
   day=n; const r=reading(n); chs=parse(r.ref); if(!chs.length) return; lastFocus=document.activeElement;
   $('#plDay').textContent=`Day ${n}${r.cat?' · '+r.cat:''}`; $('#plRef').textContent=nice(r.ref);
-  marks(); P.el.hidden=false; document.body.style.overflow='hidden'; P.play.focus(); stop(); openCh(0,false);
+  marks(); P.el.hidden=false; document.body.style.overflow='hidden'; P.play.focus(); stop(); AU.removeAttribute('src'); AU.dataset.src=''; $('#seek').value=0; $('#tCur').textContent='0:00'; $('#tDur').textContent='0:00';
+  if(mode==='narrator') nGo(0,false); else openCh(0,false);
 }
 function closeP(){stop();P.el.hidden=true;document.body.style.overflow='';lastFocus&&lastFocus.focus&&lastFocus.focus()}
-P.play.onclick=()=>{if(playing){stop();return} if(synth){try{synth.cancel();const u=new SpeechSynthesisUtterance(' ');u.volume=0;synth.speak(u)}catch(e){}} token++;speak(vi===0)}; // the silent utterance unlocks speech on iPhone during the tap
-$('#plPrev').onclick=()=>{const w=playing;stop();if(vi>0)vi--;else if(ci>0){openCh(ci-1,false);return}hl();if(w)speak()};
-$('#plNext').onclick=()=>{const w=playing;stop();if(vi<verses.length-1){vi++;hl();if(w)speak()}else if(ci<chs.length-1)openCh(ci+1,w)};
+P.play.onclick=()=>{if(mode==='narrator'){ if(playing){stop()} else {nPlay(true)} return } if(playing){stop();return} if(synth){try{synth.cancel();const u=new SpeechSynthesisUtterance(' ');u.volume=0;synth.speak(u)}catch(e){}} token++;speak(vi===0)}; // the silent utterance unlocks speech on iPhone during the tap
+$('#plPrev').onclick=()=>{ if(mode==='narrator'){ nPrev(); return } const w=playing;stop();if(vi>0)vi--;else if(ci>0){openCh(ci-1,false);return}hl();if(w)speak()};
+$('#plNext').onclick=()=>{ if(mode==='narrator'){ nNext(); return } const w=playing;stop();if(vi<verses.length-1){vi++;hl();if(w)speak()}else if(ci<chs.length-1)openCh(ci+1,w)};
 $('#plClose').onclick=closeP;
 P.el.addEventListener('keydown',e=>{if(e.key==='Escape')closeP()});
-P.chaps.onclick=e=>{const b=e.target.closest('[data-ci]');if(!b)return;const w=playing;stop();openCh(+b.dataset.ci,w)};
-P.inn.onclick=e=>{const p=e.target.closest('p[data-vi]');if(!p)return;const w=playing;stop();vi=+p.dataset.vi;hl();if(w)speak()};
-$$('[data-rate]').forEach(b=>b.onclick=()=>{rate=+b.dataset.rate;store.set('f52.rate2',rate);marks();if(playing){stop();speak()}});
+P.chaps.onclick=e=>{const b=e.target.closest('[data-ci]');if(!b)return;const w=playing;stop();if(mode==='narrator'){nGo(+b.dataset.ci,w)}else openCh(+b.dataset.ci,w)};
+P.inn.onclick=e=>{const p=e.target.closest('p[data-vi]');if(!p)return; if(mode==='narrator'){ nSeekVerse(+p.dataset.vi); return }const w=playing;stop();vi=+p.dataset.vi;hl();if(w)speak()};
+$$('[data-rate]').forEach(b=>b.onclick=()=>{rate=+b.dataset.rate;store.set('f52.rate2',rate);marks();if(mode==='narrator'){AU.playbackRate=rate;return}if(playing){stop();speak()}});
 $$('[data-tr]').forEach(b=>b.onclick=()=>{tr=b.dataset.tr;store.set('f52.tr2',tr);marks();const w=playing;stop();openCh(ci,w)});
+
+/* ---------- NARRATOR: human-read World English Bible (Winfred W. Henson, public domain, ebible.org) ---------- */
+const AU=new Audio(); AU.preload='auto'; window.AU=AU;
+let AUDIO=null, span=null; // span: {start,end} fractions of the chapter file for partial chapters; cum: cumulative char fractions per verse
+fetch('assets/audio.json').then(r=>r.json()).then(j=>AUDIO=j).catch(()=>{});
+async function chapterFull(c){ if(!WEB){const r=await fetch('assets/web.json');WEB=await r.json()} return (WEB[c.usfm]||[])[c.ch-1]||[] }
+let cum=[]; // cum[k] = fraction of chapter text before verse k+1
+async function prepTiming(c){
+  const full=await chapterFull(c); const lens=full.map(t=>t.length+12); const tot=lens.reduce((a,b)=>a+b,0)||1; let acc=0; cum=lens.map(l=>{const f=acc/tot;acc+=l;return f}); cum.push(1);
+  const v1=c.v1||1, v2=c.v2||full.length; span={start:cum[v1-1]||0,end:cum[Math.min(v2,full.length)]||1};
+}
+const mmss=t=>!isFinite(t)?'0:00':`${Math.floor(t/60)}:${String(Math.floor(t%60)).padStart(2,'0')}`;
+function nSrc(){ const c=chs[ci]; if(!AUDIO||!AUDIO.books[c.usfm]) return null; const f=AUDIO.books[c.usfm][c.ch-1]; return f?AUDIO.base+f:null }
+function nLoad(){ const url=nSrc(); if(!url) return false; if(AU.dataset.src!==url){ AU.src=url; AU.dataset.src=url; AU.dataset.fresh='1'; } AU.playbackRate=rate; return true }
+function media(){ if(!('mediaSession' in navigator)) return; const c=chs[ci];
+  navigator.mediaSession.metadata=new MediaMetadata({title:label(c),artist:'Forged52 · Day '+day,album:'World English Bible, read by Winfred W. Henson',artwork:[{src:'assets/icon.png',sizes:'256x256',type:'image/png'}]});
+  navigator.mediaSession.setActionHandler('play',()=>nPlay()); navigator.mediaSession.setActionHandler('pause',()=>AU.pause());
+  navigator.mediaSession.setActionHandler('nexttrack',()=>nNext()); navigator.mediaSession.setActionHandler('previoustrack',()=>nPrev()); }
+function nPlay(fromTap){
+  if(!nLoad()){ if(!AUDIO){ toast('Loading narration…'); fetch('assets/audio.json').then(r=>r.json()).then(j=>{AUDIO=j;nPlay()}).catch(()=>nFail()); } else nFail(); return }
+  const p=AU.play(); if(p&&p.catch) p.catch(err=>{ if(err&&err.name==='NotAllowedError'){ setIcon() } else nFail() });
+  media();
+}
+function nFail(){ playing=false; setIcon(); P.inn.insertAdjacentHTML('afterbegin','<p class="pl-msg">The narration couldn\'t load here. Check your connection, or tap <b>Phone voice</b> below.</p>') }
+AU.addEventListener('loadedmetadata',()=>{ if(AU.dataset.fresh==='1'){ AU.dataset.fresh=''; if(span&&span.start>0.001) AU.currentTime=span.start*AU.duration } $('#tDur').textContent=mmss(span?(span.end-span.start)*AU.duration:AU.duration) });
+AU.addEventListener('play',()=>{playing=true;setIcon();wake(true)});
+AU.addEventListener('pause',()=>{playing=false;setIcon();wake(false)});
+AU.addEventListener('error',()=>{ if(mode==='narrator'&&AU.dataset.src) nFail() });
+AU.addEventListener('timeupdate',()=>{
+  if(!AU.duration||!span) return; const f=AU.currentTime/AU.duration;
+  const rel=(f-span.start)/(span.end-span.start); $('#seek').value=Math.max(0,Math.min(1000,rel*1000)); $('#tCur').textContent=mmss(Math.max(0,AU.currentTime-span.start*AU.duration));
+  // follow along: estimate the verse from how far into the chapter we are
+  let k=0; while(k<cum.length-1&&cum[k+1]<=f) k++; const v=(chs[ci].v1||1); const idx=k+1-v; if(idx>=0&&idx<verses.length&&idx!==vi){vi=idx;hl()}
+  if(span.end<0.999&&f>=span.end) nEnded();
+});
+AU.addEventListener('ended',()=>nEnded());
+function nEnded(){ if(ci<chs.length-1){ nGo(ci+1,true) } else { AU.pause(); playing=false; setIcon(); setDone(day,true); P.inn.insertAdjacentHTML('beforeend','<p class="pl-msg" style="color:var(--accent)!important;margin-top:1em">Finished. Marked complete.</p>'); P.text.scrollTop=P.text.scrollHeight } }
+async function nGo(i,autoplay){ AU.pause(); ci=i; await openCh(i,false); await prepTiming(chs[ci]); nLoad(); if(autoplay) nPlay() }
+function nNext(){ if(ci<chs.length-1) nGo(ci+1,playing) }
+function nPrev(){ const into=AU.duration?(AU.currentTime-(span?span.start*AU.duration:0)):0; if(into>5||ci===0){ AU.currentTime=span?span.start*AU.duration:0 } else nGo(ci-1,playing) }
+function nSeekVerse(idx){ if(!AU.duration) return; const v=(chs[ci].v1||1)+idx; AU.currentTime=(cum[v-1]||0)*AU.duration; vi=idx; hl() }
+$('#seek').oninput=e=>{ if(!AU.duration||!span) return; AU.currentTime=(span.start+(+e.target.value/1000)*(span.end-span.start))*AU.duration };
+$$('[data-mode]').forEach(b=>b.onclick=async()=>{ const was=playing; stop(); mode=b.dataset.mode; store.set('f52.mode',mode); marks(); if(mode==='narrator'){ await nGo(ci,false) } else { openCh(ci,false) } });
+
 const sz=d=>{size=Math.max(1.1,Math.min(2.6,+(size+d).toFixed(2)));store.set('f52.size2',size);P.el.style.setProperty('--pl-size',size+'rem');hl()};
 $('#plBigger').onclick=()=>sz(.15); $('#plSmaller').onclick=()=>sz(-.15);
 </script>
