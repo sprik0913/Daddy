@@ -15,6 +15,8 @@ A calm, four-page site for the Forged52 challenge: read the whole Bible in 52 we
 
 **Sync link**: `https://forged52.pages.dev/?plan=topical&week=28&day=7` sets the plan, lines today up with that week and day (day 1 = Sunday) and marks earlier days complete, then cleans the address.
 
+**Colors**: six themes (Venom default, Molten, Arctic, Crimson, Royal, Coyote) picked on the You page; saved per device. Theme colors are CSS variables at the end of the style block.
+
 **Large text**: the Aa button scales the whole site up and brightens secondary text.
 
 Progress is stored in the browser (localStorage); no account required. Reading plans come from the Forged52 app.
