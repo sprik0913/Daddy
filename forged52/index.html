@@ -274,6 +274,88 @@ footer{border-top-color:var(--olive)}
 .pl-text p.now sup{color:var(--accent)}
 .pl-small a{color:var(--accent)}
 
+
+/* ===== CHALLENGE LANDING ===== */
+.landing{position:relative;overflow:hidden;isolation:isolate}
+#sparks{position:fixed;inset:0;width:100%;height:100%;z-index:-1;pointer-events:none}
+.landing::before{content:"";position:fixed;inset:0;z-index:-2;pointer-events:none;background:radial-gradient(ellipse 90% 55% at 50% 115%,rgba(217,102,43,.30),rgba(217,102,43,.06) 45%,transparent 70%),radial-gradient(ellipse 70% 60% at 50% 30%,transparent,rgba(0,0,0,.55) 100%)}
+.ld-wrap{max-width:820px;margin:0 auto;padding:0 max(20px,env(safe-area-inset-left))}
+.ld-hero{min-height:calc(100svh - 64px);display:flex;flex-direction:column;justify-content:center;max-width:980px;margin:0 auto;padding:40px max(20px,env(safe-area-inset-left)) 70px;position:relative}
+.callout-banner{align-self:flex-start;font-family:var(--head);font-weight:800;font-size:clamp(1.2rem,3.4vw,1.6rem);letter-spacing:.06em;text-transform:uppercase;background:var(--blaze);color:#160a03;padding:8px 14px 6px;clip-path:var(--notch);margin-bottom:22px;animation:slam .5s cubic-bezier(.2,1.6,.4,1) both}
+@keyframes slam{from{transform:scale(1.4);opacity:0}to{transform:none;opacity:1}}
+.ld-kicker{font-family:var(--mono);font-weight:600;font-size:.82rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.ld-title{font-family:var(--stencil);font-weight:400;text-transform:uppercase;line-height:.92;margin-top:14px;font-size:clamp(3rem,12.5vw,8.6rem);letter-spacing:.005em}
+.ld-title span{display:block;opacity:0;transform:translateY(30px);animation:rise .8s cubic-bezier(.2,.8,.2,1) forwards}
+.ld-title span:nth-child(2){animation-delay:.12s}.ld-title span:nth-child(3){animation-delay:.24s}
+.ld-title .l2{color:var(--accent);text-shadow:0 0 50px rgba(217,102,43,.35)}
+.ld-title.sm{font-size:clamp(2.8rem,10vw,6.4rem)}
+@keyframes rise{to{opacity:1;transform:none}}
+.ld-sub{font-size:clamp(1.1rem,2.4vw,1.4rem);color:var(--muted);margin-top:20px;max-width:34ch;opacity:0;animation:rise .8s .45s forwards}
+.ld-ctas{display:flex;gap:12px;flex-wrap:wrap;margin-top:30px;opacity:0;animation:rise .8s .6s forwards}
+.big-cta{min-height:66px;padding:0 40px;font-size:1.6rem;letter-spacing:.1em}
+.ld-down{position:absolute;bottom:24px;left:max(20px,env(safe-area-inset-left));font-family:var(--mono);font-size:.8rem;letter-spacing:.14em;text-transform:uppercase;color:var(--faint);text-decoration:none}
+.ld-down span{display:inline-block;animation:bob 1.6s ease-in-out infinite;color:var(--accent)}
+@keyframes bob{50%{transform:translateY(5px)}}
+.ld-band{padding:clamp(70px,12vw,130px) 0;border-top:2px solid var(--line);background:rgba(10,11,9,.82)}
+.ld-band.alt{background:rgba(32,36,27,.86)}
+.ld-num{font-family:var(--stencil);font-size:clamp(5rem,20vw,11rem);line-height:.85;color:var(--accent)}
+.ld-num small{font-family:var(--head);font-weight:700;font-size:.3em;color:var(--muted);vertical-align:.6em;text-transform:uppercase}
+.ld-h{font-family:var(--head);font-weight:800;text-transform:uppercase;font-size:clamp(2.2rem,6.5vw,4rem);line-height:.95;margin-top:18px;letter-spacing:.005em;text-wrap:balance}
+.ld-p{color:var(--muted);font-size:clamp(1.05rem,2vw,1.25rem);margin-top:18px;max-width:52ch}
+.ld-p.small{font-size:1rem}
+.ld-p b{color:var(--text)}
+.ld-src{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:16px}
+.phone{margin-top:26px;padding:24px;border:2px solid var(--line-2);background:rgba(12,13,10,.85);clip-path:var(--notch);max-width:640px}
+.phone-row{display:flex;align-items:center;gap:16px}
+.phone-row input{flex:1;accent-color:var(--accent);height:34px}
+.phone-row output{font-family:var(--head);font-weight:800;font-size:1.6rem;text-transform:uppercase;min-width:7ch;text-align:right}
+.bars{display:grid;gap:12px;margin-top:20px}
+.bar{display:grid;grid-template-columns:96px 1fr auto;gap:12px;align-items:center}
+.bar .lbl{font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.bar i{display:block;height:22px;background:var(--line-2);transition:width .4s}
+.bar i.hot{background:var(--accent)}
+.bar b{font-family:var(--head);font-weight:700;font-size:1.15rem;min-width:9ch;text-align:right}
+@media (max-width:480px){.bar{grid-template-columns:1fr auto}.bar .lbl{grid-column:1/-1}}
+.rules3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:26px}
+.rules3 div{border:2px solid var(--line-2);background:rgba(12,13,10,.85);clip-path:var(--notch);padding:22px 16px}
+.rules3 b{display:block;font-family:var(--stencil);font-weight:400;font-size:clamp(2.6rem,9vw,4.4rem);line-height:1;color:var(--accent)}
+.rules3 span{font-family:var(--head);font-weight:700;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.ld-verse{margin-top:30px;font-family:var(--stencil);font-size:clamp(1.6rem,5vw,2.6rem);line-height:1.08;text-transform:uppercase;border-left:5px solid var(--accent);padding-left:20px}
+.ld-verse cite{display:block;margin-top:12px;font-family:var(--mono);font-style:normal;font-size:.8rem;letter-spacing:.12em;color:var(--faint)}
+.ld-final{padding:clamp(80px,14vw,150px) max(20px,env(safe-area-inset-left));text-align:center;border-top:2px solid var(--line);background:rgba(10,11,9,.7)}
+.ld-final .ld-ctas{justify-content:center;opacity:1;animation:none}
+.ld-final .ld-title span{opacity:1;transform:none;animation:none}
+.landing ~ main footer{display:none}
+body.on-landing footer{display:none}
+
+/* sheets */
+.sheet{position:fixed;inset:0;z-index:85;background:rgba(0,0,0,.7);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);display:flex;align-items:flex-end;justify-content:center}
+.sheet-card{position:relative;width:min(560px,100%);background:#141510 url(assets/topo.png) 0 0/900px;border:2px solid var(--line-2);border-bottom:0;padding:26px 22px calc(26px + env(safe-area-inset-bottom));clip-path:polygon(16px 0,100% 0,100% 100%,0 100%,0 16px);animation:up .3s cubic-bezier(.2,.8,.2,1);max-height:92vh;overflow:auto}
+@media (min-width:640px){.sheet{align-items:center}.sheet-card{border-bottom:2px solid var(--line-2);clip-path:var(--notch)}}
+@keyframes up{from{transform:translateY(40px);opacity:0}}
+.sheet-x{position:absolute;right:14px;top:14px;width:44px;height:44px;border:2px solid var(--line-2);font-size:1.5rem;line-height:1}
+.sheet-h{font-family:var(--stencil);font-weight:400;font-size:clamp(1.9rem,6vw,2.4rem);text-transform:uppercase;margin-top:8px;line-height:1}
+.sheet-h3{font-family:var(--head);font-weight:700;font-size:1.2rem;letter-spacing:.06em;text-transform:uppercase;margin-top:22px;color:var(--muted)}
+.choice{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px}
+.choice button{text-align:left;padding:14px;border:2px solid var(--line-2);background:rgba(12,13,10,.85);display:grid;gap:4px}
+.choice button b{font-family:var(--head);font-weight:800;font-size:1.35rem;text-transform:uppercase;letter-spacing:.04em}
+.choice button span{font-size:.88rem;color:var(--faint);line-height:1.3}
+.choice button[aria-pressed="true"]{border-color:var(--accent);background:rgba(200,169,110,.12)}
+.choice button[aria-pressed="true"] b{color:var(--accent)}
+.sheet-lbl{display:block;font-family:var(--mono);font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--faint);margin-top:18px}
+.sheet-in{width:100%;margin-top:8px;min-height:54px;padding:0 14px;font-size:1.2rem;background:rgba(12,13,10,.9);border:2px solid var(--line-2)}
+.sheet-in:focus{outline:none;border-color:var(--accent)}
+.stamp{position:absolute;left:50%;top:50%;font-family:var(--stencil);font-size:clamp(2.6rem,11vw,4rem);color:var(--blaze);border:6px solid var(--blaze);padding:6px 18px 2px;text-transform:uppercase;transform:translate(-50%,-50%) rotate(-12deg) scale(3);opacity:0;pointer-events:none;mix-blend-mode:screen}
+.stamp.go{animation:stamp .45s cubic-bezier(.3,1.5,.5,1) forwards}
+@keyframes stamp{to{opacity:1;transform:translate(-50%,-50%) rotate(-12deg) scale(1)}}
+.shake{animation:shk .4s}
+@keyframes shk{20%{transform:translate(-6px,3px)}40%{transform:translate(6px,-3px)}60%{transform:translate(-4px,2px)}80%{transform:translate(3px,-1px)}}
+.today-callout{margin-top:40px;padding:22px;border:2px dashed var(--line-2);display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap}
+.today-callout b{font-family:var(--head);font-weight:800;font-size:1.4rem;text-transform:uppercase;letter-spacing:.03em}
+.today-callout span{display:block;color:var(--faint);font-size:.95rem}
+@media (prefers-reduced-motion:reduce){.ld-title span,.ld-sub,.ld-ctas{opacity:1;transform:none;animation:none}}
+
+body.on-landing main,body.on-landing footer{display:none}
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -283,11 +365,114 @@ footer{border-top-color:var(--olive)}
   <div class="top-in">
     <a class="brand" href="#today"><img src="assets/logo.webp" alt="" width="61" height="42"><span>Forged<b>52</b></span></a>
     <nav class="tabs" aria-label="Pages">
-      <a href="#today" data-tab="today">Today</a><a href="#plan" data-tab="plan">Plan</a><a href="#why" data-tab="why">Why</a><a href="#join" data-tab="join">Start</a>
+      <a href="#today" data-tab="today">Today</a><a href="#plan" data-tab="plan">Plan</a><a href="#challenge" data-tab="challenge">Challenge</a><a href="#join" data-tab="join">Setup</a>
     </nav>
     <button class="tool" id="bigBtn" type="button" aria-pressed="false" title="Larger text">Aa</button>
   </div>
 </header>
+
+<!-- CHALLENGE (landing) -->
+<section class="page landing" data-page="challenge" hidden>
+  <canvas id="sparks" aria-hidden="true"></canvas>
+
+  <div class="ld-hero">
+    <div class="callout-banner" id="calloutBanner" hidden><span id="calloutName">A BROTHER</span> CALLED YOU OUT.</div>
+    <div class="ld-kicker">The Forged52 Challenge</div>
+    <h1 class="ld-title"><span class="l1">Read the</span><span class="l1">whole Bible.</span><span class="l2">52 weeks.</span></h1>
+    <p class="ld-sub">One reading a day. Every book. No skipping the hard parts.</p>
+    <div class="ld-ctas">
+      <button class="btn primary big-cta" type="button" data-accept>I'm in</button>
+      <button class="btn" type="button" data-callout>Call out a brother</button>
+    </div>
+    <a class="ld-down" href="#" data-scroll="#ld-stat" aria-label="Scroll down">What's the catch? <span>↓</span></a>
+  </div>
+
+  <div class="ld-band" id="ld-stat">
+    <div class="ld-wrap">
+      <div class="ld-num">1 <small>in</small> <span>10</span></div>
+      <h2 class="ld-h">Only about 1 in 10 Americans has read the whole Bible.</h2>
+      <p class="ld-p">Most of us have read the parts we like. A verse on a coffee mug. A sermon clip. That's not the same as letting all of it work on you.</p>
+      <p class="ld-src">Source: LifeWay Research, 2017</p>
+    </div>
+  </div>
+
+  <div class="ld-band alt">
+    <div class="ld-wrap">
+      <h2 class="ld-h">"I don't have time."</h2>
+      <p class="ld-p">Be honest. How many hours a day are you on your phone?</p>
+      <div class="phone">
+        <div class="phone-row"><input type="range" id="hrs" min="1" max="8" step="0.5" value="3" aria-label="Hours on your phone per day"><output id="hrsOut">3 hrs/day</output></div>
+        <div class="bars">
+          <div class="bar"><span class="lbl">Your phone</span><i id="barPhone"></i><b id="phoneYear">1,095 hrs/yr</b></div>
+          <div class="bar"><span class="lbl">Forged52</span><i id="barF52" class="hot"></i><b>91 hrs/yr</b></div>
+        </div>
+        <p class="ld-p small">Forged52 is about 15 minutes a day. That's <b id="pctPhone">8%</b> of your screen time.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="ld-band">
+    <div class="ld-wrap">
+      <h2 class="ld-h">What it takes</h2>
+      <div class="rules3">
+        <div><b>15</b><span>minutes a day</span></div>
+        <div><b>364</b><span>readings</span></div>
+        <div><b>52</b><span>weeks</span></div>
+      </div>
+      <p class="ld-p">Hard to read? Every reading has a Listen button that reads it to you out loud, verse by verse. No excuse left.</p>
+    </div>
+  </div>
+
+  <div class="ld-band alt">
+    <div class="ld-wrap">
+      <h2 class="ld-h">Your family is watching.</h2>
+      <p class="ld-p">Your kids will learn what a man is by watching you. Not your words. Your mornings. Be the man who opened the Book every day, and they'll remember it after you're gone.</p>
+      <blockquote class="ld-verse">Be on guard. Stand firm in the faith. Be courageous. Be strong.<cite>1 Corinthians 16:13 (NLT)</cite></blockquote>
+    </div>
+  </div>
+
+  <div class="ld-final">
+    <h2 class="ld-title sm"><span class="l1">So.</span><span class="l2">Are you in?</span></h2>
+    <div class="ld-ctas">
+      <button class="btn primary big-cta" type="button" data-accept>I'm in</button>
+      <button class="btn" type="button" data-callout>Call out a brother</button>
+    </div>
+    <p class="ld-p small" style="margin-top:18px">Free. No account. Your progress stays on your phone.</p>
+  </div>
+</section>
+
+<!-- accept + callout sheets -->
+<div class="sheet" id="acceptSheet" hidden role="dialog" aria-modal="true" aria-labelledby="acceptTitle">
+  <div class="sheet-card">
+    <button class="sheet-x" type="button" data-close aria-label="Close">×</button>
+    <div class="ld-kicker">Lock it in</div>
+    <h2 id="acceptTitle" class="sheet-h">When do you start?</h2>
+    <div class="choice" id="startChoice">
+      <button type="button" data-start="today" aria-pressed="true"><b>Today</b><span id="todayLbl"></span></button>
+      <button type="button" data-start="sunday" aria-pressed="false"><b>This Sunday</b><span id="sundayLbl"></span></button>
+    </div>
+    <h3 class="sheet-h3">How do you want to read it?</h3>
+    <div class="choice" id="routeChoice">
+      <button type="button" data-r="topical" aria-pressed="true"><b>Mixed</b><span>A different part of the Bible each day</span></button>
+      <button type="button" data-r="chrono" aria-pressed="false"><b>In order</b><span>Genesis to Revelation, as it happened</span></button>
+    </div>
+    <button class="btn primary" type="button" id="lockIn" style="width:100%;margin-top:18px">Lock it in</button>
+    <div class="stamp" id="stamp" aria-hidden="true">Committed</div>
+  </div>
+</div>
+
+<div class="sheet" id="calloutSheet" hidden role="dialog" aria-modal="true" aria-labelledby="calloutTitle">
+  <div class="sheet-card">
+    <button class="sheet-x" type="button" data-close aria-label="Close">×</button>
+    <div class="ld-kicker">Iron sharpens iron</div>
+    <h2 id="calloutTitle" class="sheet-h">Call out a brother</h2>
+    <p class="ld-p small">He'll open the link and see your name at the top: "<span id="coPreview">YOU</span> CALLED YOU OUT."</p>
+    <label class="sheet-lbl" for="coName">Your first name</label>
+    <input id="coName" class="sheet-in" maxlength="20" autocomplete="given-name" placeholder="First name">
+    <button class="btn primary" type="button" id="coSend" style="width:100%;margin-top:14px">Send the challenge</button>
+    <p class="ld-p small" id="coLink" style="margin-top:12px;word-break:break-all"></p>
+  </div>
+</div>
 
 <main>
   <!-- TODAY -->
@@ -315,6 +500,7 @@ footer{border-top-color:var(--olive)}
       <div class="section-head"><h2>This week</h2><span id="tWeekLbl"></span></div>
       <div class="list" id="tWeek"></div>
     </div>
+    <div class="today-callout"><div><b>Don't do it alone</b><span>Send a brother the challenge with your name on it.</span></div><button class="btn primary" type="button" data-callout>Call him out</button></div>
   </section>
 
   <!-- PLAN -->
@@ -332,27 +518,7 @@ footer{border-top-color:var(--olive)}
   </section>
 
   <!-- WHY -->
-  <section class="page why" data-page="why" hidden>
-    <svg class="patch" viewBox="0 0 300 170" role="img" aria-label="Forged52 patch">
-  <rect x="3" y="3" width="294" height="164" rx="22" fill="#3d4731" stroke="#232a1c" stroke-width="4"/>
-  <rect x="13" y="13" width="274" height="144" rx="15" fill="none" stroke="#c8a96e" stroke-width="2.4" stroke-dasharray="7 5"/>
-  <text x="150" y="50" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">BUILD THE MAN</text>
-  <g fill="#ebe6d8"><rect x="40" y="70" width="8" height="34"/><rect x="31" y="78" width="26" height="7"/><rect x="252" y="70" width="8" height="34"/><rect x="243" y="78" width="26" height="7"/></g>
-  <text x="150" y="104" text-anchor="middle" font-family="'Saira Stencil One',sans-serif" font-size="46" fill="#ebe6d8">FORGED52</text>
-  <text x="150" y="138" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">LEAD THE FAMILY</text>
-</svg>
-    <div class="kicker">Why Forged52</div>
-    <h1>A year in the Word, one day at a time.</h1>
-    <p class="lead">Forged52 is a simple challenge for men: read the whole Bible in 52 weeks. It isn't about speed or getting it perfect. It's about showing up every morning and letting Scripture shape the man your family follows.</p>
-    <div class="essay">
-      <div><span class="n">01</span><h2>Your family follows your lead</h2><p>Every home has someone out front. Your wife and kids take their cues from how you handle pressure, how you talk, and what you build your life on. Leading them well starts with being led yourself.</p></div>
-      <div><span class="n">02</span><h2>Steady beats intense</h2><p>A chapter or two a day, for a year. Some mornings it will hit hard. Some mornings it will feel like nothing happened. Show up anyway. That's how it gets into you.</p></div>
-      <div><span class="n">03</span><h2>Read it like it matters</h2><p>If you can, use a paper Bible and leave the phone in another room. Underline what stops you. Write down one line of what God put on your heart. If reading is hard for you, listen instead. The point is the Word, not the format.</p></div>
-      <div><span class="n">04</span><h2>It outlasts you</h2><p>Your kids won't remember every lesson you teach them. They will remember what you did every morning. One man's faithfulness can change the direction of a family for generations.</p></div>
-    </div>
-    <div class="big-verse"><p>“Be on guard. Stand firm in the faith. Be courageous. Be strong.”</p><cite>1 Corinthians 16:13 (NLT)</cite></div>
-    <div style="margin-top:22px"><a class="btn primary" href="#join" style="width:100%">Start the challenge</a></div>
-  </section>
+
 
   <!-- START / JOIN -->
   <section class="page" data-page="join" hidden>
@@ -364,8 +530,8 @@ footer{border-top-color:var(--olive)}
   <text x="150" y="104" text-anchor="middle" font-family="'Saira Stencil One',sans-serif" font-size="46" fill="#ebe6d8">FORGED52</text>
   <text x="150" y="138" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">LEAD THE FAMILY</text>
 </svg>
-    <div class="kicker">Start</div>
-    <h1>Take the challenge</h1>
+    <div class="kicker">Setup</div>
+    <h1>Your plan</h1>
     <p class="lead">Three quick steps. No account needed. Your progress is saved on this device.</p>
     <div class="steps">
       <div class="step"><h3><span>01</span>Pick your start date</h3><p>Sundays work well. The mixed plan gives each weekday its own part of the Bible, starting with the letters on Sunday.</p>
@@ -388,8 +554,8 @@ footer{border-top-color:var(--olive)}
 <nav class="tabbar" aria-label="Pages">
   <a href="#today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>Today</a>
   <a href="#plan" data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Plan</a>
-  <a href="#why" data-tab="why"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Why</a>
-  <a href="#join" data-tab="join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M5 12h14M12 5l7 7-7 7"/></svg>Start</a>
+  <a href="#challenge" data-tab="challenge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Challenge</a>
+  <a href="#join" data-tab="join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Setup</a>
 </nav>
 
 <div class="toast" id="toast" role="status"></div>
@@ -550,13 +716,82 @@ document.addEventListener('click',e=>{
 /* ---------- router ---------- */
 function renderAll(jump){renderToday();renderPlan(jump)}
 function show(){
-  let h=location.hash.slice(1); if(!['today','plan','why','join'].includes(h)) h='today';
+  let h=location.hash.slice(1); const joined=store.get('f52.joined')==='1', called=/[?&]from=/.test(location.search);
+  if(!['challenge','today','plan','join'].includes(h)) h=(called||!joined)?'challenge':'today';
   $$('.page').forEach(p=>p.hidden=p.dataset.page!==h);
+  document.body.classList.toggle('on-landing',h==='challenge');
+  if(window.landingFx){ h==='challenge'?landingFx.start():landingFx.stop() }
   $$('[data-tab]').forEach(a=>a.dataset.tab===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
   scrollTo(0,0);
   if(h==='plan'){renderPlan(true)}
 }
 addEventListener('hashchange',show); renderAll(); show();
+
+
+/* ---------- CHALLENGE LANDING ---------- */
+(()=>{
+  // callout link: ?from=Name (live site) or #challenge-Name is not used; query only
+  const from=(new URLSearchParams(location.search).get('from')||'').replace(/[^A-Za-z .'-]/g,'').trim().slice(0,20);
+  if(from){ $('#calloutName').textContent=from.toUpperCase(); $('#calloutBanner').hidden=false; }
+
+  // sparks: sparse, fast, streaking embers rising from below
+  const c=$('#sparks'), g=c.getContext('2d'); let W,H,dpr,ps=[],on=false,raf=0;
+  const reduceM=matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function size(){dpr=Math.min(devicePixelRatio||1,2);W=innerWidth;H=innerHeight;c.width=W*dpr;c.height=H*dpr;g.setTransform(dpr,0,0,dpr,0,0)}
+  function spawn(init){return{x:Math.random()*W,y:init?Math.random()*H:H+20,vx:(Math.random()-.5)*.6,vy:-(Math.random()*2.2+1.2),life:0,max:120+Math.random()*160,w:Math.random()*1.6+.6,ph:Math.random()*6.28}}
+  function frame(){ raf=requestAnimationFrame(frame); g.clearRect(0,0,W,H); g.globalCompositeOperation='lighter';
+    for(let i=0;i<ps.length;i++){const p=ps[i]; p.life++; p.ph+=.05; p.vx+=Math.sin(p.ph)*.03; const ox=p.x,oy=p.y; p.x+=p.vx; p.y+=p.vy;
+      const t=p.life/p.max, a=t<.15?t/.15:1-(t-.15)/.85;
+      if(p.life>p.max||p.y<-30){ps[i]=spawn(false);continue}
+      g.strokeStyle=`rgba(255,${150+((1-t)*80|0)},${60+((1-t)*60|0)},${a*.85})`; g.lineWidth=p.w; g.beginPath(); g.moveTo(ox-p.vx*3,oy-p.vy*3); g.lineTo(p.x,p.y); g.stroke();
+    } }
+  function fxStart(){ if(on||reduceM) return; on=true; size(); if(!ps.length) for(let i=0;i<(innerWidth<700?45:90);i++) ps.push(spawn(true)); frame() }
+  function fxStop(){ on=false; cancelAnimationFrame(raf); g.clearRect(0,0,W||0,H||0) }
+  addEventListener('resize',()=>{ if(on) size() });
+  window.landingFx={start:fxStart,stop:fxStop};
+
+  // phone math
+  const hrs=$('#hrs');
+  function phone(){ const h=+hrs.value, yr=Math.round(h*365); $('#hrsOut').textContent=`${h} hrs/day`; $('#phoneYear').textContent=`${yr.toLocaleString()} hrs/yr`;
+    $('#barPhone').style.width='100%'; $('#barF52').style.width=Math.max(2,91/yr*100)+'%'; $('#pctPhone').textContent=Math.round(91/yr*100)+'%' }
+  hrs.oninput=phone; phone();
+
+  $$('[data-scroll]').forEach(a=>a.onclick=e=>{e.preventDefault();$(a.dataset.scroll).scrollIntoView({behavior:'smooth'})});
+
+  // sheets
+  const open=id=>{$(id).hidden=false; document.body.style.overflow='hidden'};
+  const close=el=>{el.hidden=true; document.body.style.overflow=''};
+  $$('.sheet').forEach(s=>{ s.addEventListener('click',e=>{ if(e.target===s||e.target.closest('[data-close]')) close(s) }); s.addEventListener('keydown',e=>{if(e.key==='Escape')close(s)}) });
+
+  // accept
+  let pickStart='today', pickRoute=route;
+  document.addEventListener('click',e=>{ if(e.target.closest('[data-accept]')){
+    const sun=nextSunday(); $('#todayLbl').textContent=fmt(new Date(),{weekday:'short',month:'short',day:'numeric'}); $('#sundayLbl').textContent=fmt(sun,{weekday:'short',month:'short',day:'numeric'});
+    pickRoute=route; $$('#routeChoice [data-r]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.r===pickRoute));
+    $('#stamp').classList.remove('go'); open('#acceptSheet') } });
+  $$('#startChoice [data-start]').forEach(b=>b.onclick=()=>{pickStart=b.dataset.start;$$('#startChoice [data-start]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  $$('#routeChoice [data-r]').forEach(b=>b.onclick=()=>{pickRoute=b.dataset.r;$$('#routeChoice [data-r]').forEach(x=>x.setAttribute('aria-pressed',x===b))});
+  $('#lockIn').onclick=()=>{
+    route=pickRoute; start=pickStart==='today'?iso(new Date()):iso(nextSunday()); save(); store.set('f52.joined','1');
+    const st=$('#stamp'); st.classList.remove('go'); void st.offsetWidth; st.classList.add('go');
+    const card=$('#acceptSheet .sheet-card'); setTimeout(()=>{card.classList.remove('shake');void card.offsetWidth;card.classList.add('shake'); if(navigator.vibrate) navigator.vibrate(60)},300);
+    setTimeout(()=>{ close($('#acceptSheet')); renderAll(true); location.hash='today'; toast(pickStart==='today'?'Day 1 starts now':'See you Sunday') },1300);
+  };
+
+  // callout
+  const nm=$('#coName'); nm.value=store.get('f52.name')||'';
+  const prev=()=>{$('#coPreview').textContent=(nm.value.trim()||'YOU').toUpperCase()}; nm.oninput=prev; prev();
+  document.addEventListener('click',e=>{ if(e.target.closest('[data-callout]')){ $('#coLink').textContent=''; open('#calloutSheet'); setTimeout(()=>nm.focus(),250) } });
+  $('#coSend').onclick=async()=>{
+    const name=nm.value.trim().replace(/[^A-Za-z .'-]/g,'').slice(0,20); store.set('f52.name',name);
+    const base=(location.protocol.startsWith('http')&&!location.hostname.endsWith('claude.ai')&&!location.hostname.includes('claudeusercontent'))?location.origin+location.pathname:'https://forged52-daily.netlify.app/';
+    const url=base+(name?`?from=${encodeURIComponent(name)}`:'')+'#challenge';
+    const text=`${name?name+' here. ':''}I'm reading the whole Bible in 52 weeks and I'm calling you out. You in?`;
+    try{ if(navigator.share){ await navigator.share({title:'Forged52 Challenge',text,url}); return } }catch(err){ if(err&&err.name==='AbortError') return }
+    try{ await navigator.clipboard.writeText(text+' '+url); toast('Challenge copied. Paste it in a text.') }catch(err){ $('#coLink').textContent=text+' '+url }
+  };
+  if(!$('[data-page="challenge"]').hidden) fxStart();
+})();
 
 /* ---------- PLAYER: read the passage aloud, verse by verse ---------- */
 const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
