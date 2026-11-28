@@ -1,0 +1,170 @@
+M|1|Tell your family what you're doing this year and why. Ask them to hold you to it.
+M|2|Pray out loud with your wife, or a close brother if you're single. Short is fine.
+M|3|At dinner, ask each person: "What's one thing you're thankful for today?"
+M|4|Call your dad, or a man who's been like a father to you, and thank him for one specific thing.
+M|5|Do one chore at home you normally leave to someone else, without being asked or mentioning it.
+M|6|Pray over each of your kids by name before bed. If you don't have kids, pray for a family in your church by name.
+M|7|Write your wife a note telling her one thing you respect about her. Hide it where she'll find it.
+M|8|Turn the phone off at dinner every night this week. All of them.
+M|9|Ask someone you've wronged to forgive you. Don't explain it away. Just own it.
+M|10|Take one of your kids, or a young man in your life, out for breakfast. Ask about their life and listen.
+M|11|Read one of this week's chapters out loud to your family.
+M|12|Give something away that costs you. Money, time or a skill.
+M|13|Ask your wife: "How can I pray for you this week?" Then actually pray for it every day.
+M|14|Tell your kids a story about a time God came through for you.
+M|15|Fast from something you lean on (a meal, social media, sports talk) for one day and pray in that time.
+M|16|Encourage another man by text. Tell him specifically what you see God doing in him.
+M|17|Get up 15 minutes before everyone else every day this week and spend it with God before your phone.
+M|18|Bless your kids out loud before school or bed: "I'm proud of you. God has a plan for you."
+M|19|Plan a date with your wife. You make every arrangement.
+M|20|Ask your family: "Is there anything I do that makes it hard to talk to me?" Listen without defending yourself.
+M|21|Serve someone outside your family this week: a neighbor, a widow, a single mom.
+M|22|Memorize this week's verse together as a family.
+M|23|Write down three ways God has provided for your family this year and share them at dinner.
+M|24|Apologize to one of your kids for a time you got angry. Show them what humility looks like.
+M|25|Invite a man who's alone to dinner or to watch the game with you.
+M|26|Halfway. Tell your family one thing God has changed in you since you started.
+M|27|Pray with your wife about one decision you're facing together.
+M|28|Teach one of your kids or a younger man a skill you know. Use the time to talk about faith.
+M|29|Go one full day without complaining. If you slip, start over.
+M|30|Ask an older believer you respect for advice on one area of your life.
+M|31|Write down your family's "why": what you want your home to stand for. Talk about it together.
+M|32|Pay for someone's meal or groceries quietly.
+M|33|Ask your kids what they think about God. Don't correct. Just listen and learn.
+M|34|Take a prayer walk around your neighborhood and pray for each house you pass.
+M|35|Thank your pastor or a church leader in person.
+M|36|Read Ephesians 5:25-33 and ask your wife how you can love her better.
+M|37|Have a screen-free evening with your family. Play a game, cook or go outside.
+M|38|Pray for a man you don't get along with, every day this week.
+M|39|Three-quarters done. Recommit out loud to your family to finish strong.
+M|40|Share your faith story with someone who doesn't follow Jesus. Keep it simple and honest.
+M|41|Ask your kids to pray for you, and tell them what to pray for.
+M|42|Clean up something you've been putting off at home: a project, a room, a repair.
+M|43|Send a handwritten thank-you to someone who has invested in your family.
+M|44|Take your wife's or a friend's burden for a day. Find out what's weighing on them and carry part of it.
+M|45|Choose a family verse and write it somewhere everyone sees it every day.
+M|46|Talk with your family about how you spend money and what generosity looks like for you.
+M|47|Check in on a man who has drifted from church or from God. Just ask how he's really doing.
+M|48|Tell each person in your family one thing you love about them.
+M|49|Plan how you'll keep reading after the 52 weeks are done.
+M|50|Pray for your future grandkids and the generations after you.
+M|51|Write a letter to your kids about what you learned this year. Keep it for them.
+M|52|Finish. Celebrate with your family, and call out the next man to take the challenge.
+T|GEN|God made everything good. What's your favorite thing God made, and why?
+T|EXO|God rescued his people from slavery. What's something God has rescued our family from or helped us through?
+T|LEV|God told his people how to be close to him. What helps you feel close to God?
+T|NUM|Israel kept complaining in the desert. What do you complain about most, and what could we thank God for instead?
+T|DEU|Moses told the people to remember what God did. What's one thing God did for us we should never forget?
+T|JOS|God told Joshua to be strong and courageous. When do you need courage right now?
+T|JDG|People kept forgetting God and getting in trouble. What helps us remember God every day?
+T|RUT|Ruth stayed loyal to Naomi when it was hard. Who is someone you can be loyal to this week?
+T|1SA|God picked David because he looked at his heart, not his size. What does God see when he looks at your heart?
+T|2SA|David messed up big and told God he was sorry. Why is it important to admit when we're wrong?
+T|1KI|Solomon asked God for wisdom instead of money. If God offered you anything, what would you ask for?
+T|2KI|Some kings followed God and some didn't. What makes someone a good leader?
+T|1CH|David got everyone ready to worship God. What's your favorite way to worship God?
+T|2CH|When King Jehoshaphat was scared, he prayed and praised. What can we do when we're scared?
+T|EZR|The people came home and rebuilt God's house. What's something worth rebuilding in our family?
+T|NEH|Nehemiah prayed and then worked hard. What's something you need to pray about and then work on?
+T|EST|Esther was brave for her people. When is it hard to stand up for what's right?
+T|JOB|Job lost everything but still trusted God. How can we trust God when things go wrong?
+T|PSA|The Psalms are songs and prayers for every feeling. How are you feeling today, and can you tell God about it?
+T|PRO|Proverbs says wise people listen. Who gives you good advice?
+T|ECC|Life without God feels empty. What makes life truly good?
+T|SNG|God made marriage and love. What's something you've seen in a good marriage?
+T|ISA|Isaiah said Jesus would be called Prince of Peace. Where do you need peace?
+T|JER|God said, "I know the plans I have for you." What do you hope God has planned for you?
+T|LAM|Even when things were sad, God's love was new every morning. What's a new good thing from today?
+T|EZK|God promised to give his people a new heart. What would you like God to change in your heart?
+T|DAN|Daniel kept praying even when it was against the law. What would you keep doing for God no matter what?
+T|HOS|God kept loving his people even when they ran away. How does it feel to be loved even when you mess up?
+T|JOL|God said, "Come back to me with all your heart." What pulls our hearts away from God?
+T|AMO|God cares about people being treated fairly. How can we be fair and kind to others?
+T|OBA|God doesn't like it when we laugh at others' trouble. How should we treat someone who is struggling?
+T|JON|Jonah ran from God. Have you ever not wanted to do what God asked? What happened?
+T|MIC|God wants us to do what's right, be kind and walk humbly with him. Which one is hardest for you?
+T|NAM|God is patient but he also stops evil. Why is it good that God is fair?
+T|HAB|Habakkuk chose to be happy in God even when things were bad. How can we be joyful on a hard day?
+T|ZEP|The Bible says God sings over his people. How does it feel to know God delights in you?
+T|HAG|God told the people to put him first. What does putting God first look like for you this week?
+T|ZEC|Jesus came riding on a donkey, humble and gentle. What does it mean to be humble?
+T|MAL|God wants our best, not leftovers. What's something we can give God our best in?
+T|MAT|Jesus said to build your life on his words like a house on rock. What's one thing Jesus said that you want to live by?
+T|MRK|Jesus came to serve, not to be served. How can you serve someone in our family this week?
+T|LUK|Jesus came to find the lost, like a shepherd looking for one sheep. Why does God care so much about each person?
+T|JHN|Jesus said, "I am the light of the world." What does it mean that Jesus is our light?
+T|ACT|The first Christians were brave and shared Jesus with everyone. Who could you tell about Jesus?
+T|ROM|Nothing can separate us from God's love. What's something that makes you worry God might stop loving you?
+T|1CO|Love is patient and kind. Who is easy to love, and who is hard to love?
+T|2CO|God's power shows up when we're weak. When have you felt weak but God helped you?
+T|GAL|The Spirit grows love, joy and peace in us. Which fruit do you want more of?
+T|EPH|Paul says to put on God's armor. Which piece of armor do you need most today?
+T|PHP|Paul was joyful even in prison. How can we choose joy when things are hard?
+T|COL|Paul says to set our minds on things above. What do you think about most?
+T|1TH|Paul says to pray all the time. When during your day could you talk to God?
+T|2TH|Paul told them to keep working and not give up. What's something you're tempted to quit?
+T|1TI|Paul told young Timothy not to let anyone look down on him for being young. How can young people set an example?
+T|2TI|Paul said he finished the race. What does it mean to finish strong?
+T|TIT|God's grace teaches us to say no to wrong things. How can we help each other say no to wrong things?
+T|PHM|Paul asked Philemon to forgive and welcome back Onesimus. Is there someone you need to forgive?
+T|HEB|Hebrews lists heroes who trusted God. Who is a hero of faith you look up to?
+T|JAS|James says to be quick to listen and slow to speak. Who in our family needs us to listen better?
+T|1PE|Peter says to give your worries to God because he cares. What worry can you give to God tonight?
+T|2PE|Peter says to keep growing in faith. How have you grown this year?
+T|1JN|God is love. What's one way you saw love in our family today?
+T|2JN|John says to walk in love. What does walking in love look like at school or work?
+T|3JN|Gaius welcomed people into his home. How can our family make people feel welcome?
+T|JUD|Jude says God is able to keep us from falling. How does God help us stay strong?
+T|REV|Someday God will wipe away every tear. What are you looking forward to about heaven?
+V|1|JOS|1|9|9
+V|2|PSA|119|105|105
+V|3|PRO|3|5|6
+V|4|ISA|40|31|31
+V|5|MAT|6|33|33
+V|6|ROM|8|28|28
+V|7|PHP|4|13|13
+V|8|2TI|1|7|7
+V|9|1CO|16|13|14
+V|10|EPH|6|10|11
+V|11|JHN|3|16|16
+V|12|ROM|12|2|2
+V|13|PSA|46|1|1
+V|14|PRO|27|17|17
+V|15|MIC|6|8|8
+V|16|GAL|2|20|20
+V|17|HEB|12|1|2
+V|18|JAS|1|22|22
+V|19|PSA|23|1|1
+V|20|ISA|41|10|10
+V|21|LAM|3|22|23
+V|22|MAT|11|28|28
+V|23|JHN|14|6|6
+V|24|ROM|5|8|8
+V|25|2CO|5|17|17
+V|26|EPH|2|8|9
+V|27|PHP|4|6|7
+V|28|COL|3|23|23
+V|29|1PE|5|7|7
+V|30|1JN|1|9|9
+V|31|PSA|51|10|10
+V|32|PRO|4|23|23
+V|33|JOS|24|15|15
+V|34|DEU|6|5|5
+V|35|MAT|5|16|16
+V|36|JHN|15|5|5
+V|37|ROM|10|9|9
+V|38|GAL|6|9|9
+V|39|EPH|5|25|25
+V|40|HEB|4|12|12
+V|41|JAS|1|5|5
+V|42|1PE|3|15|15
+V|43|PSA|27|1|1
+V|44|PRO|22|6|6
+V|45|ISA|53|5|5
+V|46|JER|29|11|11
+V|47|MAT|28|19|20
+V|48|2CO|12|9|9
+V|49|2TI|3|16|17
+V|50|PHP|3|14|14
+V|51|2TI|4|7|7
+V|52|REV|21|4|4

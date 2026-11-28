@@ -22,3 +22,15 @@ Progress is stored in the browser (localStorage); no account required. Reading p
 ## Deploying
 
 `python3 tools/build_worker.py <folder with index.html and assets/> _worker.js` packs the site into one Cloudflare Pages advanced-mode worker. Upload it as a direct deployment to the `forged52` Pages project (multipart POST to `/accounts/<id>/pages/projects/forged52/deployments` with `manifest={}`, `branch=main` and the `_worker.js` file).
+
+## Crews, sync, reminders and more (backend)
+
+Backend: Supabase project `forged52` (ref `tfqirxldqhlylhcmbovq`). Schema and security rules are in `supabase/schema.sql`; server functions in `supabase/functions/` (`api`: device transfer codes, crew nudges, posting/deleting the weekly word, test notification; `reminders`: run hourly by pg_cron, sends each subscriber today's reading at their chosen local hour unless they've already read). Secrets (VAPID private key, ADMIN_KEY for posting, CRON_KEY) live only in Supabase function secrets.
+
+- Everyone is signed in anonymously in the background; no account needed.
+- **Crew** tab: start or join a crew (2-12 men) with a 6-letter code or an invite link `?crew=CODE`. See who's read today, streaks, and send "Pick him up" (a push notification, once a day per man).
+- **Patches**: earned at 1, 28, 91, 182, 273 and 364 readings.
+- **Weekly mission**, **verse of the week** (with practice mode) and **Table Talk** (a family dinner question per book) come from `content/08-extras.txt`.
+- **Daily reminders**: web push. On iPhone the site must be added to the Home Screen first (iOS 16.4+). Uses `sw.js` and `manifest.webmanifest`.
+- **Use on another device**: make an 8-character code on one device and enter it on the other; the account moves over (no email needed).
+- **Weekly word**: `#word` page (linked as "Post a word" in the footer). Needs the posting key. Posts show at the top of Today for 10 days, with optional voice recording, audio file or video link.

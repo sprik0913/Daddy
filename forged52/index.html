@@ -7,6 +7,11 @@
 <meta name="description" content="Read the whole Bible in 52 weeks. One reading a day.">
 <meta name="theme-color" content="#0c0d0c">
 <link rel="icon" href="assets/icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Forged52">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <link rel="apple-touch-icon" href="assets/icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -393,6 +398,63 @@ body.on-landing main,body.on-landing footer{display:none}
 .dig-acts{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:10px;flex-wrap:wrap}
 #dSaved{font-family:var(--mono);font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
 .pl-dig{display:block;margin:18px auto 0;text-align:center}
+
+/* ===== v3: word, mission, verse of the week, talk, patches, crew, you ===== */
+.word-card{margin-top:22px;padding:20px;border:2px solid var(--blaze);background:linear-gradient(180deg,rgba(217,102,43,.14),rgba(22,23,18,.95) 70%);clip-path:var(--notch)}
+.wc-k{font-family:var(--mono);font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--blaze)}
+.wc-t{font-family:var(--stencil);font-weight:400;font-size:1.7rem;margin-top:8px;line-height:1.05}
+.wc-b{color:var(--muted);margin-top:10px;white-space:pre-line}
+#wcAudio{width:100%;margin-top:12px}
+#wcVideo{margin-top:12px}
+.wc-d{font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint);margin-top:12px}
+.mission{margin-top:16px;padding:18px 20px;border:2px dashed var(--accent);background:rgba(200,169,110,.06)}
+.ms-k{font-family:var(--mono);font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.ms-t{font-family:var(--head);font-weight:700;font-size:1.45rem;line-height:1.15;margin-top:8px;text-transform:none;letter-spacing:.005em}
+.ms-btn{margin-top:14px;min-height:48px;font-size:1.05rem}
+.ms-btn .ck,.tc-done .ck{width:20px;height:20px;border:2px solid currentColor;display:inline-block;position:relative}
+.ms-btn.done{border-color:var(--accent);color:var(--accent);background:transparent}
+.ms-btn.done .ck{background:var(--accent);border-color:var(--accent)}
+.ms-btn.done .ck::after{content:"";position:absolute;left:5px;top:1px;width:5px;height:11px;border:solid var(--accent-ink);border-width:0 3px 3px 0;transform:rotate(45deg)}
+.vow{margin-top:16px;padding:18px 20px;border-left:4px solid var(--olive);background:rgba(22,23,18,.92)}
+.vw-k{display:flex;justify-content:space-between;align-items:center;font-family:var(--mono);font-size:.76rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}
+.vw-p{font-family:var(--head);font-weight:700;font-size:.95rem;letter-spacing:.08em;text-transform:uppercase;border:2px solid var(--line-2);padding:5px 10px}
+.vw-t{font-family:var(--serif);font-size:1.2rem;line-height:1.55;margin-top:10px}
+.vw-t .gap{display:inline-block;min-width:2.2em;border-bottom:2px solid var(--accent);color:transparent;cursor:pointer;margin:0 .1em}
+.vw-t .gap.show{color:var(--accent);border-bottom-color:transparent}
+.vow cite{display:block;margin-top:8px;font-style:normal;font-family:var(--mono);font-size:.78rem;letter-spacing:.1em;text-transform:uppercase;color:var(--faint)}
+.vw-h{font-size:.85rem;color:var(--faint);margin-top:6px}
+.patches{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+@media (min-width:600px){.patches{grid-template-columns:repeat(6,1fr)}}
+.patch-i{text-align:center;cursor:pointer}
+.patch-i svg{width:100%;height:auto;display:block}
+.patch-i.locked svg{filter:grayscale(1) brightness(.45);opacity:.55}
+.patch-i b{display:block;font-family:var(--head);font-weight:700;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;margin-top:4px}
+.patch-i span{display:block;font-family:var(--mono);font-size:.68rem;color:var(--faint);letter-spacing:.06em}
+.you-grid{display:grid;gap:12px;margin-top:24px}
+.sel{background:rgba(22,23,18,.95);border:2px solid var(--line-2);color:var(--text);min-height:50px;padding:0 10px;font-size:1rem;color-scheme:dark}
+.tiny{font-size:.85rem;color:var(--faint);margin-top:8px}
+.code-out{font-family:var(--mono);font-weight:600;font-size:1.5rem;letter-spacing:.12em;color:var(--accent)}
+#syncIn,#yName,#waKey,#waTitle,#waVideo,#cName,#cMe,#cCode{font-family:var(--sans);font-size:1rem;background:rgba(22,23,18,.95);border:2px solid var(--line-2);color:var(--text);padding:10px 12px;min-height:50px}
+#waBody{font:inherit;background:rgba(22,23,18,.95);border:2px solid var(--line-2);color:var(--text);padding:12px;width:100%}
+/* crew */
+.crew-head{margin-top:26px;padding:20px;border:2px solid var(--line-2);background:linear-gradient(180deg,rgba(61,71,49,.6),rgba(22,23,18,.95));clip-path:var(--notch);display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.crew-head h2{font-family:var(--stencil);font-weight:400;font-size:2rem;line-height:1}
+.crew-head .cc{font-family:var(--mono);font-size:.8rem;letter-spacing:.12em;color:var(--faint);margin-top:6px}
+.crew-sum{font-family:var(--head);font-weight:800;font-size:1.3rem;letter-spacing:.04em;text-transform:uppercase;color:var(--accent)}
+.mem{display:grid;grid-template-columns:auto 1fr auto;gap:14px;align-items:center;padding:14px 16px;border-top:1px solid var(--line)}
+.mem:first-child{border-top:0}
+.mem .dot{width:30px;height:30px;display:grid;place-items:center;border:2px solid var(--line-2);color:var(--accent-ink)}
+.mem .dot.on{background:var(--accent);border-color:var(--accent)}
+.mem .dot svg{width:18px;height:18px}
+.mem .nm{font-family:var(--head);font-weight:800;font-size:1.35rem;letter-spacing:.02em}
+.mem .nm small{font-family:var(--mono);font-size:.7rem;letter-spacing:.1em;color:var(--accent);margin-left:6px;vertical-align:2px}
+.mem .st{font-family:var(--mono);font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--faint)}
+.mem .st b{color:var(--blaze);font-weight:600}
+.pickup{font-family:var(--head);font-weight:700;font-size:1rem;letter-spacing:.06em;text-transform:uppercase;border:2px solid var(--blaze);color:var(--blaze);padding:8px 12px;white-space:nowrap}
+.pickup[disabled]{opacity:.5;border-color:var(--line-2);color:var(--faint)}
+.crew-forms{display:grid;gap:12px;margin-top:24px}
+.crew-acts{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+
 @media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 </head>
@@ -402,7 +464,7 @@ body.on-landing main,body.on-landing footer{display:none}
   <div class="top-in">
     <a class="brand" href="#today"><img src="assets/logo.webp" alt="" width="61" height="42"><span>Forged<b>52</b></span></a>
     <nav class="tabs" aria-label="Pages">
-      <a href="#today" data-tab="today">Today</a><a href="#plan" data-tab="plan">Plan</a><a href="#challenge" data-tab="challenge">Challenge</a><a href="#join" data-tab="join">Setup</a>
+      <a href="#today" data-tab="today">Today</a><a href="#plan" data-tab="plan">Plan</a><a href="#crew" data-tab="crew">Crew</a><a href="#join" data-tab="join">You</a>
     </nav>
     <button class="tool" id="bigBtn" type="button" aria-pressed="false" title="Larger text">Aa</button>
   </div>
@@ -521,6 +583,14 @@ body.on-landing main,body.on-landing footer{display:none}
     </div>
     <div class="prog"><div class="segbar" id="tSeg" aria-hidden="true"></div><div class="prog-meta"><span id="tDayOf"></span><span id="tPct"></span></div></div>
 
+    <div class="word-card" id="wordCard" hidden>
+      <div class="wc-k">From the point man</div>
+      <h2 class="wc-t" id="wcTitle"></h2>
+      <p class="wc-b" id="wcBody"></p>
+      <audio id="wcAudio" controls preload="none" hidden></audio>
+      <a class="btn" id="wcVideo" href="#" target="_blank" rel="noopener" hidden>Watch the video</a>
+      <div class="wc-d" id="wcDate"></div>
+    </div>
     <div class="reading">
       <div class="tagline"><div class="kicker" id="tKick">Today's reading</div><span class="serial" id="tSerial">F52</span></div>
       <div class="ref" id="tRef"></div>
@@ -532,22 +602,38 @@ body.on-landing main,body.on-landing footer{display:none}
       <div class="note" id="tNote"></div>
     </div>
 
+    <div class="mission" id="mission">
+      <div class="ms-k">This week's mission · Lead your family</div>
+      <p class="ms-t" id="msText"></p>
+      <button class="btn ms-btn" type="button" id="msDone"><span class="ck"></span><span id="msLbl">Mark mission done</span></button>
+    </div>
     <div class="dig" id="dig">
       <div class="dig-head"><h2>Dig deeper</h2><span>After you read</span></div>
       <div class="dig-block"><div class="dig-k">Recap</div><div id="dRecap"></div></div>
       <div class="dig-block" id="dBooks"></div>
       <div class="dig-block"><div class="dig-k">Think on it</div>
         <ol class="dig-q"><li>What does this show you about <b>God</b>? His character, his promises, what he cares about.</li><li>What does it show you about <b>people</b>, and about <b>you</b>?</li><li>What's <b>one thing you'll do</b> differently today because of it?</li></ol></div>
+      <div class="dig-block" id="dTalk"></div>
       <div class="dig-block"><div class="dig-k">Where did you see God today?</div>
         <textarea id="dJournal" rows="3" placeholder="One line. What stood out, what convicted you, what you're taking with you."></textarea>
         <div class="dig-acts"><span id="dSaved"></span><button class="btn" type="button" id="dShare">Send to a brother</button></div></div>
     </div>
 
-    <div class="verse"><p id="vText"></p><cite id="vRef"></cite></div>
+    <div class="vow" id="vow">
+      <div class="vw-k"><span>Verse of the week</span><button type="button" class="vw-p" id="vwPractice">Practice</button></div>
+      <p class="vw-t" id="vText"></p>
+      <cite id="vRef"></cite>
+      <div class="vw-h" id="vwHint"></div>
+    </div>
+
 
     <div class="section">
       <div class="section-head"><h2>This week</h2><span id="tWeekLbl"></span></div>
       <div class="list" id="tWeek"></div>
+    </div>
+    <div class="section">
+      <div class="section-head"><h2>Patches</h2><span id="pCount"></span></div>
+      <div class="patches" id="patches"></div>
     </div>
     <div class="today-callout"><div><b>Don't do it alone</b><span>Send a brother the challenge with your name on it.</span></div><button class="btn primary" type="button" data-callout>Call him out</button></div>
   </section>
@@ -570,6 +656,29 @@ body.on-landing main,body.on-landing footer{display:none}
 
 
   <!-- START / JOIN -->
+  <section class="page" data-page="crew" hidden>
+    <div class="kicker">Crew</div>
+    <h1>Don't read alone</h1>
+    <p class="lead">Men quit alone and finish together. Start a crew of 2 to 12 men, see who's read today, and pick up a brother who's slipping.</p>
+    <div id="crewBox"><p class="lead" style="margin-top:24px">Connecting…</p></div>
+  </section>
+  <section class="page" data-page="word" hidden>
+    <div class="kicker">Point man</div>
+    <h1>Post a word</h1>
+    <p class="lead">A short message for every man doing the challenge. It shows at the top of their Today page for 10 days. Record your voice, write it out, or both.</p>
+    <div class="steps">
+      <div class="step"><h3><span>01</span>Posting key</h3><div class="field"><input id="waKey" placeholder="F52-XXXX-XXXX" autocapitalize="characters"></div></div>
+      <div class="step"><h3><span>02</span>Your word</h3>
+        <div class="field" style="display:grid;gap:10px"><input id="waTitle" maxlength="120" placeholder="Title, e.g. Week 30: Don't coast"><textarea id="waBody" rows="5" placeholder="What you want the men to hear this week"></textarea><input id="waVideo" placeholder="Video link (optional, e.g. YouTube)"></div></div>
+      <div class="step"><h3><span>03</span>Voice message (optional)</h3>
+        <div class="field"><button class="btn" type="button" id="waRec">Record</button><span class="tiny" id="waRecStatus"></span></div>
+        <audio id="waPreview" controls hidden style="margin-top:10px;width:100%"></audio>
+        <div class="field" style="margin-top:10px"><label class="tiny">Or upload an audio file <input type="file" id="waFile" accept="audio/*"></label></div></div>
+    </div>
+    <button class="btn primary" type="button" id="waPost" style="width:100%;margin-top:16px">Post it</button>
+    <p class="tiny" id="waStatus" style="margin-top:10px"></p>
+    <div class="section"><div class="section-head"><h2>Posted</h2></div><div class="list" id="waList"></div></div>
+  </section>
   <section class="page" data-page="join" hidden>
     <svg class="patch" style="width:min(220px,60vw)" viewBox="0 0 300 170" role="img" aria-label="Forged52 patch">
   <rect x="3" y="3" width="294" height="164" rx="22" fill="#3d4731" stroke="#232a1c" stroke-width="4"/>
@@ -579,9 +688,21 @@ body.on-landing main,body.on-landing footer{display:none}
   <text x="150" y="104" text-anchor="middle" font-family="'Saira Stencil One',sans-serif" font-size="46" fill="#ebe6d8">FORGED52</text>
   <text x="150" y="138" text-anchor="middle" font-family="'Barlow Condensed',sans-serif" font-weight="700" font-size="17" letter-spacing="5" fill="#c8a96e">LEAD THE FAMILY</text>
 </svg>
-    <div class="kicker">Setup</div>
-    <h1>Your plan</h1>
+    <div class="kicker">You</div>
+    <h1>Your setup</h1>
     <p class="lead">Three quick steps. No account needed. Your progress is saved on this device.</p>
+    <div class="you-grid">
+      <div class="step"><h3><span>ID</span>Your name</h3><p>Your crew sees this name.</p>
+        <div class="field"><input id="yName" maxlength="24" placeholder="First name" autocomplete="given-name"><button class="btn" type="button" id="yNameSave">Save</button></div></div>
+      <div class="step"><h3><span>&#9200;</span>Daily reminder</h3><p id="remNote">Get a notification each morning with your reading. It skips the day if you've already read.</p>
+        <div class="field"><select id="remHour" class="sel"></select><button class="btn primary" type="button" id="remOn">Turn on reminders</button><button class="btn" type="button" id="remTest" hidden>Send a test</button></div>
+        <p class="tiny" id="remStatus"></p></div>
+      <div class="step"><h3><span>&#8644;</span>Use on another device</h3><p>Your progress, crew and journal are backed up. To use them on another phone, tablet or computer, make a code here and type it on the other device.</p>
+        <div class="field"><button class="btn" type="button" id="syncMake">Make a code</button><span class="code-out" id="syncCode"></span></div>
+        <div class="field" style="margin-top:12px"><input id="syncIn" maxlength="9" placeholder="Code from your other device" autocapitalize="characters"><button class="btn" type="button" id="syncUse">Use code</button></div>
+        <p class="tiny" id="syncStatus"></p></div>
+      <div class="step"><h3><span>&#9650;</span>The challenge page</h3><p>The page new men see first, with the call-out button.</p><a class="btn" href="#challenge">Open the challenge page</a></div>
+    </div>
     <div class="step resume" id="resume">
       <h3><span>&#8635;</span>Already reading? Pick up where you are</h3>
       <p>Coming from the Forged52 app or another plan? Enter the week and day you're on today. Your dates line up and everything before it is marked complete.</p>
@@ -608,16 +729,27 @@ body.on-landing main,body.on-landing footer{display:none}
   </section>
 </main>
 
-<footer><span>Forged52 · Zeeland Fabrication</span><span>Build the man. Lead the family.</span></footer>
+<footer><span>Forged52 · Zeeland Fabrication · <a href="#word" style="color:inherit">Post a word</a></span><span>Build the man. Lead the family.</span></footer>
 
 <nav class="tabbar" aria-label="Pages">
   <a href="#today" data-tab="today"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M4 19.5v-15A2.5 2.5 0 0 1 6.5 2H20v20H6.5a2.5 2.5 0 0 1 0-5H20"/></svg>Today</a>
   <a href="#plan" data-tab="plan"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><rect x="3" y="4" width="18" height="18" rx="3"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Plan</a>
-  <a href="#challenge" data-tab="challenge"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>Challenge</a>
-  <a href="#join" data-tab="join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>Setup</a>
+  <a href="#crew" data-tab="crew"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="9" cy="8" r="3.5"/><path d="M2.5 20v-1a6.5 6.5 0 0 1 13 0v1"/><circle cx="17.5" cy="9" r="2.5"/><path d="M16 14.2a5 5 0 0 1 6 4.8v1"/></svg>Crew</a>
+  <a href="#join" data-tab="join"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9"><circle cx="12" cy="8" r="4"/><path d="M4 21v-1a8 8 0 0 1 16 0v1"/></svg>You</a>
 </nav>
 
 <div class="toast" id="toast" role="status"></div>
+<div class="sheet" id="patchSheet" hidden role="dialog" aria-modal="true" aria-labelledby="psTitle">
+  <div class="sheet-card" style="text-align:center">
+    <button class="sheet-x" type="button" data-close aria-label="Close">×</button>
+    <div class="ld-kicker">Patch earned</div>
+    <div id="psArt" style="width:min(240px,70vw);margin:16px auto"></div>
+    <h2 id="psTitle" class="sheet-h"></h2>
+    <p class="ld-p small" id="psText" style="margin:10px auto 0"></p>
+    <button class="btn primary" type="button" data-close style="width:100%;margin-top:18px">Keep going</button>
+  </div>
+</div>
+
 
 <div class="player" id="player" hidden role="dialog" aria-modal="true" aria-labelledby="plRef">
   <div class="pl-head">
@@ -686,7 +818,7 @@ const nextSunday=()=>{const d=new Date();d.setHours(0,0,0,0);d.setDate(d.getDate
 let route=store.get('f52.plan')||'topical';
 let start=store.get('f52.start')||iso(nextSunday());
 let done=new Set(JSON.parse(store.get('f52.done')||'[]'));
-function save(){store.set('f52.plan',route);store.set('f52.start',start);store.set('f52.done',JSON.stringify([...done]))}
+function save(){store.set('f52.plan',route);store.set('f52.start',start);store.set('f52.done',JSON.stringify([...done]));if(window.cloudPush)cloudPush()}
 function dayIndex(){const s=parseDate(start),n=new Date();n.setHours(0,0,0,0);return Math.round((n-s)/864e5)} // 0 = day 1
 function curDay(){const i=dayIndex();return i<0?1:i>=364?364:i+1}
 function dateFor(n){const d=parseDate(start);d.setDate(d.getDate()+n-1);return d}
@@ -783,7 +915,7 @@ $('#jShare').onclick=async()=>{const url=location.href.split('#')[0];try{await n
 
 /* ---------- DIG DEEPER: chapter recaps, book briefings, questions, journal ---------- */
 var RECAP=null;
-fetch('assets/recap.json').then(r=>r.json()).then(j=>{RECAP=j;renderDig()}).catch(()=>{});
+fetch('assets/recap.json').then(r=>r.json()).then(j=>{RECAP=j;renderDig();if(window.renderExtras)renderExtras()}).catch(()=>{});
 function renderDig(){
   const n=curDay(), r=reading(n), chs=parse(r.ref);
   if(!RECAP){ $('#dRecap').innerHTML='<span class="rc"><span>Loading…</span></span>'; }
@@ -822,19 +954,224 @@ document.addEventListener('click',e=>{
   setTimeout(()=>toast(`Synced: week ${w}, ${DAYS[d-1][0].toUpperCase()+DAYS[d-1].slice(1)}`),400);
 })();
 
+
+/* ================= v3: cloud (Supabase), crews, sync, reminders, patches, missions, verse, talk, word ================= */
+const SB_URL='https://tfqirxldqhlylhcmbovq.supabase.co';
+const SB_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InRmcWlyeGxkcWhseWxoY21ib3ZxIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTU4MzcyODEsImV4cCI6MjExMTQxMzI4MX0.cYtIa2Qv3gy1KRf_NGY5K962T_zabI5xheNVUeQ5rA0';
+const VAPID_PUBLIC='BGuzpTkorxKPCsEqmY2NrRVR_O8D71apDDz2drohd_ZoPORh-UZR8dWUiS7xVA-dhDNhboSj5xOhgfSFJjWP06g';
+const API=SB_URL+'/functions/v1/api';
+const CHECK2='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3.2"><path d="M4 12l5 5L20 6"/></svg>';
+let sb=null, me=null, cloudReady=false, pushTimer=0;
+let missions=new Set(JSON.parse(store.get('f52.missions')||'[]'));
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const myName=()=>store.get('f52.name')||'';
+function journalAll(){const o={};for(let i=1;i<=364;i++){const v=store.get('f52.j.'+i);if(v)o[i]=v}return o}
+
+/* ---- cloud ---- */
+async function api(action,body={},extra={}){
+  const h={'content-type':'application/json','apikey':SB_KEY,...extra};
+  const s=sb&&(await sb.auth.getSession()).data.session; if(s) h.authorization='Bearer '+s.access_token;
+  const r=await fetch(API,{method:'POST',headers:h,body:JSON.stringify({action,...body})}); const j=await r.json().catch(()=>({}));
+  if(!r.ok) throw new Error(j.error||('Error '+r.status)); return j;
+}
+async function cloudInit(){
+  if(!window.supabase){ return }
+  try{
+    sb=window.supabase.createClient(SB_URL,SB_KEY,{auth:{persistSession:true,autoRefreshToken:true,storageKey:'f52.auth',detectSessionInUrl:false}});
+    let {data:{session}}=await sb.auth.getSession();
+    if(!session){ const r=await sb.auth.signInAnonymously(); if(r.error) throw r.error; session=r.data.session }
+    me=session.user; cloudReady=true;
+    await cloudPull();
+    if(myName()) await sb.from('profiles').upsert({id:me.id,name:myName()});
+    handleCrewLink(); renderCrew(); renderYou(); renderWord();
+  }catch(e){ console.warn('cloud',e); const cb=$('#crewBox'); if(cb) cb.innerHTML='<p class="lead" style="margin-top:24px">Crews need an internet connection. Check yours and reopen this page.</p>' }
+}
+async function cloudPull(){
+  const {data}=await sb.from('progress').select('*').eq('user_id',me.id).maybeSingle();
+  if(!data){ await cloudPushNow(); return }
+  const localTs=+(store.get('f52.updated')||0), remoteTs=Date.parse(data.updated_at)||0;
+  (data.done||[]).forEach(n=>done.add(n)); (data.missions||[]).forEach(n=>missions.add(n));
+  for(const [k,v] of Object.entries(data.journal||{})) if(!store.get('f52.j.'+k)) store.set('f52.j.'+k,v);
+  if(remoteTs>localTs||!store.get('f52.start')){ route=data.route||route; start=data.start_date||start }
+  store.set('f52.missions',JSON.stringify([...missions]));
+  try{localStorage.setItem('f52.plan',route);localStorage.setItem('f52.start',start);localStorage.setItem('f52.done',JSON.stringify([...done]))}catch(e){}
+  renderAll(); renderExtras(); cloudPushNow();
+}
+async function cloudPushNow(){
+  if(!cloudReady) return;
+  const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'America/Detroit';
+  await sb.from('progress').upsert({user_id:me.id,route,start_date:start,done:[...done],missions:[...missions],journal:journalAll(),tz,updated_at:new Date().toISOString()});
+}
+window.cloudPush=()=>{ store.set('f52.updated',String(Date.now())); clearTimeout(pushTimer); pushTimer=setTimeout(()=>cloudPushNow().catch(()=>{}),1200) };
+
+/* ---- extras on Today: mission, verse of the week, table talk, patches ---- */
+let practice=0;
+function renderExtras(){
+  if(!RECAP||!RECAP.missions) return;
+  const n=curDay(), w=Math.ceil(n/7);
+  $('#msText').textContent=RECAP.missions[w-1]; const md=missions.has(w); const mb=$('#msDone'); mb.classList.toggle('done',md); $('#msLbl').textContent=md?'Mission done':'Mark mission done';
+  const v=RECAP.verses[w-1]; $('#vRef').textContent=`${v.ref} · Week ${w}`;
+  const words=v.text.split(' ');
+  if(!practice){ $('#vText').textContent=v.text; $('#vwHint').textContent=''; $('#vwPractice').textContent='Practice' }
+  else { const keep=practice===1?2:practice===2?3:999; // hide every 2nd, every 3rd kept, or all
+    $('#vText').innerHTML=words.map((wd,i)=>(practice===3||i%keep!==0)?`<span class="gap" role="button" tabindex="0">${esc(wd)}</span>`:esc(wd)).join(' ');
+    $('#vwHint').textContent=practice===3?'Say the whole verse, then tap to check.':'Fill in the blanks out loud. Tap a blank to check.'; $('#vwPractice').textContent=practice===3?'Show verse':'Harder' }
+  const r=reading(n), chs=parse(r.ref), first=chs[0], book=first?first.usfm:null;
+  const q=book&&RECAP.talk[book], tell=first?(RECAP.ch[first.usfm]||[])[first.ch-1]:'';
+  $('#dTalk').innerHTML=q?`<div class="dig-k">Table talk · for dinner with your family</div><p style="color:var(--muted)"><b style="color:var(--text)">Tell them:</b> ${esc(tell)}</p><p style="color:var(--muted);margin-top:8px"><b style="color:var(--text)">Ask them:</b> ${esc(q)}</p>`:'';
+  renderPatches();
+}
+$('#msDone').onclick=()=>{const w=Math.ceil(curDay()/7); missions.has(w)?missions.delete(w):missions.add(w); store.set('f52.missions',JSON.stringify([...missions])); window.cloudPush(); renderExtras(); if(missions.has(w)){const r=$('#msDone').getBoundingClientRect();(window.burst||(()=>{}))(r.left+r.width/2,r.top,40);toast('Mission done. Lead on.')}};
+$('#vwPractice').onclick=()=>{practice=(practice+1)%4; renderExtras()};
+$('#vText').addEventListener('click',e=>{const g=e.target.closest('.gap'); if(g) g.classList.toggle('show')});
+
+/* patches */
+const PATCHES=[
+  {n:1,name:'First Strike',line:'DAY 1',text:'You opened the Book. Every forge starts with a single spark.'},
+  {n:28,name:'Four Weeks',line:'28 READ',text:'A month in. Habits are forming. Keep swinging the hammer.'},
+  {n:91,name:'Quarter',line:'91 READ',text:'A quarter of the Bible. Most men never get this far.'},
+  {n:182,name:'Halfway',line:'182 READ',text:'Halfway through the whole Bible. Warriors don\'t quit now.'},
+  {n:273,name:'Three Quarters',line:'273 READ',text:'Three quarters done. The blade is almost forged.'},
+  {n:364,name:'Forged',line:'364 READ',text:'The whole Bible, cover to cover. Forged. Tempered. Unbreakable.'}];
+function patchSVG(i){const p=PATCHES[i];const col=['#8c8775','#c8a96e','#c8a96e','#d9662b','#c8a96e','#ebe6d8'][i];
+  return `<svg viewBox="0 0 120 140" aria-hidden="true"><path d="M60 4 L112 20 V70 C112 104 88 124 60 136 C32 124 8 104 8 70 V20 Z" fill="#3d4731" stroke="#1e2318" stroke-width="4"/><path d="M60 13 L103 26 V70 C103 99 83 116 60 127 C37 116 17 99 17 70 V26 Z" fill="none" stroke="${col}" stroke-width="2.2" stroke-dasharray="5 4"/>
+  <g fill="#ebe6d8"><rect x="56" y="28" width="8" height="34"/><rect x="45" y="37" width="30" height="7"/></g>
+  <text x="60" y="88" text-anchor="middle" font-family="'Saira Stencil One',sans-serif" font-size="${p.name.length>12?10:p.name.length>9?13:17}" fill="#ebe6d8">${p.name.toUpperCase()}</text>
+  <text x="60" y="106" text-anchor="middle" font-family="'IBM Plex Mono',monospace" font-weight="600" font-size="9" letter-spacing="1.5" fill="${col}">${p.line}</text></svg>`}
+function renderPatches(){
+  const total=done.size; $('#pCount').textContent=`${PATCHES.filter(p=>total>=p.n).length} of ${PATCHES.length}`;
+  $('#patches').innerHTML=PATCHES.map((p,i)=>`<div class="patch-i${total>=p.n?'':' locked'}" data-patch="${i}">${patchSVG(i)}<b>${p.name}</b><span>${total>=p.n?'Earned':`${p.n-total} to go`}</span></div>`).join('');
+  const seen=+(store.get('f52.patchSeen')||0); const earned=PATCHES.filter(p=>total>=p.n).length;
+  if(earned>seen){ store.set('f52.patchSeen',String(earned)); if(seen>0||total<40) showPatch(earned-1) }
+}
+function showPatch(i){ const p=PATCHES[i]; $('#psArt').innerHTML=patchSVG(i); $('#psTitle').textContent=p.name; $('#psText').textContent=p.text; $('#patchSheet').hidden=false }
+$('#patches').addEventListener('click',e=>{const t=e.target.closest('[data-patch]'); if(t&&!t.classList.contains('locked')) showPatch(+t.dataset.patch)});
+$('#patchSheet').addEventListener('click',e=>{if(e.target.id==='patchSheet'||e.target.closest('[data-close]')) $('#patchSheet').hidden=true});
+
+/* ---- crews ---- */
+let crew=null, crewTimer=0;
+function handleCrewLink(){ const c=new URLSearchParams(location.search).get('crew'); if(c){ store.set('f52.pendingCrew',c.toUpperCase().replace(/[^A-Z0-9]/g,'').slice(0,6)); const q=new URLSearchParams(location.search); q.delete('crew'); history.replaceState(null,'',location.pathname+(q.toString()?'?'+q:'')+'#crew'); show() } }
+async function myCrew(){ const {data}=await sb.from('crew_members').select('crew_id, crews(id,code,name,owner)').eq('user_id',me.id).order('joined_at',{ascending:true}).limit(1); return data&&data[0]?data[0].crews:null }
+async function renderCrew(){
+  const box=$('#crewBox'); if(!box||!cloudReady) return;
+  try{ crew=await myCrew() }catch(e){ box.innerHTML='<p class="lead" style="margin-top:24px">Couldn\'t load your crew. Check your connection.</p>'; return }
+  if(!crew){
+    const pend=store.get('f52.pendingCrew')||'';
+    box.innerHTML=`<div class="crew-forms">
+      ${pend?`<div class="step" style="border-color:var(--blaze)"><h3><span>!</span>You've been invited</h3><p>Crew code <b class="code-out" style="font-size:1.1rem">${esc(pend)}</b></p></div>`:''}
+      <div class="step"><h3><span>01</span>Your first name</h3><p>So your crew knows who you are.</p><div class="field"><input id="cMe" maxlength="24" placeholder="First name" value="${esc(myName())}"></div></div>
+      <div class="step"><h3><span>02</span>Join a crew</h3><p>Got a code from a brother? Enter it here.</p><div class="field"><input id="cCode" maxlength="6" placeholder="6-letter code" value="${esc(pend)}" autocapitalize="characters"><button class="btn primary" type="button" id="cJoin">Join crew</button></div></div>
+      <div class="step"><h3><span>03</span>Or start one</h3><p>Name it, then send the invite to 2 to 11 men.</p><div class="field"><input id="cName" maxlength="40" placeholder="Crew name, e.g. Tuesday Men"><button class="btn" type="button" id="cMake">Start crew</button></div></div>
+      <p class="tiny" id="cStatus"></p></div>`;
+    const needName=()=>{const n=$('#cMe').value.trim(); if(!n){$('#cStatus').textContent='Add your first name first.';$('#cMe').focus();return null} return n};
+    $('#cJoin').onclick=async()=>{const n=needName(); if(!n) return; await setName(n); try{ await sb.rpc('join_crew',{invite:$('#cCode').value}).then(r=>{if(r.error) throw r.error}); store.set('f52.pendingCrew',''); toast('You\'re in the crew'); renderCrew() }catch(e){ $('#cStatus').textContent=e.message||'Couldn\'t join.' } };
+    $('#cMake').onclick=async()=>{const n=needName(); if(!n) return; await setName(n); try{ const r=await sb.rpc('create_crew',{crew_name:$('#cName').value}); if(r.error) throw r.error; toast('Crew started. Now invite your men.'); renderCrew() }catch(e){ $('#cStatus').textContent=e.message||'Couldn\'t start the crew.' } };
+    return;
+  }
+  const {data:rows,error}=await sb.rpc('crew_status',{c:crew.id});
+  if(error){ box.innerHTML=`<p class="lead">${esc(error.message)}</p>`; return }
+  const readN=rows.filter(r=>r.read_today).length;
+  const nudged=JSON.parse(store.get('f52.nudged')||'{}'), today=iso(new Date());
+  box.innerHTML=`<div class="crew-head"><div><h2>${esc(crew.name)}</h2><div class="cc">CODE ${esc(crew.code)} · ${rows.length} ${rows.length>1?'MEN':'MAN'}</div></div><div class="crew-sum">${readN}/${rows.length} read today</div></div>
+    <div class="crew-acts"><button class="btn primary" type="button" id="cInvite">Invite men</button><button class="btn" type="button" id="cRefresh">Refresh</button></div>
+    <div class="list" style="margin-top:14px">${rows.map(r=>`<div class="mem"><span class="dot${r.read_today?' on':''}">${r.read_today?CHECK2:''}</span>
+      <div><div class="nm">${esc(r.name)}${r.is_me?'<small>YOU</small>':''}</div><div class="st">${r.read_today?'Read today':'Not yet today'} · Day ${r.day} · ${r.streak>1?`<b>${r.streak} days straight</b>`:`${r.total} read`}</div></div>
+      ${(!r.is_me&&!r.read_today)?`<button class="pickup" type="button" data-pick="${r.user_id}" ${nudged[r.user_id]===today?'disabled':''}>${nudged[r.user_id]===today?'Picked up':'Pick him up'}</button>`:'<span></span>'}</div>`).join('')}</div>
+    <p class="tiny">"Pick him up" sends him a notification (if he turned on reminders) saying you're behind him. Once a day per man.</p>
+    <div class="crew-acts"><button class="btn" type="button" id="cLeave" style="font-size:.95rem">Leave crew</button></div>`;
+  $('#cRefresh').onclick=renderCrew;
+  $('#cInvite').onclick=async()=>{ const url=`https://forged52.pages.dev/?crew=${crew.code}`; const text=`Join my Forged52 crew "${crew.name}". We're reading the whole Bible in 52 weeks and holding each other to it. Code: ${crew.code}`;
+    try{ if(navigator.share){ await navigator.share({title:'Forged52 crew',text,url}); return } }catch(e){ if(e&&e.name==='AbortError') return }
+    try{ await navigator.clipboard.writeText(text+' '+url); toast('Invite copied. Paste it in a text.') }catch(e){ toast(url) } };
+  $('#cLeave').onclick=async()=>{ if($('#cLeave').dataset.sure!=='1'){ $('#cLeave').dataset.sure='1'; $('#cLeave').textContent='Tap again to leave'; return } await sb.from('crew_members').delete().eq('crew_id',crew.id).eq('user_id',me.id); toast('You left the crew'); renderCrew() };
+  box.querySelectorAll('[data-pick]').forEach(b=>b.onclick=async()=>{ b.disabled=true; try{ const r=await api('nudge',{crew_id:crew.id,to_user:b.dataset.pick}); nudged[b.dataset.pick]=today; store.set('f52.nudged',JSON.stringify(nudged)); b.textContent='Picked up'; toast(r.delivered?'He got your nudge.':r.already?'Already nudged him today.':'Nudge saved. He\'ll see it when reminders are on.') }catch(e){ b.disabled=false; toast(e.message) } });
+}
+async function setName(n){ store.set('f52.name',n); if(cloudReady) await sb.from('profiles').upsert({id:me.id,name:n}) }
+
+/* ---- You page: name, reminders, sync ---- */
+function renderYou(){
+  $('#yName').value=myName();
+  const sel=$('#remHour'); if(!sel.options.length){ for(let h=4;h<=22;h++){const o=document.createElement('option');o.value=h;o.textContent=new Date(2000,0,1,h).toLocaleTimeString([], {hour:'numeric'});sel.appendChild(o)} sel.value=store.get('f52.remHour')||'6' }
+  const ios=/iPad|iPhone|iPod/.test(navigator.userAgent), standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone;
+  const can='serviceWorker' in navigator&&'PushManager' in window;
+  if(store.get('f52.remOn')==='1'){ $('#remOn').textContent='Update reminder time'; $('#remTest').hidden=false; $('#remStatus').textContent='Reminders are on.' }
+  else if(ios&&!standalone){ $('#remStatus').innerHTML='On iPhone, first tap <b>Share</b> then <b>Add to Home Screen</b>, open Forged52 from your Home Screen, and turn reminders on there.' }
+  else if(!can){ $('#remStatus').textContent='This browser can\'t do notifications.' }
+}
+$('#yNameSave').onclick=async()=>{ const n=$('#yName').value.trim(); if(!n) return; await setName(n); toast('Name saved') };
+const b64u=s=>{const p='='.repeat((4-s.length%4)%4);const b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(b,c=>c.charCodeAt(0))};
+$('#remOn').onclick=async()=>{
+  const st=$('#remStatus');
+  if(!cloudReady){ st.textContent='Needs an internet connection.'; return }
+  if(!('serviceWorker' in navigator)||!('PushManager' in window)){ renderYou(); return }
+  try{
+    const perm=await Notification.requestPermission(); if(perm!=='granted'){ st.textContent='Notifications are blocked. Allow them in your phone settings for this app.'; return }
+    const reg=await navigator.serviceWorker.register('sw.js'); await navigator.serviceWorker.ready;
+    let sub=await reg.pushManager.getSubscription(); if(!sub) sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(VAPID_PUBLIC)});
+    const j=sub.toJSON(); const hour=+$('#remHour').value; const tz=Intl.DateTimeFormat().resolvedOptions().timeZone||'America/Detroit';
+    const {error}=await sb.from('push_subs').upsert({endpoint:j.endpoint,user_id:me.id,p256dh:j.keys.p256dh,auth:j.keys.auth,hour,tz}); if(error) throw error;
+    store.set('f52.remOn','1'); store.set('f52.remHour',String(hour)); st.textContent=`Reminders on for ${$('#remHour').selectedOptions[0].textContent} every day.`; $('#remTest').hidden=false; $('#remOn').textContent='Update reminder time';
+  }catch(e){ st.textContent='Couldn\'t turn on reminders: '+(e.message||e) }
+};
+$('#remTest').onclick=async()=>{ try{ const r=await api('test_push'); toast(r.ok?'Test sent':'No device found. Turn reminders on again.') }catch(e){ toast(e.message) } };
+$('#syncMake').onclick=async()=>{ if(!cloudReady){toast('Needs internet');return} $('#syncStatus').textContent=''; try{ await cloudPushNow(); const r=await api('transfer_create'); $('#syncCode').textContent=r.code; $('#syncStatus').textContent='Type this on your other device within 15 minutes.' }catch(e){ $('#syncStatus').textContent=e.message } };
+$('#syncUse').onclick=async()=>{ if(!sb){toast('Needs internet');return} const st=$('#syncStatus'); try{ const r=await api('transfer_redeem',{code:$('#syncIn').value}); const {error}=await sb.auth.verifyOtp({token_hash:r.token_hash,type:'magiclink'}); if(error) throw error;
+  me=(await sb.auth.getUser()).data.user; done=new Set(); missions=new Set(); store.set('f52.updated','0'); await cloudPull(); store.set('f52.joined','1'); st.textContent='Done. This device now shares your progress and crew.'; renderCrew() }catch(e){ st.textContent=e.message } };
+
+/* ---- weekly word ---- */
+async function renderWord(){
+  if(!cloudReady) return;
+  const {data}=await sb.from('words').select('*').order('created_at',{ascending:false}).limit(1);
+  const w=data&&data[0]; const card=$('#wordCard');
+  if(!w||Date.now()-Date.parse(w.created_at)>10*864e5){ card.hidden=true; return }
+  card.hidden=false; $('#wcTitle').textContent=w.title; $('#wcBody').textContent=w.body||''; $('#wcBody').hidden=!w.body;
+  const a=$('#wcAudio'); if(w.audio_url){a.src=w.audio_url;a.hidden=false}else a.hidden=true;
+  const v=$('#wcVideo'); if(w.video_url&&/^https:\/\//.test(w.video_url)){v.href=w.video_url;v.hidden=false}else v.hidden=true;
+  $('#wcDate').textContent='Posted '+new Date(w.created_at).toLocaleDateString([], {weekday:'long',month:'short',day:'numeric'});
+}
+/* admin page */
+let rec=null, chunks=[], recBlob=null;
+$('#waKey').value=store.get('f52.adminKey')||'';
+$('#waRec').onclick=async()=>{
+  if(rec&&rec.state==='recording'){ rec.stop(); return }
+  try{ const stream=await navigator.mediaDevices.getUserMedia({audio:true}); chunks=[]; rec=new MediaRecorder(stream);
+    rec.ondataavailable=e=>chunks.push(e.data); rec.onstop=()=>{ stream.getTracks().forEach(t=>t.stop()); recBlob=new Blob(chunks,{type:rec.mimeType||'audio/webm'}); const p=$('#waPreview'); p.src=URL.createObjectURL(recBlob); p.hidden=false; $('#waRec').textContent='Record again'; $('#waRecStatus').textContent='Recorded. Listen back, then post.' };
+    rec.start(); $('#waRec').textContent='Stop'; $('#waRecStatus').textContent='Recording…' }catch(e){ $('#waRecStatus').textContent='Microphone not available: '+(e.message||e) }
+};
+$('#waFile').onchange=e=>{ const f=e.target.files[0]; if(f){ recBlob=f; const p=$('#waPreview'); p.src=URL.createObjectURL(f); p.hidden=false } };
+const toB64=b=>new Promise((res,rej)=>{const r=new FileReader();r.onload=()=>res(String(r.result).split(',')[1]);r.onerror=rej;r.readAsDataURL(b)});
+$('#waPost').onclick=async()=>{
+  const st=$('#waStatus'); st.textContent='Posting…';
+  try{ const key=$('#waKey').value.trim(); const body={title:$('#waTitle').value,body:$('#waBody').value,video_url:$('#waVideo').value.trim()||null};
+    if(recBlob){ if(recBlob.size>15e6) throw new Error('Audio is too long. Keep it under about 10 minutes.'); body.audio_b64=await toB64(recBlob); body.audio_type=recBlob.type||'audio/webm' }
+    await api('post_word',body,{'x-admin-key':key}); store.set('f52.adminKey',key); st.textContent='Posted. It shows at the top of Today for 10 days.'; $('#waTitle').value='';$('#waBody').value='';$('#waVideo').value='';recBlob=null;$('#waPreview').hidden=true; renderWord(); renderWordList()
+  }catch(e){ st.textContent=e.message }
+};
+async function renderWordList(){ if(!cloudReady) return; const {data}=await sb.from('words').select('*').order('created_at',{ascending:false}).limit(20);
+  $('#waList').innerHTML=(data||[]).map(w=>`<div class="row"><span></span><div><div class="d">${new Date(w.created_at).toLocaleDateString()}</div><div class="r">${esc(w.title)}</div></div><button class="play" type="button" data-delword="${w.id}" aria-label="Delete">×</button></div>`).join('')||'<p class="tiny" style="padding:14px">Nothing posted yet.</p>';
+  $('#waList').querySelectorAll('[data-delword]').forEach(b=>b.onclick=async()=>{ try{ await api('delete_word',{id:+b.dataset.delword},{'x-admin-key':$('#waKey').value.trim()}); renderWordList(); renderWord() }catch(e){ toast(e.message) } }) }
+
+/* service worker for notifications */
+if('serviceWorker' in navigator && location.protocol==='https:' && !/claude/.test(location.hostname)) navigator.serviceWorker.register('sw.js').catch(()=>{});
+
 /* ---------- router ---------- */
-function renderAll(jump){renderToday();renderPlan(jump);if(window.renderDig)renderDig()}
+function renderAll(jump){renderToday();renderPlan(jump);if(window.renderDig)renderDig();if(window.renderExtras&&window.RECAP)renderExtras()}
 function show(){
-  let h=location.hash.slice(1); const joined=store.get('f52.joined')==='1', called=/[?&]from=/.test(location.search);
-  if(!['challenge','today','plan','join'].includes(h)) h=(called||!joined)?'challenge':'today';
+  let h=location.hash.slice(1); if(h==='you') h='join'; const joined=store.get('f52.joined')==='1', called=/[?&]from=/.test(location.search);
+  if(store.get('f52.pendingCrew')&&!h) h='crew';
+  if(!['challenge','today','plan','join','crew','word'].includes(h)) h=(called||!joined)?'challenge':'today';
   $$('.page').forEach(p=>p.hidden=p.dataset.page!==h);
   document.body.classList.toggle('on-landing',h==='challenge');
   if(window.landingFx){ h==='challenge'?landingFx.start():landingFx.stop() }
   $$('[data-tab]').forEach(a=>a.dataset.tab===h?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'));
   scrollTo(0,0);
   if(h==='plan'){renderPlan(true)}
+  if(h==='crew'&&window.renderCrew){renderCrew()}
+  if(h==='join'&&window.renderYou){renderYou()}
+  if(h==='word'&&window.renderWordList){renderWordList()}
 }
 addEventListener('hashchange',show); renderAll(); show();
+if(window.cloudInit) cloudInit();
 
 
 /* ---------- CHALLENGE LANDING ---------- */
