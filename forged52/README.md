@@ -4,7 +4,7 @@
 
 FORGED52 is the flagship program of FORGED, a free discipleship app for men. It covers the whole Bible in 52 weeks, with a weekly theme, devotional, mission, prayer, Scripture memory and private crews. There are no ads and no subscriptions, and no account is needed to begin.
 
-- **Live (production):** https://forged52.pages.dev. This is a Cloudflare Pages project, `forged52`.
+- **Live (production):** https://forged52.pages.dev, a Cloudflare Pages project (`forged52`). The redesign went live on 2026-11-28 as deployment `3259f1e8`.
 - **Preview branch:** https://preview.forged52.pages.dev (Pages branch `preview`).
 - **Rollback:** the last pre-redesign production deployment is `658f8cc1` (https://658f8cc1.forged52.pages.dev). Roll back in the Cloudflare dashboard under Pages → forged52 → Deployments.
 
